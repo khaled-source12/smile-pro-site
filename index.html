@@ -570,7 +570,7 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
 
 <!-- ══════════ URGENCY BAR ══════════ -->
 <div class="urgency-bar">
-  <span>Limited:</span> Only 8 assessment slots remaining this week at our Mivida clinic
+  <span>Limited:</span> Only <span id="slot-count">8</span> assessment slots remaining this week at our Mivida clinic
 </div>
 
 <!-- ══════════ NAV ══════════ -->
@@ -1118,6 +1118,9 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
 
 <!-- ══════════ SCRIPTS ══════════ -->
 <script>
+// ── Randomize urgency slot count (1-10)
+document.getElementById('slot-count').textContent = Math.floor(Math.random() * 10) + 1;
+
 // ── Scroll fade-up
 const obs = new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('vis');obs.unobserve(i.target)}})},{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
