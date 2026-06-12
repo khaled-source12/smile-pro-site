@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: khaled-source12/smile-pro-site
   branch: main
+  base_url: https://YOUR-SITE-NAME.netlify.app
+  auth_endpoint: /.netlify/functions/auth
 
 media_folder: "images"
 public_folder: "/images"
@@ -27,3 +30,12 @@ collections:
       - {label: "Photo", name: "image", widget: "image"}
       - {label: "Category", name: "category", widget: "select", options: ["clinic", "doctor", "mivida"]}
       - {label: "Alt Text (description)", name: "alt", widget: "string"}
+
+  - name: "logo"
+    label: "Logo"
+    files:
+      - file: "images/logo.png"
+        label: "Site Logo"
+        name: "logo"
+        fields:
+          - {label: "Logo File", name: "logo", widget: "image"}
