@@ -5,6 +5,9 @@ backend:
   base_url: https://smile-pro-eg.netlify.app
   auth_endpoint: /.netlify/functions/auth
 
+media_library:
+  name: default
+
 media_folder: "images"
 public_folder: "/images"
 
@@ -27,7 +30,7 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Photo", name: "image", widget: "image"}
+      - {label: "Photo", name: "image", widget: "image", media_library: {name: "default"}}
       - {label: "Category", name: "category", widget: "select", options: ["clinic", "doctor", "mivida"]}
       - {label: "Alt Text (description)", name: "alt", widget: "string"}
 
@@ -38,4 +41,4 @@ collections:
         label: "Site Logo"
         name: "logo"
         fields:
-          - {label: "Logo File", name: "logo", widget: "image"}
+          - {label: "Logo File", name: "logo", widget: "image", media_library: {name: "default"}}
