@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SMILE Pro Vision Correction - Mivida, New Cairo</title>
+<meta name="description" content="New Cairo's only ZEISS SMILE Pro certified centre. Flapless laser vision correction in 15 minutes. Personalised vision assessment at our Mivida clinic."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<!-- REPLACE: GTM head snippet -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:   #FAF7F2;
+  --cream2:  #F2EAE1;
+  --cream3:  #EDE0D5;
+  --burg:    #16383D;
+  --burg2:   #1F4D54;
+  --burg3:   #2A6670;
+  --bronze:  #5FBF3B;
+  --bronze2: #7FD957;
+  --bronze3: #A6EB8C;
+  --bpale:   #E8F7E1;
+  --white:   #FFFFFF;
+  --text:    #18080C;
+  --muted:   #7A686C;
+  --border:  #DDD0C8;
+  --r:       14px;
+  --rg:      20px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:80px;
+}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.15;color:var(--burg)}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ── UTILITIES */
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section-sm{padding:64px 0}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);display:block;margin-bottom:14px}
+.rule{width:40px;height:2px;background:var(--bronze);margin-bottom:22px}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fade-up.vis{opacity:1;transform:translateY(0)}
+
+/* ── URGENCY BAR */
+.urgency-bar{
+  background:var(--burg);
+  padding:10px 16px;
+  text-align:center;
+  font-size:13px;
+  color:rgba(255,255,255,.9);
+  letter-spacing:.02em;
+}
+.urgency-bar span{color:var(--bronze3);font-weight:500}
+
+/* ── NAV */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(250,247,242,.97);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:14px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:34px;height:34px;background:var(--burg);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+}
+.logo-mark svg{width:18px;height:18px;stroke:var(--bronze3);stroke-width:1.5;fill:none}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--burg)}
+.logo-text span{color:var(--bronze)}
+.nav-btn{
+  display:flex;align-items:center;gap:7px;
+  background:var(--burg);color:#fff;
+  font-size:13px;font-weight:500;
+  padding:9px 20px;border-radius:50px;
+  transition:background .2s;
+}
+.nav-btn:hover{background:var(--burg2)}
+.nav-btn svg{width:14px;height:14px;fill:#fff;flex-shrink:0}
+
+/* ── HERO */
+.hero{background:var(--burg);padding:80px 0 0;position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;
+  top:-100px;right:-100px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(184,116,58,.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center;padding-bottom:80px}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:50px;padding:6px 16px;
+  font-size:12px;color:rgba(255,255,255,.75);
+  margin-bottom:22px;
+}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--bronze2);flex-shrink:0}
+.hero h1{font-size:clamp(38px,5vw,62px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--bronze2)}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:460px;line-height:1.8;margin-bottom:32px}
+.hero-proof{display:flex;flex-wrap:wrap;gap:10px}
+.hero-proof-item{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50px;padding:5px 14px;
+  font-size:12px;color:rgba(255,255,255,.75);
+}
+.hero-proof-item svg{width:12px;height:12px;stroke:var(--bronze2);stroke-width:2;fill:none;flex-shrink:0}
+
+/* HERO FORM CARD */
+.form-card{
+  background:var(--white);border-radius:var(--rg);
+  padding:34px 30px;
+  box-shadow:0 24px 64px rgba(0,0,0,.25);
+}
+.form-card-title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--burg);margin-bottom:5px}
+.form-card-sub{font-size:12px;color:var(--muted);margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:12px;font-weight:500;color:var(--burg);margin-bottom:5px;letter-spacing:.02em}
+.fg input,.fg select{
+  width:100%;height:46px;
+  border:1.5px solid var(--border);border-radius:10px;
+  padding:0 14px;
+  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);
+  background:var(--cream);transition:border-color .2s;
+  appearance:none;-webkit-appearance:none;
+}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--burg);background:#fff}
+.fg input::placeholder{color:#bbb}
+.sel-wrap{position:relative}
+.sel-wrap::after{
+  content:'';position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;
+  border-top:6px solid var(--muted);pointer-events:none;
+}
+.form-btn{
+  width:100%;height:50px;background:var(--burg);color:#fff;border:none;
+  border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;margin-top:6px;transition:background .2s,transform .1s;letter-spacing:.02em;
+}
+.form-btn:hover{background:var(--burg2)}
+.form-btn:active{transform:scale(.99)}
+.form-note{text-align:center;font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+.form-wa{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
+  font-size:13px;color:var(--muted);
+}
+.wa-link{display:flex;align-items:center;gap:5px;color:#25D366;font-weight:500;font-size:13px}
+.wa-link:hover{opacity:.8}
+.wa-link svg{width:15px;height:15px;fill:#25D366}
+
+/* ── TRUST BAR */
+.trust-bar{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding:28px 0}
+.trust-inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.trust-item{text-align:center;padding:10px 36px;border-right:1px solid rgba(255,255,255,.1)}
+.trust-item:last-child{border-right:none}
+.trust-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--bronze2);line-height:1}
+.trust-lbl{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+
+/* ── QUIZ SECTION */
+.quiz-section{background:var(--cream2)}
+.quiz-wrap{
+  max-width:700px;margin:0 auto;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--rg);padding:48px 48px;
+  box-shadow:0 4px 32px rgba(107,27,42,.06);
+}
+.quiz-progress{display:flex;gap:6px;margin-bottom:32px}
+.qp-dot{flex:1;height:3px;background:var(--border);border-radius:2px;transition:background .4s}
+.qp-dot.done{background:var(--burg)}
+.qp-dot.active{background:var(--bronze)}
+.quiz-step{display:none}
+.quiz-step.active{display:block}
+.quiz-q{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--burg);margin-bottom:8px}
+.quiz-hint{font-size:13px;color:var(--muted);margin-bottom:28px}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{
+  display:flex;align-items:center;gap:14px;
+  border:1.5px solid var(--border);border-radius:12px;
+  padding:16px 20px;cursor:pointer;
+  transition:border-color .2s,background .2s;
+  font-size:15px;color:var(--text);
+  background:var(--cream);
+}
+.quiz-opt:hover{border-color:var(--burg);background:var(--white)}
+.quiz-opt.selected{border-color:var(--burg);background:rgba(107,27,42,.04)}
+.quiz-opt-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--bpale);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.quiz-result{display:none;text-align:center;padding:8px 0}
+.quiz-result.active{display:block}
+.result-circle{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(107,27,42,.08);
+  border:2px solid rgba(107,27,42,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.result-circle svg{width:30px;height:30px;stroke:var(--burg);stroke-width:2;fill:none}
+.quiz-result h3{font-size:28px;margin-bottom:10px}
+.quiz-result p{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 28px;line-height:1.7}
+.quiz-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--burg);color:#fff;
+  font-size:15px;font-weight:500;
+  padding:14px 32px;border-radius:50px;
+  cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+  transition:background .2s;
+}
+.quiz-cta-btn:hover{background:var(--burg2)}
+
+/* ── BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.b-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:36px 28px;transition:box-shadow .3s,transform .3s;
+}
+.b-card:hover{box-shadow:0 8px 40px rgba(107,27,42,.1);transform:translateY(-4px)}
+.b-icon{
+  width:50px;height:50px;background:var(--bpale);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+}
+.b-icon svg{width:24px;height:24px;stroke:var(--burg);stroke-width:1.5;fill:none}
+.b-card h3{font-size:22px;margin-bottom:10px}
+.b-card p{font-size:14px;color:var(--muted);line-height:1.75}
+.b-tag{
+  display:inline-block;margin-top:16px;
+  background:var(--bpale);color:var(--bronze);
+  font-size:11px;font-weight:500;padding:4px 12px;border-radius:50px;letter-spacing:.04em;
+}
+
+/* ── JOURNEY TIMELINE */
+.journey-section{background:var(--burg)}
+.journey-section h2{color:#fff}
+.journey-section .lbl{color:var(--bronze2)}
+.journey-section .rule{background:var(--bronze)}
+.timeline{margin-top:56px;position:relative}
+.timeline::before{
+  content:'';position:absolute;
+  left:28px;top:0;bottom:0;width:1px;
+  background:rgba(255,255,255,.15);
+}
+.tl-item{
+  display:flex;gap:28px;align-items:flex-start;
+  margin-bottom:0;position:relative;
+}
+.tl-item:last-child .tl-body{padding-bottom:0}
+.tl-dot-wrap{
+  width:56px;flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:1;
+}
+.tl-dot{
+  width:56px;height:56px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.tl-dot svg{width:22px;height:22px;stroke:var(--bronze2);stroke-width:1.5;fill:none}
+.tl-dot-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;color:rgba(255,255,255,.35);
+  margin-top:6px;letter-spacing:.04em;
+}
+.tl-body{padding:12px 0 40px}
+.tl-time{
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:6px;
+}
+.tl-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;color:#fff;margin-bottom:8px;
+}
+.tl-desc{font-size:14px;color:rgba(255,255,255,.6);line-height:1.75;max-width:560px}
+.tl-highlight{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(184,116,58,.2);border:1px solid rgba(184,116,58,.3);
+  border-radius:50px;padding:4px 14px;
+  font-size:12px;color:var(--bronze2);
+  margin-top:10px;
+}
+.tl-highlight svg{width:12px;height:12px;stroke:var(--bronze2);stroke-width:2;fill:none}
+
+/* ── COMPARISON */
+.comp-section{background:var(--cream2)}
+.comp-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:48px;border-radius:16px;overflow:hidden}
+.comp-table th{padding:18px 24px;text-align:left;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.comp-table th:first-child{background:var(--cream3);color:var(--muted);width:36%}
+.comp-table th.col-l{background:rgba(107,27,42,.04);color:var(--muted)}
+.comp-table th.col-s{background:var(--burg);color:var(--bronze2)}
+.comp-table td{padding:14px 24px;font-size:14px;border-top:1px solid var(--border)}
+.comp-table td:first-child{background:var(--cream3);color:var(--muted);font-size:13px}
+.comp-table td.col-l{background:rgba(107,27,42,.02);color:var(--muted)}
+.comp-table td.col-s{background:rgba(107,27,42,.04);color:var(--text);font-weight:500}
+.ci{color:var(--bronze);margin-right:5px}
+.cx{color:var(--border);margin-right:5px}
+
+/* ── COST CALCULATOR */
+.calc-section{background:var(--white)}
+.calc-wrap{max-width:700px;margin:48px auto 0}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.calc-input-group label{
+  display:block;font-size:12px;font-weight:500;
+  color:var(--burg);margin-bottom:6px;letter-spacing:.02em;
+}
+.calc-input-group input{
+  width:100%;height:46px;border:1.5px solid var(--border);border-radius:10px;
+  padding:0 14px;font-family:'DM Sans',sans-serif;font-size:15px;
+  background:var(--cream);color:var(--text);transition:border-color .2s;
+}
+.calc-input-group input:focus{outline:none;border-color:var(--burg);background:#fff}
+.calc-result{
+  background:var(--burg);border-radius:var(--r);padding:28px 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+}
+.calc-col{text-align:center;padding:0 20px}
+.calc-col:first-child{border-right:1px solid rgba(255,255,255,.15)}
+.calc-col-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);margin-bottom:8px}
+.calc-col-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:#fff;line-height:1}
+.calc-col-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:4px}
+.calc-col-num.savings{color:var(--bronze2)}
+.calc-note{text-align:center;font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6}
+
+/* ── DOCTOR */
+.doctor-section{background:var(--cream)}
+.doctor-grid{display:grid;grid-template-columns:380px 1fr;gap:72px;align-items:center}
+.doc-img{
+  width:100%;aspect-ratio:3/4;background:var(--cream2);
+  border-radius:var(--rg);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.doc-img svg{width:72px;height:72px;stroke:var(--border);stroke-width:.8;fill:none}
+.doc-badge{
+  position:absolute;bottom:-1px;right:-1px;
+  background:var(--burg);border-radius:var(--rg) 0 var(--rg) 0;
+  padding:18px 22px;text-align:center;
+}
+.doc-badge-num{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--bronze2);line-height:1}
+.doc-badge-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-top:4px}
+.doc-name{font-size:clamp(30px,3.5vw,46px);margin-bottom:5px}
+.doc-title{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--bronze);margin-bottom:22px}
+.doc-bio{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px}
+.creds{display:flex;flex-direction:column;gap:10px}
+.cred{display:flex;align-items:flex-start;gap:12px}
+.cred-dot{width:5px;height:5px;background:var(--bronze);border-radius:50%;flex-shrink:0;margin-top:9px}
+.cred-text{font-size:14px;line-height:1.6}
+
+/* ── TECHNOLOGY */
+.tech-section{background:var(--burg)}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:52px}
+.tech-img{
+  aspect-ratio:1;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--rg);
+  display:flex;align-items:center;justify-content:center;
+}
+.tech-img-inner{text-align:center}
+.zeiss-wordmark{font-family:'DM Sans',sans-serif;font-size:48px;font-weight:300;color:rgba(255,255,255,.9);letter-spacing:.3em}
+.zeiss-sub{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
+.tech-features{display:flex;flex-direction:column;gap:20px}
+.tech-feat{display:flex;align-items:flex-start;gap:16px}
+.tech-feat-icon{
+  width:44px;height:44px;flex-shrink:0;
+  background:rgba(184,116,58,.2);border:1px solid rgba(184,116,58,.3);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+}
+.tech-feat-icon svg{width:20px;height:20px;stroke:var(--bronze2);stroke-width:1.5;fill:none}
+.tech-feat-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;margin-bottom:4px}
+.tech-feat-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
+
+/* ── TESTIMONIALS */
+.testi-section{background:var(--cream2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.testi-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px}
+.testi-stars{font-size:13px;letter-spacing:3px;color:var(--bronze);margin-bottom:14px}
+.testi-quote{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--burg);line-height:1.55;margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border)}
+.testi-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--bpale);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--burg);
+  flex-shrink:0;
+}
+.testi-name{font-size:13px;font-weight:500;color:var(--text)}
+.testi-detail{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ── FAQ */
+.faq-section{background:var(--white)}
+.faq-list{margin-top:48px;max-width:760px;margin-left:auto;margin-right:auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;background:none;border:none;
+  padding:22px 0;text-align:left;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--burg);
+}
+.faq-q:hover{color:var(--bronze)}
+.faq-icon{
+  width:26px;height:26px;border:1.5px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:16px;color:var(--muted);line-height:1;
+  transition:transform .3s,background .3s,border-color .3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--burg);border-color:var(--burg);color:#fff}
+.faq-a{
+  font-size:15px;color:var(--muted);line-height:1.8;
+  max-height:0;overflow:hidden;padding-bottom:0;
+  transition:max-height .35s ease,padding .35s ease;
+}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:22px}
+
+/* ── GUARANTEE */
+.guarantee-section{background:var(--cream2)}
+.guarantee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.g-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;text-align:center}
+.g-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--bpale);margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+}
+.g-icon svg{width:24px;height:24px;stroke:var(--burg);stroke-width:1.5;fill:none}
+.g-card h3{font-size:19px;margin-bottom:8px}
+.g-card p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── BOTTOM CTA */
+.cta-section{background:var(--burg);text-align:center;padding:96px 0}
+.cta-section h2{font-size:clamp(34px,5vw,58px);color:#fff;max-width:660px;margin:0 auto 14px}
+.cta-section h2 em{color:var(--bronze2)}
+.cta-section p{font-size:16px;color:rgba(255,255,255,.65);max-width:500px;margin:0 auto 48px}
+.cta-form-wrap{
+  max-width:540px;margin:0 auto;
+  background:var(--white);border-radius:var(--rg);padding:40px;
+  box-shadow:0 24px 72px rgba(0,0,0,.3);
+}
+.cta-form-wrap .form-card-title{text-align:center;margin-bottom:4px}
+.cta-form-sub{text-align:center;font-size:13px;color:var(--muted);margin-bottom:24px}
+
+/* ── FOOTER */
+footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding:36px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:19px;color:rgba(255,255,255,.65)}
+.footer-logo span{color:var(--bronze)}
+.footer-addr{font-size:12px;color:rgba(255,255,255,.35);text-align:center;line-height:1.7}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2)}
+
+/* ── STICKY BOTTOM BAR */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:var(--white);border-top:1px solid var(--border);
+  padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 -4px 24px rgba(107,27,42,.1);
+}
+.sticky-bar-text{font-size:14px;color:var(--muted)}
+.sticky-bar-text strong{color:var(--burg)}
+.sticky-bar-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.sticky-cta{
+  display:flex;align-items:center;gap:7px;
+  background:var(--burg);color:#fff;
+  font-size:13px;font-weight:500;
+  padding:10px 22px;border-radius:50px;border:none;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:background .2s;white-space:nowrap;
+}
+.sticky-cta:hover{background:var(--burg2)}
+.sticky-wa{
+  display:flex;align-items:center;gap:6px;
+  background:#25D366;color:#fff;
+  font-size:13px;font-weight:500;
+  padding:10px 18px;border-radius:50px;
+  transition:background .2s;white-space:nowrap;
+}
+.sticky-wa:hover{background:#1ebe5d}
+.sticky-wa svg{width:16px;height:16px;fill:#fff}
+
+/* ── FLOATING WHATSAPP (mobile) */
+.wa-float{
+  position:fixed;bottom:84px;right:20px;z-index:250;
+  width:52px;height:52px;border-radius:50%;
+  background:#25D366;color:#fff;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  animation:wa-pulse 3s ease-in-out infinite;
+}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+@keyframes wa-pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 32px rgba(37,211,102,.6)}}
+
+/* ── RESPONSIVE */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:32px;padding-bottom:0}
+  .form-card{border-radius:0;margin:0 -24px}
+  .benefits-grid{grid-template-columns:1fr}
+  .doctor-grid{grid-template-columns:1fr}
+  .tech-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .guarantee-grid{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .trust-inner{flex-direction:column}
+  .trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .trust-item:last-child{border-bottom:none}
+  .quiz-wrap{padding:32px 24px}
+  .sticky-bar-text{display:none}
+  .wa-float{display:flex}
+}
+@media(max-width:600px){
+  .section{padding:64px 0}
+  .cta-form-wrap{padding:28px 20px}
+  .calc-result{grid-template-columns:1fr}
+  .calc-col:first-child{border-right:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:20px;margin-bottom:20px}
+}
+
+/* GALLERY */
+.gallery-tabs{display:flex;gap:8px;justify-content:center;margin:32px 0 8px;flex-wrap:wrap}
+.gallery-tab{
+  padding:8px 20px;border-radius:50px;border:1.5px solid var(--border);
+  background:var(--white);font-size:13px;font-weight:500;color:var(--muted);
+  cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.gallery-tab.active{background:var(--burg);color:#fff;border-color:var(--burg)}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;
+}
+.gallery-item{
+  aspect-ratio:1;border-radius:var(--r);overflow:hidden;
+  background:var(--cream2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item .placeholder-icon{width:32px;height:32px;stroke:var(--border);stroke-width:1;fill:none}
+.gallery-item.large{grid-column:span 2;grid-row:span 2}
+.gallery-item[data-cat]{display:flex}
+.gallery-item.hidden{display:none}
+@media(max-width:900px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item.large{grid-column:span 2;grid-row:span 1}
+}
+
+</style>
+</head>
+<body>
+
+<!-- REPLACE: GTM noscript -->
+
+<!-- ══════════ URGENCY BAR ══════════ -->
+<div class="urgency-bar">
+  <span>Limited:</span> Only 8 assessment slots remaining this week at our Mivida clinic
+</div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+        </div>
+        <div class="logo-text">Vision<span>Pro</span> Center</div>
+      </div>
+      <a href="#about-doctor" style="font-size:13px;font-weight:500;color:var(--burg);margin-right:20px">About Dr. El Naggar</a>
+      <a href="#assessment" class="nav-btn">
+        Reserve your assessment
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          New Cairo's only ZEISS SMILE Pro certified centre - Mivida
+        </div>
+        <h1>You've spent enough<br/>mornings reaching<br/>for your <em>glasses.</em></h1>
+        <p class="hero-sub">SMILE Pro corrects your vision permanently in under 15 minutes. No flap. No blade. No dry eye. Most patients drive themselves to work the same day.</p>
+        <div class="hero-proof">
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Flapless - zero flap risk for life</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ZEISS VisuMax 800 - same as London &amp; Dubai</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>7+ years · 10,000+ procedures</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Located inside Mivida compound</div>
+        </div>
+      </div>
+      <div id="assessment">
+        <div class="form-card">
+          <div class="form-card-title">Reserve your assessment</div>
+          <div class="form-card-sub">Vision screening · Our team calls you within 15 minutes</div>
+          <form name="consultation" id="main-form" method="POST" data-netlify="true" action="/thank-you.html">
+            <input type="hidden" name="form-name" value="consultation"/>
+            <div class="fg"><label for="name">Full name</label><input type="text" id="name" name="name" placeholder="Ahmed Mohamed" required/></div>
+            <div class="fg"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required/></div>
+            <div class="fg"><label for="vision">You currently wear</label>
+              <div class="sel-wrap"><select id="vision" name="vision" required><option value="" disabled selected>Select one</option><option>Glasses</option><option>Contact lenses</option><option>Both glasses and contacts</option></select></div>
+            </div>
+            <button type="submit" class="form-btn">Reserve my assessment →</button>
+          </form>
+          <p class="form-note">No cost · No commitment · Strictly confidential</p>
+          <div class="form-wa">
+            <span>Prefer to message first?</span>
+            <a href="https://wa.me/201140011556?text=Hello, I'd like to learn more about SMILE Pro" class="wa-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+              WhatsApp us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══════════ BENEFITS ══════════ -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <span class="lbl fade-up">Why SMILE Pro</span>
+    <div class="rule fade-up"></div>
+    <h2 style="font-size:clamp(32px,4vw,52px);max-width:600px" class="fade-up">LASIK was the best option<br/><em>until SMILE Pro existed</em></h2>
+    <div class="benefits-grid">
+      <div class="b-card fade-up">
+        <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>No flap. Ever.</h3>
+        <p>LASIK creates a large corneal flap that never fully heals - one impact years later can dislodge it. SMILE Pro uses a 2mm micro-incision invisible to the naked eye. No flap means no flap complications, for life.</p>
+        <span class="b-tag">Zero flap risk · permanent</span>
+      </div>
+      <div class="b-card fade-up">
+        <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Drive yourself home the same day</h3>
+        <p>The ZEISS laser operates for 8 seconds per eye. The entire procedure takes 15 minutes. Most patients are back at their desk the same day. No hospital stay, no general anaesthesia.</p>
+        <span class="b-tag">Most patients drive the same day</span>
+      </div>
+      <div class="b-card fade-up">
+        <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Your eyes won't feel like sandpaper</h3>
+        <p>Egypt has one of the world's highest dry eye rates - and LASIK makes it significantly worse. SMILE Pro's micro-incision preserves the corneal nerves controlling tear production. Clinically proven lower dry eye incidence.</p>
+        <span class="b-tag">Critical for Egyptian patients</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PATIENT JOURNEY TIMELINE ══════════ -->
+<section class="section journey-section">
+  <div class="container">
+    <span class="lbl fade-up">The complete patient journey</span>
+    <div class="rule fade-up"></div>
+    <h2 style="font-size:clamp(30px,4vw,50px)" class="fade-up">From <em>"I'm curious"</em><br/>to seeing clearly - step by step</h2>
+    <div class="timeline">
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div class="tl-dot-num">01</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Today - 2 minutes</div>
+          <div class="tl-title">You submit the form or send a WhatsApp</div>
+          <div class="tl-desc">That's it. Name, phone number, whether you wear glasses or contacts. No medical history forms, no uploads, nothing complicated. Our team receives your request immediately.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Takes 2 minutes</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="tl-dot-num">02</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Within 15 minutes</div>
+          <div class="tl-title">Our team calls to schedule your visit</div>
+          <div class="tl-desc">A member of our team calls you personally - not an automated message. We confirm a time that works for you at our Mivida clinic. Evenings and weekends are available. The call takes about 3 minutes.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personal call - not a bot</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+          <div class="tl-dot-num">03</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Assessment day - 30 minutes</div>
+          <div class="tl-title">Precision vision assessment</div>
+          <div class="tl-desc">You come to the clinic - valet parking is provided. We conduct a comprehensive eye mapping session: corneal thickness measurement, prescription analysis, pupil response, and overall eye health screening. Dr. El Naggar personally reviews your results and discusses whether SMILE Pro is the right choice for you. If it isn't, we tell you honestly - and recommend the best alternative.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personally reviewed by Dr. El Naggar</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="tl-dot-num">04</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Surgery day - total 2 hours at clinic</div>
+          <div class="tl-title">The SMILE Pro procedure - 15 minutes</div>
+          <div class="tl-desc">You arrive, relax in our private preparation room, and receive anaesthetic eye drops. The procedure itself takes 15 minutes for both eyes - the ZEISS laser operates for 8 seconds per eye. You are fully awake. You feel mild pressure, nothing more. You walk out wearing protective glasses. A friend or driver takes you home. You rest, you sleep.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Laser: 8 seconds per eye</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="tl-dot-num">05</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Next morning</div>
+          <div class="tl-title">You wake up and see clearly</div>
+          <div class="tl-desc">Most patients message us within hours of the procedure, surprised by how much they can already see. By the same day, vision is typically sharp enough to drive, read, and work normally. A brief follow-up check confirms your recovery is progressing perfectly. Use your prescribed drops and avoid eye contact with water for 48 hours.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Most patients drive the same day</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="tl-dot-num">06</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-time">Week 1–2</div>
+          <div class="tl-title">Back to everything</div>
+          <div class="tl-desc">Days 3–5: return to work, light gym, driving. Week 2: swimming cleared, travel unrestricted, most sports approved. A 1-month follow-up visit confirms your final vision outcome. Over 98% of our patients achieve 20/20 vision or better.</div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>98% achieve 20/20 or better</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ COMPARISON ══════════ -->
+<section class="section comp-section">
+  <div class="container">
+    <span class="lbl fade-up">SMILE Pro vs traditional LASIK</span>
+    <div class="rule fade-up"></div>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:540px" class="fade-up">The difference is bigger<br/><em>than most people realise</em></h2>
+    <table class="comp-table">
+      <thead><tr><th></th><th class="col-l">Traditional LASIK</th><th class="col-s">SMILE Pro ✦</th></tr></thead>
+      <tbody>
+        <tr><td>Corneal flap</td><td class="col-l"><span class="cx">✗</span>Required - never fully heals</td><td class="col-s"><span class="ci">✓</span>No flap - 2mm micro-incision</td></tr>
+        <tr><td>Dry eye risk</td><td class="col-l"><span class="cx">✗</span>Significantly higher</td><td class="col-s"><span class="ci">✓</span>Clinically lower - preserved nerves</td></tr>
+        <tr><td>Laser duration</td><td class="col-l">30–60 seconds per eye</td><td class="col-s"><span class="ci">✓</span>8 seconds per eye</td></tr>
+        <tr><td>Return to sport</td><td class="col-l"><span class="cx">✗</span>4-6 weeks</td><td class="col-s"><span class="ci">✓</span>Next day</td></tr>
+        <tr><td>Suitable for active lifestyle</td><td class="col-l"><span class="cx">✗</span>With caution</td><td class="col-s"><span class="ci">✓</span>Specifically designed for active patients</td></tr>
+        <tr><td>Corneal strength preserved</td><td class="col-l"><span class="cx">✗</span>Compromised by flap</td><td class="col-s"><span class="ci">✓</span>Superior biomechanical strength</td></tr>
+        <tr><td>Technology generation</td><td class="col-l">Previous generation</td><td class="col-s"><span class="ci">✓</span>ZEISS VisuMax 800 - latest generation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ COST CALCULATOR ══════════ -->
+<section class="section calc-section">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">The real cost of waiting</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up">How much are your glasses<br/><em>actually costing you?</em></h2>
+    <div class="calc-wrap fade-up">
+      <div class="calc-grid">
+        <div class="calc-input-group">
+          <label>Annual spend on glasses &amp; frames (EGP)</label>
+          <input type="number" id="glasses-cost" value="3000" min="0" oninput="calcCost()"/>
+        </div>
+        <div class="calc-input-group">
+          <label>Annual spend on contacts &amp; solutions (EGP)</label>
+          <input type="number" id="contacts-cost" value="4800" min="0" oninput="calcCost()"/>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="calc-col">
+          <div class="calc-col-lbl">10-year glasses &amp; contacts cost</div>
+          <div class="calc-col-num" id="calc-total">79,000 EGP</div>
+          <div class="calc-col-sub">Ongoing - every single year</div>
+        </div>
+        <div class="calc-col">
+          <div class="calc-col-lbl">SMILE Pro - one time, forever</div>
+          <div class="calc-col-num savings">40,000 EGP</div>
+          <div class="calc-col-sub">Includes all follow-ups · no recurring cost</div>
+        </div>
+      </div>
+      <p class="calc-note">Numbers adjust as you type. Average Egyptian contact lens user spends 4,800–8,000 EGP per year on lenses, solutions and check-ups alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DOCTOR ══════════ -->
+<section class="section doctor-section" id="about-doctor">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">About your surgeon</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center;margin-bottom:48px" class="fade-up">Meet <em>Dr. Mohamed El Naggar</em></h2>
+
+    <div class="doctor-grid">
+      <div class="fade-up">
+        <div class="doc-img">
+          <!-- REPLACE: <img src="naggar.jpg" alt="Dr. Mohamed El Naggar" style="width:100%;height:100%;object-fit:cover"/> -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a8 8 0 00-16 0v2"/></svg>
+          <div class="doc-badge"><div class="doc-badge-num">10K+</div><div class="doc-badge-lbl">Procedures</div></div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <span class="lbl">Performed by</span>
+        <div class="rule"></div>
+        <h2 class="doc-name">Dr. Mohamed El Naggar</h2>
+        <div class="doc-title">Consultant Corneal &amp; Refractive Surgeon · Fellow, Royal College of Surgeons (UK)</div>
+        <p class="doc-bio">Founder of the Gazirat Al Arab Eye &amp; Laser Center, Dr. Mohamed El Naggar is a Fellow of the Royal College of Surgeons (UK), a member of the American Academy of Ophthalmology, the European Society of Cataract &amp; Refractive Surgeons, and the Royal College of Surgeons of Edinburgh. Now bringing ZEISS SMILE Pro to Mivida - every procedure personally performed and followed up by Dr. El Naggar.</p>
+        <div class="creds">
+          <div class="cred"><div class="cred-dot"></div><div class="cred-text">Fellow, Royal College of Surgeons - Ophthalmology, United Kingdom</div></div>
+          <div class="cred"><div class="cred-dot"></div><div class="cred-text">Founder, Gazirat Al Arab Eye &amp; Laser Center, Egypt</div></div>
+          <div class="cred"><div class="cred-dot"></div><div class="cred-text">Member, European Society of Cataract &amp; Refractive Surgeons · Member, Royal College of Surgeons (Edinburgh)</div></div>
+          <div class="cred"><div class="cred-dot"></div><div class="cred-text">Member, American Academy of Ophthalmology</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Philosophy / approach strip -->
+    <div class="guarantee-grid" style="margin-top:48px">
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>International training</h3>
+        <p>Fellowship training completed in the United Kingdom, bringing international surgical standards to Mivida.</p>
+      </div>
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <h3>Founder &amp; lead surgeon</h3>
+        <p>Founded the Gazirat Al Arab Eye &amp; Laser Center - every SMILE Pro procedure in Mivida is personally performed by Dr. El Naggar.</p>
+      </div>
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Globally recognised</h3>
+        <p>Active member of four international ophthalmology societies, keeping techniques aligned with the latest global standards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TECHNOLOGY ══════════ -->
+<section class="section tech-section">
+  <div class="container">
+    <span class="lbl fade-up">The technology</span>
+    <div class="rule fade-up"></div>
+    <h2 style="font-size:clamp(30px,4vw,48px);color:#fff;max-width:520px" class="fade-up">The same machine used in<br/><em>London, Dubai, and Singapore</em></h2>
+    <div class="tech-grid">
+      <div class="tech-img fade-up">
+        <div class="tech-img-inner">
+          <!-- REPLACE: add photo of the ZEISS machine -->
+          <div class="zeiss-wordmark">ZEISS</div>
+          <div class="zeiss-sub">VisuMax 800 · Certified Centre</div>
+        </div>
+      </div>
+      <div class="tech-features fade-up">
+        <div class="tech-feat">
+          <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><div class="tech-feat-title">2 MHz laser pulse rate</div><div class="tech-feat-desc">The ZEISS VisuMax 800 fires 2 million laser pulses per second - delivering unmatched precision with the shortest possible suction time. 8 seconds per eye.</div></div>
+        </div>
+        <div class="tech-feat">
+          <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+          <div><div class="tech-feat-title">2mm micro-incision</div><div class="tech-feat-desc">The only system capable of a sub-2mm incision for complete lenticule extraction. No flap. Less trauma. Less dry eye. Faster healing.</div></div>
+        </div>
+        <div class="tech-feat">
+          <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="tech-feat-title">FDA cleared · CE marked</div><div class="tech-feat-desc">Approved by US and European medical authorities. The same hardware used at top refractive centres in London, Dubai, Singapore, and New York.</div></div>
+        </div>
+        <div class="tech-feat">
+          <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><div class="tech-feat-title">Treats myopia + astigmatism</div><div class="tech-feat-desc">SMILE Pro with VisuMax 800 addresses the full spectrum of refractive errors including myopia and astigmatism - wider eligibility than previous SMILE systems.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section class="section testi-section">
+  <div class="container">
+    <span class="lbl fade-up">Patient stories</span>
+    <div class="rule fade-up"></div>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:500px" class="fade-up">"I waited years.<br/><em>I wish I did it sooner."</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I cried the same day. Not from pain - from the shock of being able to read my phone without reaching for my glasses for the first time in 18 years."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div><div class="testi-name">Sarah K.</div><div class="testi-detail">Mivida resident · wore glasses 18 years · now 20/20</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I play squash three times a week. My biggest concern was safety for sports. Dr. El Naggar explained exactly why SMILE Pro is better for active patients. Three weeks after surgery I was back on court."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div><div class="testi-name">Karim A.</div><div class="testi-detail">5th Settlement · squash player · 6 months post-surgery</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I was terrified. I watched the procedure video five times before booking. The actual experience was nothing like the fear. It was 15 minutes, and by evening I could see the TV from across the room without contacts."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">N</div>
+          <div><div class="testi-name">Nour M.</div><div class="testi-detail">New Cairo · contact lens user 12 years · surgery 4 months ago</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="section faq-section">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">Common questions</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center" class="fade-up">Everything you need to know<br/><em>before you decide</em></h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Honestly - does it hurt?<span class="faq-icon">+</span></button><div class="faq-a">No - and this is the question everyone asks first. Anaesthetic drops numb your eye completely before we start. During the laser you feel mild pressure for about 8 seconds. Not pain - pressure. Think of a finger gently pressing on your closed eyelid. Most patients tell us they were surprised by how underwhelming it was. The fear is always worse than the reality.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does the whole thing take?<span class="faq-icon">+</span></button><div class="faq-a">The laser runs for 8 seconds per eye. Both eyes together take 15 minutes in the procedure room. You'll be at the clinic for about 2 hours total including preparation, the procedure, and a brief rest period. Plan to take the rest of that day off - most people are watching TV comfortably by evening with noticeably clearer vision already.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I know if I'm a candidate?<span class="faq-icon">+</span></button><div class="faq-a">Most adults aged 18–55 who wear glasses or contacts for short-sightedness or astigmatism are suitable candidates. The honest answer is: we don't know until we examine your eyes. That's exactly why we start with a thorough assessment - measuring corneal thickness, prescription stability, and overall eye health. If SMILE Pro isn't right for you, we tell you clearly and recommend the best alternative. We would rather lose a surgery than risk your vision.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does 40,000 EGP include - are there hidden costs?<span class="faq-icon">+</span></button><div class="faq-a">No hidden costs. 40,000 EGP covers the full SMILE Pro procedure on both eyes, all pre-surgery assessments, all follow-up appointments for 12 months, and prescribed eye drops for recovery. The assessment is booked separately and priced independently from the procedure. Compare that to a lifetime of glasses, contacts, solutions, and annual optician visits.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When can I drive, work out, and travel again?<span class="faq-icon">+</span></button><div class="faq-a">Driving: most patients are cleared the same day. Desk work and screens: same day with your prescribed drops. Light gym, walking, and most sports: next day. Swimming: 1 week. Flights: no restriction after 48 hours. We give every patient a personalised day-by-day recovery guide - no guesswork.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if I'm not a candidate after the assessment?<span class="faq-icon">+</span></button><div class="faq-a">We tell you honestly - and that's a promise. If your corneas aren't suitable for SMILE Pro, Dr. El Naggar will explain why in detail and discuss the best alternative for your specific eyes, whether that's a different laser technique or lens-based correction. This applies regardless of the outcome. We are not in the business of performing procedures on patients who aren't ideal candidates.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GUARANTEE ══════════ -->
+<section class="section-sm guarantee-section">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">Our commitments to you</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(26px,3vw,40px);text-align:center" class="fade-up">We earn your trust<br/><em>before we ask for your commitment</em></h2>
+    <div class="guarantee-grid">
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Honest eligibility only</h3>
+        <p>If you are not a strong candidate for SMILE Pro, we will not perform the procedure. We will refer you to the best alternative - even if that means no surgery with us.</p>
+      </div>
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>12-month follow-up included</h3>
+        <p>All post-operative check-ups for a full year are included in your procedure cost. Your recovery is our responsibility until your vision is confirmed and stable.</p>
+      </div>
+      <div class="g-card fade-up">
+        <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <h3>Dr. El Naggar performs every procedure</h3>
+        <p>Your surgery is performed personally by Dr. El Naggar - not a junior surgeon or resident. The same hands that assessed you are the same hands that operate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LOCATION ══════════ -->
+<section class="section-sm" style="background:var(--cream2)">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">Find us</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up">Visit the clinic</h2>
+    <div class="split fade-up" style="grid-template-columns:1fr 1.3fr">
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div>
+          <div class="lbl" style="margin-bottom:6px">Address</div>
+          <p style="font-size:15px;color:var(--text);line-height:1.7">El Naggar Center<br/>Eterna Clinic, Floor 1, Clinic 18<br/>Mivida Compound, 5th Settlement<br/>New Cairo, Egypt</p>
+        </div>
+        <div>
+          <div class="lbl" style="margin-bottom:6px">Hours</div>
+          <p style="font-size:15px;color:var(--text);line-height:1.7">Saturday - Thursday<br/>Friday: Closed</p>
+        </div>
+        <a href="https://wa.me/201140011556" target="_blank" rel="noopener" class="wa-link" style="margin-top:8px">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+          Get directions on WhatsApp
+        </a>
+      </div>
+      <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--border);min-height:320px">
+        <!-- REPLACE: paste the real Google Maps embed src for El Naggar Center, Mivida -->
+        <iframe src="https://www.google.com/maps?q=Eterna+Clinic+Mivida&output=embed" width="100%" height="100%" style="border:0;min-height:320px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ GALLERY ══════════ -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <span class="lbl fade-up" style="text-align:center;display:block">Gallery</span>
+    <div class="rule fade-up" style="margin:0 auto 22px"></div>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up">A look inside <em>El Naggar Center</em></h2>
+    <p style="text-align:center;font-size:14px;color:var(--muted);max-width:520px;margin:10px auto 0">The clinic, the team, and the Mivida setting - the standard of care you can expect before you ever sit in the chair.</p>
+
+    <div class="gallery-tabs fade-up">
+      <div class="gallery-tab active" onclick="filterGallery('all',this)">All</div>
+      <div class="gallery-tab" onclick="filterGallery('clinic',this)">The Clinic</div>
+      <div class="gallery-tab" onclick="filterGallery('doctor',this)">Dr. El Naggar</div>
+      <div class="gallery-tab" onclick="filterGallery('mivida',this)">Mivida</div>
+    </div>
+
+    <div class="gallery-grid fade-up">
+      <!-- REPLACE each <img> below with a real photo. Keep data-cat values: clinic / doctor / mivida -->
+      <div class="gallery-item large" data-cat="clinic">
+        <!-- <img src="clinic-1.jpg" alt="Clinic reception"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="doctor">
+        <!-- <img src="doctor-1.jpg" alt="Dr. El Naggar"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="mivida">
+        <!-- <img src="mivida-1.jpg" alt="Mivida compound"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="clinic">
+        <!-- <img src="clinic-2.jpg" alt="ZEISS VisuMax 800 in the procedure room"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="clinic">
+        <!-- <img src="clinic-3.jpg" alt="Waiting area"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="doctor">
+        <!-- <img src="doctor-2.jpg" alt="Dr. El Naggar with patient"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="mivida">
+        <!-- <img src="mivida-2.jpg" alt="Mivida compound entrance"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <div class="gallery-item" data-cat="clinic">
+        <!-- <img src="clinic-4.jpg" alt="Consultation room"/> -->
+        <svg class="placeholder-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BOTTOM CTA ══════════ -->
+<section class="cta-section">
+  <div class="container">
+    <span class="lbl" style="display:block;color:var(--bronze2)">You've been thinking about this long enough</span>
+    <h2>The assessment is thorough.<br/><em>The decision is yours.</em></h2>
+    <p>No pressure. No commitment. A 30-minute visit that tells you exactly whether SMILE Pro is right for your eyes. If it is - you'll know. If it isn't - you'll know that too.</p>
+    <div class="cta-form-wrap">
+      <div class="form-card-title">Reserve your assessment</div>
+      <p class="cta-form-sub">Vision screening · Our team calls within 15 minutes</p>
+      <form name="consultation" id="bottom-form" method="POST" data-netlify="true" action="/thank-you.html">
+        <input type="hidden" name="form-name" value="consultation"/>
+        <div class="fg"><label for="name2">Full name</label><input type="text" id="name2" name="name" placeholder="Ahmed Mohamed" required/></div>
+        <div class="fg"><label for="phone2">Phone number</label><input type="tel" id="phone2" name="phone" placeholder="+20 1XX XXX XXXX" required/></div>
+        <div class="fg"><label for="vision2">You currently wear</label>
+          <div class="sel-wrap"><select id="vision2" name="vision" required><option value="" disabled selected>Select one</option><option>Glasses</option><option>Contact lenses</option><option>Both glasses and contacts</option></select></div>
+        </div>
+        <button type="submit" class="form-btn">Reserve my assessment →</button>
+      </form>
+      <div class="form-wa" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <span>Prefer WhatsApp?</span>
+        <a href="https://wa.me/201140011556?text=Hello, I'd like to reserve a SMILE Pro assessment" class="wa-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+          Message us directly
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Vision<span>Pro</span> Center</div>
+      <div class="footer-addr">Mivida Compound, 5th Settlement, New Cairo<br/><a href="tel:+20XXXXXXXXXX" style="color:rgba(255,255,255,.3)">+20 1XX XXX XXXX</a></div>
+      <div class="footer-copy">© 2025 VisionPro Center</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ STICKY BOTTOM BAR ══════════ -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-text">New Cairo's only <strong>ZEISS SMILE Pro</strong> certified centre - Mivida compound</div>
+  <div class="sticky-bar-actions">
+    <a href="https://wa.me/201140011556?text=Hello, I'd like to reserve a SMILE Pro assessment" class="sticky-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+      WhatsApp
+    </a>
+    <button class="sticky-cta" onclick="document.getElementById('assessment').scrollIntoView({behavior:'smooth'})">Reserve assessment →</button>
+  </div>
+</div>
+
+<!-- MOBILE FLOATING WA -->
+<a href="https://wa.me/201140011556?text=Hello, I'd like to reserve a SMILE Pro assessment" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+</a>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+// ── Scroll fade-up
+const obs = new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('vis');obs.unobserve(i.target)}})},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// ── FAQ
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+// ── Quiz
+let quizStep=1;
+function selectOpt(el,step){
+  el.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  setTimeout(()=>advanceQuiz(step),380);
+}
+function advanceQuiz(step){
+  document.getElementById('qs'+step).classList.remove('active');
+  document.getElementById('qd'+step).classList.remove('active');
+  document.getElementById('qd'+step).classList.add('done');
+  if(step<3){
+    quizStep=step+1;
+    document.getElementById('qs'+quizStep).classList.add('active');
+    document.getElementById('qd'+quizStep).classList.add('active');
+  } else {
+    document.getElementById('quiz-result').classList.add('active');
+    document.querySelectorAll('.qp-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done')});
+  }
+}
+
+// ── Cost calculator
+function calcCost(){
+  const g=parseInt(document.getElementById('glasses-cost').value)||0;
+  const c=parseInt(document.getElementById('contacts-cost').value)||0;
+  const total=(g+c)*10;
+  document.getElementById('calc-total').textContent=total.toLocaleString('en-EG')+' EGP';
+}
+calcCost();
+
+// ── Netlify form JS submission
+function handleForm(formEl){
+  formEl.addEventListener('submit',function(e){
+    e.preventDefault();
+    const btn=formEl.querySelector('button[type="submit"]');
+    btn.textContent='Reserving...';btn.disabled=true;
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(formEl)).toString()})
+    .then(()=>window.location.href='/thank-you.html')
+    .catch(()=>window.location.href='/thank-you.html');
+  });
+}
+handleForm(document.getElementById('main-form'));
+handleForm(document.getElementById('bottom-form'));
+
+// ── Hide sticky bar when hero form visible
+const heroForm=document.getElementById('assessment');
+const stickyBar=document.getElementById('sticky-bar');
+const barObs=new IntersectionObserver(e=>{
+  stickyBar.style.transform=e[0].isIntersecting?'translateY(100%)':'translateY(0)';
+  stickyBar.style.transition='transform .3s ease';
+},{threshold:.5});
+barObs.observe(heroForm);
+
+// ── Gallery filter
+function filterGallery(cat, btn){
+  document.querySelectorAll('.gallery-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item=>{
+    if(cat==='all' || item.dataset.cat===cat){
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+}
+</script>
+</body>
+</html>

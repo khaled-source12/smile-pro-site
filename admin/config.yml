@@ -1,0 +1,29 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Website Content"
+    files:
+      - file: "content/site.json"
+        label: "Site Settings"
+        name: "site"
+        fields:
+          - {label: "WhatsApp Number (with country code, no +)", name: "whatsapp", widget: "string"}
+          - {label: "Clinic Address Line 1", name: "address_line1", widget: "string"}
+          - {label: "Clinic Address Line 2", name: "address_line2", widget: "string"}
+          - {label: "Working Hours", name: "hours", widget: "string"}
+
+  - name: "gallery"
+    label: "Gallery Photos"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Photo", name: "image", widget: "image"}
+      - {label: "Category", name: "category", widget: "select", options: ["clinic", "doctor", "mivida"]}
+      - {label: "Alt Text (description)", name: "alt", widget: "string"}

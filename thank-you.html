@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thank You — VisionPro Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<!-- ═══ REPLACE: Paste your GTM head snippet here ═══ -->
+<!-- ═══ REPLACE: Paste your Meta Pixel base code here ═══ -->
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:  #0B1D3A;
+    --gold:  #B8892E;
+    --gold-l:#D4A84B;
+    --cream: #F9F8F4;
+    --white: #FFFFFF;
+    --text:  #111827;
+    --muted: #6B7280;
+    --border:#E4E2DB;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    color: var(--navy);
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--navy);
+  }
+  .nav-logo span { color: var(--gold); }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 56px 48px;
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 40px rgba(11,29,58,.07);
+  }
+
+  /* CHECK ICON */
+  .check-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(16,185,129,.1);
+    border: 2px solid rgba(16,185,129,.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    animation: pop .5s cubic-bezier(.175,.885,.32,1.275) both;
+  }
+  .check-circle svg {
+    width: 32px; height: 32px;
+    stroke: #10b981;
+    stroke-width: 2.5;
+    fill: none;
+  }
+  @keyframes pop {
+    0%   { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  h1 { font-size: 40px; margin-bottom: 10px; }
+  .arabic {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted);
+    direction: rtl;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .message {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .message strong { color: var(--navy); }
+
+  /* NEXT STEPS */
+  .steps { text-align: left; margin-bottom: 32px; }
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(184,137,46,.12);
+    border: 1px solid rgba(184,137,46,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text { font-size: 14px; line-height: 1.6; }
+  .step-text span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* WHATSAPP BUTTON */
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .wa-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+  .wa-btn svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+  .back-link {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .back-link a { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,.35);
+  }
+
+  @media (max-width: 600px) {
+    .card { padding: 36px 24px; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GTM noscript — REPLACE with your actual GTM noscript snippet -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+
+<nav>
+  <div class="nav-logo">Vision<span>Pro</span> Center</div>
+</nav>
+
+<main>
+  <div class="card">
+
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <h1>You're all set!</h1>
+    <span class="arabic">تم استلام طلبك بنجاح</span>
+
+    <p class="message">
+      Thank you, we have received your request for a <strong>free SMILE Pro eligibility check.</strong><br/><br/>
+      Our team will call you within <strong>15 minutes</strong> to confirm your appointment at our Mivida clinic.
+    </p>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-dot">1</div>
+        <div class="step-text">
+          Our team calls you within 15 minutes
+          <span>We'll confirm a convenient time for your free eligibility check</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-dot">2</div>
+        <div class="step-text">
+          Free eligibility check at our Mivida clinic
+          <span>A comprehensive eye examination — no cost, no commitment</span>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-dot">3</div>
+        <div class="step-text">
+          Your SMILE Pro procedure — see clearly the next day
+          <span>Under 15 minutes total. Back to your life within 24 hours</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPLACE: update WhatsApp number -->
+    <a href="https://wa.me/201000000000?text=مرحبا،+لقد+أرسلت+طلبي+للتو+وأريد+تأكيد+موعدي" class="wa-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+      Chat with us on WhatsApp now
+    </a>
+
+    <span class="back-link">Didn't mean to submit? <a href="/">Go back to the page</a></span>
+
+  </div>
+</main>
+
+<footer>
+  © 2025 VisionPro Center · Mivida Compound, New Cairo, Egypt
+</footer>
+
+<!-- ═══ TRACKING: fires on this page = confirmed lead ═══ -->
+<script>
+  // Meta Pixel Lead event — fires when visitor reaches this page
+  // REPLACE YOUR_PIXEL_ID with your actual pixel ID
+  // !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  // n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  // if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  // n.queue=[];t=b.createElement(e);t.async=!0;
+  // t.src=v;s=b.getElementsByTagName(e)[0];
+  // s.parentNode.insertBefore(t,s)}(window, document,'script',
+  // 'https://connect.facebook.net/en_US/fbevents.js');
+  // fbq('init', 'YOUR_PIXEL_ID');
+  // fbq('track', 'PageView');
+  // fbq('track', 'Lead');
+
+  // Google Ads conversion — REPLACE send_to value
+  // gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXX/XXXXXXXXX'});
+</script>
+
+</body>
+</html>
