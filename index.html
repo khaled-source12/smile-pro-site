@@ -510,6 +510,10 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:32px;padding-bottom:0}
   .form-card{border-radius:0;margin:0 -24px}
+  .nav-btn{display:none}
+  .nav-inner{justify-content:flex-start}
+  .comp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -24px;padding:0 24px}
+  .comp-table{min-width:640px}
   .benefits-grid{grid-template-columns:1fr}
   .doctor-grid{grid-template-columns:1fr}
   .tech-grid{grid-template-columns:1fr}
@@ -576,7 +580,6 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
       <div class="logo">
         <img src="images/smile-pro-logo.png" alt="Smile Pro Egypt" style="height:38px;width:auto"/>
       </div>
-      <a href="#about-doctor" style="font-size:13px;font-weight:500;color:var(--burg);margin-right:20px">About Dr. El Naggar</a>
       <a href="#assessment" class="nav-btn">
         Reserve your assessment
         <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -757,7 +760,7 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
     <span class="lbl fade-up">SMILE Pro vs traditional LASIK</span>
     <div class="rule fade-up"></div>
     <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:540px" class="fade-up">The difference is bigger<br/><em>than most people realise</em></h2>
-    <table class="comp-table">
+    <div class="comp-table-wrap"><table class="comp-table">
       <thead><tr><th></th><th class="col-l">Traditional LASIK</th><th class="col-s">SMILE Pro ✦</th></tr></thead>
       <tbody>
         <tr><td>Corneal flap</td><td class="col-l"><span class="cx">✗</span>Required - never fully heals</td><td class="col-s"><span class="ci">✓</span>No flap - 2mm micro-incision</td></tr>
@@ -768,7 +771,7 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
         <tr><td>Corneal strength preserved</td><td class="col-l"><span class="cx">✗</span>Compromised by flap</td><td class="col-s"><span class="ci">✓</span>Superior biomechanical strength</td></tr>
         <tr><td>Technology generation</td><td class="col-l">Previous generation</td><td class="col-s"><span class="ci">✓</span>ZEISS VisuMax 800 - latest generation</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 </section>
 
