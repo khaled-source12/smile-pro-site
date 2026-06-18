@@ -679,7 +679,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img src="images/smile-pro-logo.png" alt="Smile Pro Egypt" style="height:38px;width:auto"/>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
-        <a href="tel:+201113524230" class="call-btn">
+        <a href="tel:+201113524230" class="call-btn" data-track="call">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           Call us
         </a>
@@ -725,7 +725,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="sel-wrap"><select id="procedure" name="procedure" required><option value="" disabled selected>Select a procedure</option><option>SMILE Pro</option><option>Custom LASIK</option><option>Femto LASIK</option><option>Not sure - need guidance</option></select></div>
             </div>
             <button type="submit" class="form-btn">Reserve my assessment →</button>
-            <a href="tel:+201113524230" class="form-call-btn">
+            <a href="tel:+201113524230" class="call-btn" data-track="call">
   <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
   Or call us: +20 11 1352 4230
 </a>
@@ -1193,7 +1193,7 @@ procedure in Mivida is personally performed by Dr. El Naggar. </p>
           <div class="sel-wrap"><select id="procedure2" name="procedure" required><option value="" disabled selected>Select a procedure</option><option>SMILE Pro</option><option>Custom LASIK</option><option>Femto LASIK</option><option>Not sure - need guidance</option></select></div>
         </div>
         <button type="submit" class="form-btn">Reserve my assessment →</button>
-        <a href="tel:+201113524230" class="form-call-btn">
+       <a href="tel:+201113524230" class="call-btn" data-track="call">
   <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
   Or call us: +20 11 1352 4230
 </a>
@@ -1333,6 +1333,17 @@ function filterGallery(cat, btn){
     }
   });
 }
+</script>
+  <!-- Meta + Snapchat Call Click Tracking -->
+<script>
+document.querySelectorAll('a[href="tel:+201113524230"]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    // Meta Pixel
+    fbq('track', 'Contact');
+    // Snapchat Pixel
+    snaptr('track', 'PHONE_NUMBER_CLICK');
+  });
+});
 </script>
 </body>
 </html>
