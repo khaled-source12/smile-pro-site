@@ -732,7 +732,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <form name="consultation" id="main-form" method="POST" data-netlify="true" action="/thank-you.html">
             <input type="hidden" name="form-name" value="consultation"/>
             <div class="fg"><label for="name">Full name</label><input type="text" id="name" name="name" placeholder="Ahmed Mohamed" required/></div>
-            <div class="fg"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required/></div>
+            <div class="fg"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/></div>
             <div class="fg"><label for="area">Area</label>
               <div class="sel-wrap"><select id="area" name="area" required><option value="" disabled selected>Select your area</option><option>Cairo</option><option>Giza</option><option>Mivida / New Cairo</option><option>Alexandria</option><option>Other</option></select></div>
             </div>
@@ -1200,8 +1200,7 @@ procedure in Mivida is personally performed by Dr. El Naggar. </p>
       <form name="consultation" id="bottom-form" method="POST" data-netlify="true" action="/thank-you.html">
         <input type="hidden" name="form-name" value="consultation"/>
         <div class="fg"><label for="name2">Full name</label><input type="text" id="name2" name="name" placeholder="Ahmed Mohamed" required/></div>
-        <div class="fg"><label for="phone2">Phone number</label><input type="tel" id="phone2" name="phone" placeholder="+20 1XX XXX XXXX" required/></div>
-        <div class="fg"><label for="area2">Area</label>
+id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/>        <div class="fg"><label for="area2">Area</label>
           <div class="sel-wrap"><select id="area2" name="area" required><option value="" disabled selected>Select your area</option><option>Cairo</option><option>Giza</option><option>Mivida / New Cairo</option><option>Alexandria</option><option>Other</option></select></div>
         </div>
         <div class="fg"><label for="procedure2">Procedure you're interested in</label>
