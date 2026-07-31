@@ -1,0 +1,49 @@
+# robots.txt — smileproegypt.com
+# Deploy to the repo root so it resolves at https://smileproegypt.com/robots.txt
+
+# ── Search engines ─────────────────────────────────────────────
+User-agent: *
+Allow: /
+
+# Netlify form-handling artefacts — no SEO value, keep them out of the index
+Disallow: /.netlify/
+Disallow: /*?_gl=
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+
+# ── AI crawlers ────────────────────────────────────────────────
+# Explicitly allowed. If you want to be cited by ChatGPT, Perplexity,
+# Claude and Gemini, these agents need to be able to read the page.
+# Note: Google AI Overviews are served by Googlebot, not Google-Extended —
+# blocking Google-Extended does NOT remove you from AI Overviews, it only
+# opts you out of Gemini model training.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# ── Sitemap ────────────────────────────────────────────────────
+Sitemap: https://smileproegypt.com/sitemap.xml
