@@ -1,50 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  sitemap.xml — smileproegypt.com
-  Deploy to repo root. Then submit it in Google Search Console
-  (Indexing → Sitemaps → enter "sitemap.xml" → Submit).
-
-  Update <lastmod> whenever you meaningfully change a page.
-  Uncomment the content-page entries only once those pages exist.
--->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://smileproegypt.com/</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en-EG" href="https://smileproegypt.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar-EG" href="https://smileproegypt.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smileproegypt.com/"/>
+    <lastmod>2026-08-17</lastmod>
     <priority>1.0</priority>
-  </url>
-
-  <!-- thank-you.html is intentionally excluded: it is a conversion
-       endpoint with no search value. Add <meta name="robots"
-       content="noindex, follow"/> to its <head> as well. -->
-
-  <!-- ══ PLANNED CONTENT PAGES — uncomment as each goes live ══
-  <url>
-    <loc>https://smileproegypt.com/smile-pro-vs-lasik/</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smileproegypt.com/smile-pro-price-egypt/</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smileproegypt.com/am-i-a-candidate/</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smileproegypt.com/ar/</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en-EG" href="https://smileproegypt.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar-EG" href="https://smileproegypt.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smileproegypt.com/"/>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.9</priority>
   </url>
-  ═══════════════════════════════════════════════════════ -->
-
+  <url>
+    <loc>https://smileproegypt.com/thank-you.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.3</priority>
+  </url>
 </urlset>
