@@ -6,80 +6,349 @@
     
     <!-- SEO Titles & Descriptions -->
     <title id="pageTitle">مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro</title>
-    <meta name="description" content="اقرأ أحدث المقالات عن عمليات تصحيح النظر، الفيمتو ليزك، وتقنية سمارت سايد مع دكتور محمد النجار استشاري جراحة العيون.">
-    
-    <!-- Hreflang Tags for Dual Language SEO -->
-    <link rel="alternate" hreflang="ar" href="https://khaled-source12.github.io/smile-pro-site/blog.html?lang=ar" />
-    <link rel="alternate" hreflang="en" href="https://khaled-source12.github.io/smile-pro-site/blog.html?lang=en" />
+    <meta name="description" content="اقرأ أحدث المقالات عن عمليات تصحيح النظر، الفيمتو ليزك، وتقنية الفيمتو سمايل مع دكتور محمد النجار استشاري جراحة العيون.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://smileproegypt.com/blog.html">
 
-    <!-- Schema Markup linking Dr. Mohamed El Naggar to LASIK -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Physician",
-      "name": "Dr. Mohamed El Naggar",
-      "medicalSpecialty": "Ophthalmology",
-      "knowsAbout": ["LASIK Surgery", "Femto LASIK", "Smile Pro LASIK", "Refractive Surgery"],
-      "description": "Dr. Mohamed El Naggar is a specialist in LASIK and refractive eye surgery."
+      "@type": "Blog",
+      "name": "Smile Pro LASIK & Vision Correction Blog",
+      "description": "Medical articles and guides by Dr. Mohamed El Naggar on LASIK, Femto LASIK, and SMILE Pro.",
+      "publisher": {
+        "@type": "Physician",
+        "name": "Dr. Mohamed El Naggar",
+        "jobTitle": "Consultant Corneal & Refractive Surgeon"
+      }
     }
     </script>
 
     <style>
-        body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
-        .nav-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; }
-        .lang-switch { padding: 8px 16px; cursor: pointer; background: #007bb5; color: white; border: none; border-radius: 5px; font-weight: bold; }
-        .blog-container { max-width: 1000px; margin: 40px auto; }
-        .blog-card { border: 1px solid #ddd; background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .blog-card h2 { color: #007bb5; margin-top: 0; }
-        .doc-tag { font-weight: bold; color: #2e7d32; }
+        :root {
+            --cream: #FAF7F2;
+            --cream2: #F2EAE1;
+            --burg: #16383D;
+            --burg2: #1F4D54;
+            --bronze: #5FBF3B;
+            --bronze2: #7FD957;
+            --bpale: #E8F7E1;
+            --white: #FFFFFF;
+            --text: #18080C;
+            --muted: #7A686C;
+            --border: #DDD0C8;
+            --r: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Cairo', 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky; top: 0; z-index: 200;
+            background: rgba(250,247,242,.97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--burg); text-decoration: none; }
+        .logo span { color: var(--bronze); }
+        .nav-controls { display: flex; align-items: center; gap: 15px; }
+        .lang-btn {
+            background: var(--burg); color: #fff; border: none;
+            padding: 8px 18px; border-radius: 50px; font-weight: 600;
+            cursor: pointer; font-size: 13px; transition: 0.2s;
+        }
+        .lang-btn:hover { background: var(--burg2); }
+
+        /* Hero Header */
+        .blog-hero {
+            background: var(--burg);
+            color: #fff;
+            padding: 60px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+        .blog-hero h1 { font-family: 'Space Grotesk', 'Cairo', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; margin-bottom: 12px; }
+        .blog-hero p { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 650px; margin: 0 auto; }
+        .doc-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 16px; border-radius: 50px; margin-bottom: 20px; font-size: 13px; color: var(--bronze2);
+        }
+
+        /* Categories Filter */
+        .category-bar {
+            display: flex; justify-content: center; gap: 12px;
+            margin: -25px auto 40px; position: relative; z-index: 10; flex-wrap: wrap;
+        }
+        .cat-tab {
+            background: var(--white); border: 1px solid var(--border);
+            padding: 10px 22px; border-radius: 50px; font-weight: 600; font-size: 14px;
+            color: var(--burg); cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .cat-tab.active, .cat-tab:hover {
+            background: var(--burg); color: #fff; border-color: var(--burg);
+        }
+
+        /* Featured Article Card */
+        .featured-card {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--r); overflow: hidden;
+            display: grid; grid-template-columns: 1.2fr 1fr;
+            margin-bottom: 40px; box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease;
+        }
+        .featured-card:hover { transform: translateY(-3px); }
+        .featured-img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; }
+        .featured-content { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+        .tag { display: inline-block; background: var(--bpale); color: var(--burg); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; width: fit-content; }
+        .featured-title { font-size: 24px; color: var(--burg); font-weight: 700; margin-bottom: 14px; line-height: 1.4; }
+        .featured-excerpt { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+        .meta-info { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 16px; }
+        .read-btn { color: var(--burg); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+
+        /* Article Grid */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .post-card {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: var(--r); overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+        .post-img { width: 100%; height: 210px; object-fit: cover; }
+        .post-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+        .post-title { font-size: 18px; color: var(--burg); font-weight: 700; margin: 10px 0; line-height: 1.4; }
+        .post-desc { color: var(--muted); font-size: 14px; margin-bottom: 20px; flex-grow: 1; }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%);
+            color: #fff; border-radius: var(--r); padding: 40px; text-align: center; margin-bottom: 60px;
+        }
+        .cta-banner h2 { font-size: 26px; margin-bottom: 10px; }
+        .cta-banner p { color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+        .cta-btn {
+            background: var(--bronze); color: #fff; padding: 12px 28px; border-radius: 50px;
+            font-weight: 700; text-decoration: none; display: inline-block; transition: 0.2s;
+        }
+        .cta-btn:hover { background: var(--bronze2); }
+
+        @media (max-width: 768px) {
+            .featured-card { grid-template-columns: 1fr; }
+            .featured-img { height: 220px; }
+            .featured-content { padding: 24px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="nav-bar">
-        <a href="index.html" style="font-weight:bold; font-size: 1.2rem; text-decoration:none; color:#333;">Smile Pro</a>
-        <button onclick="toggleLanguage()" class="lang-switch" id="langBtn">English</button>
-    </div>
-
-    <main class="blog-container">
-        <h1 id="mainHeading">مركز معلومات الليزك وتصحيح النظر</h1>
-        <p id="subHeading">مقالات طبية متخصصة تحت إشراف <span class="doc-tag">دكتور محمد النجار</span> استشاري جراحات العيون.</p>
-
-        <div class="blog-card">
-            <h2 id="art1Title">ما الفرق بين الفيمتو ليزك وتقنية Smile Pro؟</h2>
-            <p id="art1Desc">دليل شامل يقدمه دكتور محمد النجار لمساعدتك في اختيار العملية الأنسب لعينيك بين الليزك السطحي، الفيمتو ليزك، وتقنيات الفيمتو سمايل.</p>
-            <a href="article-lasik-vs-smilepro.html" id="art1Link" style="color:#007bb5; font-weight:bold;">اقرأ المقال بالكامل &larr;</a>
+    <!-- Header Navigation -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">Smile <span>Pro</span></a>
+            <div class="nav-controls">
+                <a href="index.html" style="text-decoration:none; color:var(--burg); font-weight:600; font-size:14px;" id="homeNav">الرئيسية</a>
+                <button onclick="toggleLanguage()" class="lang-btn" id="langBtn">English</button>
+            </div>
         </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="blog-hero">
+        <div class="container">
+            <div class="doc-badge" id="docBadge">✨ تحت إشراف د. محمد النجار — استشاري جراحات العيون</div>
+            <h1 id="heroTitle">مركز معلومات تصحيح النظر والليزك</h1>
+            <p id="heroSub">أحدث الأدبيات والنصائح الطبية الموثوقة حول عمليات الفيمتو ليزك، الفيمتو سمايل، وتقنية Smile Pro.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Categories Filter -->
+        <div class="category-bar">
+            <button class="cat-tab active" id="catAll">الكل</button>
+            <button class="cat-tab" id="catLasik">الليزك والفيمتو ليزك</button>
+            <button class="cat-tab" id="catSmile">تقنية Smile Pro</button>
+            <button class="cat-tab" id="catTips">نصائح قبل وبعد العملية</button>
+        </div>
+
+        <!-- Featured Big Article Card -->
+        <article class="featured-card">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80" alt="LASIK vs Smile Pro" class="featured-img">
+            <div class="featured-content">
+                <span class="tag" id="featTag">مقال مميز</span>
+                <h2 class="featured-title" id="featTitle">ما الفرق بين الفيمتو ليزك وتقنية Smile Pro الحديثة؟</h2>
+                <p class="featured-excerpt" id="featDesc">دليل طبي مقسّم يقدمه دكتور محمد النجار لشرح الفروق الجوهرية بين الفيمتو ليزك التقليدي وتقنية Smile Pro بدون قشور قرنية.</p>
+                <div class="meta-info">
+                    <span id="featAuthor">بواسطة د. محمد النجار</span>
+                    <a href="article-lasik-vs-smilepro.html" class="read-btn" id="featReadBtn">اقرأ المقال كامل 👈</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Article Grid -->
+        <div class="blog-grid">
+            
+            <!-- Article Card 1 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Recovery tips after LASIK" class="post-img">
+                <div class="post-body">
+                    <span class="tag" id="c1Tag">نصائح الشفاء</span>
+                    <h3 class="post-title" id="c1Title">متى يمكنك العودة للقيادة والعمل بعد عملية الليزك؟</h3>
+                    <p class="post-desc" id="c1Desc">جدول زمني تفصيلي للتعافي السريع بعد جراحات تصحيح النظر وأهم التعليمات للحفاظ على عينيك.</p>
+                    <div class="meta-info">
+                        <span id="c1Time">⏱️ 4 دقائق قراءة</span>
+                        <a href="#" class="read-btn" id="c1Link">اقرأ المزيد 👈</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 2 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Doctor Evaluation" class="post-img">
+                <div class="post-body">
+                    <span class="tag" id="c2Tag">الفحوصات</span>
+                    <h3 class="post-title" id="c2Title">هل سمك القرنية لديك يناسب عملية الفيمتو ليزك؟</h3>
+                    <p class="post-desc" id="c2Desc">شرح مفصل لكيفية تقييم القرنية في عيادة دكتور محمد النجار لاختيار الإجراء الأنسب لك.</p>
+                    <div class="meta-info">
+                        <span id="c2Time">⏱️ 5 دقائق قراءة</span>
+                        <a href="#" class="read-btn" id="c2Link">اقرأ المزيد 👈</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 3 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Dry eyes treatment" class="post-img">
+                <div class="post-body">
+                    <span class="tag" id="c3Tag">جفاف العين</span>
+                    <h3 class="post-title" id="c3Title">كيف تتجنب جفاف العين بعد عمليات تصحيح النظر؟</h3>
+                    <p class="post-desc" id="c3Desc">أسباب جفاف العين الموقت بعد الليزك وكيف تضمن تقنية Smile Pro الحفاظ على أعصاب القرنية.</p>
+                    <div class="meta-info">
+                        <span id="c3Time">⏱️ 3 دقائق قراءة</span>
+                        <a href="#" class="read-btn" id="c3Link">اقرأ المزيد 👈</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Consultation Banner -->
+        <section class="cta-banner">
+            <h2 id="ctaTitle">هل تريد معرفة العملية الأنسب لعينيك؟</h2>
+            <p id="ctaDesc">احجز موعد كشف وفحص شامل للقرنية مع دكتور محمد النجار في عيادة Smile Pro التجمع الخامس.</p>
+            <a href="index.html#assessment" class="cta-btn" id="ctaBtn">احجز كشفك الآن</a>
+        </section>
     </main>
 
+    <!-- Language Toggle JavaScript -->
     <script>
-        // Language Toggle Script
         function toggleLanguage() {
             const html = document.getElementById('htmlTag');
             const isArabic = html.getAttribute('lang') === 'ar';
 
             if (isArabic) {
-                // Switch to English
+                // Switch to English (LTR)
                 html.setAttribute('lang', 'en');
                 html.setAttribute('dir', 'ltr');
                 document.getElementById('langBtn').innerText = 'عربي';
+                document.getElementById('homeNav').innerText = 'Home';
                 document.getElementById('pageTitle').innerText = 'LASIK & Vision Correction Blog | Dr. Mohamed El Naggar - Smile Pro';
-                document.getElementById('mainHeading').innerText = 'LASIK & Eye Surgery Insights';
-                document.getElementById('subHeading').innerHTML = 'Expert articles curated by <span class="doc-tag">Dr. Mohamed El Naggar</span>, Ophthalmology Specialist.';
-                document.getElementById('art1Title').innerText = 'What is the Difference Between Femto LASIK and Smile Pro?';
-                document.getElementById('art1Desc').innerText = 'A comprehensive comparison by Dr. Mohamed El Naggar explaining regular LASIK, Femto LASIK, and Smile Pro procedures.';
-                document.getElementById('art1Link').innerHTML = 'Read Full Article &rarr;';
+                
+                document.getElementById('docBadge').innerText = '✨ Supervised by Dr. Mohamed El Naggar — Refractive Surgeon';
+                document.getElementById('heroTitle').innerText = 'LASIK & Vision Correction Knowledge Hub';
+                document.getElementById('heroSub').innerText = 'Medical guides and insights on Femto LASIK, Femto SMILE, and SMILE Pro procedures.';
+                
+                document.getElementById('catAll').innerText = 'All';
+                document.getElementById('catLasik').innerText = 'LASIK & Femto LASIK';
+                document.getElementById('catSmile').innerText = 'SMILE Pro Technology';
+                document.getElementById('catTips').innerText = 'Recovery Tips';
+
+                document.getElementById('featTag').innerText = 'Featured Article';
+                document.getElementById('featTitle').innerText = 'What is the Difference Between Femto LASIK and SMILE Pro?';
+                document.getElementById('featDesc').innerText = 'A medical breakdown by Dr. Mohamed El Naggar explaining key differences between traditional Femto LASIK and flapless SMILE Pro.';
+                document.getElementById('featAuthor').innerText = 'By Dr. Mohamed El Naggar';
+                document.getElementById('featReadBtn').innerText = 'Read Full Article 👉';
+
+                document.getElementById('c1Tag').innerText = 'Recovery';
+                document.getElementById('c1Title').innerText = 'When Can You Drive and Work After LASIK?';
+                document.getElementById('c1Desc').innerText = 'A detailed timeline for fast recovery after vision correction surgeries and safety guidelines.';
+                document.getElementById('c1Time').innerText = '⏱️ 4 min read';
+                document.getElementById('c1Link').innerText = 'Read More 👉';
+
+                document.getElementById('c2Tag').innerText = 'Screening';
+                document.getElementById('c2Title').innerText = 'Is Your Corneal Thickness Suitable for Femto LASIK?';
+                document.getElementById('c2Desc').innerText = 'An explanation of corneal mapping and candidate evaluation at Dr. Mohamed El Naggar Clinic.';
+                document.getElementById('c2Time').innerText = '⏱️ 5 min read';
+                document.getElementById('c2Link').innerText = 'Read More 👉';
+
+                document.getElementById('c3Tag').innerText = 'Dry Eyes';
+                document.getElementById('c3Title').innerText = 'How to Prevent Dry Eyes After Vision Correction?';
+                document.getElementById('c3Desc').innerText = 'Understanding temporary dry eyes post-surgery and how SMILE Pro protects corneal nerves.';
+                document.getElementById('c3Time').innerText = '⏱️ 3 min read';
+                document.getElementById('c3Link').innerText = 'Read More 👉';
+
+                document.getElementById('ctaTitle').innerText = 'Want to Find the Best Procedure for Your Eyes?';
+                document.getElementById('ctaDesc').innerText = 'Book a comprehensive corneal assessment with Dr. Mohamed El Naggar at Eterna Medical City, New Cairo.';
+                document.getElementById('ctaBtn').innerText = 'Book Your Assessment';
             } else {
-                // Switch back to Arabic
+                // Switch back to Arabic (RTL)
                 html.setAttribute('lang', 'ar');
                 html.setAttribute('dir', 'rtl');
                 document.getElementById('langBtn').innerText = 'English';
+                document.getElementById('homeNav').innerText = 'الرئيسية';
                 document.getElementById('pageTitle').innerText = 'مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro';
-                document.getElementById('mainHeading').innerText = 'مركز معلومات الليزك وتصحيح النظر';
-                document.getElementById('subHeading').innerHTML = 'مقالات طبية متخصصة تحت إشراف <span class="doc-tag">دكتور محمد النجار</span> استشاري جراحات العيون.';
-                document.getElementById('art1Title').innerText = 'ما الفرق بين الفيمتو ليزك وتقنية Smile Pro؟';
-                document.getElementById('art1Desc').innerText = 'دليل شامل يقدمه دكتور محمد النجار لمساعدتك في اختيار العملية الأنسب لعينيك بين الليزك السطحي، الفيمتو ليزك، وتقنيات الفيمتو سمايل.';
-                document.getElementById('art1Link').innerHTML = 'اقرأ المقال بالكامل &larr;';
+                
+                document.getElementById('docBadge').innerText = '✨ تحت إشراف د. محمد النجار — استشاري جراحات العيون';
+                document.getElementById('heroTitle').innerText = 'مركز معلومات تصحيح النظر والليزك';
+                document.getElementById('heroSub').innerText = 'أحدث الأدبيات والنصائح الطبية الموثوقة حول عمليات الفيمتو ليزك، الفيمتو سمايل، وتقنية Smile Pro.';
+                
+                document.getElementById('catAll').innerText = 'الكل';
+                document.getElementById('catLasik').innerText = 'الليزك والفيمتو ليزك';
+                document.getElementById('catSmile').innerText = 'تقنية Smile Pro';
+                document.getElementById('catTips').innerText = 'نصائح قبل وبعد العملية';
+
+                document.getElementById('featTag').innerText = 'مقال مميز';
+                document.getElementById('featTitle').innerText = 'ما الفرق بين الفيمتو ليزك وتقنية Smile Pro الحديثة؟';
+                document.getElementById('featDesc').innerText = 'دليل طبي مقسّم يقدمه دكتور محمد النجار لشرح الفروق الجوهرية بين الفيمتو ليزك التقليدي وتقنية Smile Pro بدون قشور قرنية.';
+                document.getElementById('featAuthor').innerText = 'بواسطة د. محمد النجار';
+                document.getElementById('featReadBtn').innerText = 'اقرأ المقال كامل 👈';
+
+                document.getElementById('c1Tag').innerText = 'نصائح الشفاء';
+                document.getElementById('c1Title').innerText = 'متى يمكنك العودة للقيادة والعمل بعد عملية الليزك؟';
+                document.getElementById('c1Desc').innerText = 'جدول زمني تفصيلي للتعافي السريع بعد جراحات تصحيح النظر وأهم التعليمات للحفاظ على عينيك.';
+                document.getElementById('c1Time').innerText = '⏱️ 4 دقائق قراءة';
+                document.getElementById('c1Link').innerText = 'اقرأ المزيد 👈';
+
+                document.getElementById('c2Tag').innerText = 'الفحوصات';
+                document.getElementById('c2Title').innerText = 'هل سمك القرنية لديك يناسب عملية الفيمتو ليزك؟';
+                document.getElementById('c2Desc').innerText = 'شرح مفصل لكيفية تقييم القرنية في عيادة دكتور محمد النجار لاختيار الإجراء الأنسب لك.';
+                document.getElementById('c2Time').innerText = '⏱️ 5 دقائق قراءة';
+                document.getElementById('c2Link').innerText = 'اقرأ المزيد 👈';
+
+                document.getElementById('c3Tag').innerText = 'جفاف العين';
+                document.getElementById('c3Title').innerText = 'كيف تتجنب جفاف العين بعد عمليات تصحيح النظر؟';
+                document.getElementById('c3Desc').innerText = 'أسباب جفاف العين الموقت بعد الليزك وكيف تضمن تقنية Smile Pro الحفاظ على أعصاب القرنية.';
+                document.getElementById('c3Time').innerText = '⏱️ 3 دقائق قراءة';
+                document.getElementById('c3Link').innerText = 'اقرأ المزيد 👈';
+
+                document.getElementById('ctaTitle').innerText = 'هل تريد معرفة العملية الأنسب لعينيك؟';
+                document.getElementById('ctaDesc').innerText = 'احجز موعد كشف وفحص شامل للقرنية مع دكتور محمد النجار في عيادة Smile Pro التجمع الخامس.';
+                document.getElementById('ctaBtn').innerText = 'احجز كشفك الآن';
             }
         }
     </script>
