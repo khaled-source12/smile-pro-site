@@ -95,7 +95,7 @@ snaptr('track', 'PAGE_VIEW');
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
 <!-- ══════════════════════════════════════════════════════════════
      STRUCTURED DATA
@@ -807,6 +807,73 @@ footer{background:var(--burg);border-top:1px solid rgba(255,255,255,.08);padding
 }
 .form-call-btn:hover{border-color:var(--burg);color:var(--burg)}
 .form-call-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;flex-shrink:0}
+
+/* ── LANGUAGE TOGGLE */
+.lang-toggle{
+  display:flex;align-items:center;gap:0;
+  border:1.5px solid var(--border);border-radius:50px;overflow:hidden;
+  font-size:12px;font-weight:500;
+}
+.lang-toggle button{
+  padding:6px 14px;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  background:transparent;color:var(--muted);transition:all .2s;
+}
+.lang-toggle button.active{background:var(--burg);color:#fff}
+
+/* ── RTL OVERRIDES */
+html[dir="rtl"] body{font-family:'Cairo','DM Sans',sans-serif}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,html[dir="rtl"] h4{font-family:'Cairo',sans-serif}
+html[dir="rtl"] .form-card-title,html[dir="rtl"] .tl-title,html[dir="rtl"] .tech-feat-title,
+html[dir="rtl"] .testi-quote,html[dir="rtl"] .testi-avatar,html[dir="rtl"] .faq-q,
+html[dir="rtl"] .trust-num,html[dir="rtl"] .doc-badge-num,html[dir="rtl"] .calc-col-num,
+html[dir="rtl"] .logo-text,html[dir="rtl"] .tl-dot-num{font-family:'Cairo',sans-serif}
+html[dir="rtl"] .faq-q{text-align:right}
+html[dir="rtl"] .comp-table th,html[dir="rtl"] .comp-table td{text-align:right}
+html[dir="rtl"] .sel-wrap::after{right:auto;left:14px}
+html[dir="rtl"] .timeline::before{left:auto;right:28px}
+html[dir="rtl"] .tl-item{flex-direction:row-reverse}
+html[dir="rtl"] .tl-desc,html[dir="rtl"] .tl-body{text-align:right}
+html[dir="rtl"] .cred{flex-direction:row-reverse}
+html[dir="rtl"] .cred-text{text-align:right}
+html[dir="rtl"] .tech-feat{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] .hero-proof-item{flex-direction:row-reverse}
+html[dir="rtl"] .hero-pill{flex-direction:row-reverse}
+html[dir="rtl"] .nav-inner{flex-direction:row-reverse}
+html[dir="rtl"] .nav-btn{flex-direction:row-reverse}
+html[dir="rtl"] .nav-btn svg{transform:scaleX(-1)}
+html[dir="rtl"] .hero h1{text-align:right}
+html[dir="rtl"] .hero-sub{text-align:right}
+html[dir="rtl"] .hero-kicker{text-align:right}
+html[dir="rtl"] .hero-proof{justify-content:flex-end}
+html[dir="rtl"] .sticky-bar{flex-direction:row-reverse}
+html[dir="rtl"] .sticky-bar-actions{flex-direction:row-reverse}
+html[dir="rtl"] .footer-inner{flex-direction:row-reverse}
+html[dir="rtl"] .form-wa{flex-direction:row-reverse}
+html[dir="rtl"] .wa-link{flex-direction:row-reverse}
+html[dir="rtl"] .form-call-btn{flex-direction:row-reverse}
+html[dir="rtl"] .call-btn{flex-direction:row-reverse}
+html[dir="rtl"] .b-card{text-align:right}
+html[dir="rtl"] .g-card{text-align:center}
+html[dir="rtl"] .doctor-grid{direction:rtl}
+html[dir="rtl"] .doc-badge{right:auto;left:-1px;border-radius:0 var(--rg) 0 var(--rg)}
+html[dir="rtl"] .calc-col:first-child{border-right:none;border-left:1px solid rgba(255,255,255,.15)}
+html[dir="rtl"] .trust-item{border-right:none;border-left:1px solid rgba(255,255,255,.1)}
+html[dir="rtl"] .trust-item:last-child{border-left:none}
+html[dir="rtl"] .sticky-wa{flex-direction:row-reverse}
+html[dir="rtl"] .lbl{letter-spacing:.06em}
+html[dir="rtl"] .fg input,html[dir="rtl"] .fg select{text-align:right}
+html[dir="rtl"] .fg label{text-align:right}
+html[dir="rtl"] .form-btn{font-family:'Cairo',sans-serif}
+html[dir="rtl"] .sticky-cta{font-family:'Cairo',sans-serif}
+@media(max-width:960px){
+  html[dir="rtl"] .nav-inner{flex-direction:row-reverse;justify-content:flex-end}
+  html[dir="rtl"] .trust-item{border-left:none}
+  html[dir="rtl"] .timeline::before{right:28px}
+}
+@media(max-width:600px){
+  html[dir="rtl"] .calc-col:first-child{border-left:none}
+}
 </style>
 </head>
 <body>
@@ -817,7 +884,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ══════════ URGENCY BAR ══════════ -->
 <div class="urgency-bar">
-  <span>Limited:</span> Only <span id="slot-count">8</span> assessment slots remaining this week at our Mivida clinic
+  <span data-i18n="urgency_limited">Limited:</span> <span data-i18n="urgency_only">Only</span> <span id="slot-count">8</span> <span data-i18n="urgency_rest">assessment slots remaining this week at our Mivida clinic</span>
 </div>
 
 <!-- ══════════ NAV ══════════ -->
@@ -828,12 +895,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img src="images/smile-pro-logo.png" alt="Smile Pro Egypt — Dr. Mohamed El Naggar Eye Clinic, New Cairo" style="height:38px;width:auto"/>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
+        <div class="lang-toggle">
+          <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+          <button id="btn-ar" onclick="setLang('ar')">عربي</button>
+        </div>
         <a href="tel:+201113524230" class="call-btn" data-track="call">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          Call us
+          <span data-i18n="nav_call">Call us</span>
         </a>
         <a href="#assessment" class="nav-btn">
-          Reserve your assessment
+          <span data-i18n="nav_reserve">Reserve your assessment</span>
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -848,44 +919,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="hero-pill">
           <div class="hero-pill-dot"></div>
-          ZEISS SMILE Pro technology in Mivida, New Cairo
+          <span data-i18n="hero_pill">ZEISS SMILE Pro technology in Mivida, New Cairo</span>
         </div>
-        <h1>You've spent enough<br/>mornings reaching<br/>for your <em>glasses.</em></h1>
-        <p class="hero-kicker">SMILE Pro laser eye surgery in New Cairo with Dr. Mohamed El Naggar</p>
-        <p class="hero-sub">SMILE Pro corrects your vision permanently in under 15 minutes. No flap. No blade. No dry eye. Most patients drive themselves to work the same day.</p>
+        <h1 data-i18n-html="hero_h1">You've spent enough<br/>mornings reaching<br/>for your <em>glasses.</em></h1>
+        <p class="hero-kicker" data-i18n="hero_kicker">SMILE Pro laser eye surgery in New Cairo with Dr. Mohamed El Naggar</p>
+        <p class="hero-sub" data-i18n="hero_sub">SMILE Pro corrects your vision permanently in under 15 minutes. No flap. No blade. No dry eye. Most patients drive themselves to work the same day.</p>
         <div class="hero-proof">
-          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Flapless - zero flap risk for life</div>
-          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ZEISS VisuMax 800 - same as London &amp; Dubai</div>
-          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>7+ years · 10,000+ procedures</div>
-          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Located in Eterna Healthcare City New Cairo</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="proof_flapless">Flapless - zero flap risk for life</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="proof_zeiss">ZEISS VisuMax 800 - same as London &amp; Dubai</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="proof_years">7+ years · 10,000+ procedures</div>
+          <div class="hero-proof-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="proof_location">Located in Eterna Healthcare City New Cairo</div>
         </div>
       </div>
       <div id="assessment">
         <div class="form-card">
-          <div class="form-card-title">Reserve your assessment</div>
-          <div class="form-card-sub">Vision screening · Our team calls you within 15 minutes</div>
+          <div class="form-card-title" data-i18n="form_title">Reserve your assessment</div>
+          <div class="form-card-sub" data-i18n="form_sub">Vision screening · Our team calls you within 15 minutes</div>
           <form name="consultation" id="main-form" method="POST" data-netlify="true" action="/thank-you.html">
             <input type="hidden" name="form-name" value="consultation"/>
-            <div class="fg"><label for="name">Full name</label><input type="text" id="name" name="name" placeholder="Ahmed Mohamed" required/></div>
-            <div class="fg"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/></div>
-            <div class="fg"><label for="area">Area</label>
+            <div class="fg"><label for="name" data-i18n="form_name">Full name</label><input type="text" id="name" name="name" placeholder="Ahmed Mohamed" required/></div>
+            <div class="fg"><label for="phone" data-i18n="form_phone">Phone number</label><input type="tel" id="phone" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/></div>
+            <div class="fg"><label for="area" data-i18n="form_area">Area</label>
               <div class="sel-wrap"><select id="area" name="area" required><option value="" disabled selected>Select your area</option><option>Cairo</option><option>Giza</option><option>Mivida / New Cairo</option><option>Alexandria</option><option>Other</option></select></div>
             </div>
-            <div class="fg"><label for="procedure">Procedure you're interested in</label>
+            <div class="fg"><label for="procedure" data-i18n="form_procedure">Procedure you're interested in</label>
               <div class="sel-wrap"><select id="procedure" name="procedure" required><option value="" disabled selected>Select a procedure</option><option>SMILE Pro</option><option>Custom LASIK</option><option>Femto LASIK</option><option>Not sure - need guidance</option></select></div>
             </div>
-            <button type="submit" class="form-btn">Reserve my assessment →</button>
+            <button type="submit" class="form-btn" data-i18n="form_btn">Reserve my assessment →</button>
             <a href="tel:+201113524230" class="form-call-btn" data-track="call">
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              Or call us: +20 11 1352 4230
+              <span data-i18n="form_call">Or call us:</span> +20 11 1352 4230
             </a>
           </form>
-          <p class="form-note">No commitment · Strictly confidential</p>
+          <p class="form-note" data-i18n="form_note">No commitment · Strictly confidential</p>
           <div class="form-wa">
-            <span>Prefer to message first?</span>
+            <span data-i18n="form_wa_prefer">Prefer to message first?</span>
             <a href="https://wa.me/201113524230?text=Hello, I'd like to learn more about SMILE Pro" class="wa-link" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
-              WhatsApp us
+              <span data-i18n="form_wa_btn">WhatsApp us</span>
             </a>
           </div>
         </div>
@@ -897,29 +968,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ OUR PROCEDURES ══════════ -->
 <section class="section" id="procedures" style="background:var(--cream2)">
   <div class="container">
-    <span class="lbl fade-up" style="text-align:center;display:block">Our Procedures</span>
+    <span class="lbl fade-up" style="text-align:center;display:block" data-i18n="proc_lbl">Our Procedures</span>
     <div class="rule fade-up" style="margin:0 auto 22px"></div>
-    <h2 style="font-size:clamp(30px,4vw,50px);text-align:center" class="fade-up">Three ways to see clearly<br/><em>find the right fit for your eyes</em></h2>
-    <p style="text-align:center;font-size:14px;color:var(--muted);max-width:560px;margin:14px auto 0">Every patient is different. During your assessment, Dr. El Naggar will recommend the procedure best suited to your eyes, lifestyle, and goals.</p>
+    <h2 style="font-size:clamp(30px,4vw,50px);text-align:center" class="fade-up"><span data-i18n-html="proc_h2">Three ways to see clearly<br/><em>find the right fit for your eyes</em></span></h2>
+    <p style="text-align:center;font-size:14px;color:var(--muted);max-width:560px;margin:14px auto 0" data-i18n="proc_desc">Every patient is different. During your assessment, Dr. El Naggar will recommend the procedure best suited to your eyes, lifestyle, and goals.</p>
 
     <div class="benefits-grid" style="margin-top:48px">
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>Custom LASIK</h3>
-        <p>A tailored, blade-based laser procedure mapped precisely to your eye's unique shape. A trusted, well-established option with decades of global track record and predictable outcomes.</p>
-        <span class="b-tag">Precision-mapped · proven worldwide</span>
+        <h3 data-i18n="proc_custom_h">Custom LASIK</h3>
+        <p data-i18n="proc_custom_p">A tailored, blade-based laser procedure mapped precisely to your eye's unique shape. A trusted, well-established option with decades of global track record and predictable outcomes.</p>
+        <span class="b-tag" data-i18n="proc_custom_tag">Precision-mapped · proven worldwide</span>
       </div>
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3>Femto LASIK</h3>
-        <p>An advanced, high-speed laser technique offering faster treatment times and smooth visual recovery - a strong option for patients seeking quick results with established LASIK technology.</p>
-        <span class="b-tag">Fast treatment · smooth recovery</span>
+        <h3 data-i18n="proc_femto_h">Femto LASIK</h3>
+        <p data-i18n="proc_femto_p">An advanced, high-speed laser technique offering faster treatment times and smooth visual recovery - a strong option for patients seeking quick results with established LASIK technology.</p>
+        <span class="b-tag" data-i18n="proc_femto_tag">Fast treatment · smooth recovery</span>
       </div>
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>SMILE Pro</h3>
-        <p>Our most advanced option - a flapless, minimally-invasive procedure using the ZEISS VisuMax 800. Designed for active lifestyles, with a 2mm micro-incision and same-day recovery for most patients.</p>
-        <span class="b-tag">Flapless · same-day recovery</span>
+        <h3 data-i18n="proc_smile_h">SMILE Pro</h3>
+        <p data-i18n="proc_smile_p">Our most advanced option - a flapless, minimally-invasive procedure using the ZEISS VisuMax 800. Designed for active lifestyles, with a 2mm micro-incision and same-day recovery for most patients.</p>
+        <span class="b-tag" data-i18n="proc_smile_tag">Flapless · same-day recovery</span>
       </div>
     </div>
   </div>
@@ -928,31 +999,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ BENEFITS ══════════ -->
 <section class="section" id="why-smile-pro" style="background:var(--white)">
   <div class="container">
-    <span class="lbl fade-up">Why SMILE Pro</span>
+    <span class="lbl fade-up" data-i18n="why_lbl">Why SMILE Pro</span>
     <div class="rule fade-up"></div>
-    <h2 style="font-size:clamp(32px,4vw,52px);max-width:600px" class="fade-up">What makes SMILE Pro<br/><em>our most advanced option</em></h2>
+    <h2 style="font-size:clamp(32px,4vw,52px);max-width:600px" class="fade-up"><span data-i18n-html="why_h2">What makes SMILE Pro<br/><em>our most advanced option</em></span></h2>
 
-    <h3 class="answer-h fade-up">What is SMILE Pro?</h3>
-    <p class="answer-p fade-up">SMILE Pro is a flapless laser vision correction procedure performed with the ZEISS VisuMax 800. A femtosecond laser shapes a thin lenticule of tissue inside the intact cornea, which is removed through a micro-incision under 2mm. No corneal flap is created. The laser runs for about 8 seconds per eye and the full procedure takes around 15 minutes for both eyes.</p>
+    <h3 class="answer-h fade-up" data-i18n="why_answer_h">What is SMILE Pro?</h3>
+    <p class="answer-p fade-up"><span data-i18n="why_answer_p">SMILE Pro is a flapless laser vision correction procedure performed with the ZEISS VisuMax 800. A femtosecond laser shapes a thin lenticule of tissue inside the intact cornea, which is removed through a micro-incision under 2mm. No corneal flap is created. The laser runs for about 8 seconds per eye and the full procedure takes around 15 minutes for both eyes.</span></p>
 
     <div class="benefits-grid">
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>No flap. Ever.</h3>
-        <p>SMILE Pro uses a 2mm micro-incision invisible to the naked eye - there's no corneal flap involved at any stage. This minimally-invasive approach is a key reason it's well suited to active lifestyles.</p>
-        <span class="b-tag">Flapless · minimally invasive</span>
+        <h3 data-i18n="ben_noflap_h">No flap. Ever.</h3>
+        <p><span data-i18n="ben_noflap_p">SMILE Pro uses a 2mm micro-incision invisible to the naked eye - there's no corneal flap involved at any stage. This minimally-invasive approach is a key reason it's well suited to active lifestyles.</span></p>
+        <span class="b-tag" data-i18n="ben_noflap_tag">Flapless · minimally invasive</span>
       </div>
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>Drive yourself home the same day</h3>
-        <p>The ZEISS laser operates for 8 seconds per eye. The entire procedure takes 15 minutes. Most patients are back at their desk the same day. No hospital stay, no general anaesthesia.</p>
-        <span class="b-tag">Most patients drive the same day</span>
+        <h3 data-i18n="ben_drive_h">Drive yourself home the same day</h3>
+        <p><span data-i18n="ben_drive_p">The ZEISS laser operates for 8 seconds per eye. The entire procedure takes 15 minutes. Most patients are back at their desk the same day. No hospital stay, no general anaesthesia.</span></p>
+        <span class="b-tag" data-i18n="ben_drive_tag">Most patients drive the same day</span>
       </div>
       <div class="b-card fade-up">
         <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <h3>Designed with dry eyes in mind</h3>
-        <p>Egypt has one of the world's highest dry eye rates. SMILE Pro's micro-incision preserves the corneal nerves that control tear production, which is associated with a clinically lower dry eye incidence.</p>
-        <span class="b-tag">Lower dry eye incidence</span>
+        <h3 data-i18n="ben_dry_h">Designed with dry eyes in mind</h3>
+        <p><span data-i18n="ben_dry_p">Egypt has one of the world's highest dry eye rates. SMILE Pro's micro-incision preserves the corneal nerves that control tear production, which is associated with a clinically lower dry eye incidence.</span></p>
+        <span class="b-tag" data-i18n="ben_dry_tag">Lower dry eye incidence</span>
       </div>
     </div>
   </div>
@@ -961,9 +1032,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ PATIENT JOURNEY TIMELINE ══════════ -->
 <section class="section journey-section" id="journey">
   <div class="container">
-    <span class="lbl fade-up">The complete patient journey</span>
+    <span class="lbl fade-up" data-i18n="journey_lbl">The complete patient journey</span>
     <div class="rule fade-up"></div>
-    <h2 style="font-size:clamp(30px,4vw,50px)" class="fade-up">From <em>"I'm curious"</em><br/>to seeing clearly - step by step</h2>
+    <h2 style="font-size:clamp(30px,4vw,50px)" class="fade-up"><span data-i18n-html="journey_h2">From <em>"I'm curious"</em><br/>to seeing clearly - step by step</span></h2>
     <div class="timeline">
 
       <div class="tl-item fade-up">
@@ -972,10 +1043,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">01</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Today - 2 minutes</div>
-          <div class="tl-title">You submit the form or send a WhatsApp</div>
-          <div class="tl-desc">That's it. Name, phone number, whether you wear glasses or contacts. No medical history forms, no uploads, nothing complicated. Our team receives your request immediately.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Takes 1 minute</div>
+          <div class="tl-time" data-i18n="tl1_time">Today - 2 minutes</div>
+          <div class="tl-title" data-i18n="tl1_title">You submit the form or send a WhatsApp</div>
+          <div class="tl-desc"><span data-i18n="tl1_desc">That's it. Name, phone number, whether you wear glasses or contacts. No medical history forms, no uploads, nothing complicated. Our team receives your request immediately.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl1_hl">Takes 1 minute</div>
         </div>
       </div>
 
@@ -985,10 +1056,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">02</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Within 15 minutes</div>
-          <div class="tl-title">Our team calls to schedule your visit</div>
-          <div class="tl-desc">A member of our team calls you personally - not an automated message. We confirm a time that works for you at our Mivida clinic. Evenings and weekends are available. The call takes about 3 minutes.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personal call</div>
+          <div class="tl-time" data-i18n="tl2_time">Within 15 minutes</div>
+          <div class="tl-title" data-i18n="tl2_title">Our team calls to schedule your visit</div>
+          <div class="tl-desc"><span data-i18n="tl2_desc">A member of our team calls you personally - not an automated message. We confirm a time that works for you at our Mivida clinic. Evenings and weekends are available. The call takes about 3 minutes.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl2_hl">Personal call</div>
         </div>
       </div>
 
@@ -998,10 +1069,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">03</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Assessment day - 30 minutes</div>
-          <div class="tl-title">Precision vision assessment</div>
-          <div class="tl-desc">You come to the clinic - parking is provided. We conduct a comprehensive eye mapping session: corneal thickness measurement, prescription analysis, pupil response, and overall eye health screening. Dr. El Naggar personally reviews your results and discusses whether SMILE Pro is the right choice for you. If it isn't, we tell you honestly - and recommend the best alternative.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personally reviewed by Dr. El Naggar</div>
+          <div class="tl-time" data-i18n="tl3_time">Assessment day - 30 minutes</div>
+          <div class="tl-title" data-i18n="tl3_title">Precision vision assessment</div>
+          <div class="tl-desc"><span data-i18n="tl3_desc">You come to the clinic - parking is provided. We conduct a comprehensive eye mapping session: corneal thickness measurement, prescription analysis, pupil response, and overall eye health screening. Dr. El Naggar personally reviews your results and discusses whether SMILE Pro is the right choice for you. If it isn't, we tell you honestly - and recommend the best alternative.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl3_hl">Personally reviewed by Dr. El Naggar</div>
         </div>
       </div>
 
@@ -1011,10 +1082,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">04</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Surgery day - total 2 hours at clinic</div>
-          <div class="tl-title">The SMILE Pro procedure - 15 minutes</div>
-          <div class="tl-desc">You arrive, relax in our private preparation room, and receive anaesthetic eye drops. The procedure itself takes 15 minutes for both eyes - the ZEISS laser operates for 8 seconds per eye. You are fully awake. You feel mild pressure, nothing more. You walk out wearing protective glasses. A friend or driver takes you home. You rest, you sleep.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Laser: 8 seconds per eye</div>
+          <div class="tl-time" data-i18n="tl4_time">Surgery day - total 2 hours at clinic</div>
+          <div class="tl-title" data-i18n="tl4_title">The SMILE Pro procedure - 15 minutes</div>
+          <div class="tl-desc"><span data-i18n="tl4_desc">You arrive, relax in our private preparation room, and receive anaesthetic eye drops. The procedure itself takes 15 minutes for both eyes - the ZEISS laser operates for 8 seconds per eye. You are fully awake. You feel mild pressure, nothing more. You walk out wearing protective glasses. A friend or driver takes you home. You rest, you sleep.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl4_hl">Laser: 8 seconds per eye</div>
         </div>
       </div>
 
@@ -1024,10 +1095,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">05</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Next morning</div>
-          <div class="tl-title">You wake up and see clearly</div>
-          <div class="tl-desc">Most patients message us within hours of the procedure, surprised by how much they can already see. By the same day, vision is typically sharp enough to drive, read, and work normally. A brief follow-up check confirms your recovery is progressing perfectly. Use your prescribed drops and avoid eye contact with water for 48 hours.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Most patients drive the same day</div>
+          <div class="tl-time" data-i18n="tl5_time">Next morning</div>
+          <div class="tl-title" data-i18n="tl5_title">You wake up and see clearly</div>
+          <div class="tl-desc"><span data-i18n="tl5_desc">Most patients message us within hours of the procedure, surprised by how much they can already see. By the same day, vision is typically sharp enough to drive, read, and work normally. A brief follow-up check confirms your recovery is progressing perfectly. Use your prescribed drops and avoid eye contact with water for 48 hours.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl5_hl">Most patients drive the same day</div>
         </div>
       </div>
 
@@ -1037,10 +1108,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="tl-dot-num">06</div>
         </div>
         <div class="tl-body">
-          <div class="tl-time">Week 1–2</div>
-          <div class="tl-title">Back to everything</div>
-          <div class="tl-desc">Days 3–5: return to work, light gym, driving. Week 2: swimming cleared, travel unrestricted, most sports approved. A 1-month follow-up visit confirms your final vision outcome. In our patient outcomes to date, over 98% achieve 20/20 vision or better.</div>
-          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>98% achieve 20/20 or better</div>
+          <div class="tl-time" data-i18n="tl6_time">Week 1–2</div>
+          <div class="tl-title" data-i18n="tl6_title">Back to everything</div>
+          <div class="tl-desc"><span data-i18n="tl6_desc">Days 3–5: return to work, light gym, driving. Week 2: swimming cleared, travel unrestricted, most sports approved. A 1-month follow-up visit confirms your final vision outcome. In our patient outcomes to date, over 98% achieve 20/20 vision or better.</span></div>
+          <div class="tl-highlight"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg data-i18n="tl6_hl">98% achieve 20/20 or better</div>
         </div>
       </div>
 
@@ -1051,15 +1122,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ COMPARISON ══════════ -->
 <section class="section comp-section" id="smile-pro-vs-lasik">
   <div class="container">
-    <span class="lbl fade-up">Comparing your options</span>
+    <span class="lbl fade-up" data-i18n="comp_lbl">Comparing your options</span>
     <div class="rule fade-up"></div>
-    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:540px" class="fade-up">Key differences<br/><em>at a glance</em></h2>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:540px" class="fade-up"><span data-i18n-html="comp_h2">Key differences<br/><em>at a glance</em></span></h2>
 
-    <h3 class="answer-h fade-up">What is the difference between SMILE Pro and LASIK?</h3>
-    <p class="answer-p fade-up">LASIK requires creating a corneal flap. SMILE Pro removes tissue through a micro-incision under 2mm with no flap at all, which preserves more corneal nerves and biomechanical strength. In practice that means a minimally invasive procedure well suited to active lifestyles, with clinically lower rates of post-operative dry eye and a laser time of 8 seconds per eye instead of 30 to 60.</p>
+    <h3 class="answer-h fade-up" data-i18n="comp_answer_h">What is the difference between SMILE Pro and LASIK?</h3>
+    <p class="answer-p fade-up"><span data-i18n="comp_answer_p">LASIK requires creating a corneal flap. SMILE Pro removes tissue through a micro-incision under 2mm with no flap at all, which preserves more corneal nerves and biomechanical strength. In practice that means a minimally invasive procedure well suited to active lifestyles, with clinically lower rates of post-operative dry eye and a laser time of 8 seconds per eye instead of 30 to 60.</span></p>
 
     <div class="comp-table-wrap"><table class="comp-table">
-      <thead><tr><th></th><th class="col-l">Traditional LASIK</th><th class="col-s">SMILE Pro ✦</th></tr></thead>
+      <thead><tr><th></th><th class="col-l" data-i18n="comp_lasik">Traditional LASIK</th><th class="col-s" data-i18n="comp_smile">SMILE Pro ✦</th></tr></thead>
       <tbody>
         <tr><td>Corneal flap</td><td class="col-l"><span class="cx">✗</span>Required</td><td class="col-s"><span class="ci">✓</span>No flap - 2mm micro-incision</td></tr>
         <tr><td>Dry eye risk</td><td class="col-l"><span class="cx">✗</span>High</td><td class="col-s"><span class="ci">✓</span>Clinically lower - preserved nerves</td></tr>
@@ -1076,37 +1147,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ COST CALCULATOR ══════════ -->
 <section class="section calc-section" id="cost">
   <div class="container">
-    <span class="lbl fade-up" style="text-align:center;display:block">The real cost of waiting</span>
+    <span class="lbl fade-up" style="text-align:center;display:block" data-i18n="calc_lbl">The real cost of waiting</span>
     <div class="rule fade-up" style="margin:0 auto 22px"></div>
-    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up">How much are your glasses<br/><em>actually costing you?</em></h2>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up"><span data-i18n-html="calc_h2">How much are your glasses<br/><em>actually costing you?</em></span></h2>
 
-    <h3 class="answer-h fade-up" style="text-align:center">How much does SMILE Pro cost in Egypt?</h3>
-    <p class="answer-p fade-up" style="margin:0 auto;text-align:center">SMILE Pro at our New Cairo clinic is 48,000 EGP. That covers the procedure on both eyes, all pre-surgery assessments, 12 months of follow-up appointments, and prescribed recovery eye drops. The initial vision assessment is booked and priced separately.</p>
+    <h3 class="answer-h fade-up" style="text-align:center" data-i18n="calc_answer_h">How much does SMILE Pro cost in Egypt?</h3>
+    <p class="answer-p fade-up" style="margin:0 auto;text-align:center"><span data-i18n="calc_answer_p">SMILE Pro at our New Cairo clinic is 48,000 EGP. That covers the procedure on both eyes, all pre-surgery assessments, 12 months of follow-up appointments, and prescribed recovery eye drops. The initial vision assessment is booked and priced separately.</span></p>
 
     <div class="calc-wrap fade-up">
       <div class="calc-grid">
         <div class="calc-input-group">
-          <label for="glasses-cost">Annual spend on glasses &amp; frames (EGP)</label>
+          <label for="glasses-cost" data-i18n="calc_glasses_label">Annual spend on glasses &amp; frames (EGP)</label>
           <input type="number" id="glasses-cost" value="3000" min="0" oninput="calcCost()"/>
         </div>
         <div class="calc-input-group">
-          <label for="contacts-cost">Annual spend on contacts &amp; solutions (EGP)</label>
+          <label for="contacts-cost" data-i18n="calc_contacts_label">Annual spend on contacts &amp; solutions (EGP)</label>
           <input type="number" id="contacts-cost" value="4800" min="0" oninput="calcCost()"/>
         </div>
       </div>
       <div class="calc-result">
         <div class="calc-col">
-          <div class="calc-col-lbl">10-year glasses &amp; contacts cost</div>
+          <div class="calc-col-lbl" data-i18n="calc_total_lbl">10-year glasses &amp; contacts cost</div>
           <div class="calc-col-num" id="calc-total">79,000 EGP</div>
-          <div class="calc-col-sub">Ongoing - every single year</div>
+          <div class="calc-col-sub" data-i18n="calc_total_sub">Ongoing - every single year</div>
         </div>
         <div class="calc-col">
-          <div class="calc-col-lbl">SMILE Pro - one time, forever</div>
+          <div class="calc-col-lbl" data-i18n="calc_smile_lbl">SMILE Pro - one time, forever</div>
           <div class="calc-col-num savings">48,000 EGP</div>
-          <div class="calc-col-sub">Includes all follow-ups · no recurring cost</div>
+          <div class="calc-col-sub" data-i18n="calc_smile_sub">Includes all follow-ups · no recurring cost</div>
         </div>
       </div>
-      <p class="calc-note">Numbers adjust as you type. Average Egyptian contact lens user spends 4,800–8,000 EGP per year on lenses, solutions and check-ups alone.</p>
+      <p class="calc-note" data-i18n="calc_note">Numbers adjust as you type. Average Egyptian contact lens user spends 4,800–8,000 EGP per year on lenses, solutions and check-ups alone.</p>
     </div>
   </div>
 </section>
@@ -1114,23 +1185,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ DOCTOR ══════════ -->
 <section class="section doctor-section" id="about-doctor">
   <div class="container">
-    <span class="lbl fade-up" style="text-align:center;display:block">About your surgeon</span>
+    <span class="lbl fade-up" style="text-align:center;display:block" data-i18n="doc_lbl">About your surgeon</span>
     <div class="rule fade-up" style="margin:0 auto 22px"></div>
-    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center;margin-bottom:48px" class="fade-up">Meet <em>Dr. Mohamed El Naggar</em></h2>
+    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center;margin-bottom:48px" class="fade-up"><span data-i18n-html="doc_h2">Meet <em>Dr. Mohamed El Naggar</em></span></h2>
 
     <div class="doctor-grid">
       <div class="fade-up">
         <div class="doc-img">
           <img src="images/Naggar6.png" alt="Dr. Mohamed El Naggar, Consultant Corneal and Refractive Surgeon, New Cairo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
-          <div class="doc-badge"><div class="doc-badge-num">10K+</div><div class="doc-badge-lbl">Procedures</div></div>
+          <div class="doc-badge"><div class="doc-badge-num">10K+</div><div class="doc-badge-lbl" data-i18n="doc_badge_lbl">Procedures</div></div>
         </div>
       </div>
       <div class="fade-up">
-        <span class="lbl">Performed by</span>
+        <span class="lbl" data-i18n="doc_performed">Performed by</span>
         <div class="rule"></div>
         <h3 class="doc-name">Dr. Mohamed El Naggar</h3>
         <div class="doc-title">Consultant Corneal &amp; Refractive Surgeon · Fellow, Royal College of Surgeons (UK)</div>
-        <p class="doc-bio">Founder of the Gazirat Al Arab Eye &amp; Laser Center, Dr. Mohamed El Naggar is a Fellow of the Royal College of Surgeons (UK), a member of the American Academy of Ophthalmology, the European Society of Cataract &amp; Refractive Surgeons, and the Royal College of Surgeons of Edinburgh. Advanced ZEISS SMILE Pro technology is now available at his New Cairo clinic, where every SMILE Pro procedure is personally performed by Dr. El Naggar.</p>
+        <p class="doc-bio"><span data-i18n="doc_bio">Founder of the Gazirat Al Arab Eye &amp; Laser Center, Dr. Mohamed El Naggar is a Fellow of the Royal College of Surgeons (UK), a member of the American Academy of Ophthalmology, the European Society of Cataract &amp; Refractive Surgeons, and the Royal College of Surgeons of Edinburgh. Advanced ZEISS SMILE Pro technology is now available at his New Cairo clinic, where every SMILE Pro procedure is personally performed by Dr. El Naggar.</span></p>
         <div class="creds">
           <div class="cred"><div class="cred-dot"></div><div class="cred-text">Fellow, Royal College of Surgeons - Ophthalmology, United Kingdom</div></div>
           <div class="cred"><div class="cred-dot"></div><div class="cred-text">Founder, Gazirat Al Arab Eye &amp; Laser Center, Egypt</div></div>
@@ -1144,18 +1215,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="guarantee-grid" style="margin-top:48px">
       <div class="g-card fade-up">
         <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>International training</h3>
-        <p>Fellowship training completed in the United Kingdom, bringing international surgical standards to New Cairo.</p>
+        <h3 data-i18n="doc_card1_h">International training</h3>
+        <p data-i18n="doc_card1_p">Fellowship training completed in the United Kingdom, bringing international surgical standards to New Cairo.</p>
       </div>
       <div class="g-card fade-up">
         <div class="g-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-        <h3>Founder &amp; lead surgeon</h3>
-        <p>Founded the Gazirat Al Arab Eye &amp; Laser Center - every SMILE Pro procedure here is personally performed by Dr. El Naggar.</p>
+        <h3 data-i18n="doc_card2_h">Founder &amp; lead surgeon</h3>
+        <p data-i18n="doc_card2_p">Founded the Gazirat Al Arab Eye &amp; Laser Center - every SMILE Pro procedure here is personally performed by Dr. El Naggar.</p>
       </div>
       <div class="g-card fade-up">
         <div class="g-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>Globally recognised</h3>
-        <p>Active member of four international ophthalmology societies, keeping techniques aligned with the latest global standards.</p>
+        <h3 data-i18n="doc_card3_h">Globally recognised</h3>
+        <p data-i18n="doc_card3_p">Active member of four international ophthalmology societies, keeping techniques aligned with the latest global standards.</p>
       </div>
     </div>
   </div>
@@ -1164,9 +1235,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ TECHNOLOGY ══════════ -->
 <section class="section tech-section" id="technology">
   <div class="container">
-    <span class="lbl fade-up">The technology</span>
+    <span class="lbl fade-up" data-i18n="tech_lbl">The technology</span>
     <div class="rule fade-up"></div>
-    <h2 style="font-size:clamp(30px,4vw,48px);color:#fff;max-width:520px" class="fade-up">The same machine used in<br/><em>London, Dubai, and Singapore</em></h2>
+    <h2 style="font-size:clamp(30px,4vw,48px);color:#fff;max-width:520px" class="fade-up"><span data-i18n-html="tech_h2">The same machine used in<br/><em>London, Dubai, and Singapore</em></span></h2>
     <div class="tech-grid">
       <div class="tech-img fade-up" style="overflow:hidden">
         <video autoplay loop muted playsinline aria-label="ZEISS VisuMax 800 laser system" style="width:100%;height:100%;object-fit:cover;border-radius:var(--rg)">
@@ -1176,19 +1247,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="tech-features fade-up">
         <div class="tech-feat">
           <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div><div class="tech-feat-title">2 MHz laser pulse rate</div><div class="tech-feat-desc">The ZEISS VisuMax 800 fires 2 million laser pulses per second - delivering unmatched precision with the shortest possible suction time. 8 seconds per eye.</div></div>
+          <div><div class="tech-feat-title" data-i18n="tech1_h">2 MHz laser pulse rate</div><div class="tech-feat-desc"><span data-i18n="tech1_p">The ZEISS VisuMax 800 fires 2 million laser pulses per second - delivering unmatched precision with the shortest possible suction time. 8 seconds per eye.</span></div></div>
         </div>
         <div class="tech-feat">
           <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
-          <div><div class="tech-feat-title">2mm micro-incision</div><div class="tech-feat-desc">The only system capable of a sub-2mm incision for complete lenticule extraction. No flap. Less trauma. Less dry eye. Faster healing.</div></div>
+          <div><div class="tech-feat-title" data-i18n="tech2_h">2mm micro-incision</div><div class="tech-feat-desc"><span data-i18n="tech2_p">The only system capable of a sub-2mm incision for complete lenticule extraction. No flap. Less trauma. Less dry eye. Faster healing.</span></div></div>
         </div>
         <div class="tech-feat">
           <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><div class="tech-feat-title">FDA cleared · CE marked</div><div class="tech-feat-desc">Approved by US and European medical authorities. The same hardware used at top refractive centres in London, Dubai, Singapore, and New York.</div></div>
+          <div><div class="tech-feat-title" data-i18n="tech3_h">FDA cleared · CE marked</div><div class="tech-feat-desc"><span data-i18n="tech3_p">Approved by US and European medical authorities. The same hardware used at top refractive centres in London, Dubai, Singapore, and New York.</span></div></div>
         </div>
         <div class="tech-feat">
           <div class="tech-feat-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <div><div class="tech-feat-title">Treats myopia + astigmatism</div><div class="tech-feat-desc">SMILE Pro with VisuMax 800 addresses the full spectrum of refractive errors including myopia and astigmatism - wider eligibility than previous SMILE systems.</div></div>
+          <div><div class="tech-feat-title" data-i18n="tech4_h">Treats myopia + astigmatism</div><div class="tech-feat-desc"><span data-i18n="tech4_p">SMILE Pro with VisuMax 800 addresses the full spectrum of refractive errors including myopia and astigmatism - wider eligibility than previous SMILE systems.</span></div></div>
         </div>
       </div>
     </div>
@@ -1198,32 +1269,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ TESTIMONIALS ══════════ -->
 <section class="section testi-section" id="patient-stories">
   <div class="container">
-    <span class="lbl fade-up">Patient stories</span>
+    <span class="lbl fade-up" data-i18n="testi_lbl">Patient stories</span>
     <div class="rule fade-up"></div>
-    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:500px" class="fade-up">"I waited years.<br/><em>I wish I did it sooner."</em></h2>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);max-width:500px" class="fade-up"><span data-i18n-html="testi_h2">"I waited years.<br/><em>I wish I did it sooner."</em></span></h2>
     <div class="testi-grid">
       <div class="testi-card fade-up">
         <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"I cried the same day. Not from pain - from the shock of being able to read my phone without reaching for my glasses for the first time in 18 years."</div>
+        <div class="testi-quote"><span data-i18n="testi1_q">"I cried the same day. Not from pain - from the shock of being able to read my phone without reaching for my glasses for the first time in 18 years."</span></div>
         <div class="testi-author">
           <div class="testi-avatar">S</div>
-          <div><div class="testi-name">Sarah K.</div><div class="testi-detail">Mivida resident · wore glasses 18 years · now 20/20</div></div>
+          <div><div class="testi-name">Sarah K.</div><div class="testi-detail" data-i18n="testi1_detail">Mivida resident · wore glasses 18 years · now 20/20</div></div>
         </div>
       </div>
       <div class="testi-card fade-up">
         <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"I play squash three times a week. My biggest concern was safety for sports. Dr. El Naggar explained exactly why SMILE Pro is better for active patients. Three weeks after surgery I was back on court."</div>
+        <div class="testi-quote"><span data-i18n="testi2_q">"I play squash three times a week. My biggest concern was safety for sports. Dr. El Naggar explained exactly why SMILE Pro is better for active patients. Three weeks after surgery I was back on court."</span></div>
         <div class="testi-author">
           <div class="testi-avatar">K</div>
-          <div><div class="testi-name">Karim A.</div><div class="testi-detail">5th Settlement · squash player · 6 months post-surgery</div></div>
+          <div><div class="testi-name">Karim A.</div><div class="testi-detail" data-i18n="testi2_detail">5th Settlement · squash player · 6 months post-surgery</div></div>
         </div>
       </div>
       <div class="testi-card fade-up">
         <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"I was terrified. I watched the procedure video five times before booking. The actual experience was nothing like the fear. It was 15 minutes, and by evening I could see the TV from across the room without contacts."</div>
+        <div class="testi-quote"><span data-i18n="testi3_q">"I was terrified. I watched the procedure video five times before booking. The actual experience was nothing like the fear. It was 15 minutes, and by evening I could see the TV from across the room without contacts."</span></div>
         <div class="testi-author">
           <div class="testi-avatar">N</div>
-          <div><div class="testi-name">Nour M.</div><div class="testi-detail">New Cairo · contact lens user 12 years · surgery 4 months ago</div></div>
+          <div><div class="testi-name">Nour M.</div><div class="testi-detail" data-i18n="testi3_detail">New Cairo · contact lens user 12 years · surgery 4 months ago</div></div>
         </div>
       </div>
     </div>
@@ -1233,38 +1304,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ FAQ ══════════ -->
 <section class="section faq-section" id="faq">
   <div class="container">
-    <span class="lbl fade-up" style="text-align:center;display:block">Common questions</span>
+    <span class="lbl fade-up" style="text-align:center;display:block" data-i18n="faq_lbl">Common questions</span>
     <div class="rule fade-up" style="margin:0 auto 22px"></div>
-    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center" class="fade-up">Everything you need to know<br/><em>before you decide</em></h2>
+    <h2 style="font-size:clamp(30px,4vw,48px);text-align:center" class="fade-up"><span data-i18n-html="faq_h2">Everything you need to know<br/><em>before you decide</em></span></h2>
     <div class="faq-list">
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">Does SMILE Pro hurt?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)" data-i18n="faq1_q">Does SMILE Pro hurt?<span class="faq-icon">+</span></button></h3>
         <div class="faq-a">No - and this is the question everyone asks first. Anaesthetic drops numb your eye completely before we start. During the laser you feel mild pressure for about 8 seconds. Not pain - pressure. Think of a finger gently pressing on your closed eyelid. Most patients tell us they were surprised by how underwhelming it was. The fear is always worse than the reality.</div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">How long does SMILE Pro take?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)" data-i18n="faq2_q">How long does SMILE Pro take?<span class="faq-icon">+</span></button></h3>
         <div class="faq-a">The laser runs for 8 seconds per eye. Both eyes together take 15 minutes in the procedure room. You'll be at the clinic for about 2 hours total including preparation, the procedure, and a brief rest period. Plan to take the rest of that day off - most people are watching TV comfortably by evening with noticeably clearer vision already.</div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">Am I a candidate for SMILE Pro?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)" data-i18n="faq3_q">Am I a candidate for SMILE Pro?<span class="faq-icon">+</span></button></h3>
         <div class="faq-a">Most adults aged 18–55 who wear glasses or contacts for short-sightedness or astigmatism are suitable candidates. The honest answer is: we don't know until we examine your eyes. That's exactly why we start with a thorough assessment - measuring corneal thickness, prescription stability, and overall eye health. If SMILE Pro isn't right for you, we tell you clearly and recommend the best alternative. We would rather lose a surgery than risk your vision.</div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">How much does SMILE Pro cost in Egypt?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)" data-i18n="faq4_q">How much does SMILE Pro cost in Egypt?<span class="faq-icon">+</span></button></h3>
         <div class="faq-a">No hidden costs. 48,000 EGP covers the full SMILE Pro procedure on both eyes, all pre-surgery assessments, all follow-up appointments for 12 months, and prescribed eye drops for recovery. The assessment is booked separately and priced independently from the procedure. Compare that to a lifetime of glasses, contacts, solutions, and annual optician visits.</div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">When can I drive after SMILE Pro?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)" data-i18n="faq5_q">When can I drive after SMILE Pro?<span class="faq-icon">+</span></button></h3>
         <div class="faq-a">Driving: most patients are cleared the same day. Desk work and screens: same day with your prescribed drops. Light gym, walking, and most sports: next day. Swimming: 1 week. Flights: no restriction after 48 hours. We give every patient a personalised day-by-day recovery guide - no guesswork.</div>
       </div>
 
       <div class="faq-item">
-        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)">What if I'm not a candidate after the assessment?<span class="faq-icon">+</span></button></h3>
+        <h3 class="faq-h"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq6_q">What if I'm not a candidate after the assessment?</span><span class="faq-icon">+</span></button></h3>
         <div class="faq-a">We tell you honestly - and that's a promise. If your corneas aren't suitable for SMILE Pro, Dr. El Naggar will explain why in detail and discuss the best alternative for your specific eyes, whether that's a different laser technique or lens-based correction. This applies regardless of the outcome. We are not in the business of performing procedures on patients who aren't ideal candidates.</div>
       </div>
 
@@ -1275,22 +1346,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ LOCATION ══════════ -->
 <section class="section-sm" id="location" style="background:var(--cream2)">
   <div class="container">
-    <span class="lbl fade-up" style="text-align:center;display:block">Find us</span>
+    <span class="lbl fade-up" style="text-align:center;display:block" data-i18n="loc_lbl">Find us</span>
     <div class="rule fade-up" style="margin:0 auto 22px"></div>
-    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up">Visit the clinic</h2>
+    <h2 style="font-size:clamp(28px,3.5vw,46px);text-align:center" class="fade-up" data-i18n="loc_h2">Visit the clinic</h2>
     <div class="split fade-up" style="grid-template-columns:1fr 1.3fr">
       <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
         <div>
-          <div class="lbl" style="margin-bottom:6px">Address</div>
+          <div class="lbl" style="margin-bottom:6px" data-i18n="loc_addr_lbl">Address</div>
           <!-- NAP: this block must match the Google Business Profile word for word -->
           <p style="font-size:15px;color:var(--text);line-height:1.7">Dr. Mohamed El Naggar Eye Clinic<br/>Clinic 7, Eterna Medical City<br/>Mivida, Fifth Settlement<br/>New Cairo, Egypt</p>
         </div>
         <div>
-          <div class="lbl" style="margin-bottom:6px">Hours</div>
-          <p style="font-size:15px;color:var(--text);line-height:1.7">Saturday - Thursday<br/>Friday: Closed</p>
+          <div class="lbl" style="margin-bottom:6px" data-i18n="loc_hours_lbl">Hours</div>
+          <p style="font-size:15px;color:var(--text);line-height:1.7" data-i18n="loc_hours">Saturday - Thursday<br/>Friday: Closed</p>
         </div>
         <div>
-          <div class="lbl" style="margin-bottom:6px">Phone</div>
+          <div class="lbl" style="margin-bottom:6px" data-i18n="loc_phone_lbl">Phone</div>
           <p style="font-size:15px;color:var(--text);line-height:1.7"><a href="tel:+201113524230" data-track="call">+20 111 352 4230</a></p>
         </div>
         <a href="https://maps.google.com/?cid=13995429696697510863" target="_blank" rel="noopener" class="call-btn" style="margin-top:4px;align-self:flex-start">
@@ -1299,7 +1370,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
         <a href="https://wa.me/201113524230" target="_blank" rel="noopener" class="wa-link" style="margin-top:4px">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
-          Get directions on WhatsApp
+          <span data-i18n="loc_wa_btn">Get directions on WhatsApp</span>
         </a>
       </div>
       <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--border);min-height:320px">
@@ -1312,20 +1383,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ══════════ BOTTOM CTA ══════════ -->
 <section class="cta-section">
   <div class="container">
-    <span class="lbl" style="display:block;color:var(--bronze2)">You've been thinking about this long enough</span>
-    <h2>The assessment is thorough.<br/><em>The decision is yours.</em></h2>
-    <p>No pressure. No commitment. A 30-minute visit that tells you exactly whether SMILE Pro is right for your eyes. If it is - you'll know. If it isn't - you'll know that too.</p>
+    <span class="lbl" style="display:block;color:var(--bronze2)"><span data-i18n="cta_lbl">You've been thinking about this long enough</span></span>
+    <h2><span data-i18n-html="cta_h2">The assessment is thorough.<br/><em>The decision is yours.</em></span></h2>
+    <p data-i18n="cta_p">No pressure. No commitment. A 30-minute visit that tells you exactly whether SMILE Pro is right for your eyes. If it is - you'll know. If it isn't - you'll know that too.</p>
     <div class="cta-form-wrap">
-      <div class="form-card-title">Reserve your assessment</div>
-      <p class="cta-form-sub">Vision screening · Our team calls within 15 minutes</p>
+      <div class="form-card-title" data-i18n="form_title">Reserve your assessment</div>
+      <p class="cta-form-sub" data-i18n="form_sub2">Vision screening · Our team calls within 15 minutes</p>
       <form name="consultation" id="bottom-form" method="POST" data-netlify="true" action="/thank-you.html">
         <input type="hidden" name="form-name" value="consultation"/>
-        <div class="fg"><label for="name2">Full name</label><input type="text" id="name2" name="name" placeholder="Ahmed Mohamed" required/></div>
-        <div class="fg"><label for="phone2">Phone number</label><input type="tel" id="phone2" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/></div>
-        <div class="fg"><label for="area2">Area</label>
+        <div class="fg"><label for="name2" data-i18n="form_name">Full name</label><input type="text" id="name2" name="name" placeholder="Ahmed Mohamed" required/></div>
+        <div class="fg"><label for="phone2" data-i18n="form_phone">Phone number</label><input type="tel" id="phone2" name="phone" placeholder="+20 1XX XXX XXXX" required pattern="^(\+20|0)(10|11|12|15)[0-9]{8}$" title="Please enter a valid Egyptian mobile number (010, 011, 012, or 015)"/></div>
+        <div class="fg"><label for="area2" data-i18n="form_area">Area</label>
           <div class="sel-wrap"><select id="area2" name="area" required><option value="" disabled selected>Select your area</option><option>Cairo</option><option>Giza</option><option>Mivida / New Cairo</option><option>Alexandria</option><option>Other</option></select></div>
         </div>
-        <div class="fg"><label for="procedure2">Procedure you're interested in</label>
+        <div class="fg"><label for="procedure2" data-i18n="form_procedure">Procedure you're interested in</label>
           <div class="sel-wrap"><select id="procedure2" name="procedure" required><option value="" disabled selected>Select a procedure</option><option>SMILE Pro</option><option>Custom LASIK</option><option>Femto LASIK</option><option>Not sure - need guidance</option></select></div>
         </div>
         <button type="submit" class="form-btn">Reserve my assessment →</button>
@@ -1335,7 +1406,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
       </form>
       <div class="form-wa" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-        <span>Prefer WhatsApp?</span>
+        <span data-i18n="form_wa_prefer2">Prefer WhatsApp?</span>
         <a href="https://wa.me/201113524230?text=Hello, I'd like to reserve a SMILE Pro assessment" class="wa-link" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
           Message us directly
@@ -1371,20 +1442,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z"/></svg>
         </a>
       </div>
-      <div class="footer-copy" style="width:100%;text-align:center;margin-top:12px">© 2026 Smile Pro Egypt · Dr. Mohamed El Naggar Eye Clinic</div>
+      <div class="footer-copy" style="width:100%;text-align:center;margin-top:12px"><span data-i18n="footer_copy">© 2026 Smile Pro Egypt · Dr. Mohamed El Naggar Eye Clinic</span></div>
     </div>
   </div>
 </footer>
 
 <!-- ══════════ STICKY BOTTOM BAR ══════════ -->
 <div class="sticky-bar" id="sticky-bar">
-  <div class="sticky-bar-text">ZEISS <strong>SMILE Pro</strong> technology in Mivida, New Cairo</div>
+  <div class="sticky-bar-text"><span data-i18n-html="sticky_text">ZEISS <strong>SMILE Pro</strong> technology in Mivida, New Cairo</span></div>
   <div class="sticky-bar-actions">
     <a href="https://wa.me/201113524230?text=Hello, I'd like to reserve a SMILE Pro assessment" class="sticky-wa" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg data-i18n="sticky_wa">
       WhatsApp
     </a>
-    <button class="sticky-cta" onclick="document.getElementById('assessment').scrollIntoView({behavior:'smooth'})">Reserve assessment →</button>
+    <button class="sticky-cta" onclick="document.getElementById('assessment').scrollIntoView({behavior:'smooth'})" data-i18n="sticky_btn">Reserve assessment →</button>
   </div>
 </div>
 
@@ -1441,6 +1512,371 @@ const barObs=new IntersectionObserver(e=>{
   stickyBar.style.transition='transform .3s ease';
 },{threshold:.5});
 barObs.observe(heroForm);
+</script>
+
+<!-- ══════════ BILINGUAL SYSTEM ══════════ -->
+<script>
+const T = {
+  // URGENCY
+  urgency_limited: 'عدد محدود:',
+  urgency_only: 'باقي',
+  urgency_rest: 'مواعيد كشف متاحة الأسبوع ده في عيادتنا بميفيدا',
+  
+  // NAV
+  nav_reserve: 'احجز كشفك',
+  nav_call: 'اتصل بينا',
+  
+  // HERO
+  hero_pill: 'تقنية ZEISS SMILE Pro في ميفيدا، القاهرة الجديدة',
+  hero_h1: 'كفاية صحيان كل يوم<br/>وأنت بتدور على<br/><em>النضارة.</em>',
+  hero_kicker: 'عملية SMILE Pro لتصحيح الإبصار بالليزر في القاهرة الجديدة مع د. محمد النجار',
+  hero_sub: 'SMILE Pro بتصحح نظرك نهائياً في أقل من ١٥ دقيقة. من غير قطع في القرنية. من غير مشرط. من غير جفاف عين. معظم المرضى بيسوقوا نفس اليوم.',
+  
+  proof_flapless: 'من غير فلاب - صفر مخاطر مدى الحياة',
+  proof_zeiss: 'ZEISS VisuMax 800 - نفس جهاز لندن ودبي',
+  proof_years: '+٧ سنين · +١٠,٠٠٠ عملية',
+  proof_location: 'في إيتيرنا هيلث كير سيتي، القاهرة الجديدة',
+  
+  // FORM
+  form_title: 'احجز كشفك دلوقتي',
+  form_sub: 'كشف نظر شامل · فريقنا هيتصل بيك خلال ١٥ دقيقة',
+  form_sub2: 'كشف نظر شامل · فريقنا هيتصل خلال ١٥ دقيقة',
+  form_name: 'الاسم بالكامل',
+  form_phone: 'رقم الموبايل',
+  form_area: 'المنطقة',
+  form_procedure: 'العملية اللي مهتم بيها',
+  form_btn: '← احجز كشفي',
+  form_call: 'أو اتصل بينا:',
+  form_note: 'مفيش التزام · سرية تامة',
+  form_wa_prefer: 'تحب تبعت رسالة الأول؟',
+  form_wa_prefer2: 'تحب واتساب؟',
+  form_wa_btn: 'كلمنا واتساب',
+  form_wa_direct: 'ابعتلنا مباشرة',
+  
+  // PROCEDURES
+  proc_lbl: 'العمليات المتاحة',
+  proc_h2: 'ثلاث طرق تشوف صح<br/><em>اختار الأنسب لعينيك</em>',
+  proc_desc: 'كل مريض مختلف. خلال الكشف، د. النجار هيرشحلك العملية الأنسب لعينيك وأسلوب حياتك وأهدافك.',
+  proc_custom_h: 'Custom LASIK',
+  proc_custom_p: 'عملية ليزر مفصلة بدقة حسب شكل عينك. خيار مجرب وموثوق بسجل عالمي طويل ونتائج متوقعة.',
+  proc_custom_tag: 'دقة عالية · مجرب عالمياً',
+  proc_femto_h: 'Femto LASIK',
+  proc_femto_p: 'تقنية ليزر متقدمة وسريعة بتوفر وقت علاج أقصر وتعافي بصري سلس - خيار ممتاز للي عايز نتيجة سريعة.',
+  proc_femto_tag: 'علاج سريع · تعافي سلس',
+  proc_smile_h: 'SMILE Pro',
+  proc_smile_p: 'أحدث خيار عندنا - عملية بدون فلاب وبأقل تدخل جراحي باستخدام جهاز ZEISS VisuMax 800. مصممة للحياة النشيطة، بفتحة ٢ مم والتعافي في نفس اليوم.',
+  proc_smile_tag: 'بدون فلاب · تعافي نفس اليوم',
+  
+  // WHY SMILE PRO
+  why_lbl: 'ليه SMILE Pro',
+  why_h2: 'إيه اللي يميز SMILE Pro<br/><em>كأحدث خيار عندنا</em>',
+  why_answer_h: 'إيه هي عملية SMILE Pro؟',
+  why_answer_p: 'SMILE Pro هي عملية تصحيح إبصار بالليزر من غير فلاب بتتعمل بجهاز ZEISS VisuMax 800. ليزر الفيمتوثانية بيشكل طبقة رقيقة من النسيج جوا القرنية السليمة، وبيتم إزالتها من خلال فتحة صغيرة أقل من ٢ مم. مفيش أي قطع في القرنية. الليزر بيشتغل حوالي ٨ ثواني في كل عين والعملية كلها بتاخد حوالي ١٥ دقيقة للعينين.',
+  ben_noflap_h: 'من غير فلاب. أبداً.',
+  ben_noflap_p: 'SMILE Pro بتستخدم فتحة ٢ مم مش مرئية بالعين المجردة - مفيش أي فلاب في القرنية في أي مرحلة. الأسلوب ده بأقل تدخل جراحي هو سبب رئيسي إنها مناسبة للحياة النشيطة.',
+  ben_noflap_tag: 'بدون فلاب · أقل تدخل',
+  ben_drive_h: 'سوق نفسك البيت نفس اليوم',
+  ben_drive_p: 'ليزر ZEISS بيشتغل ٨ ثواني في كل عين. العملية كلها ١٥ دقيقة. معظم المرضى بيرجعوا شغلهم نفس اليوم. مفيش إقامة في مستشفى ولا بنج كلي.',
+  ben_drive_tag: 'معظم المرضى بيسوقوا نفس اليوم',
+  ben_dry_h: 'مصممة مع مراعاة جفاف العين',
+  ben_dry_p: 'مصر من أعلى الدول في نسب جفاف العين. الفتحة الصغيرة في SMILE Pro بتحافظ على أعصاب القرنية اللي بتتحكم في إفراز الدموع، وده مرتبط بنسبة جفاف أقل إكلينيكياً.',
+  ben_dry_tag: 'نسبة جفاف عين أقل',
+  
+  // JOURNEY
+  journey_lbl: 'رحلة المريض الكاملة',
+  journey_h2: 'من <em>"أنا مهتم"</em><br/>لنظر واضح - خطوة بخطوة',
+  tl1_time: 'النهارده - دقيقتين',
+  tl1_title: 'تبعت الفورم أو تكلمنا واتساب',
+  tl1_desc: 'بس كده. اسمك، رقم تليفونك، لابس نظارة ولا عدسات. مفيش استمارات طبية ولا ملفات. فريقنا بيستلم طلبك فوراً.',
+  tl1_hl: 'بتاخد دقيقة واحدة',
+  tl2_time: 'خلال ١٥ دقيقة',
+  tl2_title: 'فريقنا هيتصل يحدد ميعادك',
+  tl2_desc: 'حد من فريقنا هيتصل بيك شخصياً - مش رسالة أوتوماتيك. هنتفق على ميعاد يناسبك في عيادتنا بميفيدا. أوقات مسائية وويكند متاحة.',
+  tl2_hl: 'مكالمة شخصية',
+  tl3_time: 'يوم الكشف - ٣٠ دقيقة',
+  tl3_title: 'كشف نظر شامل ودقيق',
+  tl3_desc: 'تيجي العيادة - الباركينج متوفر. بنعمل فحص شامل: قياس سمك القرنية، تحليل النظر، استجابة البؤبؤ، وفحص صحة العين الكاملة. د. النجار بيراجع نتائجك بنفسه ويناقش معاك لو SMILE Pro هي الخيار المناسب. لو مش مناسبة، هنقولك بصراحة ونرشحلك البديل الأفضل.',
+  tl3_hl: 'مراجعة شخصية من د. النجار',
+  tl4_time: 'يوم العملية - ساعتين في العيادة',
+  tl4_title: 'عملية SMILE Pro - ١٥ دقيقة',
+  tl4_desc: 'توصل، ترتاح في غرفة التحضير الخاصة، وتاخد قطرة بنج. العملية نفسها ١٥ دقيقة للعينين - ليزر ZEISS بيشتغل ٨ ثواني في كل عين. تكون صاحي تماماً. تحس بضغط خفيف، مفيش أكتر. تمشي لابس نظارة حماية. حد يوصلك البيت. ترتاح وتنام.',
+  tl4_hl: 'الليزر: ٨ ثواني في كل عين',
+  tl5_time: 'تاني يوم الصبح',
+  tl5_title: 'تصحى وتشوف بوضوح',
+  tl5_desc: 'معظم المرضى بيبعتولنا خلال ساعات من العملية مندهشين من وضوح الرؤية. نفس اليوم النظر بيكون واضح كفاية للسواقة والقراية والشغل. كشف متابعة سريع بيأكد إن التعافي ماشي تمام.',
+  tl5_hl: 'معظم المرضى بيسوقوا نفس اليوم',
+  tl6_time: 'الأسبوع ١–٢',
+  tl6_title: 'رجعت لكل حاجة',
+  tl6_desc: 'يوم ٣–٥: ترجع الشغل، جيم خفيف، سواقة. الأسبوع ٢: السباحة مسموحة، السفر مفتوح، معظم الرياضات معتمدة. كشف متابعة بعد شهر بيأكد النتيجة النهائية. أكتر من ٩٨٪ من مرضانا بيحققوا نظر 20/20 أو أحسن.',
+  tl6_hl: '٩٨٪ بيحققوا 20/20 أو أحسن',
+  
+  // COMPARISON
+  comp_lbl: 'مقارنة بين الخيارات',
+  comp_h2: 'الفروقات الأساسية<br/><em>في لمحة</em>',
+  comp_answer_h: 'إيه الفرق بين SMILE Pro والليزك؟',
+  comp_answer_p: 'الليزك بيحتاج عمل فلاب في القرنية. SMILE Pro بتزيل النسيج من خلال فتحة أقل من ٢ مم من غير أي فلاب، وده بيحافظ على أعصاب القرنية والقوة البيوميكانيكية. عملياً ده معناه عملية بأقل تدخل مناسبة للحياة النشيطة، بنسب جفاف عين أقل إكلينيكياً ووقت ليزر ٨ ثواني بدل ٣٠ لـ ٦٠.',
+  comp_lasik: 'الليزك التقليدي',
+  comp_smile: 'SMILE Pro ✦',
+  
+  // CALCULATOR
+  calc_lbl: 'التكلفة الحقيقية للانتظار',
+  calc_h2: 'نظاراتك فعلاً<br/><em>بتكلفك كام؟</em>',
+  calc_answer_h: 'SMILE Pro بتكلف كام في مصر؟',
+  calc_answer_p: 'SMILE Pro في عيادتنا في القاهرة الجديدة بـ ٤٨,٠٠٠ جنيه. ده شامل العملية للعينين، كل الفحوصات قبل العملية، ١٢ شهر متابعة، وقطرات العين الموصوفة. الكشف الأولي بيتحجز ويتسعر بشكل منفصل.',
+  calc_glasses_label: 'مصاريف النظارات والإطارات السنوية (جنيه)',
+  calc_contacts_label: 'مصاريف العدسات والمحاليل السنوية (جنيه)',
+  calc_total_lbl: 'تكلفة النظارات والعدسات على ١٠ سنين',
+  calc_total_sub: 'مستمرة - كل سنة',
+  calc_smile_lbl: 'SMILE Pro - مرة واحدة، للأبد',
+  calc_smile_sub: 'شاملة كل المتابعات · مفيش تكلفة متكررة',
+  calc_note: 'الأرقام بتتحدث وأنت بتكتب. مستخدم العدسات اللاصقة في مصر بيصرف ٤,٨٠٠–٨,٠٠٠ جنيه في السنة على العدسات والمحاليل والكشوفات.',
+  
+  // DOCTOR
+  doc_lbl: 'عن الجراح',
+  doc_h2: 'تعرف على <em>د. محمد النجار</em>',
+  doc_badge_lbl: 'عملية',
+  doc_performed: 'بيتم إجراؤها بواسطة',
+  doc_bio: 'مؤسس مركز جزيرة العرب للعيون والليزر، د. محمد النجار حاصل على زمالة الكلية الملكية للجراحين (بريطانيا)، وعضو الأكاديمية الأمريكية لطب العيون، والجمعية الأوروبية لجراحات المياه البيضاء وتصحيح الإبصار، والكلية الملكية للجراحين بإدنبرة. تقنية ZEISS SMILE Pro المتقدمة متاحة دلوقتي في عيادته بالقاهرة الجديدة، وكل عملية SMILE Pro بيجريها د. النجار بنفسه.',
+  doc_card1_h: 'تدريب دولي',
+  doc_card1_p: 'تدريب الزمالة تم في المملكة المتحدة، وجاب المعايير الجراحية الدولية للقاهرة الجديدة.',
+  doc_card2_h: 'المؤسس والجراح الرئيسي',
+  doc_card2_p: 'أسس مركز جزيرة العرب للعيون والليزر - كل عملية SMILE Pro هنا بيجريها د. النجار بنفسه.',
+  doc_card3_h: 'معترف بيه عالمياً',
+  doc_card3_p: 'عضو نشط في أربع جمعيات دولية لطب العيون، بيحافظ على تقنياته متوافقة مع أحدث المعايير العالمية.',
+  
+  // TECHNOLOGY
+  tech_lbl: 'التكنولوجيا',
+  tech_h2: 'نفس الجهاز المستخدم في<br/><em>لندن ودبي وسنغافورة</em>',
+  tech1_h: 'معدل نبضات ليزر ٢ ميجاهرتز',
+  tech1_p: 'جهاز ZEISS VisuMax 800 بيطلق ٢ مليون نبضة ليزر في الثانية - دقة لا مثيل لها مع أقصر وقت شفط ممكن. ٨ ثواني في كل عين.',
+  tech2_h: 'فتحة ٢ مم',
+  tech2_p: 'النظام الوحيد القادر على فتحة أقل من ٢ مم لاستخراج العدسة الكاملة. بدون فلاب. أقل صدمة. أقل جفاف عين. تعافي أسرع.',
+  tech3_h: 'معتمد من FDA · حاصل على علامة CE',
+  tech3_p: 'معتمد من الهيئات الطبية الأمريكية والأوروبية. نفس الجهاز المستخدم في أفضل مراكز تصحيح الإبصار في لندن ودبي وسنغافورة ونيويورك.',
+  tech4_h: 'بيعالج قصر النظر + الاستجماتيزم',
+  tech4_p: 'SMILE Pro مع VisuMax 800 بيعالج كل أنواع عيوب الإبصار بما فيها قصر النظر والاستجماتيزم - مؤهلات أوسع من أنظمة SMILE السابقة.',
+  
+  // TESTIMONIALS
+  testi_lbl: 'قصص المرضى',
+  testi_h2: '"استنيت سنين.<br/><em>ياريتني عملتها بدري."</em>',
+  testi1_q: '"عيطت نفس اليوم. مش من الألم - من الصدمة إني قدرت أقرا تليفوني من غير ما أدور على النضارة لأول مرة في ١٨ سنة."',
+  testi1_detail: 'ساكنة في ميفيدا · لبست نضارة ١٨ سنة · دلوقتي 20/20',
+  testi2_q: '"بالعب اسكواش ٣ مرات في الأسبوع. أكبر قلقي كان السلامة في الرياضة. د. النجار شرحلي بالظبط ليه SMILE Pro أحسن للمرضى النشيطين. بعد ٣ أسابيع من العملية رجعت الملعب."',
+  testi2_detail: 'التجمع الخامس · لاعب اسكواش · بعد ٦ شهور من العملية',
+  testi3_q: '"كنت خايفة جداً. فرجت على فيديو العملية ٥ مرات قبل ما أحجز. التجربة الحقيقية مكانتش زي الخوف خالص. ١٥ دقيقة، وبالليل كنت بشوف التلفزيون من آخر الأوضة من غير عدسات."',
+  testi3_detail: 'القاهرة الجديدة · لبست عدسات ١٢ سنة · العملية من ٤ شهور',
+  
+  // FAQ
+  faq_lbl: 'أسئلة شائعة',
+  faq_h2: 'كل حاجة محتاج تعرفها<br/><em>قبل ما تقرر</em>',
+  faq1_q: 'بصراحة - العملية بتوجع؟',
+  faq2_q: 'العملية بتاخد وقت قد إيه؟',
+  faq3_q: 'أنا مرشح لـ SMILE Pro؟',
+  faq4_q: 'SMILE Pro بتكلف كام في مصر؟',
+  faq5_q: 'أقدر أسوق بعد العملية امتى؟',
+  faq6_q: 'لو مش مرشح بعد الكشف؟',
+  
+  // LOCATION
+  loc_lbl: 'موقعنا',
+  loc_h2: 'زور العيادة',
+  loc_addr_lbl: 'العنوان',
+  loc_hours_lbl: 'المواعيد',
+  loc_phone_lbl: 'التليفون',
+  loc_hours: 'السبت - الخميس<br/>الجمعة: مغلق',
+  loc_maps_btn: 'افتح في خرائط جوجل',
+  loc_wa_btn: 'خد الاتجاهات على واتساب',
+  
+  // CTA
+  cta_lbl: 'فكرت كفاية',
+  cta_h2: 'الكشف شامل.<br/><em>القرار قرارك.</em>',
+  cta_p: 'مفيش ضغط. مفيش التزام. زيارة ٣٠ دقيقة بتقولك بالظبط لو SMILE Pro مناسبة لعينيك. لو مناسبة - هتعرف. لو مش مناسبة - هتعرف برضو.',
+  
+  // STICKY
+  sticky_text: 'تقنية ZEISS <strong>SMILE Pro</strong> في ميفيدا، القاهرة الجديدة',
+  sticky_btn: '← احجز كشف',
+  sticky_wa: 'واتساب',
+  
+  // FOOTER
+  footer_copy: '© ٢٠٢٦ سمايل برو إيجيبت · عيادة د. محمد النجار للعيون',
+};
+
+// Select option translations
+const selectTranslations = {
+  ar: {
+    'Select your area': 'اختار منطقتك',
+    'Cairo': 'القاهرة',
+    'Giza': 'الجيزة',
+    'Mivida / New Cairo': 'ميفيدا / القاهرة الجديدة',
+    'Alexandria': 'الإسكندرية',
+    'Other': 'أخرى',
+    'Select a procedure': 'اختار العملية',
+    'SMILE Pro': 'SMILE Pro',
+    'Custom LASIK': 'Custom LASIK',
+    'Femto LASIK': 'Femto LASIK',
+    'Not sure - need guidance': 'مش متأكد - محتاج مساعدة',
+    'Select one': 'اختار',
+  },
+  en: {
+    'اختار منطقتك': 'Select your area',
+    'القاهرة': 'Cairo',
+    'الجيزة': 'Giza',
+    'ميفيدا / القاهرة الجديدة': 'Mivida / New Cairo',
+    'الإسكندرية': 'Alexandria',
+    'أخرى': 'Other',
+    'اختار العملية': 'Select a procedure',
+    'محتاج مساعدة - مش متأكد': 'Not sure - need guidance',
+    'مش متأكد - محتاج مساعدة': 'Not sure - need guidance',
+    'اختار': 'Select one',
+  }
+};
+
+// Placeholder translations
+const placeholderTranslations = {
+  ar: { 'Ahmed Mohamed': 'أحمد محمد', '+20 1XX XXX XXXX': '+٢٠ ١XX XXX XXXX' },
+  en: { 'أحمد محمد': 'Ahmed Mohamed', '+٢٠ ١XX XXX XXXX': '+20 1XX XXX XXXX' }
+};
+
+// FAQ answer translations
+const faqAnswers = {
+  ar: [
+    'لا - وده أول سؤال كل الناس بتسأله. قطرة البنج بتخدر عينك تماماً قبل ما نبدأ. أثناء الليزر بتحس بضغط خفيف لمدة ٨ ثواني تقريباً. مش ألم - ضغط. زي صباع بيضغط بلطف على جفنك المقفول. معظم المرضى بيقولوا إنهم اتفاجئوا قد إيه كانت الموضوع بسيط. الخوف دايماً أسوأ من الحقيقة.',
+    'الليزر بيشتغل ٨ ثواني في كل عين. العينين مع بعض بياخدوا ١٥ دقيقة في غرفة العمليات. هتكون في العيادة حوالي ساعتين شاملة التحضير والعملية وفترة راحة قصيرة. خد باقي اليوم ده أجازة - معظم الناس بتكون قاعدة بتفرج على التلفزيون مرتاحة بالليل ونظرها أوضح بشكل ملحوظ.',
+    'معظم الكبار من ١٨ لـ ٥٥ سنة اللي لابسين نضارة أو عدسات لقصر النظر أو الاستجماتيزم مرشحين مناسبين. الإجابة الصريحة: مش هنعرف غير لما نكشف على عينيك. عشان كده بنبدأ بكشف شامل - قياس سمك القرنية واستقرار النظر وصحة العين الكاملة. لو SMILE Pro مش مناسبة ليك، هنقولك بوضوح ونرشحلك أحسن بديل.',
+    'مفيش تكاليف مخفية. ٤٨,٠٠٠ جنيه شاملة عملية SMILE Pro الكاملة للعينين، كل الفحوصات قبل العملية، كل مواعيد المتابعة لمدة ١٢ شهر، وقطرات العين الموصوفة للتعافي. الكشف بيتحجز ويتسعر بشكل منفصل عن العملية.',
+    'السواقة: معظم المرضى بيتصرح لهم نفس اليوم. الشغل والشاشات: نفس اليوم مع القطرات. الجيم الخفيف ومعظم الرياضات: تاني يوم. السباحة: بعد أسبوع. الطيران: مفيش قيود بعد ٤٨ ساعة.',
+    'هنقولك بصراحة - ودي وعد. لو القرنية مش مناسبة لـ SMILE Pro، د. النجار هيشرحلك بالتفصيل ليه ويناقش معاك أحسن بديل لعينيك تحديداً، سواء تقنية ليزر تانية أو تصحيح بالعدسات.',
+  ],
+  en: [] // stored on first load
+};
+
+// Comparison table translations
+const compTableAr = [
+  ['القرنية (فلاب)', '<span class="cx">✗</span>مطلوب', '<span class="ci">✓</span>بدون فلاب - فتحة ٢ مم'],
+  ['خطر جفاف العين', '<span class="cx">✗</span>عالي', '<span class="ci">✓</span>أقل إكلينيكياً - أعصاب محفوظة'],
+  ['مدة الليزر', '٣٠–٦٠ ثانية في كل عين', '<span class="ci">✓</span>٨ ثواني في كل عين'],
+  ['الرجوع للرياضة', '<span class="cx">✗</span>٢-٤ أسابيع', '<span class="ci">✓</span>تاني يوم'],
+  ['مناسبة للحياة النشيطة', '<span class="cx">✗</span>بحذر', '<span class="ci">✓</span>مصممة خصيصاً للمرضى النشيطين'],
+  ['الحفاظ على قوة القرنية', '<span class="cx">✗</span>متأثرة بالفلاب', '<span class="ci">✓</span>قوة بيوميكانيكية أعلى'],
+  ['جيل التكنولوجيا', 'الجيل السابق', '<span class="ci">✓</span>ZEISS VisuMax 800 - أحدث جيل'],
+];
+
+let compTableEn = []; // stored on first load
+
+let currentLang = 'en';
+const enOriginals = {};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === 'ar' ? 'ar-EG' : 'en-EG';
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+  
+  if (lang === 'ar') {
+    // Save English originals and apply Arabic
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (!enOriginals[key]) enOriginals[key] = el.innerHTML;
+      if (T[key]) el.textContent = T[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (!enOriginals['html_'+key]) enOriginals['html_'+key] = el.innerHTML;
+      if (T[key]) el.innerHTML = T[key];
+    });
+    
+    // Select options
+    document.querySelectorAll('select option').forEach(opt => {
+      const arText = selectTranslations.ar[opt.textContent.trim()];
+      if (arText) { if (!opt.dataset.enText) opt.dataset.enText = opt.textContent; opt.textContent = arText; }
+    });
+    
+    // Placeholders
+    document.querySelectorAll('input[placeholder]').forEach(inp => {
+      const arPh = placeholderTranslations.ar[inp.placeholder];
+      if (arPh) { if (!inp.dataset.enPh) inp.dataset.enPh = inp.placeholder; inp.placeholder = arPh; }
+    });
+    
+    // FAQ answers
+    const faqAs = document.querySelectorAll('.faq-a');
+    faqAs.forEach((a, i) => {
+      if (!faqAnswers.en[i]) faqAnswers.en[i] = a.textContent;
+      if (faqAnswers.ar[i]) a.textContent = faqAnswers.ar[i];
+    });
+    
+    // Comparison table
+    const rows = document.querySelectorAll('.comp-table tbody tr');
+    if (compTableEn.length === 0) {
+      rows.forEach(r => {
+        const cells = r.querySelectorAll('td');
+        compTableEn.push([cells[0].innerHTML, cells[1].innerHTML, cells[2].innerHTML]);
+      });
+    }
+    rows.forEach((r, i) => {
+      if (compTableAr[i]) {
+        const cells = r.querySelectorAll('td');
+        cells[0].innerHTML = compTableAr[i][0];
+        cells[1].innerHTML = compTableAr[i][1];
+        cells[2].innerHTML = compTableAr[i][2];
+      }
+    });
+    
+    // WhatsApp links - switch to Arabic text
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+      a.href = a.href.replace(/text=[^&]*/,'text=' + encodeURIComponent('مرحباً، حابب أعرف أكتر عن SMILE Pro'));
+    });
+    
+  } else {
+    // Restore English
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (enOriginals[key]) el.innerHTML = enOriginals[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (enOriginals['html_'+key]) el.innerHTML = enOriginals['html_'+key];
+    });
+    
+    document.querySelectorAll('select option').forEach(opt => {
+      if (opt.dataset.enText) opt.textContent = opt.dataset.enText;
+    });
+    document.querySelectorAll('input[placeholder]').forEach(inp => {
+      if (inp.dataset.enPh) inp.placeholder = inp.dataset.enPh;
+    });
+    
+    const faqAs = document.querySelectorAll('.faq-a');
+    faqAs.forEach((a, i) => { if (faqAnswers.en[i]) a.textContent = faqAnswers.en[i]; });
+    
+    const rows = document.querySelectorAll('.comp-table tbody tr');
+    rows.forEach((r, i) => {
+      if (compTableEn[i]) {
+        const cells = r.querySelectorAll('td');
+        cells[0].innerHTML = compTableEn[i][0];
+        cells[1].innerHTML = compTableEn[i][1];
+        cells[2].innerHTML = compTableEn[i][2];
+      }
+    });
+    
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+      a.href = a.href.replace(/text=[^&]*/,"text=" + encodeURIComponent("Hello, I'd like to learn more about SMILE Pro"));
+    });
+  }
+  
+  // Store preference
+  try { localStorage.setItem('spe_lang', lang); } catch(e){}
+}
+
+// Auto-detect on load
+(function(){
+  try {
+    const saved = localStorage.getItem('spe_lang');
+    if (saved === 'ar') { setLang('ar'); return; }
+    if (saved === 'en') return;
+  } catch(e){}
+  const bl = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (bl.startsWith('ar')) setLang('ar');
+})();
 </script>
 
 <!-- Meta + Snapchat Call Click Tracking -->
