@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlTag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Titles & Descriptions -->
+    <title id="pageTitle">مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro</title>
+    <meta name="description" content="اقرأ أحدث المقالات عن عمليات تصحيح النظر، الفيمتو ليزك، وتقنية سمارت سايد مع دكتور محمد النجار استشاري جراحة العيون.">
+    
+    <!-- Hreflang Tags for Dual Language SEO -->
+    <link rel="alternate" hreflang="ar" href="https://khaled-source12.github.io/smile-pro-site/blog.html?lang=ar" />
+    <link rel="alternate" hreflang="en" href="https://khaled-source12.github.io/smile-pro-site/blog.html?lang=en" />
+
+    <!-- Schema Markup linking Dr. Mohamed El Naggar to LASIK -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": "Dr. Mohamed El Naggar",
+      "medicalSpecialty": "Ophthalmology",
+      "knowsAbout": ["LASIK Surgery", "Femto LASIK", "Smile Pro LASIK", "Refractive Surgery"],
+      "description": "Dr. Mohamed El Naggar is a specialist in LASIK and refractive eye surgery."
+    }
+    </script>
+
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
+        .nav-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; }
+        .lang-switch { padding: 8px 16px; cursor: pointer; background: #007bb5; color: white; border: none; border-radius: 5px; font-weight: bold; }
+        .blog-container { max-width: 1000px; margin: 40px auto; }
+        .blog-card { border: 1px solid #ddd; background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .blog-card h2 { color: #007bb5; margin-top: 0; }
+        .doc-tag { font-weight: bold; color: #2e7d32; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="index.html" style="font-weight:bold; font-size: 1.2rem; text-decoration:none; color:#333;">Smile Pro</a>
+        <button onclick="toggleLanguage()" class="lang-switch" id="langBtn">English</button>
+    </div>
+
+    <main class="blog-container">
+        <h1 id="mainHeading">مركز معلومات الليزك وتصحيح النظر</h1>
+        <p id="subHeading">مقالات طبية متخصصة تحت إشراف <span class="doc-tag">دكتور محمد النجار</span> استشاري جراحات العيون.</p>
+
+        <div class="blog-card">
+            <h2 id="art1Title">ما الفرق بين الفيمتو ليزك وتقنية Smile Pro؟</h2>
+            <p id="art1Desc">دليل شامل يقدمه دكتور محمد النجار لمساعدتك في اختيار العملية الأنسب لعينيك بين الليزك السطحي، الفيمتو ليزك، وتقنيات الفيمتو سمايل.</p>
+            <a href="article-lasik-vs-smilepro.html" id="art1Link" style="color:#007bb5; font-weight:bold;">اقرأ المقال بالكامل &larr;</a>
+        </div>
+    </main>
+
+    <script>
+        // Language Toggle Script
+        function toggleLanguage() {
+            const html = document.getElementById('htmlTag');
+            const isArabic = html.getAttribute('lang') === 'ar';
+
+            if (isArabic) {
+                // Switch to English
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                document.getElementById('langBtn').innerText = 'عربي';
+                document.getElementById('pageTitle').innerText = 'LASIK & Vision Correction Blog | Dr. Mohamed El Naggar - Smile Pro';
+                document.getElementById('mainHeading').innerText = 'LASIK & Eye Surgery Insights';
+                document.getElementById('subHeading').innerHTML = 'Expert articles curated by <span class="doc-tag">Dr. Mohamed El Naggar</span>, Ophthalmology Specialist.';
+                document.getElementById('art1Title').innerText = 'What is the Difference Between Femto LASIK and Smile Pro?';
+                document.getElementById('art1Desc').innerText = 'A comprehensive comparison by Dr. Mohamed El Naggar explaining regular LASIK, Femto LASIK, and Smile Pro procedures.';
+                document.getElementById('art1Link').innerHTML = 'Read Full Article &rarr;';
+            } else {
+                // Switch back to Arabic
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                document.getElementById('langBtn').innerText = 'English';
+                document.getElementById('pageTitle').innerText = 'مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro';
+                document.getElementById('mainHeading').innerText = 'مركز معلومات الليزك وتصحيح النظر';
+                document.getElementById('subHeading').innerHTML = 'مقالات طبية متخصصة تحت إشراف <span class="doc-tag">دكتور محمد النجار</span> استشاري جراحات العيون.';
+                document.getElementById('art1Title').innerText = 'ما الفرق بين الفيمتو ليزك وتقنية Smile Pro؟';
+                document.getElementById('art1Desc').innerText = 'دليل شامل يقدمه دكتور محمد النجار لمساعدتك في اختيار العملية الأنسب لعينيك بين الليزك السطحي، الفيمتو ليزك، وتقنيات الفيمتو سمايل.';
+                document.getElementById('art1Link').innerHTML = 'اقرأ المقال بالكامل &larr;';
+            }
+        }
+    </script>
+</body>
+</html>
