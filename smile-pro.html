@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlTag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO -->
+    <title id="pageTitle">تقنية السمايل برو (SMILE Pro) في مصر | دكتور محمد النجار</title>
+    <meta name="description" id="metaDesc" content="احصل على أحدث تقنيات تصحيح النظر بالليزر في مصر خلال 8 ثوانٍ فقط بدون فتح شريحة مع دكتور محمد النجار وتقنية ZEISS VisuMax 800.">
+    <meta name="keywords" content="Smile Pro, سمايل برو, VisuMax 800, دكتور محمد النجار, تصحيح النظر بالليزر, الفيمتو ليزك">
+    <link rel="canonical" href="https://smileproegypt.com/smile-pro.html">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --burg: #16383D;
+            --burg2: #1F4D54;
+            --bronze: #5FBF3B;
+            --bronze2: #7FD957;
+            --bpale: #E8F7E1;
+            --cream: #FAF7F2;
+            --cream2: #F2EAE1;
+            --white: #FFFFFF;
+            --text: #18080C;
+            --muted: #666666;
+            --border: #DDD0C8;
+            --r: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; }
+
+        /* Navigation */
+        nav { position: sticky; top: 0; z-index: 200; background: rgba(250,247,242,.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--burg); text-decoration: none; }
+        .logo span { color: var(--bronze); }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .btn-nav { background: var(--bronze); color: #fff; text-decoration: none; padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; }
+        .lang-btn { background: var(--burg); color: #fff; border: none; padding: 8px 16px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 13px; }
+
+        /* Hero Section */
+        .hero { padding: 60px 0; background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: #fff; border-radius: 0 0 30px 30px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-badge { display: inline-block; background: rgba(95, 191, 59, 0.2); color: var(--bronze2); border: 1px solid var(--bronze); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
+        .hero h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; line-height: 1.25; margin-bottom: 15px; }
+        .hero p { font-size: 17px; opacity: 0.9; margin-bottom: 25px; }
+        .hero-stats { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat-item { background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); }
+        .stat-item h3 { font-size: 22px; color: var(--bronze2); }
+        .stat-item p { font-size: 12px; margin: 0; opacity: 0.8; }
+        .hero-img { width: 100%; border-radius: var(--r); border: 3px solid rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+        /* General Sections */
+        section { padding: 60px 0; }
+        .sec-title { text-align: center; margin-bottom: 40px; }
+        .sec-title h2 { font-size: 30px; color: var(--burg); font-weight: 800; margin-bottom: 8px; }
+        .sec-title p { color: var(--muted); font-size: 15px; }
+
+        /* Feature Cards */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .feat-card { background: var(--white); padding: 30px; border-radius: var(--r); border: 1px solid var(--border); transition: 0.3s; }
+        .feat-card:hover { transform: translateY(-5px); border-color: var(--bronze); }
+        .feat-icon { font-size: 32px; margin-bottom: 15px; display: inline-block; }
+        .feat-card h3 { font-size: 18px; color: var(--burg); margin-bottom: 8px; font-weight: 700; }
+        .feat-card p { font-size: 14px; color: var(--muted); }
+
+        /* Workflow Steps */
+        .steps-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; position: relative; }
+        .step-card { background: var(--cream2); padding: 25px; border-radius: var(--r); border-top: 4px solid var(--bronze); position: relative; }
+        .step-num { font-size: 13px; font-weight: 800; color: var(--bronze); text-transform: uppercase; margin-bottom: 5px; }
+        .step-card h3 { font-size: 17px; color: var(--burg); margin-bottom: 8px; }
+        .step-card p { font-size: 13px; color: #555; }
+
+        /* Tech Section */
+        .tech-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .tech-box img { width: 100%; border-radius: 12px; }
+        .tech-info h3 { font-size: 24px; color: var(--burg); margin-bottom: 15px; }
+        .tech-info ul { list-style: none; }
+        .tech-info li { position: relative; padding-right: 25px; margin-bottom: 12px; font-size: 15px; }
+        .tech-info li::before { content: "✓"; position: absolute; right: 0; color: var(--bronze); font-weight: bold; }
+
+        /* Comparison Table */
+        .comp-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); margin-top: 20px; }
+        .comp-table th, .comp-table td { padding: 16px 20px; text-align: start; font-size: 14px; border-bottom: 1px solid var(--border); }
+        .comp-table th { background: var(--burg); color: #fff; font-size: 15px; }
+        .comp-table tr:hover { background: var(--bpale); }
+
+        /* CTA Banner */
+        .cta-box { background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: #fff; padding: 50px; border-radius: var(--r); text-align: center; margin-top: 40px; }
+        .cta-box h2 { font-size: 28px; margin-bottom: 10px; }
+        .cta-box p { font-size: 16px; opacity: 0.9; margin-bottom: 25px; }
+        .cta-btn { background: var(--bronze); color: #fff; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block; transition: 0.3s; }
+        .cta-btn:hover { background: var(--bronze2); }
+
+        @media (max-width: 768px) {
+            .hero-grid, .tech-box { grid-template-columns: 1fr; text-align: center; }
+            .hero-stats { justify-content: center; }
+            .tech-info li { padding-right: 0; padding-top: 20px; }
+            .tech-info li::before { right: 50%; transform: translateX(50%); top: 0; }
+            .comp-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">Smile <span>Pro</span></a>
+            <div class="nav-right">
+                <a href="blog.html" class="btn-nav" style="background:transparent; color:var(--burg);">المدونة</a>
+                <button onclick="toggleLanguage()" class="lang-btn" id="langBtn">English</button>
+                <a href="#book" class="btn-nav">احجز الآن</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="hero-badge">أحدث جيل لتصحيح النظر 2026</span>
+                <h1 id="heroH1">تقنية السمايل برو (SMILE Pro)<br>تصحيح النظر في 8 ثوانٍ فقط</h1>
+                <p id="heroP">استعد قوة إبصارك بدون فتح شريحة بالقرنية وبدون ألم، باستخدام أحدث جهاز ZEISS VisuMax 800 الألماني مع دكتور محمد النجار.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>8 ثوانٍ</h3>
+                        <p id="stat1">وقت تطبيق الليزر</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2 ملم</h3>
+                        <p id="stat2">شق جراحي دقيق جداً</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p id="stat3">بدون فتح شريحة (Flapless)</p>
+                    </div>
+                </div>
+
+                <a href="#book" class="cta-btn" id="heroCta">احجز كشفك الطبي اليوم</a>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80" alt="تقنية السمايل برو مع دكتور محمد النجار" class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Key Features -->
+        <section>
+            <div class="sec-title">
+                <h2 id="featTitle">لماذا تعتبر تقنية SMILE Pro الخيار الأفضل؟</h2>
+                <p id="featSub">تجمع التقنية بين أقصى درجات الأمان السرعة والراحة التامة للمريض</p>
+            </div>
+            <div class="features-grid">
+                <div class="feat-card">
+                    <span class="feat-icon">⚡</span>
+                    <h3 id="f1T">سرعة فائقة (8 ثوانٍ)</h3>
+                    <p id="f1D">تقليل زمن الليزر إلى ثلث الوقت مقارنة بالسمايل التقليدي، مما يمنع التوتر ويزيد من راحة العين.</p>
+                </div>
+                <div class="feat-card">
+                    <span class="feat-icon">🛡️</span>
+                    <h3 id="f2T">أمان تام للقرنية</h3>
+                    <p id="f2D">بدون قطع شريحة واسعة (No Flap)، مما يحافظ على قوة وثبات القرنية البيوميكانيكي مدى الحياة.</p>
+                </div>
+                <div class="feat-card">
+                    <span class="feat-icon">💧</span>
+                    <h3 id="f3T">حد أدنى من الجفاف</h3>
+                    <p id="f3D">الحفاظ على أكثر من 80% من أعصاب القرنية الحسية، مما يحميك من جفاف العين الشديد بعد العملية.</p>
+                </div>
+                <div class="feat-card">
+                    <span class="feat-icon">🎯</span>
+                    <h3 id="f4T">دقة تصحيح الاستجماتيزم</h3>
+                    <p id="f4D">تقنية OcuLign & CentraLign الذكية لضبط مركز الإبصار ومعالجة الاستجماتيزم بدرجة فائقة.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Overview -->
+        <section>
+            <div class="tech-box">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" alt="جهاز VisuMax 800">
+                <div class="tech-info">
+                    <h3 id="techH3">جهاز ZEISS VisuMax 800 العالمي</h3>
+                    <p id="techP" style="color:var(--muted); margin-bottom:20px;">الجيل الأحدث عالمياً من شركة كارل زايس الألمانية، والمصمم لتوفير أعلى معدلات النجاح في جراحات الانكسار.</p>
+                    <ul id="techList">
+                        <li>معدل تردد ليزر يبلغ 2 ميجاهرتز لتقليل وقت الجراحة.</li>
+                        <li>أنظمة توجيه آلي بالذكاء الاصطناعي لتتبع حركة العين الميكروسكوبية.</li>
+                        <li>إحساس شبه معدوم بالضغط على العين أثناء تطبيق الليزر.</li>
+                        <li>تعافٍ سريع للغاية يتيح لك ممارسة حياتك في اليوم التالي.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step by Step Workflow -->
+        <section>
+            <div class="sec-title">
+                <h2 id="stepTitle">خطوات إجراء العملية مع دكتور محمد النجار</h2>
+                <p id="stepSub">رحلة علاجية بسيطة ومريحة تستغرق 15 دقيقة فقط داخل غرفة العمليات</p>
+            </div>
+            <div class="steps-wrapper">
+                <div class="step-card">
+                    <div class="step-num">الخطوة 01</div>
+                    <h3 id="s1T">التخدير الموضعي</h3>
+                    <p id="s1D">وضع قطرات تخدير موضعية في العين بدون أي حقن أو ألم نهائياً.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">الخطوة 02</div>
+                    <h3 id="s2T">تطبيق الليزر (8 ثوانٍ)</h3>
+                    <p id="s2D">يقوم جهاز VisuMax 800 بتشكيل النسيج داخلياً خلال 8 ثوانٍ فقط.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">الخطوة 03</div>
+                    <h3 id="s3T">استخراج العدسة الدقيقة</h3>
+                    <p id="s3D">يستخرج الجراح النسيج المصغر بحرفية من فتحة دقيقة لا تتعدى 2 ملم.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">الخطوة 04</div>
+                    <h3 id="s4T">الالتئام الطبيعي</h3>
+                    <p id="s4D">تلتئم الفتحة تلقائياً بدون غرز أو خياطة وتعود لرؤيتك الواضحة خلال ساعات.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section>
+            <div class="sec-title">
+                <h2 id="compTitle">مقارنة SMILE Pro مع تقنيات تصحيح النظر الأخرى</h2>
+            </div>
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th id="th1">وجه المقارنة</th>
+                        <th>SMILE Pro</th>
+                        <th>الفيمتو ليزك (Femto LASIK)</th>
+                        <th>الليزك السطحي (PRK)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td><strong>زمن تطبيق الليزر</strong></td>
+                        <td>8 ثوانٍ فقط</td>
+                        <td>15 - 20 ثانية</td>
+                        <td>30 - 40 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>قطع شريحة بالقرنية (Flap)</strong></td>
+                        <td>لا يوجد (شق 2 ملم)</td>
+                        <td>نعم (قطع دائم للشريحة)</td>
+                        <td>لا يوجد (كشط سطحي)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>مستوى جفاف العين</strong></td>
+                        <td>نادر جداً ومؤقت</td>
+                        <td>متوسط إلى مرتفع</td>
+                        <td>مؤقت لعدة أسابيع</td>
+                    </tr>
+                    <tr>
+                        <td><strong>فترة التعافي للعودة للعمل</strong></td>
+                        <td>خلال 24 ساعة</td>
+                        <td>2 - 3 أيام</td>
+                        <td>4 - 7 أيام</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Booking CTA Section -->
+        <section id="book">
+            <div class="cta-box">
+                <h2 id="ctaH2">جاهز للاستغناء عن النظارات والعدسات اللاصقة؟</h2>
+                <p id="ctaP">احجز موعد تقييم القرنية والفحص الشامل مع دكتور محمد النجار لتحديد مدى ملائمة تقنية SMILE Pro لعينيك.</p>
+                <a href="https://wa.me/201207278888" class="cta-btn" id="ctaWhatsapp">تواصل عبر الواتساب الآن</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleLanguage() {
+            const html = document.getElementById('htmlTag');
+            const isArabic = html.getAttribute('lang') === 'ar';
+
+            if (isArabic) {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                document.getElementById('langBtn').innerText = 'عربي';
+                document.getElementById('pageTitle').innerText = 'SMILE Pro Technology in Egypt | Dr. Mohamed El Naggar';
+                
+                document.getElementById('heroH1').innerHTML = 'SMILE Pro Technology<br>Vision Correction in Just 8 Seconds';
+                document.getElementById('heroP').innerText = 'Restore your sharp vision flapless and pain-free using the advanced ZEISS VisuMax 800 with Dr. Mohamed El Naggar.';
+                document.getElementById('stat1').innerText = 'Laser Treatment Time';
+                document.getElementById('stat2').innerText = 'Micro Incision';
+                document.getElementById('stat3').innerText = 'Flapless Procedure';
+                document.getElementById('heroCta').innerText = 'Book Consultation Today';
+
+                document.getElementById('featTitle').innerText = 'Why Choose SMILE Pro?';
+                document.getElementById('featSub').innerText = 'Combining ultimate safety, speed, and comfort for every patient.';
+                document.getElementById('f1T').innerText = 'Ultra Fast (8 Seconds)';
+                document.getElementById('f1D').innerText = 'Reduces laser delivery time to 1/3 compared to traditional SMILE for total patient comfort.';
+                document.getElementById('f2T').innerText = 'Corneal Biomechanical Safety';
+                document.getElementById('f2D').innerText = 'Flapless procedure that preserves long-term structural integrity of your cornea.';
+                document.getElementById('f3T').innerText = 'Minimal Dry Eyes';
+                document.getElementById('f3D').innerText = 'Preserves over 80% of corneal nerves, significantly reducing post-op dry eye risk.';
+                document.getElementById('f4T').innerText = 'Precise Astigmatism Correction';
+                document.getElementById('f4D').innerText = 'Smart OcuLign & CentraLign axis alignment for superior visual clarity.';
+
+                document.getElementById('techH3').innerText = 'Powered by ZEISS VisuMax 800';
+                document.getElementById('techP').innerText = 'The latest generation femtosecond laser system engineered by Carl Zeiss Germany for maximum surgical precision.';
+                document.getElementById('techList').innerHTML = `
+                    <li>2 MHz laser pulse frequency for rapid lenticule creation.</li>
+                    <li>AI-assisted eye tracking and automatic axis alignment.</li>
+                    <li>Virtually zero pressure sensation during the procedure.</li>
+                    <li>Rapid visual recovery allowing immediate return to daily activities.</li>
+                `;
+
+                document.getElementById('stepTitle').innerText = 'Surgical Workflow with Dr. Mohamed El Naggar';
+                document.getElementById('stepSub').innerText = 'A seamless 15-minute procedure designed for maximum comfort.';
+                document.getElementById('s1T').innerText = 'Topical Anesthesia';
+                document.getElementById('s1D').innerText = 'Numbing eye drops applied with zero needles or pain.';
+                document.getElementById('s2T').innerText = '8-Second Laser Step';
+                document.getElementById('s2D').innerText = 'VisuMax 800 creates the precise lenticule in under 8 seconds.';
+                document.getElementById('s3T').innerText = 'Lenticule Extraction';
+                document.getElementById('s3D').innerText = 'The surgeon delicately removes the lenticule through a 2mm keyhole incision.';
+                document.getElementById('s4T').innerText = 'Natural Healing';
+                document.getElementById('s4D').innerText = 'Self-sealing incision requiring no stitches; clear vision resumes within hours.';
+
+                document.getElementById('compTitle').innerText = 'SMILE Pro vs. Other Laser Procedures';
+                document.getElementById('th1').innerText = 'Feature';
+                document.getElementById('tableBody').innerHTML = `
+                    <tr>
+                        <td><strong>Laser Time</strong></td>
+                        <td>8 Seconds</td>
+                        <td>15 - 20 Seconds</td>
+                        <td>30 - 40 Seconds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Corneal Flap</strong></td>
+                        <td>None (2mm Incision)</td>
+                        <td>Yes (Full Flap)</td>
+                        <td>None (Epithelium Removal)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dry Eye Risk</strong></td>
+                        <td>Minimal & Temporary</td>
+                        <td>Moderate to High</td>
+                        <td>Temporary (Weeks)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recovery Time</strong></td>
+                        <td>24 Hours</td>
+                        <td>2 - 3 Days</td>
+                        <td>4 - 7 Days</td>
+                    </tr>
+                `;
+
+                document.getElementById('ctaH2').innerText = 'Ready to Live Free from Glasses & Contact Lenses?';
+                document.getElementById('ctaP').innerText = 'Book your comprehensive corneal evaluation with Dr. Mohamed El Naggar today.';
+                document.getElementById('ctaWhatsapp').innerText = 'Chat on WhatsApp Now';
+            } else {
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                document.getElementById('langBtn').innerText = 'English';
+                document.getElementById('pageTitle').innerText = 'تقنية السمايل برو (SMILE Pro) في مصر | دكتور محمد النجار';
+                
+                document.getElementById('heroH1').innerHTML = 'تقنية السمايل برو (SMILE Pro)<br>تصحيح النظر في 8 ثوانٍ فقط';
+                document.getElementById('heroP').innerText = 'استعد قوة إبصارك بدون فتح شريحة بالقرنية وبدون ألم، باستخدام أحدث جهاز ZEISS VisuMax 800 الألماني مع دكتور محمد النجار.';
+                document.getElementById('stat1').innerText = 'وقت تطبيق الليزر';
+                document.getElementById('stat2').innerText = 'شق جراحي دقيق جداً';
+                document.getElementById('stat3').innerText = 'بدون فتح شريحة (Flapless)';
+                document.getElementById('heroCta').innerText = 'احجز كشفك الطبي اليوم';
+
+                document.getElementById('featTitle').innerText = 'لماذا تعتبر تقنية SMILE Pro الخيار الأفضل؟';
+                document.getElementById('featSub').innerText = 'تجمع التقنية بين أقصى درجات الأمان السرعة والراحة التامة للمريض';
+                document.getElementById('f1T').innerText = 'سرعة فائقة (8 ثوانٍ)';
+                document.getElementById('f1D').innerText = 'تقليل زمن الليزر إلى ثلث الوقت مقارنة بالسمايل التقليدي، مما يمنع التوتر ويزيد من راحة العين.';
+                document.getElementById('f2T').innerText = 'أمان تام للقرنية';
+                document.getElementById('f2D').innerText = 'بدون قطع شريحة واسعة (No Flap)، مما يحافظ على قوة وثبات القرنية البيوميكانيكي مدى الحياة.';
+                document.getElementById('f3T').innerText = 'حد أدنى من الجفاف';
+                document.getElementById('f3D').innerText = 'الحفاظ على أكثر من 80% من أعصاب القرنية الحسية، مما يحميك من جفاف العين الشديد بعد العملية.';
+                document.getElementById('f4T').innerText = 'دقة تصحيح الاستجماتيزم';
+                document.getElementById('f4D').innerText = 'تقنية OcuLign & CentraLign الذكية لضبط مركز الإبصار ومعالجة الاستجماتيزم بدرجة فائقة.';
+
+                document.getElementById('techH3').innerText = 'جهاز ZEISS VisuMax 800 العالمي';
+                document.getElementById('techP').innerText = 'الجيل الأحدث عالمياً من شركة كارل زايس الألمانية، والمصمم لتوفير أعلى معدلات النجاح في جراحات الانكسار.';
+                document.getElementById('techList').innerHTML = `
+                    <li>معدل تردد ليزر يبلغ 2 ميجاهرتز لتقليل وقت الجراحة.</li>
+                    <li>أنظمة توجيه آلي بالذكاء الاصطناعي لتتبع حركة العين الميكروسكوبية.</li>
+                    <li>إحساس شبه معدوم بالضغط على العين أثناء تطبيق الليزر.</li>
+                    <li>تعافٍ سريع للغاية يتيح لك ممارسة حياتك في اليوم التالي.</li>
+                `;
+
+                document.getElementById('stepTitle').innerText = 'خطوات إجراء العملية مع دكتور محمد النجار';
+                document.getElementById('stepSub').innerText = 'رحلة علاجية بسيطة ومريحة تستغرق 15 دقيقة فقط داخل غرفة العمليات';
+                document.getElementById('s1T').innerText = 'التخدير الموضعي';
+                document.getElementById('s1D').innerText = 'وضع قطرات تخدير موضعية في العين بدون أي حقن أو ألم نهائياً.';
+                document.getElementById('s2T').innerText = 'تطبيق الليزر (8 ثوانٍ)';
+                document.getElementById('s2D').innerText = 'يقوم جهاز VisuMax 800 بتشكيل النسيج داخلياً خلال 8 ثوانٍ فقط.';
+                document.getElementById('s3T').innerText = 'استخراج العدسة الدقيقة';
+                document.getElementById('s3D').innerText = 'يستخرج الجراح النسيج المصغر بحرفية من فتحة دقيقة لا تتعدى 2 ملم.';
+                document.getElementById('s4T').innerText = 'الالتئام الطبيعي';
+                document.getElementById('s4D').innerText = 'تلتئام الفتحة تلقائياً بدون غرز أو خياطة وتعود لرؤيتك الواضحة خلال ساعات.';
+
+                document.getElementById('compTitle').innerText = 'مقارنة SMILE Pro مع تقنيات تصحيح النظر الأخرى';
+                document.getElementById('th1').innerText = 'وجه المقارنة';
+                document.getElementById('tableBody').innerHTML = `
+                    <tr>
+                        <td><strong>زمن تطبيق الليزر</strong></td>
+                        <td>8 ثوانٍ فقط</td>
+                        <td>15 - 20 ثانية</td>
+                        <td>30 - 40 ثانية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>قطع شريحة بالقرنية (Flap)</strong></td>
+                        <td>لا يوجد (شق 2 ملم)</td>
+                        <td>نعم (قطع دائم للشريحة)</td>
+                        <td>لا يوجد (كشط سطحي)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>مستوى جفاف العين</strong></td>
+                        <td>نادر جداً ومؤقت</td>
+                        <td>متوسط إلى مرتفع</td>
+                        <td>مؤقت لعدة أسابيع</td>
+                    </tr>
+                    <tr>
+                        <td><strong>فترة التعافي للعودة للعمل</strong></td>
+                        <td>خلال 24 ساعة</td>
+                        <td>2 - 3 أيام</td>
+                        <td>4 - 7 أيام</td>
+                    </tr>
+                `;
+
+                document.getElementById('ctaH2').innerText = 'جاهز للاستغناء عن النظارات والعدسات اللاصقة؟';
+                document.getElementById('ctaP').innerText = 'احجز موعد تقييم القرنية والفحص الشامل مع دكتور محمد النجار لتحديد مدى ملائمة تقنية SMILE Pro لعينيك.';
+                document.getElementById('ctaWhatsapp').innerText = 'تواصل عبر الواتساب الآن';
+            }
+        }
+    </script>
+</body>
+</html>
