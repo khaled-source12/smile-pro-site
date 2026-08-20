@@ -801,7 +801,8 @@ footer{background:#10282C;color:rgba(255,255,255,0.7);padding:40px 0;font-size:1
       <h2 class="form-card-title">Book Vision Assessment</h2>
       <p class="form-card-sub">Reserve your evaluation at Eterna Medical City, New Cairo</p>
       
-      <form action="#" method="POST">
+    <form name="consultation" id="main-form" method="POST" data-netlify="true" action="/thank-you.html">
+<input type="hidden" name="form-name" value="consultation"/>
         <div class="fg">
           <label for="full-name">Full Name</label>
           <input type="text" id="full-name" name="name" placeholder="Enter your full name" required />
@@ -1122,7 +1123,7 @@ footer{background:#10282C;color:rgba(255,255,255,0.7);padding:40px 0;font-size:1
     <h2>ZEISS VisuMax 800 Engineering</h2>
 
     <div class="tech-grid fade-up">
-      <div class="tech-img">
+      <div class="Video1.mp4">
         <div>
           <div class="zeiss-wordmark">ZEISS</div>
           <div class="zeiss-sub">VisuMax 800 Platform</div>
@@ -1316,7 +1317,8 @@ footer{background:#10282C;color:rgba(255,255,255,0.7);padding:40px 0;font-size:1
       <h3 class="form-card-title">Book Vision Assessment</h3>
       <p class="cta-form-sub">Eterna Medical City • Fifth Settlement, New Cairo</p>
 
-      <form action="#" method="POST">
+      <form name="consultation" id="bottom-form" method="POST" data-netlify="true" action="/thank-you.html">
+<input type="hidden" name="form-name" value="consultation"/>
         <div class="fg">
           <label for="cta-name">Full Name</label>
           <input type="text" id="cta-name" name="name" placeholder="Enter your name" required />
@@ -1429,6 +1431,19 @@ footer{background:#10282C;color:rgba(255,255,255,0.7);padding:40px 0;font-size:1
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  function handleForm(formEl){
+  if(!formEl)return;
+  formEl.addEventListener('submit',function(e){
+    e.preventDefault();
+    const btn=formEl.querySelector('button[type="submit"]');
+    btn.textContent='Sending...';btn.disabled=true;
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(formEl)).toString()})
+    .then(()=>window.location.href='/thank-you.html')
+    .catch(()=>window.location.href='/thank-you.html');
+  });
+}
+handleForm(document.getElementById('main-form'));
+handleForm(document.getElementById('bottom-form'));
 </script>
 
 </body>
