@@ -342,46 +342,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
       <!-- ═══ STEP 3 ═══ -->
-<div class="wiz-step" id="step3">
-  <div class="result-wrap" id="result-area"></div>
-
-  <div class="gate" id="lead-gate">
-    <div class="gate-title">احصل على التفاصيل الكاملة</div>
-    <div class="gate-sub">هنبعتلك التقدير على واتساب ونحجزلك فحص البنتاكام.</div>
-    
-    <!-- Updated name and form-name to match index(7).html -->
-    <form name="consultation" id="estimator-form" method="POST" data-netlify="true" action="/ar/thank-you.html">
-      <input type="hidden" name="form-name" value="consultation"/>
-      <input type="hidden" name="service" value="price-estimator"/>
-      <input type="hidden" name="language" value="ar"/>
-      <input type="hidden" name="recommended-tech" id="h-tech" value=""/>
-      <input type="hidden" name="prescription" id="h-rx" value=""/>
-      <input type="hidden" name="conditions" id="h-conditions" value=""/>
-      <input type="hidden" name="priority" id="h-priority" value=""/>
-      <input type="hidden" name="price-range" id="h-price" value=""/>
-      
-      <div class="fg">
-        <label for="est-name">الاسم بالكامل</label>
-        <input type="text" id="est-name" name="name" placeholder="أحمد محمد" required/>
-      </div>
-      <div class="fg">
-        <label for="est-phone">رقم الواتساب</label>
-        <input type="tel" id="est-phone" name="phone" placeholder="01X XXXX XXXX" required dir="ltr" style="text-align:left"/>
-        <div class="field-error" id="phone-error">من فضلك اكتب رقم موبايل مصري صحيح</div>
-      </div>
-      <button type="submit" class="form-btn">احجز فحص البنتاكام ←</button>
-    </form>
-    
-    <p class="form-note">الفحص مجاني · بدون التزام · بياناتك سرية تماماً</p>
-    <div class="wa-alt">
-      <span>تحب تتكلم الأول؟</span>
-      <a href="#" id="wa-results-link" class="wa-link" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
-        ابعتلي النتيجة على واتساب
-      </a>
-    </div>
+<form name="consultation" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/ar/thank-you.html">
+  <!-- Required Netlify hidden fields -->
+  <input type="hidden" name="form-name" value="consultation"/>
+  <input type="hidden" name="bot-field" />
+  
+  <input type="hidden" name="service" value="price-estimator"/>
+  <input type="hidden" name="language" value="ar"/>
+  
+  <!-- Dynamic wizard output inputs -->
+  <input type="hidden" name="recommended-tech" id="h-tech" value=""/>
+  <input type="hidden" name="prescription" id="h-rx" value=""/>
+  <input type="hidden" name="conditions" id="h-conditions" value=""/>
+  <input type="hidden" name="priority" id="h-priority" value=""/>
+  <input type="hidden" name="price-range" id="h-price" value=""/>
+  
+  <div class="fg">
+    <label for="est-name">الاسم بالكامل</label>
+    <input type="text" id="est-name" name="name" placeholder="أحمد محمد" required/>
   </div>
-</div>
+  
+  <div class="fg">
+    <label for="est-phone">رقم الواتساب</label>
+    <input type="tel" id="est-phone" name="phone" placeholder="01X XXXX XXXX" required dir="ltr" style="text-align:left"/>
+    <div class="field-error" id="phone-error" style="display:none; color:red;">من فضلك اكتب رقم موبايل مصري صحيح</div>
+  </div>
+  
+  <button type="submit" class="form-btn" id="est-submit-btn">احجز فحص البنتاكام ←</button>
+</form>
         
 <!-- PRICE TABLE -->
 <section class="info-section" style="background:var(--white)">
@@ -661,5 +649,68 @@ const stickyObs = new IntersectionObserver(e => {
 }, { threshold: 0 });
 stickyObs.observe(wizardEl);
 </script>
+document.addEventListener('DOMContentLoaded', function () {
+  const estimatorForm = document.getElementById('estimator-form');
+
+  if (!estimatorForm) return;
+
+  estimatorForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('est-submit-btn');
+    if (submitBtn) {
+      submitBtn.textContent = 'جاري الإرسال...';
+      submitBtn.disabled = true;
+    }
+
+    // 1. Fill dynamic variables from window.wizardState (or UI elements if variables aren't globally scoped)
+    if (window.wizardState) {
+      document.getElementById('h-tech').value = window.wizardState.recommendedTech || '';
+      document.getElementById('h-rx').value = window.wizardState.prescription || '';
+      document.getElementById('h-conditions').value = window.wizardState.conditions || '';
+      document.getElementById('h-priority').value = window.wizardState.priority || '';
+      document.getElementById('h-price').value = window.wizardState.priceRange || '';
+    }
+
+    // 2. Prepare Form Data using URL-encoded format expected by Netlify
+    const formData = new FormData(estimatorForm);
+    const encodedData = new URLSearchParams(formData).toString();
+
+    // 3. Post to Netlify root
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodedData
+    })
+      .then((response) => {
+        if (response.ok) {
+          window.location.href = estimatorForm.getAttribute('action') || '/ar/thank-you.html';
+        } else {
+          // Native browser submit fallback
+          estimatorForm.submit();
+        }
+      })
+      .catch((error) => {
+        console.error('Submission error:', error);
+        estimatorForm.submit();
+      });
+  });
+});
+
+        <!-- Hidden dummy form so Netlify registers all calculator fields on build -->
+<form name="consultation" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="tel" name="phone" />
+  <input type="hidden" name="service" />
+  <input type="hidden" name="language" />
+  <input type="hidden" name="recommended-tech" />
+  <input type="hidden" name="prescription" />
+  <input type="hidden" name="conditions" />
+  <input type="hidden" name="priority" />
+  <input type="hidden" name="price-range" />
+</form>
+        
+        
 </body>
+
 </html>
