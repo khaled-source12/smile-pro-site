@@ -616,31 +616,37 @@ const phoneRegex = /^(\+20|0)(10|11|12|15)[0-9]{8}$/;
 
 document.getElementById('estimator-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const phone = document.getElementById('est-phone').value.replace(/\s+/g, '');
+  const phoneInput = document.getElementById('est-phone');
+  const phone = phoneInput.value.replace(/\s+/g, '');
   const errEl = document.getElementById('phone-error');
-  if (!phoneRegex.test(phone)) { errEl.style.display = 'block'; return; }
+
+  if (!phoneRegex.test(phone)) { 
+    errEl.style.display = 'block'; 
+    return; 
+  }
   errEl.style.display = 'none';
 
   const btn = this.querySelector('button[type="submit"]');
   btn.textContent = 'جاري الحجز...';
   btn.disabled = true;
 
-  gtag('event', 'generate_lead', {
-    event_category: 'engagement',
-    event_label: 'Price Estimator Lead AR',
-    currency: 'EGP',
-    value: 0
-  });
+  // 1. Detect if page is Arabic or English
+  const isArabic = document.documentElement.lang.startsWith('ar') || window.location.pathname.startsWith('/ar/');
+  const thankYouUrl = isArabic ? '/ar/thank-you.html' : '/thank-you.html';
 
-  fetch('/', {
+  // 2. Submit data and redirect to the correct page
+  fetch(window.location.pathname, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams(new FormData(this)).toString()
   })
-  .then(() => window.location.href = '/ar/thank-you.html')
-  .catch(() => window.location.href = '/ar/thank-you.html');
+  .then(() => {
+    window.location.href = thankYouUrl;
+  })
+  .catch(() => {
+    window.location.href = thankYouUrl;
+  });
 });
-
 // ══════════ FAQ ══════════
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item'), isOpen = item.classList.contains('open');
