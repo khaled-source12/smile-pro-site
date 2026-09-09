@@ -341,35 +341,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-      <!-- ═══ STEP 3 ═══ -->
-<form name="consultation" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/ar/thank-you.html">
-  <!-- Required Netlify hidden fields -->
-  <input type="hidden" name="form-name" value="consultation"/>
-  <input type="hidden" name="bot-field" />
-  
-  <input type="hidden" name="service" value="price-estimator"/>
-  <input type="hidden" name="language" value="ar"/>
-  
-  <!-- Dynamic wizard output inputs -->
-  <input type="hidden" name="recommended-tech" id="h-tech" value=""/>
-  <input type="hidden" name="prescription" id="h-rx" value=""/>
-  <input type="hidden" name="conditions" id="h-conditions" value=""/>
-  <input type="hidden" name="priority" id="h-priority" value=""/>
-  <input type="hidden" name="price-range" id="h-price" value=""/>
-  
-  <div class="fg">
-    <label for="est-name">الاسم بالكامل</label>
-    <input type="text" id="est-name" name="name" placeholder="أحمد محمد" required/>
+        <!-- ═══ STEP 3 ═══ -->
+        <div class="wiz-step" id="step3">
+          <div class="result-wrap" id="result-area"></div>
+
+          <div class="gate" id="lead-gate">
+            <div class="gate-title">احصل على التفاصيل الكاملة</div>
+            <div class="gate-sub">هنبعتلك التقدير على واتساب ونحجزلك فحص البنتاكام.</div>
+            
+            <form name="price-estimator-ar" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/ar/thank-you.html">
+              <input type="hidden" name="form-name" value="price-estimator-ar"/>
+              <input type="hidden" name="bot-field" />
+              <input type="hidden" name="service" value="price-estimator"/>
+              <input type="hidden" name="language" value="ar"/>
+              <input type="hidden" name="recommended-tech" id="h-tech" value=""/>
+              <input type="hidden" name="prescription" id="h-rx" value=""/>
+              <input type="hidden" name="conditions" id="h-conditions" value=""/>
+              <input type="hidden" name="priority" id="h-priority" value=""/>
+              <input type="hidden" name="price-range" id="h-price" value=""/>
+              
+              <div class="fg">
+                <label for="est-name">الاسم بالكامل</label>
+                <input type="text" id="est-name" name="name" placeholder="أحمد محمد" required/>
+              </div>
+              <div class="fg">
+                <label for="est-phone">رقم الواتساب</label>
+                <input type="tel" id="est-phone" name="phone" placeholder="01X XXXX XXXX" required dir="ltr" style="text-align:left"/>
+                <div class="field-error" id="phone-error">من فضلك اكتب رقم موبايل مصري صحيح</div>
+              </div>
+              <button type="submit" class="form-btn" id="est-submit-btn">احجز فحص البنتاكام ←</button>
+            </form>
+            
+            <p class="form-note">الفحص مجاني · بدون التزام · بياناتك سرية تماماً</p>
+            <div class="wa-alt">
+              <span>تحب تتكلم الأول؟</span>
+              <a href="#" id="wa-results-link" class="wa-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+                ابعتلي النتيجة على واتساب
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  
-  <div class="fg">
-    <label for="est-phone">رقم الواتساب</label>
-    <input type="tel" id="est-phone" name="phone" placeholder="01X XXXX XXXX" required dir="ltr" style="text-align:left"/>
-    <div class="field-error" id="phone-error" style="display:none; color:red;">من فضلك اكتب رقم موبايل مصري صحيح</div>
-  </div>
-  
-  <button type="submit" class="form-btn" id="est-submit-btn">احجز فحص البنتاكام ←</button>
-</form>
+</section>
         
 <!-- PRICE TABLE -->
 <section class="info-section" style="background:var(--white)">
@@ -385,7 +402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <tr><td>PRK / إزالة سطحية</td><td style="direction:ltr;text-align:right">١٥,٠٠٠ – ٢٥,٠٠٠</td><td>القرنية الرفيعة، الرياضات العنيفة، الميزانية المحدودة</td></tr>
         <tr><td>ليزك عادي / كاستم</td><td style="direction:ltr;text-align:right">١٨,٠٠٠ – ٢٨,٠٠٠</td><td>قصر النظر العادي، تعافي سريع</td></tr>
         <tr><td>فيمتو ليزك (بدون مشرط)</td><td style="direction:ltr;text-align:right">٣٠,٠٠٠ – ٤٨,٠٠٠</td><td>دقة عالية، فلاب بالليزر، المعيار الذهبي</td></tr>
-        <tr class="highlight-row"><td>سمايل برو (ZEISS VisuMax 800)</td><td style="direction:ltr;text-align:right">٤٥,٠٠٠ – ٦٨,٠٠٠</td><td>بدون فلاب، أقل جفاف، نشاط رياضي</td></tr>
+        <tr class="highlight-row"><td>سمايل برو (ZEISS VisuMax 800)</td><td style="direction:ltr;text-align:right">٤٥,٠٠٠ – ٦٨,٠٠0</td><td>بدون فلاب، أقل جفاف، نشاط رياضي</td></tr>
         <tr><td>ICL (عدسة داخلية)</td><td style="direction:ltr;text-align:right">٧٠,٠٠٠ – ١١٠,٠٠٠</td><td>قياس عالي جداً، الليزك مش مناسب</td></tr>
       </tbody>
     </table>
@@ -415,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">ينفع أقسّط؟<span class="faq-icon">+</span></button>
-        <div class="faq-a">أيوه. بنتعامل مع ڤاليو وبريميوم كارد للتقسيط. حسب التقنية ومدة التقسيط، القسط الشهري ممكن يبدأ من حوالي ٢,٥٠٠ جنيه/شهر. فريقنا يقدر يوضحلك الخيارات بالظبط بعد الفحص.</div>
+        <div class="faq-a">أيوه. بنتعامل مع ڤاليو وبريميوم كارد للتقسيط. حسب التقنية ومدة التقسيط، القسط الشهري ممكن يبدأ من حوالي ٢,٥٠0 جنيه/شهر. فريقنا يقدر يوضحلك الخيارات بالظبط بعد الفحص.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">إيه هو فحص البنتاكام وليه مهم؟<span class="faq-icon">+</span></button>
@@ -449,6 +466,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
 </a>
 
+<!-- Hidden dummy form so Netlify builds all custom inputs into the price-estimator-ar schema -->
+<form name="price-estimator-ar" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="tel" name="phone" />
+  <input type="hidden" name="service" />
+  <input type="hidden" name="language" />
+  <input type="hidden" name="recommended-tech" />
+  <input type="hidden" name="prescription" />
+  <input type="hidden" name="conditions" />
+  <input type="hidden" name="priority" />
+  <input type="hidden" name="price-range" />
+</form>
+
 <script>
 // ══════════ STATE ══════════
 const state = { rx: null, conditions: new Set(), priority: null };
@@ -464,7 +494,9 @@ function goStep(n) {
     else if (i === n) wp.classList.add('active');
   }
   document.getElementById('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  gtag('event', 'estimator_step', { step: n, language: 'ar' });
+  if (typeof gtag === 'function') {
+    gtag('event', 'estimator_step', { step: n, language: 'ar' });
+  }
 }
 
 function selectOpt(el, key, value) {
@@ -598,42 +630,53 @@ function computeResult() {
   document.getElementById('wa-results-link').href = `https://wa.me/201140011556?text=${waText}`;
 }
 
-// ══════════ FORM ══════════
+// ══════════ FORM SUBMISSION ══════════
 const phoneRegex = /^(\+20|0)(10|11|12|15)[0-9]{8}$/;
 
-document.getElementById('estimator-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const phoneInput = document.getElementById('est-phone');
-  const phone = phoneInput.value.replace(/\s+/g, '');
-  const errEl = document.getElementById('phone-error');
+document.addEventListener('DOMContentLoaded', function () {
+  const estimatorForm = document.getElementById('estimator-form');
+  if (!estimatorForm) return;
 
-  if (!phoneRegex.test(phone)) { 
-    errEl.style.display = 'block'; 
-    return; 
-  }
-  errEl.style.display = 'none';
+  estimatorForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  const btn = this.querySelector('button[type="submit"]');
-  btn.textContent = 'جاري الحجز...';
-  btn.disabled = true;
+    const phoneInput = document.getElementById('est-phone');
+    const phone = phoneInput ? phoneInput.value.replace(/\s+/g, '') : '';
+    const errEl = document.getElementById('phone-error');
 
-  // 1. Detect if page is Arabic or English
-  const isArabic = document.documentElement.lang.startsWith('ar') || window.location.pathname.startsWith('/ar/');
-  const thankYouUrl = isArabic ? '/ar/thank-you.html' : '/thank-you.html';
+    if (!phoneRegex.test(phone)) { 
+      if (errEl) errEl.style.display = 'block'; 
+      return; 
+    }
+    if (errEl) errEl.style.display = 'none';
 
-  // 2. Submit data and redirect to the correct page
-  fetch(window.location.pathname, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(this)).toString()
-  })
-  .then(() => {
-    window.location.href = thankYouUrl;
-  })
-  .catch(() => {
-    window.location.href = thankYouUrl;
+    const btn = document.getElementById('est-submit-btn');
+    if (btn) {
+      btn.textContent = 'جاري الإرسال...';
+      btn.disabled = true;
+    }
+
+    const formData = new FormData(estimatorForm);
+    const encodedData = new URLSearchParams(formData).toString();
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodedData
+    })
+    .then((res) => {
+      if (res.ok) {
+        window.location.href = estimatorForm.getAttribute('action') || '/ar/thank-you.html';
+      } else {
+        estimatorForm.submit();
+      }
+    })
+    .catch(() => {
+      estimatorForm.submit();
+    });
   });
 });
+
 // ══════════ FAQ ══════════
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item'), isOpen = item.classList.contains('open');
@@ -644,73 +687,13 @@ function toggleFaq(btn) {
 // ══════════ STICKY BAR ══════════
 const wizardEl = document.getElementById('wizard');
 const stickyBarEl = document.getElementById('sticky-bar');
-const stickyObs = new IntersectionObserver(e => {
-  stickyBarEl.classList.toggle('vis', !e[0].isIntersecting);
-}, { threshold: 0 });
-stickyObs.observe(wizardEl);
+if (wizardEl && stickyBarEl) {
+  const stickyObs = new IntersectionObserver(e => {
+    stickyBarEl.classList.toggle('vis', !e[0].isIntersecting);
+  }, { threshold: 0 });
+  stickyObs.observe(wizardEl);
+}
 </script>
-document.addEventListener('DOMContentLoaded', function () {
-  const estimatorForm = document.getElementById('estimator-form');
 
-  if (!estimatorForm) return;
-
-  estimatorForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const submitBtn = document.getElementById('est-submit-btn');
-    if (submitBtn) {
-      submitBtn.textContent = 'جاري الإرسال...';
-      submitBtn.disabled = true;
-    }
-
-    // 1. Fill dynamic variables from window.wizardState (or UI elements if variables aren't globally scoped)
-    if (window.wizardState) {
-      document.getElementById('h-tech').value = window.wizardState.recommendedTech || '';
-      document.getElementById('h-rx').value = window.wizardState.prescription || '';
-      document.getElementById('h-conditions').value = window.wizardState.conditions || '';
-      document.getElementById('h-priority').value = window.wizardState.priority || '';
-      document.getElementById('h-price').value = window.wizardState.priceRange || '';
-    }
-
-    // 2. Prepare Form Data using URL-encoded format expected by Netlify
-    const formData = new FormData(estimatorForm);
-    const encodedData = new URLSearchParams(formData).toString();
-
-    // 3. Post to Netlify root
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encodedData
-    })
-      .then((response) => {
-        if (response.ok) {
-          window.location.href = estimatorForm.getAttribute('action') || '/ar/thank-you.html';
-        } else {
-          // Native browser submit fallback
-          estimatorForm.submit();
-        }
-      })
-      .catch((error) => {
-        console.error('Submission error:', error);
-        estimatorForm.submit();
-      });
-  });
-});
-
-        <!-- Hidden dummy form so Netlify registers all calculator fields on build -->
-<form name="consultation" netlify netlify-honeypot="bot-field" hidden>
-  <input type="text" name="name" />
-  <input type="tel" name="phone" />
-  <input type="hidden" name="service" />
-  <input type="hidden" name="language" />
-  <input type="hidden" name="recommended-tech" />
-  <input type="hidden" name="prescription" />
-  <input type="hidden" name="conditions" />
-  <input type="hidden" name="priority" />
-  <input type="hidden" name="price-range" />
-</form>
-        
-        
 </body>
-
 </html>
