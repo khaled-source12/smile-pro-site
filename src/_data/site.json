@@ -1,0 +1,37 @@
+{
+  "name": "Smile Pro Egypt",
+  "url": "https://smileproegypt.com",
+  "clinic_number": "7",
+  "contact": {
+    "phone_e164": "+201113524230",
+    "phone_display_en": "+20 111 352 4230",
+    "phone_display_ar": "٠١١١ ٣٥٢ ٤٢٣٠",
+    "whatsapp": "201113524230"
+  },
+  "address": {
+    "en": [
+      "Eterna Medical City",
+      "Mivida Compound, Fifth Settlement, New Cairo, Egypt"
+    ],
+    "ar": [
+      "إيتيرنا ميديكال سيتي",
+      "ميفيدا، التجمع الخامس، القاهرة الجديدة، مصر"
+    ]
+  },
+  "hours": {
+    "en": "Saturday–Thursday · Friday closed",
+    "ar": "السبت–الخميس · الجمعة مغلق"
+  },
+  "social": {
+    "facebook": "https://facebook.com/drnaggarcenter",
+    "instagram": "https://instagram.com/smileproeg",
+    "linkedin": "https://www.linkedin.com/company/smile-pro-egypt/about",
+    "tiktok": "https://tiktok.com/@drnaggarcenter1"
+  },
+  "doctor": {
+    "en": "Dr. Mohamed El Naggar",
+    "ar": "د. محمد النجار",
+    "title_en": "Consultant Corneal & Refractive Surgeon",
+    "title_ar": "استشاري جراحات القرنية وتصحيح الإبصار"
+  }
+}

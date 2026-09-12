@@ -1,0 +1,17 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: "DM Sans", "Cairo", sans-serif;
+  line-height: 1.65;
+}
+html[dir="rtl"] body { font-family: "Cairo", "DM Sans", sans-serif; }
+img, video, iframe { max-width: 100%; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; }
+.site-shell { width: min(100% - 40px, var(--shell)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 65%, white); outline-offset: 3px; }
+@media (max-width: 640px) { .site-shell { width: min(100% - 28px, var(--shell)); } }

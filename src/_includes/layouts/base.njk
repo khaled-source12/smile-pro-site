@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ 'ar-EG' if locale == 'ar' else 'en-EG' }}" dir="{{ 'rtl' if locale == 'ar' else 'ltr' }}">
+<head>
+  {% set resolved_alternate_url = alternate_url %}
+  {% if translation_key %}{% set resolved_alternate_url = collections.articles | translationUrl(translation_key, locale) %}{% endif %}
+  {% set resolved_x_default_url = x_default_url %}
+  {% if translation_key %}{% set resolved_x_default_url = (canonical or page.url) if locale == 'en' else resolved_alternate_url %}{% endif %}
+  {% include "partials/head.njk" %}
+</head>
+<body class="page-{{ page_kind or 'standard' }} locale-{{ locale }}" data-whatsapp="{{ site.contact.whatsapp }}"{% if locale == 'ar' and resolved_alternate_url %} data-legacy-english-url="{{ resolved_alternate_url }}"{% endif %}>
+  {% set resolved_booking_url = booking_url %}
+  {% if not resolved_booking_url %}
+    {% if page_kind == 'calculator' %}
+      {% set resolved_booking_url = '#wizard' %}
+    {% elif page_kind == 'home' or page_kind == 'smile-pro' or page_kind == 'femto' %}
+      {% set resolved_booking_url = '#book' %}
+    {% else %}
+      {% set resolved_booking_url = '/ar/#book' if locale == 'ar' else '/#book' %}
+    {% endif %}
+  {% endif %}
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZRLPZN2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  {% include "partials/header.njk" %}
+  {{ content | safe }}
+  {% include "partials/footer.njk" %}
+  {% include "partials/sticky-actions.njk" %}
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/forms.js" defer></script>
+  {% if page_js %}<script src="/assets/js/pages/{{ page_js }}" defer></script>{% endif %}
+</body>
+</html>

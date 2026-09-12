@@ -1,0 +1,14 @@
+{
+  "name": "smile-pro-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "node scripts/clean-dist.mjs && eleventy",
+    "check": "npm run build && node scripts/check-site.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6"
+  }
+}

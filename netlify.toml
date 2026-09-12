@@ -1,8 +1,48 @@
 [build]
-  publish = "."
+  command = "npm run check"
+  publish = "dist"
   functions = "netlify/functions"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/index.html"
+  to = "/ar/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/laser-eye-surgery-cost-egypt/index.html"
+  to = "/laser-eye-surgery-cost-egypt/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/laser-eye-surgery-cost-egypt/index.html"
+  to = "/ar/laser-eye-surgery-cost-egypt/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/laser-eye-surgery-cost-egypt.html"
+  to = "/laser-eye-surgery-cost-egypt/"
+  status = 301
+
+[[redirects]]
+  from = "/ar/laser-eye-surgery-cost-egypt.html"
+  to = "/ar/laser-eye-surgery-cost-egypt/"
+  status = 301
+
+[[redirects]]
+  from = "/ar/laser-eye-surgery-cost-egypt/.html"
+  to = "/ar/laser-eye-surgery-cost-egypt/"
+  status = 301
+
+[[redirects]]
+  from = "/robot.txt"
+  to = "/robots.txt"
+  status = 301

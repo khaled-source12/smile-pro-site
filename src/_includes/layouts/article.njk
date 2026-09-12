@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+---
+<main class="article-page site-shell">
+  <header class="article-header">
+    <span class="tag">{{ category or ('مقال طبي' if locale == 'ar' else 'Medical article') }}</span>
+    <h1 class="article-title">{{ title }}</h1>
+    <div class="article-meta">
+      <span>{{ site.doctor.ar if locale == 'ar' else site.doctor.en }}</span>
+      <span>{{ site.doctor.title_ar if locale == 'ar' else site.doctor.title_en }}</span>
+      {% if read_time %}<span>{{ read_time }}</span>{% endif %}
+    </div>
+  </header>
+  {% if image %}<img class="main-img" src="{{ image }}" alt="{{ title }}">{% endif %}
+  <article class="article-body">
+    {{ content | safe }}
+  </article>
+  <section class="article-cta">
+    <h2>{{ 'هل تريد معرفة العملية الأنسب لعينيك؟' if locale == 'ar' else 'Which procedure is right for your eyes?' }}</h2>
+    <p>{{ 'احجز فحصًا شاملًا للقرنية مع د. محمد النجار في القاهرة الجديدة.' if locale == 'ar' else 'Book a comprehensive corneal assessment with Dr. Mohamed El Naggar in New Cairo.' }}</p>
+    <a href="{{ '/ar/#book' if locale == 'ar' else '/#book' }}">{{ 'احجز فحصك الآن' if locale == 'ar' else 'Book your assessment' }}</a>
+  </section>
+</main>

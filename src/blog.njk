@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+locale: ar
+permalink: /blog.html
+canonical: /blog.html
+alternate_url: /en/blog.html
+x_default_url: /en/blog.html
+page_kind: blog
+page_css: blog.css
+title: مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro
+description: اقرأ أحدث المقالات الطبية عن جراحات تصحيح النظر والفيمتو ليزك وتقنية Smile Pro مع دكتور محمد النجار.
+image: /images/Naggar6.png
+sitemap: true
+---
+{% set posts = collections.articles | byLocale('ar') | sortByDateDesc %}
+{% set categories = posts | uniqueDataValues('category') %}
+<header class="blog-hero">
+  <div class="container">
+    <span class="doc-badge">محتوى طبي بإشراف د. محمد النجار</span>
+    <h1>دليل تصحيح النظر وصحة القرنية</h1>
+    <p>مقالات عملية تساعدك على فهم التقنيات والفحوصات والتعافي قبل اتخاذ قرار تصحيح النظر.</p>
+  </div>
+</header>
+<main class="container blog-main">
+  <div class="category-bar" role="group" aria-label="تصنيف المقالات">
+    <button class="cat-tab active" type="button" data-blog-filter="all" aria-pressed="true">الكل</button>
+    {% for category in categories %}<button class="cat-tab" type="button" data-blog-filter="{{ category }}" aria-pressed="false">{{ category }}</button>{% endfor %}
+  </div>
+  <div class="blog-grid">
+    {% for post in posts %}
+    <article class="post-card" data-blog-category="{{ post.data.category }}">
+      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" loading="lazy">
+      <div class="post-body">
+        <span class="tag">{{ post.data.category }}</span>
+        <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+        <p class="post-desc">{{ post.data.excerpt }}</p>
+        <div class="meta-info"><span>{{ post.data.read_time }}</span><a href="{{ post.url }}" class="read-btn">اقرأ المقال ←</a></div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <section class="cta-banner">
+    <h2>هل تريد معرفة العملية الأنسب لعينيك؟</h2>
+    <p>احجز فحصًا شاملًا للقرنية مع د. محمد النجار في القاهرة الجديدة.</p>
+    <a href="/ar/#book" class="cta-btn">احجز فحصك الآن</a>
+  </section>
+</main>

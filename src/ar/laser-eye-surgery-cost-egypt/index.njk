@@ -1,0 +1,207 @@
+---
+layout: "layouts/landing.njk"
+locale: "ar"
+permalink: "/ar/laser-eye-surgery-cost-egypt/index.html"
+canonical: "/ar/laser-eye-surgery-cost-egypt/"
+alternate_url: "/laser-eye-surgery-cost-egypt/"
+x_default_url: "/laser-eye-surgery-cost-egypt/"
+page_kind: "calculator"
+page_css: "calculator-ar.css"
+page_js: "calculator-ar.js"
+title: "أسعار عمليات الليزك في مصر ٢٠٢٦ — سمايل برو، فيمتو ليزك وأكتر | Smile Pro Egypt"
+description: "اعرف سعر عملية الليزك في مصر. احسب تكلفة سمايل برو، فيمتو ليزك، PRK و ICL حسب نظرك — فحص بنتاكام مجاني في عيادتنا في ميفيدا، التجمع الخامس."
+image: "/images/Naggar6.png"
+show_sticky: true
+sitemap: true
+---
+{% from "partials/forms.njk" import estimator %}
+<!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- NAV -->
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-pill">
+      <div class="hero-pill-dot"></div>
+      أسعار محدّثة سبتمبر ٢٠٢٦ · أسعار العيادة الفعلية
+    </div>
+    <h1>عملية الليزك في مصر<br/><em>بكام فعلاً؟</em></h1>
+    <p class="hero-sub">جاوب على ٣ أسئلة سريعة عن نظرك. هنقولك السعر التقريبي لـ سمايل برو، فيمتو ليزك، PRK أو ICL — وهنوضحلك أنهي تقنية مناسبة لعينك.</p>
+  </div>
+</section>
+
+<!-- WIZARD -->
+<section class="wizard-section" id="wizard">
+  <div class="container">
+    <div class="wizard-card">
+
+      <!-- Progress -->
+      <div class="wizard-progress">
+        <div class="wp-step active" id="wp1"><span class="wp-num">١</span>نظرك</div>
+        <div class="wp-step" id="wp2"><span class="wp-num">٢</span>عينك</div>
+        <div class="wp-step" id="wp3"><span class="wp-num">٣</span>التقدير</div>
+      </div>
+
+      <div class="wizard-body">
+
+        <!-- ═══ STEP 1 ═══ -->
+        <div class="wiz-step active" id="step1">
+          <div class="wiz-q">نظرك ضعيف قد إيه؟</div>
+          <div class="wiz-hint">مش متأكد؟ اختار الأقرب — فحص البنتاكام بيحدد الرقم بالظبط.</div>
+          <div class="opt-grid">
+            <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','mild')">
+              <span class="opt-icon">👓</span>
+              <span><span class="opt-label">خفيف</span><span class="opt-desc">بقدر أمشي من غير نظارة فترات قصيرة</span></span>
+            </button>
+            <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','moderate')">
+              <span class="opt-icon">🔍</span>
+              <span><span class="opt-label">متوسط</span><span class="opt-desc">محتاج نظارة لأغلب الأنشطة — الوشوش مش واضحة من بعيد</span></span>
+            </button>
+            <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','high')">
+              <span class="opt-icon">🌫️</span>
+              <span><span class="opt-label">عالي</span><span class="opt-desc">أي حاجة أبعد من إيدي مش واضحة — مستحيل من غير نظارة</span></span>
+            </button>
+            <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','unsure')">
+              <span class="opt-icon">🤷</span>
+              <span><span class="opt-label">مش متأكد</span><span class="opt-desc">عارف إني محتاج نظارة بس مش عارف القياس</span></span>
+            </button>
+          </div>
+          <div class="wiz-nav">
+            <div></div>
+            <button type="button" class="wiz-next" id="next1" disabled onclick="goStep(2)">التالي</button>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 2 ═══ -->
+        <div class="wiz-step" id="step2">
+          <div class="wiz-q">فيه حاجة تانية عن عينك؟</div>
+          <div class="wiz-hint">اختار كل اللي ينطبق عليك — أو كمّل لو مفيش.</div>
+          <div class="chk-grid">
+            <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'thin-cornea')">
+              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><span style="font-weight:600">قرنية رفيعة</span><span style="font-size:12px;color:var(--muted)">دكتور قالي قبل كده</span></span>
+            </button>
+            <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'dry-eyes')">
+              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><span style="font-weight:600">جفاف أو حساسية في العين</span><span style="font-size:12px;color:var(--muted)">عيني بتدمع أو بتحرقني كتير</span></span>
+            </button>
+            <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'active')">
+              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><span style="font-weight:600">رياضة ونشاط بدني</span><span style="font-size:12px;color:var(--muted)">جيم، كورة، سباحة، إلخ</span></span>
+            </button>
+            <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'keratoconus')">
+              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><span style="font-weight:600">قرنية مخروطية / بحك عيني كتير</span><span style="font-size:12px;color:var(--muted)">مشخّص أو مشتبه فيه</span></span>
+            </button>
+          </div>
+
+          <div style="margin-top:24px">
+            <div class="wiz-q" style="font-size:20px">إيه أهم حاجة بالنسبالك؟</div>
+            <div class="wiz-hint">اختار أولوية واحدة.</div>
+            <div class="opt-grid">
+              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','no-dryeye')" style="padding:13px 18px">
+                <span class="opt-icon" style="width:32px;height:32px;font-size:15px">💧</span>
+                <span><span class="opt-label" style="font-size:14px">مفيش جفاف عين</span></span>
+              </button>
+              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','fast-recovery')" style="padding:13px 18px">
+                <span class="opt-icon" style="width:32px;height:32px;font-size:15px">⚡</span>
+                <span><span class="opt-label" style="font-size:14px">أسرع تعافي</span></span>
+              </button>
+              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','lowest-cost')" style="padding:13px 18px">
+                <span class="opt-icon" style="width:32px;height:32px;font-size:15px">💰</span>
+                <span><span class="opt-label" style="font-size:14px">أقل تكلفة</span></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="wiz-nav">
+            <button type="button" class="wiz-back" onclick="goStep(1)">رجوع ←</button>
+            <button type="button" class="wiz-next" id="next2" onclick="goStep(3)">شوف التقدير</button>
+          </div>
+        </div>
+
+        <!-- ═══ STEP 3 ═══ -->
+        <div class="wiz-step" id="step3">
+          <div class="result-wrap" id="result-area"></div>
+
+          <div class="gate" id="lead-gate">
+            <div class="gate-title">احصل على التفاصيل الكاملة</div>
+            <div class="gate-sub">هنبعتلك التقدير على واتساب ونحجزلك فحص البنتاكام.</div>
+
+            {{ estimator('ar') }}
+
+            <p class="form-note">الفحص مجاني · بدون التزام · بياناتك سرية تماماً</p>
+            <div class="wa-alt">
+              <span>تحب تتكلم الأول؟</span>
+              <a href="#" id="wa-results-link" class="wa-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+                ابعتلي النتيجة على واتساب
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE TABLE -->
+<section class="info-section" style="background:var(--white)">
+  <div class="container">
+      <span class="lbl">أسعار عمليات الليزك في مصر — ٢٠٢٦</span>
+    <div class="rule"></div>
+    <h2>كل التقنيات، <em>بأسعار واضحة</em></h2>
+    <p style="font-size:15px;color:var(--muted);max-width:560px;margin-top:10px;line-height:2">الأسعار للعينين وشاملة المتابعة. التقنية المناسبة بتعتمد على سُمك القرنية، القياس، ونمط حياتك — مش الميزانية بس. فحص البنتاكام بيحدد أنهي تقنية آمنة لعينك.</p>
+    <div class="price-table-wrap">
+    <table class="price-table">
+      <thead><tr><th>التقنية</th><th>السعر (جنيه، العينين)</th><th>الأنسب لـ</th></tr></thead>
+      <tbody>
+        <tr><td>PRK / إزالة سطحية</td><td style="direction:ltr;text-align:right">١٥,٠٠٠ – ٢٥,٠٠٠</td><td>القرنية الرفيعة، الرياضات العنيفة، الميزانية المحدودة</td></tr>
+        <tr><td>ليزك عادي / كاستم</td><td style="direction:ltr;text-align:right">١٨,٠٠٠ – ٢٨,٠٠٠</td><td>قصر النظر العادي، تعافي سريع</td></tr>
+        <tr><td>فيمتو ليزك (بدون مشرط)</td><td style="direction:ltr;text-align:right">٣٠,٠٠٠ – ٤٨,٠٠٠</td><td>دقة عالية، فلاب بالليزر، المعيار الذهبي</td></tr>
+        <tr class="highlight-row"><td>سمايل برو (ZEISS VisuMax 800)</td><td style="direction:ltr;text-align:right">٤٥,٠٠٠ – ٦٨,٠٠٠</td><td>بدون فلاب، أقل جفاف، نشاط رياضي</td></tr>
+        <tr><td>ICL (عدسة داخلية)</td><td style="direction:ltr;text-align:right">٧٠,٠٠٠ – ١١٠,٠٠٠</td><td>قياس عالي جداً، الليزك مش مناسب</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px">التقسيط متاح عن طريق ڤاليو وبريميوم كارد. الأسعار في مركز النجار، ميفيدا، القاهرة الجديدة.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="info-section" style="background:var(--cream)">
+  <div class="container">
+    <span class="lbl">أسئلة شائعة عن التكلفة</span>
+    <div class="rule"></div>
+    <h2>قبل ما تقارن أسعار، <em>اقرا ده</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">ليه فيه فرق كبير في الأسعار؟<span class="faq-icon">+</span></button>
+        <div class="faq-a">لأن التقنية مختلفة. PRK بتستخدم ليزر سطحي من غير فلاب. الليزك بيعمل فلاب بالمشرط. فيمتو ليزك بيعمل الفلاب بالليزر بدل المشرط. سمايل برو بتشيل الفلاب تماماً وبتستخدم فتحة ٢ مللي بس بجهاز ZEISS VisuMax 800. كل درجة فوق بتزوّد الدقة والأمان وسرعة التعافي — بس كمان التكلفة. السؤال الصح مش "أنهي أرخص" — السؤال "أنهي آمن على قرنيتي أنا."</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">الأرخص يعني أسوأ؟<span class="faq-icon">+</span></button>
+        <div class="faq-a">مش بالضرورة. PRK عملية مجرّبة وآمنة من سنين وهي الأفضل لبعض الحالات — خصوصاً القرنية الرفيعة والرياضيين. المشكلة لما عيادة بتقدم تقنية واحدة بس وبتحط كل المرضى فيها. في مركز النجار، دكتور النجار بيوصي بالتقنية اللي نتيجة فحص البنتاكام بتاعك بتقول عليها — وساعات بتكون الخيار الأقل تكلفة.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">السعر شامل إيه بالظبط؟<span class="faq-icon">+</span></button>
+        <div class="faq-a">في عيادتنا، السعر شامل العملية للعينين، كل الفحوصات قبل العملية، فحص البنتاكام، قطرات التعافي، ومتابعة لمدة ١٢ شهر. مفيش تكاليف مخفية. فحص الاستشارة الأول بيتحجز ويتسعّر بشكل منفصل عن العملية.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">ينفع أقسّط؟<span class="faq-icon">+</span></button>
+        <div class="faq-a">أيوه. بنتعامل مع ڤاليو وبريميوم كارد للتقسيط. حسب التقنية ومدة التقسيط، القسط الشهري ممكن يبدأ من حوالي ٢,٥٠٠ جنيه/شهر. فريقنا يقدر يوضحلك الخيارات بالظبط بعد الفحص.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">إيه هو فحص البنتاكام وليه مهم؟<span class="faq-icon">+</span></button>
+        <div class="faq-a">البنتاكام كاميرا دوّارة بتعمل خريطة ثلاثية الأبعاد لقرنيتك كلها — بتقيس السُمك والانحناء والارتفاع في آلاف النقاط. بتقولنا بشكل قاطع أنهي تقنية آمنة لعينك وأنهي لأ. من غيرها، أي تقدير سعر مجرد تخمين. عشان كده بنبدأ رحلة كل مريض بالفحص ده.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->

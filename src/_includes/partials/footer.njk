@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="site-shell site-footer__grid">
+    <a class="site-footer__brand" href="{{ '/ar/' if locale == 'ar' else '/' }}">Smile <span>Pro</span> Egypt</a>
+    <div>
+      {% for line in site | clinicAddress(locale) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}<br>
+      <a href="tel:{{ site.contact.phone_e164 }}">{{ site.contact.phone_display_ar if locale == 'ar' else site.contact.phone_display_en }}</a>
+    </div>
+    <div>{{ site.hours[locale] }}<br>© 2026 Smile Pro Egypt</div>
+  </div>
+</footer>

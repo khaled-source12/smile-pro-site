@@ -1,0 +1,7 @@
+{% if show_sticky %}
+<div class="site-sticky-actions{% if page_kind == 'calculator' %} site-sticky-actions--deferred{% endif %}"{% if page_kind == 'calculator' %} id="sticky-bar"{% endif %}>
+  <a class="site-sticky-actions__whatsapp" href="https://wa.me/{{ site.contact.whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="site-sticky-actions__book" href="{{ resolved_booking_url }}">{% if page_kind == 'calculator' %}{{ 'احسب السعر' if locale == 'ar' else 'Get my estimate' }}{% else %}{{ 'احجز الآن' if locale == 'ar' else 'Book assessment' }}{% endif %}</a>
+</div>
+<a class="site-whatsapp-float" href="https://wa.me/{{ site.contact.whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp">W</a>
+{% endif %}

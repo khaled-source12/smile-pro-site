@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="{{ 'ar' if locale == 'ar' else 'en' }}" dir="{{ 'rtl' if locale == 'ar' else 'ltr' }}">
+<head>{% include "partials/head.njk" %}</head>
+<body class="page-standalone locale-{{ locale }}">
+{{ content | safe }}
+<script src="/assets/js/site.js" defer></script>
+{% if page_js %}<script src="/assets/js/pages/{{ page_js }}" defer></script>{% endif %}
+</body>
+</html>

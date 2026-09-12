@@ -1,0 +1,99 @@
+backend:
+  name: github
+  repo: khaled-source12/smile-pro-site
+  branch: main
+  base_url: https://smile-pro-eg.netlify.app
+  auth_endpoint: /.netlify/functions/auth
+
+media_folder: "src/images"
+public_folder: "/images"
+
+collections:
+  - name: "settings"
+    label: "Website Settings"
+    files:
+      - file: "src/_data/site.json"
+        label: "Clinic & Contact Details"
+        name: "site"
+        fields:
+          - {label: "Site Name", name: "name", widget: "string"}
+          - {label: "Production URL", name: "url", widget: "string"}
+          - {label: "Clinic Number", name: "clinic_number", widget: "string"}
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - {label: "Phone (E.164)", name: "phone_e164", widget: "string"}
+              - {label: "Phone Display — English", name: "phone_display_en", widget: "string"}
+              - {label: "Phone Display — Arabic", name: "phone_display_ar", widget: "string"}
+              - {label: "WhatsApp Digits", name: "whatsapp", widget: "string"}
+          - label: "Address"
+            name: "address"
+            widget: "object"
+            fields:
+              - {label: "English Address Lines (clinic number is added automatically)", name: "en", widget: "list"}
+              - {label: "Arabic Address Lines (clinic number is added automatically)", name: "ar", widget: "list"}
+          - label: "Working Hours"
+            name: "hours"
+            widget: "object"
+            fields:
+              - {label: "English", name: "en", widget: "string"}
+              - {label: "Arabic", name: "ar", widget: "string"}
+          - label: "Doctor"
+            name: "doctor"
+            widget: "object"
+            fields:
+              - {label: "English Name", name: "en", widget: "string"}
+              - {label: "Arabic Name", name: "ar", widget: "string"}
+              - {label: "English Title", name: "title_en", widget: "string"}
+              - {label: "Arabic Title", name: "title_ar", widget: "string"}
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            fields:
+              - {label: "Facebook", name: "facebook", widget: "string", required: false}
+              - {label: "Instagram", name: "instagram", widget: "string", required: false}
+              - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+              - {label: "TikTok", name: "tiktok", widget: "string", required: false}
+
+  - name: "articles_ar"
+    label: "Arabic Articles"
+    folder: "src/articles/ar"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{fields.slug}}"
+    fields:
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase English letters, numbers, and hyphens"]}
+      - {label: "Translation Key", name: "translation_key", widget: "string"}
+      - {label: "Publication Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD"}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Reading Time", name: "read_time", widget: "string"}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "SEO Title", name: "seo_title", widget: "string"}
+      - {label: "SEO Description", name: "seo_description", widget: "text"}
+      - {label: "Article Body", name: "body", widget: "markdown"}
+
+  - name: "articles_en"
+    label: "English Articles"
+    folder: "src/articles/en"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{fields.slug}}"
+    fields:
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens"]}
+      - {label: "Translation Key", name: "translation_key", widget: "string"}
+      - {label: "Publication Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD"}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Reading Time", name: "read_time", widget: "string"}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "SEO Title", name: "seo_title", widget: "string"}
+      - {label: "SEO Description", name: "seo_description", widget: "text"}
+      - {label: "Article Body", name: "body", widget: "markdown"}

@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+locale: en
+permalink: /en/blog.html
+canonical: /en/blog.html
+alternate_url: /blog.html
+x_default_url: /en/blog.html
+page_kind: blog
+page_css: blog.css
+title: Laser Vision Correction Blog | Dr. Mohamed El Naggar - Smile Pro
+description: Practical medical guides to SMILE Pro, Femto LASIK, corneal assessment, and recovery with Dr. Mohamed El Naggar.
+image: /images/Naggar6.png
+sitemap: true
+---
+{% set posts = collections.articles | byLocale('en') | sortByDateDesc %}
+{% set categories = posts | uniqueDataValues('category') %}
+<header class="blog-hero">
+  <div class="container">
+    <span class="doc-badge">Medical content reviewed by Dr. Mohamed El Naggar</span>
+    <h1>Vision correction and corneal health</h1>
+    <p>Clear, practical guides to procedures, assessments, and recovery before you decide on vision correction.</p>
+  </div>
+</header>
+<main class="container blog-main">
+  <div class="category-bar" role="group" aria-label="Filter articles">
+    <button class="cat-tab active" type="button" data-blog-filter="all" aria-pressed="true">All</button>
+    {% for category in categories %}<button class="cat-tab" type="button" data-blog-filter="{{ category }}" aria-pressed="false">{{ category }}</button>{% endfor %}
+  </div>
+  <div class="blog-grid">
+    {% for post in posts %}
+    <article class="post-card" data-blog-category="{{ post.data.category }}">
+      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" loading="lazy">
+      <div class="post-body">
+        <span class="tag">{{ post.data.category }}</span>
+        <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+        <p class="post-desc">{{ post.data.excerpt }}</p>
+        <div class="meta-info"><span>{{ post.data.read_time }}</span><a href="{{ post.url }}" class="read-btn">Read article →</a></div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <section class="cta-banner">
+    <h2>Which procedure is right for your eyes?</h2>
+    <p>Book a comprehensive corneal assessment with Dr. Mohamed El Naggar in New Cairo.</p>
+    <a href="/#book" class="cta-btn">Book your assessment</a>
+  </section>
+</main>

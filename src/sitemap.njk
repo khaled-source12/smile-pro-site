@@ -1,0 +1,23 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{% for item in collections.all %}{% if item.data.sitemap and item.data.published !== false %}
+  {% set item_alt = item.data.alternate_url %}
+  {% if item.data.translation_key %}{% set item_alt = collections.articles | translationUrl(item.data.translation_key, item.data.locale) %}{% endif %}
+  {% set item_x_default = item.data.x_default_url %}
+  {% if item.data.translation_key %}{% set item_x_default = (item.data.canonical or item.url) if item.data.locale == 'en' else item_alt %}{% endif %}
+  <url>
+    <loc>{{ site.url }}{{ item.data.canonical or item.url }}</loc>
+    {% if item_alt %}
+    <xhtml:link rel="alternate" hreflang="{{ 'ar-EG' if item.data.locale == 'en' else 'en-EG' }}" href="{{ site.url }}{{ item_alt }}"/>
+    <xhtml:link rel="alternate" hreflang="{{ 'en-EG' if item.data.locale == 'en' else 'ar-EG' }}" href="{{ site.url }}{{ item.data.canonical or item.url }}"/>
+    {% if item_x_default %}<xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ item_x_default }}"/>{% endif %}
+    {% endif %}
+    {% set lastmod = item.data.date | dateOnly %}
+    {% if lastmod %}<lastmod>{{ lastmod }}</lastmod>{% endif %}
+  </url>
+{% endif %}{% endfor %}
+</urlset>
