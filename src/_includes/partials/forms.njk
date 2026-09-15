@@ -1,39 +1,65 @@
-{% macro consultation(locale='en', formName='consultation', formId='main-form', fieldPrefix='main', compact=false, defaultProcedure='smile-pro') %}
-<form name="{{ formName }}" id="{{ formId }}" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you.html' if locale == 'ar' else '/thank-you.html' }}">
+{% macro attributionFields(formPosition) %}
+  <input type="hidden" name="form-position" value="{{ formPosition }}">
+  <input type="hidden" name="lead-id" value="">
+  <input type="hidden" name="landing-page" value="">
+  <input type="hidden" name="source-page" value="">
+  <input type="hidden" name="referrer" value="">
+  <input type="hidden" name="utm-source" value="">
+  <input type="hidden" name="utm-medium" value="">
+  <input type="hidden" name="utm-campaign" value="">
+  <input type="hidden" name="utm-term" value="">
+  <input type="hidden" name="utm-content" value="">
+  <input type="hidden" name="gclid" value="">
+  <input type="hidden" name="fbclid" value="">
+  <input type="hidden" name="msclkid" value="">
+{% endmacro %}
+
+{% macro procedureField(locale='en', fieldPrefix='main', defaultProcedure='not-sure') %}
+  <div class="fg">
+    <div class="procedure-field-heading">
+      <label for="{{ fieldPrefix }}-procedure">{{ 'التقنية المطلوبة' if locale == 'ar' else 'Procedure of interest' }}</label>
+      <button type="button" class="procedure-compare-button" aria-haspopup="dialog" aria-controls="procedure-comparison-dialog" data-procedure-comparison-open>{{ 'قارن التقنيات' if locale == 'ar' else 'Compare procedures' }}</button>
+    </div>
+    <div class="sel-wrap">
+      <select id="{{ fieldPrefix }}-procedure" name="procedure" required>
+        <option value="not-sure"{% if not defaultProcedure or defaultProcedure == 'not-sure' %} selected{% endif %}>{{ 'غير متأكد، أحتاج إلى فحص' if locale == 'ar' else 'Not sure — I need an assessment' }}</option>
+        {% for procedureKey in pricing.lead_options %}
+        <option value="{{ procedureKey }}"{% if defaultProcedure == procedureKey %} selected{% endif %}>{{ pricing.treatments[procedureKey][locale].name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro consultation(locale='en', formName='consultation', formId='main-form', fieldPrefix='main', defaultProcedure='not-sure', formPosition='primary') %}
+<form name="{{ formName }}" id="{{ formId }}" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-form-position="{{ formPosition }}" data-service="{{ defaultProcedure or 'not-sure' }}">
   <input type="hidden" name="form-name" value="{{ formName }}">
   <input type="hidden" name="bot-field">
   <input type="hidden" name="language" value="{{ locale }}">
+  {{ attributionFields(formPosition) }}
   <div class="fg">
     <label for="{{ fieldPrefix }}-name">{{ 'الاسم بالكامل' if locale == 'ar' else 'Full Name' }}</label>
     <input type="text" id="{{ fieldPrefix }}-name" name="name" placeholder="{{ 'أدخل اسمك بالكامل' if locale == 'ar' else 'Enter your full name' }}" autocomplete="name" required>
   </div>
   <div class="fg">
     <label for="{{ fieldPrefix }}-phone">{{ 'رقم الهاتف' if locale == 'ar' else 'Phone Number' }}</label>
-    <input type="tel" id="{{ fieldPrefix }}-phone" name="phone" placeholder="01X XXXX XXXX" inputmode="tel" autocomplete="tel" required>
+    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="{{ fieldPrefix }}-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="{{ fieldPrefix }}-phone-error" aria-invalid="false" data-phone-input data-default-country="EG" dir="ltr" required></div>
+    <div class="field-error" id="{{ fieldPrefix }}-phone-error" role="alert" hidden>{{ 'من فضلك اكتب رقم هاتف صحيحاً مع كود الدولة عند الحاجة' if locale == 'ar' else 'Enter a valid phone number, including the country code when needed' }}</div>
   </div>
-  {% if not compact %}
-  <div class="fg">
-    <label for="{{ fieldPrefix }}-procedure">{{ 'التقنية المطلوبة' if locale == 'ar' else ('Selected Procedure' if defaultProcedure == 'femto-lasik' else 'Interested Procedure') }}</label>
-    <div class="sel-wrap">
-      <select id="{{ fieldPrefix }}-procedure" name="procedure">
-        <option value="smile-pro"{% if defaultProcedure == 'smile-pro' %} selected{% endif %}>{{ 'سمايل برو' if locale == 'ar' else 'SMILE Pro' }} (VisuMax 800)</option>
-        <option value="custom-lasik">{{ 'الليزك التفصيلي' if locale == 'ar' else 'Custom LASIK' }}</option>
-        <option value="femto-lasik"{% if defaultProcedure == 'femto-lasik' %} selected{% endif %}>{{ 'الفيمتو ليزك' if locale == 'ar' else 'Femto LASIK' }}</option>
-        <option value="not-sure">{{ 'غير متأكد / أحتاج إلى فحص' if locale == 'ar' else 'Unsure / Need Assessment' }}</option>
-      </select>
-    </div>
-  </div>
-  {% endif %}
-  <button type="submit" class="form-btn">{% if compact %}{{ 'طلب موعد الفحص' if locale == 'ar' else 'Request Evaluation Slot' }}{% else %}{{ 'تأكيد طلب الفحص' if locale == 'ar' else 'Confirm Assessment Request' }}{% endif %}</button>
+  {{ procedureField(locale, fieldPrefix, defaultProcedure or 'not-sure') }}
+  <p class="privacy-notice">{% if locale == 'ar' %}بإرسال الطلب، تُستخدم بياناتك للرد عليك وفق <a href="/ar/privacy/" target="_blank" rel="noopener">سياسة الخصوصية</a>.{% else %}By sending this request, your details will be used to respond to you as described in the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a>.{% endif %}</p>
+  <button type="submit" class="form-btn">{{ 'اطلب موعد فحص النظر' if locale == 'ar' else 'Book Your Vision Assessment' }}</button>
+  <p class="form-reassurance">{{ 'لديك أسئلة قبل الحضور؟ المكالمة والإجابة عن استفساراتك مجاناً بالكامل.' if locale == 'ar' else 'Questions before you visit? Your call and answers from our team are completely free.' }}</p>
 </form>
 {% endmacro %}
 
 {% macro estimator(locale='en') %}
-<form name="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you.html' if locale == 'ar' else '/thank-you.html' }}" data-managed-form="custom">
+<form name="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-managed-form="custom" data-form-position="calculator-result" data-service="not-sure">
   <input type="hidden" name="form-name" value="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}">
   <input type="hidden" name="bot-field">
   <input type="hidden" name="language" value="{{ locale }}">
   <input type="hidden" name="service" value="price-estimator">
+  {{ attributionFields('calculator-result') }}
   <input type="hidden" name="recommended-tech" id="h-tech" value="">
   <input type="hidden" name="prescription" id="h-rx" value="">
   <input type="hidden" name="conditions" id="h-conditions" value="">
@@ -45,9 +71,11 @@
   </div>
   <div class="fg">
     <label for="est-phone">{{ 'رقم الواتساب' if locale == 'ar' else 'WhatsApp number' }}</label>
-    <input type="tel" id="est-phone" name="phone" placeholder="{{ '01X XXXX XXXX' if locale == 'ar' else '+20 1XX XXX XXXX' }}" inputmode="tel" autocomplete="tel" aria-describedby="phone-error" aria-invalid="false" required{% if locale == 'ar' %} dir="ltr" style="text-align:left"{% endif %}>
-    <div class="field-error" id="phone-error" role="alert">{{ 'من فضلك اكتب رقم موبايل مصري صحيح' if locale == 'ar' else 'Please enter a valid Egyptian mobile number' }}</div>
+    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="est-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="phone-error" aria-invalid="false" data-phone-input data-default-country="EG" dir="ltr" required></div>
+    <div class="field-error" id="phone-error" role="alert" hidden>{{ 'من فضلك اكتب رقم هاتف صحيحاً مع كود الدولة عند الحاجة' if locale == 'ar' else 'Enter a valid phone number, including the country code when needed' }}</div>
   </div>
-  <button type="submit" class="form-btn"{% if locale == 'ar' %} id="est-submit-btn"{% endif %}>{{ 'احجز فحص البنتاكام ←' if locale == 'ar' else 'Book my Pentacam assessment →' }}</button>
+  {{ procedureField(locale, 'est') }}
+  <p class="privacy-notice">{% if locale == 'ar' %}بإرسال الطلب، تُستخدم إجاباتك وبيانات التواصل للرد عليك وفق <a href="/ar/privacy/" target="_blank" rel="noopener">سياسة الخصوصية</a>.{% else %}By sending this request, your answers and contact details will be used to respond to you as described in the <a href="/privacy/" target="_blank" rel="noopener">privacy policy</a>.{% endif %}</p>
+  <button type="submit" class="form-btn"{% if locale == 'ar' %} id="est-submit-btn"{% endif %}>{{ 'أرسل نتيجتي واطلب موعد الفحص ←' if locale == 'ar' else 'Send My Result & Request an Assessment →' }}</button>
 </form>
 {% endmacro %}

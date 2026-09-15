@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-5.html"
-canonical: "/en/articles/article-5.html"
-alternate_url: "/articles/article-5.html"
-x_default_url: "/en/articles/article-5.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "Astigmatism Correction With SMILE Pro"
 seo_title: "Astigmatism Correction With SMILE Pro | Smile Pro Egypt"
-description: "How SMILE Pro treats astigmatism precisely while preserving the corneal surface."
 seo_description: "How SMILE Pro treats astigmatism precisely while preserving the corneal surface."
 slug: "article-5"
-translation_key: "article-5"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar4.webp"
+image_width: 896
+image_height: 1200
 excerpt: "How SMILE Pro treats astigmatism precisely while preserving the corneal surface."
 category: "Astigmatism"
 read_time: "4 min read"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <p><strong>Astigmatism (Refractive Error)</strong> is one of the most widespread vision disorders. It stems from an irregular curvature of the cornea, causing it to shape more like an oval football rather than a symmetrical round basketball. This irregularity scatters light rays entering the eye, leading to blurred vision, halos, and eye strain across all visual distances.</p>
 

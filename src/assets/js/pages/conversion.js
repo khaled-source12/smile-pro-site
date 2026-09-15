@@ -1,17 +1,20 @@
 (() => {
   const conversionKey = 'smile-pro-pending-lead';
-  let shouldTrack = true;
+  let lead = null;
   try {
-    shouldTrack = window.sessionStorage.getItem(conversionKey) === '1';
+    const storedLead = window.sessionStorage.getItem(conversionKey);
+    lead = storedLead === '1' ? {} : JSON.parse(storedLead || 'null');
     window.sessionStorage.removeItem(conversionKey);
   } catch (_error) {
-    // Keep tracking functional when storage is blocked by the browser.
+    // Avoid counting a direct thank-you page visit when storage is unavailable.
   }
-  if (!shouldTrack) return;
+  if (!lead) return;
 
-  if (typeof window.gtag === "function") {
-    window.gtag("event", "generate_lead", { event_category: "form" });
+  const eventParameters = { event_category: 'form', ...lead };
+  if (typeof window.trackSiteEvent === 'function') {
+    window.trackSiteEvent('smile_pro_lead', eventParameters);
+  } else {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'smile_pro_lead', ...eventParameters });
   }
-  if (typeof window.fbq === "function") window.fbq("track", "Lead");
-  if (typeof window.snaptr === "function") window.snaptr("track", "SIGN_UP");
 })();

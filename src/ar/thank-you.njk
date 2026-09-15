@@ -1,17 +1,20 @@
 ---
 layout: "layouts/thank-you.njk"
 locale: "ar"
-permalink: "/ar/thank-you.html"
-canonical: "/ar/thank-you.html"
+permalink: "/ar/thank-you/"
+canonical: "/ar/thank-you/"
+alternate_url: "/thank-you/"
+x_default_url: "/thank-you/"
 page_kind: "thank-you"
 page_css: "thank-you-ar.css"
 page_js: "conversion.js"
 title: "شكراً لك — سمايل برو مصر"
 description: "شكراً لك — سمايل برو مصر"
-image: "/images/Naggar6.png"
+image: "/images/Naggar6.webp"
 robots: "noindex, follow"
 sitemap: false
 ---
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- Google Tag Manager (noscript) -->
 
 <!-- End Google Tag Manager (noscript) -->
@@ -22,46 +25,46 @@ sitemap: false
   <div class="card">
 
     <div class="check-circle">
-      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
 
     <h1>تم استلام طلبك بنجاح!</h1>
 
     <p class="message">
-      شكراً لك، تم استلام طلبك لـ <strong>فحص وتقييم نظر سمايل برو.</strong><br/><br/>
-      سيتواصل معك فريقنا خلال <strong>١٥ دقيقة</strong> لتأكيد الموعد المناسب لك في عيادتنا بإيتيرنا هيلث كير سيتي.
+      شكراً لك، تم استلام طلبك لـ <strong>فحص وتقييم النظر.</strong><br/><br/>
+      خلال مواعيد عمل العيادة، سيتواصل معك فريقنا خلال <strong>١٥ دقيقة</strong> لتأكيد الموعد المناسب في {{ site | clinicAddress('ar') | join('، ') }} والإجابة عن أسئلتك مجاناً.
     </p>
 
     <div class="steps">
       <div class="step-row">
         <div class="step-dot">١</div>
         <div class="step-text">
-          يتصل بك فريقنا خلال ١٥ دقيقة
-          <span>سنؤكد معك الميعاد الأنسب لفحص عينك</span>
+          يتصل بك فريقنا خلال ١٥ دقيقة أثناء مواعيد العمل
+          <span>سنجيب عن أسئلتك مجاناً ونؤكد معك الميعاد الأنسب لفحص عينك</span>
         </div>
       </div>
       <div class="step-row">
         <div class="step-dot">٢</div>
         <div class="step-text">
-          فحص البنتاكام الشامل في عيادتنا
-          <span>فحص دقيق وشامل للعين يستغرق حوالي ٣٠ دقيقة</span>
+          فحص البنتاكام الشامل في {{ site.address.ar[0] }}
+          <span>فحص دقيق للعين وتصوير القرنية، يستغرق حوالي ٣٠ دقيقة</span>
         </div>
       </div>
       <div class="step-row">
         <div class="step-dot">٣</div>
         <div class="step-text">
-          عملية سمايل برو — رؤية واضحة في نفس اليوم
-          <span>تستغرق العملية ١٥ دقيقة فقط، وأغلب المرضى يعودون للمنزل بنفسهم</span>
+          خطة تصحيح النظر المناسبة لحالتك
+          <span>سيشرح لك الطبيب تفاصيل العملية وفترة التعافي وموعد العودة الآمنة للقيادة. يُرجى ترتيب وسيلة للعودة إلى المنزل يوم العملية.</span>
         </div>
       </div>
     </div>
 
-    <a href="https://wa.me/{{ site.contact.whatsapp }}?text=أهلاً، أنا لسه باعت طلب دلوقتي وعايز أأكد ميعاد الفحص" class="wa-btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+    <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}?text=أهلاً، أنا لسه باعت طلب دلوقتي وعايز أأكد ميعاد الفحص" class="wa-btn" target="_blank" rel="noopener">
+      {{ whatsappIcon() }}
       تحدث معنا عبر الواتساب الآن
     </a>
 
-    <span class="back-link">هل وصلت هنا بالخطأ؟ <a href="/ar/laser-eye-surgery-cost-egypt/">العودة للحاسبة</a></span>
+    <span class="back-link"><a href="/ar/">العودة إلى الصفحة الرئيسية</a></span>
 
   </div>
 </main>

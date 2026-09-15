@@ -1,25 +1,29 @@
 ---
 layout: "layouts/landing.njk"
 locale: "en"
-permalink: "/en/smile-pro.html"
-canonical: "/en/smile-pro.html"
-alternate_url: "/smile-pro.html"
-x_default_url: "/en/smile-pro.html"
+permalink: "/en/smile-pro/"
+canonical: "/en/smile-pro/"
+alternate_url: "/smile-pro/"
+x_default_url: "/en/smile-pro/"
 page_kind: "smile-pro"
 page_css: "smile-pro.css"
-title: "SMILE Pro Technology in Egypt | Dr. Mohamed El Naggar"
-description: "Discover flapless SMILE Pro vision correction with ZEISS VisuMax 800 and Dr. Mohamed El Naggar in New Cairo."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "SMILE Pro Technology in Egypt | {{ site.doctor.en }}"
+  description: "Discover flapless SMILE Pro vision correction with ZEISS VisuMax 800 and {{ site.doctor.en }} in {{ site.location.locality.en }}."
+image: "/images/Naggar6.webp"
 show_sticky: true
 sitemap: true
 ---
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- Hero Section -->
     <header class="hero">
         <div class="container hero-grid">
             <div>
                 <span class="hero-badge">The latest generation of vision correction in 2026</span>
                 <h1 id="heroH1">SMILE Pro Technology<br>Vision Correction in Just 8 Seconds</h1>
-                <p id="heroP">Restore your sharp vision flapless and pain-free using the advanced ZEISS VisuMax 800 with Dr. Mohamed El Naggar.</p>
+                <p id="heroP">Restore your sharp vision flapless and pain-free using the advanced ZEISS VisuMax 800.</p>
 
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -35,11 +39,21 @@ sitemap: true
                         <p id="stat3">Flapless Procedure</p>
                     </div>
                 </div>
+                <div class="doctor-trust">
+                    <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+                    <div><strong>{{ site.doctor.en }}</strong><span>{{ site.doctor.title_en }} · Clinic {{ site.clinic_number }}, {{ site.address.en[0] }}</span></div>
+                </div>
 
-                <a href="#book" class="cta-btn" id="heroCta">Book Consultation Today</a>
+                <a href="#book" class="cta-btn" id="heroCta" data-cta="smile-hero-book">Book Your Vision Assessment</a>
             </div>
-            <div>
-                <img src="/images/device1.jpeg" alt="SMILE Pro vision correction with Dr. Mohamed El Naggar" class="hero-img" width="554" height="554" fetchpriority="high">
+            <div class="lead-card" id="book">
+                <h2>Book Your Vision Assessment</h2>
+                <p class="lead-card__sub">Leave your details and our team will call to arrange your assessment and answer your questions.</p>
+                {{ consultation('en', 'smile-pro-hero-en', 'smile-pro-hero-form-en', 'smile-hero-en', 'smile-pro', 'smile-pro-hero') }}
+                <div class="lead-card__contact">
+                    <a href="tel:{{ site.contact.phone_e164 }}">Call <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('en') }}</span></a>
+                    <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" rel="noopener">{{ whatsappIcon() }} WhatsApp</a>
+                </div>
             </div>
         </div>
     </header>
@@ -78,7 +92,7 @@ sitemap: true
         <!-- Technology Overview -->
         <section>
             <div class="tech-box">
-                <img src="/images/device2.jpg" alt="ZEISS VisuMax 800 laser system" width="690" height="690" loading="lazy">
+                <img src="/images/device2.webp" alt="ZEISS VisuMax 800 laser system" width="690" height="690" eleventy:widths="320,640,690" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" loading="lazy" decoding="async">
                 <div class="tech-info">
                     <h3 id="techH3">Powered by ZEISS VisuMax 800</h3>
                     <p id="techP" style="color:var(--muted); margin-bottom:20px;">The latest generation femtosecond laser system engineered by Carl Zeiss Germany for maximum surgical precision.</p>
@@ -93,7 +107,7 @@ sitemap: true
         <!-- Step by Step Workflow -->
         <section>
             <div class="sec-title">
-                <h2 id="stepTitle">Surgical Workflow with Dr. Mohamed El Naggar</h2>
+                <h2 id="stepTitle">Surgical Workflow with {{ site.doctor.en }}</h2>
                 <p id="stepSub">A seamless 15-minute procedure designed for maximum comfort.</p>
             </div>
             <div class="steps-wrapper">
@@ -162,11 +176,14 @@ sitemap: true
         </section>
 
         <!-- Booking CTA Section -->
-        <section id="book">
+        <section id="book-again">
             <div class="cta-box">
                 <h2 id="ctaH2">Ready to Live Free from Glasses & Contact Lenses?</h2>
-                <p id="ctaP">Book your comprehensive corneal evaluation with Dr. Mohamed El Naggar today.</p>
-                <a href="https://wa.me/{{ site.contact.whatsapp }}" class="cta-btn" id="ctaWhatsapp">Chat on WhatsApp Now</a>
+                <p id="ctaP">Book your comprehensive corneal evaluation with {{ site.doctor.en }} to determine whether SMILE Pro is suitable for your eyes.</p>
+                <div class="lead-card lead-card--bottom">
+                    {{ consultation('en', 'smile-pro-bottom-en', 'smile-pro-bottom-form-en', 'smile-bottom-en', 'smile-pro', 'smile-pro-bottom') }}
+                    <div class="lead-card__contact"><a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" rel="noopener">{{ whatsappIcon() }} Chat on WhatsApp</a></div>
+                </div>
             </div>
         </section>
     </main>

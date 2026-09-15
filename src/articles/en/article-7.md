@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-7.html"
-canonical: "/en/articles/article-7.html"
-alternate_url: "/articles/article-7.html"
-x_default_url: "/en/articles/article-7.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "SMILE Pro vs Contoura LASIK"
 seo_title: "SMILE Pro vs Contoura LASIK | Smile Pro Egypt"
-description: "A comparison of SMILE Pro and Contoura LASIK across precision, recovery, and safety."
 seo_description: "A comparison of SMILE Pro and Contoura LASIK across precision, recovery, and safety."
 slug: "article-7"
-translation_key: "article-7"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar2.webp"
+image_width: 1280
+image_height: 1187
 excerpt: "A comparison of SMILE Pro and Contoura LASIK across precision, recovery, and safety."
 category: "Comparisons"
 read_time: "5 min read"
 published: true
-sitemap: true
 ---
 <p>Both <strong>SMILE Pro</strong> and <strong>Contoura LASIK</strong> represent the pinnacle of modern laser vision correction. While both procedures achieve exceptional visual outcomes, their underlying surgical mechanisms and suitability profiles differ significantly.</p>
 

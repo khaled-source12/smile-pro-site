@@ -1,0 +1,18 @@
+{
+  "aftercare": {
+    "en": {
+      "comparison_summary": "3–5 days for light exercise; 2+ weeks for swimming, after clearance",
+      "light_exercise": "after 3–5 days, following the post-operative check and surgeon clearance",
+      "gym": "about 1 week, after surgeon clearance",
+      "swimming": "at least 2 weeks and only after surgeon clearance",
+      "contact_sports": "only after surgeon clearance; timing depends on healing and the procedure performed"
+    },
+    "ar": {
+      "comparison_summary": "٣–٥ أيام للرياضة الخفيفة؛ وأسبوعان أو أكثر للسباحة، بعد موافقة الطبيب",
+      "light_exercise": "بعد ٣–٥ أيام، عقب فحص ما بعد العملية وموافقة الطبيب",
+      "gym": "بعد نحو أسبوع، بعد موافقة الطبيب",
+      "swimming": "بعد أسبوعين على الأقل وبعد موافقة الطبيب",
+      "contact_sports": "بعد موافقة الطبيب فقط؛ التوقيت يعتمد على الالتئام ونوع العملية"
+    }
+  }
+}

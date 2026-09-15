@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-6.html"
-canonical: "/articles/article-6.html"
-alternate_url: "/en/articles/article-6.html"
-x_default_url: "/en/articles/article-6.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "شروط العمر واستقرار النظر لإجراء عملية سميل برو"
 seo_title: "شروط العمر واستقرار النظر لإجراء عملية سميل برو | Smile Pro Egypt"
-description: "تعرف على السن المناسب وشروط ثبات النظر الضرورية لإجراء SMILE Pro."
 seo_description: "تعرف على السن المناسب وشروط ثبات النظر الضرورية لإجراء SMILE Pro."
 slug: "article-6"
-translation_key: "article-6"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar3.webp"
+image_width: 1280
+image_height: 853
 excerpt: "تعرف على السن المناسب وشروط ثبات النظر الضرورية لإجراء SMILE Pro."
 category: "شروط العملية"
 read_time: "3 دقائق قراءة"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <p>عند التفكير في إجراء عملية تصحيح النظر وتقنية <strong>سميل برو</strong>، فإن السؤال الأول الذي يطرحه الكثيرون هو: "هل عمري مناسب إجراء العملية؟" و"ماذا يعني ثبات النظر؟". يُحدد د. محمد النجار المعايير الطبية الدقيقة لضمان أمان الإجراء ونجاح النتائج على المدى الطويل.</p>
 

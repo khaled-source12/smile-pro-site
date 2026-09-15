@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-5.html"
-canonical: "/articles/article-5.html"
-alternate_url: "/en/articles/article-5.html"
-x_default_url: "/en/articles/article-5.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "تصحيح الاستجماتيزم بتقنية سميل برو"
 seo_title: "تصحيح الاستجماتيزم بتقنية سميل برو | Smile Pro Egypt"
-description: "كيف تعالج تقنية SMILE Pro الحديثة الاستجماتيزم بدقة وبدون شريحة قرنية."
 seo_description: "كيف تعالج تقنية SMILE Pro الحديثة الاستجماتيزم بدقة وبدون شريحة قرنية."
 slug: "article-5"
-translation_key: "article-5"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar4.webp"
+image_width: 896
+image_height: 1200
 excerpt: "كيف تعالج تقنية SMILE Pro الحديثة الاستجماتيزم بدقة وبدون شريحة قرنية."
 category: "الاستجماتيزم"
 read_time: "4 دقائق قراءة"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <!-- Arabic Content (Default) -->
 <p>يُعد <strong>الاستجماتيزم (انحراف النظر)</strong> من أكثر المشاكل البصرية شيوعاً بين المرضى. ينجم الاستجماتيزم عن عدم انتظام تكوّر القرنية؛ إذ تأخذ القرنية شكلاً بيضاوياً يشبه كرة القدم الأمريكية بدلاً من الشكل الكروي المتناسق ككرة القدم العادية. يؤدي هذا التفاوت إلى تشتت الضوء البؤري على شبكية العين، مما يسبب ضبابية الرؤية، والزغللة، وإجهاد العين عند النظر لكافة المسافات القريبة والبعيدة.</p>

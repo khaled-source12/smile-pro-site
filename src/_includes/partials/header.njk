@@ -1,8 +1,7 @@
 <nav class="site-nav" aria-label="{{ 'التنقل الرئيسي' if locale == 'ar' else 'Primary navigation' }}">
   <div class="site-shell site-nav__inner">
     <a class="site-brand" href="{{ '/ar/' if locale == 'ar' else '/' }}" aria-label="Smile Pro Egypt">
-      <img src="/images/smile-pro-logo.png" alt="" width="42" height="42">
-      <span>Smile <b>Pro</b></span>
+      <img src="/images/smile-pro-logo.webp" alt="" width="127" height="40" eleventy:widths="127,254" sizes="127px" loading="eager" decoding="async">
     </a>
     <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-open-label="{{ 'فتح القائمة' if locale == 'ar' else 'Open menu' }}" data-close-label="{{ 'إغلاق القائمة' if locale == 'ar' else 'Close menu' }}">
       <span></span><span></span><span></span>
@@ -10,13 +9,13 @@
     </button>
     <div class="site-menu" id="site-menu">
       <a href="{{ '/ar/' if locale == 'ar' else '/' }}">{{ 'الرئيسية' if locale == 'ar' else 'Home' }}</a>
-      <a href="{{ '/smile-pro.html' if locale == 'ar' else '/en/smile-pro.html' }}">{{ 'سمايل برو' if locale == 'ar' else 'SMILE Pro' }}</a>
-      {% if locale == 'en' %}<a href="/femto-lasik.html">Femto LASIK</a>{% endif %}
+      <a href="{{ '/smile-pro/' if locale == 'ar' else '/en/smile-pro/' }}">{{ 'سمايل برو' if locale == 'ar' else 'SMILE Pro' }}</a>
+      <a href="{{ '/ar/femto-lasik/' if locale == 'ar' else '/femto-lasik/' }}">{{ 'فيمتو ليزك' if locale == 'ar' else 'Femto LASIK' }}</a>
       <a href="{{ '/ar/laser-eye-surgery-cost-egypt/' if locale == 'ar' else '/laser-eye-surgery-cost-egypt/' }}">{{ 'حاسبة التكلفة' if locale == 'ar' else 'Cost estimator' }}</a>
-      <a href="{{ '/blog.html' if locale == 'ar' else '/en/blog.html' }}">{{ 'المدونة' if locale == 'ar' else 'Blog' }}</a>
-      <a class="site-menu__phone" href="tel:{{ site.contact.phone_e164 }}">{{ site.contact.phone_display_ar if locale == 'ar' else site.contact.phone_display_en }}</a>
+      <a href="{{ '/blog/' if locale == 'ar' else '/en/blog/' }}">{{ 'المدونة' if locale == 'ar' else 'Blog' }}</a>
+      <a class="site-menu__phone phone-ltr" dir="ltr" href="tel:{{ site.contact.phone_e164 }}">{{ site.contact.phone_e164 | phoneDisplay(locale) }}</a>
       {% include "partials/language-switcher.njk" %}
-      <a class="site-book" href="{{ resolved_booking_url }}">{{ 'احجز فحصك' if locale == 'ar' else 'Book assessment' }}</a>
+      <a class="site-book" href="{{ resolved_booking_url }}" data-cta="header-book">{{ 'احجز فحص النظر' if locale == 'ar' else 'Book assessment' }}</a>
     </div>
   </div>
 </nav>

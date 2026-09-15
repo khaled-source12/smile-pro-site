@@ -7,6 +7,23 @@ backend:
 
 media_folder: "src/images"
 public_folder: "/images"
+media_processing:
+  enabled: true
+  format:
+    enabled: true
+    default: webp
+  quality: 70
+  strip_metadata: true
+  width: 1200
+  height: 800
+  aspect_ratio: 3x2
+
+# Decap's built-in i18n editor treats both locale files as one article entry.
+# The multiple_folders structure matches src/articles/ar and src/articles/en.
+i18n:
+  structure: multiple_folders
+  locales: [ar, en]
+  default_locale: ar
 
 collections:
   - name: "settings"
@@ -23,16 +40,30 @@ collections:
             name: "contact"
             widget: "object"
             fields:
-              - {label: "Phone (E.164)", name: "phone_e164", widget: "string"}
-              - {label: "Phone Display — English", name: "phone_display_en", widget: "string"}
-              - {label: "Phone Display — Arabic", name: "phone_display_ar", widget: "string"}
-              - {label: "WhatsApp Digits", name: "whatsapp", widget: "string"}
+              - {label: "Phone and WhatsApp (E.164)", name: "phone_e164", widget: "string", pattern: ["^\\+[1-9][0-9]{7,14}$", "Use international format, for example +201113524230. Egypt is only the default, and other countries are supported."]}
           - label: "Address"
             name: "address"
             widget: "object"
             fields:
               - {label: "English Address Lines (clinic number is added automatically)", name: "en", widget: "list"}
               - {label: "Arabic Address Lines (clinic number is added automatically)", name: "ar", widget: "list"}
+          - label: "Location Labels and Map"
+            name: "location"
+            widget: "object"
+            fields:
+              - label: "Locality"
+                name: "locality"
+                widget: "object"
+                fields:
+                  - {label: "English", name: "en", widget: "string"}
+                  - {label: "Arabic", name: "ar", widget: "string"}
+              - label: "District"
+                name: "district"
+                widget: "object"
+                fields:
+                  - {label: "English", name: "en", widget: "string"}
+                  - {label: "Arabic", name: "ar", widget: "string"}
+              - {label: "Google Maps Embed URL", name: "map_embed_url", widget: "string", pattern: ["^https://(?:www\\.google\\.com/maps/embed(?:[/?][^#]*)?|maps\\.google\\.com/maps\\?(?:[^#&]+&)*output=embed(?:&[^#]*)?)$", "Use a Google Maps /maps/embed URL or a maps.google.com URL containing output=embed."]}
           - label: "Working Hours"
             name: "hours"
             widget: "object"
@@ -56,44 +87,41 @@ collections:
               - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
               - {label: "TikTok", name: "tiktok", widget: "string", required: false}
 
-  - name: "articles_ar"
-    label: "Arabic Articles"
-    folder: "src/articles/ar"
+  - name: "articles"
+    label: "Bilingual Articles | المقالات باللغتين"
+    label_singular: "Bilingual Article | مقال باللغتين"
+    description: "Create and edit the Arabic and English versions together. Shared fields are entered once. | أنشئ وعدّل النسختين العربية والإنجليزية معًا، واكتب البيانات المشتركة مرة واحدة."
+    folder: "src/articles"
     create: true
     extension: "md"
     format: "frontmatter"
     slug: "{{fields.slug}}"
+    i18n: true
+    summary: "{{title}} — {{slug}}"
     fields:
-      - {label: "Published", name: "published", widget: "boolean", default: true}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase English letters, numbers, and hyphens"]}
-      - {label: "Translation Key", name: "translation_key", widget: "string"}
-      - {label: "Publication Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD"}
-      - {label: "Category", name: "category", widget: "string"}
-      - {label: "Reading Time", name: "read_time", widget: "string"}
-      - {label: "Featured Image", name: "image", widget: "image"}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "SEO Title", name: "seo_title", widget: "string"}
-      - {label: "SEO Description", name: "seo_description", widget: "text"}
-      - {label: "Article Body", name: "body", widget: "markdown"}
-
-  - name: "articles_en"
-    label: "English Articles"
-    folder: "src/articles/en"
-    create: true
-    extension: "md"
-    format: "frontmatter"
-    slug: "{{fields.slug}}"
-    fields:
-      - {label: "Published", name: "published", widget: "boolean", default: true}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers, and hyphens"]}
-      - {label: "Translation Key", name: "translation_key", widget: "string"}
-      - {label: "Publication Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD"}
-      - {label: "Category", name: "category", widget: "string"}
-      - {label: "Reading Time", name: "read_time", widget: "string"}
-      - {label: "Featured Image", name: "image", widget: "image"}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "SEO Title", name: "seo_title", widget: "string"}
-      - {label: "SEO Description", name: "seo_description", widget: "text"}
-      - {label: "Article Body", name: "body", widget: "markdown"}
+      - {label: "Published in both languages | منشور باللغتين", name: "published", widget: "boolean", default: false, i18n: duplicate, hint: "Finish both language tabs before enabling this. | أكمل تبويبي اللغتين قبل التفعيل."}
+      - {label: "Article URL ID | معرّف رابط المقال", name: "slug", widget: "string", i18n: duplicate, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase English letters, numbers, and hyphens only. Do not change it after publishing. | استخدم حروفًا إنجليزية صغيرة وأرقامًا وشرطات، ولا تغيّره بعد النشر."]}
+      - {label: "Publication Date | تاريخ النشر", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD", i18n: duplicate}
+      - {label: "Featured Image | الصورة الرئيسية", name: "image", widget: "image", allow_multiple: false, choose_url: false, i18n: duplicate, hint: "Shared by both languages. New uploads become 1200 × 800 WebP at 70% quality. | مشتركة بين اللغتين، وتتحول الصور الجديدة إلى WebP بجودة 70%."}
+      - {label: "Image Width (px) | عرض الصورة", name: "image_width", widget: "number", value_type: "int", min: 1, default: 1200, i18n: duplicate, hint: "1200 for a new CMS upload; use the real width for an existing image. | استخدم 1200 للصورة الجديدة أو العرض الحقيقي للصورة القديمة."}
+      - {label: "Image Height (px) | ارتفاع الصورة", name: "image_height", widget: "number", value_type: "int", min: 1, default: 800, i18n: duplicate, hint: "800 for a new CMS upload; use the real height for an existing image. | استخدم 800 للصورة الجديدة أو الارتفاع الحقيقي للصورة القديمة."}
+      - label: "Default Form Procedure | التقنية الافتراضية للنموذج"
+        name: "form_procedure"
+        widget: "select"
+        required: false
+        i18n: duplicate
+        hint: "Choose the procedure this article is about so it appears selected when the form opens. Visitors can always change it. Leave Visitor chooses for general articles. | حدد تقنية المقال لتظهر مختارة تلقائيًا في النموذج مع السماح للزائر بتغييرها، أو اترك اختيار الزائر للمقالات العامة."
+        options:
+          - {label: "Visitor chooses (default) | يختار الزائر (الافتراضي)", value: ""}
+          - {label: "SMILE Pro | سمايل برو", value: "smile-pro"}
+          - {label: "Femto-LASIK | فيمتو ليزك", value: "femto-lasik"}
+          - {label: "Custom LASIK | الليزك التفصيلي", value: "custom-lasik"}
+          - {label: "PRK | الليزر السطحي", value: "prk"}
+          - {label: "ICL | عدسة داخلية", value: "icl"}
+      - {label: "Title | العنوان", name: "title", widget: "string", i18n: true}
+      - {label: "Category | التصنيف", name: "category", widget: "string", i18n: true}
+      - {label: "Reading Time | مدة القراءة", name: "read_time", widget: "string", i18n: true}
+      - {label: "Excerpt | الملخص", name: "excerpt", widget: "text", i18n: true}
+      - {label: "SEO Title | عنوان محركات البحث", name: "seo_title", widget: "string", i18n: true}
+      - {label: "SEO Description | وصف محركات البحث", name: "seo_description", widget: "text", i18n: true}
+      - {label: "Article Body | محتوى المقال", name: "body", widget: "markdown", i18n: true, buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"], hint: "Use the language tabs to complete both versions. Use Featured Image for the main image. | استخدم تبويبي اللغة لإكمال النسختين، وحقل الصورة الرئيسية لصورة المقال."}

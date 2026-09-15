@@ -3,7 +3,7 @@
 <head>{% include "partials/head.njk" %}</head>
 <body class="page-standalone locale-{{ locale }}">
 {{ content | safe }}
-<script src="/assets/js/site.js" defer></script>
-{% if page_js %}<script src="/assets/js/pages/{{ page_js }}" defer></script>{% endif %}
+<script type="module" src="{{ 'js/site.js' | assetUrl }}"></script>
+{% if page_js %}<script type="module" src="{{ ('js/pages/' + page_js) | assetUrl }}"></script>{% endif %}
 </body>
 </html>

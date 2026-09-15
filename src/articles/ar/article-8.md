@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-8.html"
-canonical: "/articles/article-8.html"
-alternate_url: "/en/articles/article-8.html"
-x_default_url: "/en/articles/article-8.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "مراحل التعافي والتعليمات بعد عملية سميل برو"
 seo_title: "مراحل التعافي والتعليمات بعد عملية سميل برو | Smile Pro Egypt"
-description: "الجدول الزمني للشفاء وأهم التعليمات بعد عملية SMILE Pro."
 seo_description: "الجدول الزمني للشفاء وأهم التعليمات بعد عملية SMILE Pro."
 slug: "article-8"
-translation_key: "article-8"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar1.webp"
+image_width: 719
+image_height: 1280
 excerpt: "الجدول الزمني للشفاء وأهم التعليمات بعد عملية SMILE Pro."
 category: "التعافي"
 read_time: "4 دقائق قراءة"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <p>تتميز عملية <strong>سميل برو</strong> بس سرعتها القياسية في الشفاء والعودة للحياة الطبيعية، وذلك بفضل استخدام الجراحة المجهرية بدون قطع في القرنية. تعرّف على الجدول الزمني للتعافي وأهم التعليمات للحفاظ على سلامة عينيك.</p>
 

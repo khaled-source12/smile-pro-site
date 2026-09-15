@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-2.html"
-canonical: "/articles/article-2.html"
-alternate_url: "/en/articles/article-2.html"
-x_default_url: "/en/articles/article-2.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "متى يمكنك العودة للقيادة والعمل بعد عملية الليزك؟"
 seo_title: "متى يمكنك العودة للقيادة والعمل بعد عملية الليزك؟ | Smile Pro Egypt"
-description: "جدول زمني للتعافي بعد جراحات تصحيح النظر والعودة للعمل والقيادة."
 seo_description: "جدول زمني للتعافي بعد جراحات تصحيح النظر والعودة للعمل والقيادة."
 slug: "article-2"
-translation_key: "article-2"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar3.webp"
+image_width: 1280
+image_height: 853
 excerpt: "جدول زمني للتعافي بعد جراحات تصحيح النظر والعودة للعمل والقيادة."
 category: "التعافي"
 read_time: "4 دقائق قراءة"
 published: true
-sitemap: true
 ---
 <!-- Arabic Content (Default) -->
 <p>تُعد عملية تصحيح النظر بالليزر بمختلف تقنياتها — سواء كانت الفيمتو ليزك أو تقنية Smile Pro الحديثة — واحدة من أكثر الجراحات أماناً وأسرعها في فترة التعافي البصري في الطب الحديث. ومع ذلك، يتردد سؤال شائع جداً بين المقبلين على العملية: <strong>"متى يمكنني العودة لممارسة حياتي الطبيعية، واستخدام الهواتف، وقيادة السيارة، والعودة للعمل؟"</strong></p>
@@ -57,10 +46,10 @@ sitemap: true
 <h3>3. الأنشطة الرياضية واللياقة البدنية</h3>
 <p>تختلف استعادة النشاط الرياضي بحسب نوع التقنية المستخدمة وطبيعة الرياضة نفسها:</p>
 <ul>
-<li><strong>الرياضات الخفيفة المشي والجري:</strong> يمكن ممارستها بأمان بعد 3 إلى 5 أيام، مع تجنب تدفق العرق داخل العين.</li>
-<li><strong>التمارين الرياضية بالجيم (Gym):</strong> يمكن العودة لها بعد أسبوع، مع الحرص على عدم فرك العين بأيدي غير نظيفة.</li>
-<li><strong>السباحة والرياضات المائية:</strong> يجب تأجيل السباحة في الحمام أو البحر لمدة <strong>أسبوعين إلى شهر</strong>، وذلك لتجنب خطر العدوى البكتيرية الناتجة عن المياه والمواد الكيميائية كالكلور.</li>
-<li><strong>الرياضات العنيفة والملاكمة:</strong> تفضل تقنية Smile Pro للرياضيين لأنها خالية من الشريحة، بينما تتطلب جراحة الفيمتو ليزك الابتعاد عن الرياضات الالتحامية لمدة 3 إلى 4 أسابيع.</li>
+<li><strong>الرياضات الخفيفة والمشي والجري:</strong> {{ clinical.aftercare.ar.light_exercise }}، مع تجنب تدفق العرق داخل العين.</li>
+<li><strong>التمارين الرياضية بالجيم (Gym):</strong> {{ clinical.aftercare.ar.gym }}، مع الحرص على نظافة اليدين وعدم فرك العين.</li>
+<li><strong>السباحة والرياضات المائية:</strong> {{ clinical.aftercare.ar.swimming }} لتقليل خطر العدوى من المياه أو الكلور.</li>
+<li><strong>الرياضات العنيفة والملاكمة:</strong> {{ clinical.aftercare.ar.contact_sports }}.</li>
 </ul>
 
 <h2>ثالثاً: ملخص الجدول الزمني لاستئناف الحياة الطبيعية</h2>
@@ -96,7 +85,7 @@ sitemap: true
 </tr>
 <tr>
 <td><strong>السباحة والمياه</strong></td>
-<td>بعد أسبوعين بحذر</td>
+<td>{{ clinical.aftercare.ar.swimming }}</td>
 <td>بعد 3 إلى 4 أسابيع</td>
 </tr>
 </tbody>

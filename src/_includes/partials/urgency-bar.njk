@@ -1,0 +1,14 @@
+<div class="urgency-bar" data-fomo-banner>
+  <div class="site-shell urgency-bar__inner">
+    <svg class="urgency-bar__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M7 2v3M17 2v3M3.5 9h17M5.5 4h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/>
+    </svg>
+    <span class="urgency-bar__content">
+      <span class="urgency-bar__label">{{ 'مواعيد هذا الأسبوع' if locale == 'ar' else 'Appointments this week' }}</span>
+      <span class="urgency-bar__availability" aria-live="polite" aria-atomic="true">
+        {% if locale == 'ar' %}متبقي <strong id="slot-count" data-minimum="3">8</strong> مواعيد للفحص{% else %}<strong id="slot-count" data-minimum="3">8</strong> assessment appointments remaining{% endif %}
+      </span>
+    </span>
+    <span class="urgency-bar__note">{{ 'الأولوية بأسبقية إرسال الطلب' if locale == 'ar' else 'Requests are handled in the order received' }}</span>
+  </div>
+</div>

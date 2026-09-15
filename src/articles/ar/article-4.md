@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-4.html"
-canonical: "/articles/article-4.html"
-alternate_url: "/en/articles/article-4.html"
-x_default_url: "/en/articles/article-4.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "كيف تتجنب جفاف العين بعد عمليات تصحيح النظر؟"
 seo_title: "كيف تتجنب جفاف العين بعد عمليات تصحيح النظر؟ | Smile Pro Egypt"
-description: "أسباب جفاف العين المؤقت بعد الليزك وكيفية الوقاية منه."
 seo_description: "أسباب جفاف العين المؤقت بعد الليزك وكيفية الوقاية منه."
 slug: "article-4"
-translation_key: "article-4"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar6.webp"
+image_width: 896
+image_height: 1200
 excerpt: "أسباب جفاف العين المؤقت بعد الليزك وكيفية الوقاية منه."
 category: "جفاف العين"
 read_time: "3 دقائق قراءة"
 published: true
-sitemap: true
 ---
 <!-- Arabic Content (Default) -->
 <p>تُعد عمليات تصحيح النظر بالليزر من أكثر الجراحات الدقيقة نجاحاً وأماناً في عصرنا الحالي. ومع ذلك، يُعتبر <strong>جفاف العين المؤقت</strong> من أكثر الأعراض الجانبية شائعة الحدوث خلال فترة التعافي الأولى. يتساءل الكثير من المرضى عن سبب هذا الجفاف، وكيفية التغلب عليه بسرعة للتمتع ببديهة بصرية حادة وراحة تامة.</p>

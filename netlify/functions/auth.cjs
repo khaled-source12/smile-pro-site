@@ -1,6 +1,7 @@
 const crypto = require('node:crypto');
+const { cmsOrigins, encodeStateCookie, requestCmsOrigin } = require('../lib/cms-origins.cjs');
 
-exports.handler = async () => {
+exports.handler = async (event = {}) => {
   const clientId = process.env.OAUTH_CLIENT_ID;
   if (!clientId) {
     return {
@@ -16,6 +17,8 @@ exports.handler = async () => {
   }
 
   const state = crypto.randomBytes(24).toString('hex');
+  const origin = requestCmsOrigin(event, cmsOrigins());
+  const stateCookie = encodeStateCookie(state, origin);
   const redirect = new URL('https://github.com/login/oauth/authorize');
   redirect.searchParams.set('client_id', clientId);
   // `repo` is sufficient for Decap to read and commit content. Avoid the
@@ -30,7 +33,7 @@ exports.handler = async () => {
       'Cache-Control': 'no-store',
       'Referrer-Policy': 'no-referrer',
       'X-Content-Type-Options': 'nosniff',
-      'Set-Cookie': `decap_oauth_state=${state}; Path=/.netlify/functions/callback; HttpOnly; Secure; SameSite=Lax; Max-Age=600`,
+      'Set-Cookie': `decap_oauth_state=${stateCookie}; Path=/.netlify/functions/callback; HttpOnly; Secure; SameSite=Lax; Max-Age=600`,
     },
   };
 };

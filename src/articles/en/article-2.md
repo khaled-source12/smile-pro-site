@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-2.html"
-canonical: "/en/articles/article-2.html"
-alternate_url: "/articles/article-2.html"
-x_default_url: "/en/articles/article-2.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "When Can You Drive and Return to Work After LASIK?"
 seo_title: "When Can You Drive and Return to Work After LASIK? | Smile Pro Egypt"
-description: "A practical recovery timeline for driving, work, screens, and exercise after laser vision correction."
 seo_description: "A practical recovery timeline for driving, work, screens, and exercise after laser vision correction."
 slug: "article-2"
-translation_key: "article-2"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar3.webp"
+image_width: 1280
+image_height: 853
 excerpt: "A practical recovery timeline for driving, work, screens, and exercise after laser vision correction."
 category: "Recovery"
 read_time: "4 min read"
 published: true
-sitemap: true
 ---
 <p>Laser vision correction procedures — whether Femto LASIK or modern SMILE Pro — are among the safest and fastest-recovering surgeries in modern medicine. However, one of the most frequent questions asked by prospective patients is: <strong>"When can I return to normal life, use smartphones, drive, and resume work?"</strong></p>
 
@@ -57,10 +46,10 @@ sitemap: true
 <h3>3. Sports and Physical Exercise</h3>
 <p>Resuming physical activities depends on the surgical technique and the intensity of the sport:</p>
 <ul>
-<li><strong>Light Exercise (Walking/Jogging):</strong> Safe after 3 to 5 days, taking care to keep sweat out of the eyes.</li>
-<li><strong>Gym Workouts:</strong> Resume after 1 week, ensuring clean hands and avoiding eye touching.</li>
-<li><strong>Swimming & Water Sports:</strong> Avoid pools, hot tubs, and ocean water for <strong>2 to 4 weeks</strong> to eliminate bacterial infection risks from chlorine or natural water.</li>
-<li><strong>Contact Sports:</strong> Flapless SMILE Pro allows a faster return to active sports, while Femto LASIK requires 3-4 weeks before engaging in contact sports.</li>
+<li><strong>Light Exercise (Walking/Jogging):</strong> {{ clinical.aftercare.en.light_exercise }}. Keep sweat out of the eyes.</li>
+<li><strong>Gym Workouts:</strong> {{ clinical.aftercare.en.gym }}. Keep your hands clean and avoid touching the eyes.</li>
+<li><strong>Swimming & Water Sports:</strong> {{ clinical.aftercare.en.swimming }} to reduce infection risk from water or chlorine.</li>
+<li><strong>Contact Sports:</strong> {{ clinical.aftercare.en.contact_sports }}.</li>
 </ul>
 
 <h2>3. Recovery Timeline Summary Table</h2>
@@ -96,7 +85,7 @@ sitemap: true
 </tr>
 <tr>
 <td><strong>Swimming / Pools</strong></td>
-<td>After 2 weeks</td>
+<td>{{ clinical.aftercare.en.swimming }}</td>
 <td>After 3 to 4 weeks</td>
 </tr>
 </tbody>

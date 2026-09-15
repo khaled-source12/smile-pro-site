@@ -1,26 +1,23 @@
 ---
 layout: "layouts/landing.njk"
 locale: "ar"
-permalink: "/ar/index.html"
+permalink: "/ar/"
 canonical: "/ar/"
 alternate_url: "/"
 x_default_url: "/"
 page_kind: "home"
 page_css: "home-ar.css"
-title: "جراحة سمايل برو بالليزر للعيون، التجمع الخامس | دكتور محمد النجار"
-description: "تصحيح النظر بليزر سمايل برو بدون رفرف قرنية في عيادة دكتور محمد النجار للعيون، إيتيرنا ميديكال سيتي، التجمع الخامس. جهاز ZEISS VisuMax 800. عملية تستغرق 15 دقيقة. احجز فحص النظر الآن."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "جراحة سمايل برو بالليزر للعيون، {{ site.location.district.ar }} | {{ site.doctor.ar }}"
+  description: "تصحيح النظر بليزر سمايل برو بدون رفرف قرنية مع {{ site.doctor.ar }} في {{ site.address.ar[0] }}، {{ site.location.district.ar }}. جهاز ZEISS VisuMax 800. عملية تستغرق 15 دقيقة. احجز فحص النظر الآن."
+image: "/images/Naggar6.webp"
 schema_type: "clinic"
 show_sticky: true
 sitemap: true
 ---
-{% from "partials/forms.njk" import consultation %}
-<div class="urgency-bar">
-  <span>متبقي عدد محدود:</span> متبقي <strong id="slot-count">8</strong> أجهزة فحص فقط هذا الأسبوع في عيادتنا بميفيدا
-</div>
-
-
-
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- HERO SECTION -->
 <header class="hero">
   <div class="container hero-grid">
@@ -30,43 +27,46 @@ sitemap: true
         تقنية ZEISS VisuMax 800
       </div>
       <h1>رؤية واضحة في <em>8 ثوانٍ</em> فقط لكل عين</h1>
-      <p class="hero-kicker">دكتور محمد النجار — استشاري جراحة القرنية وتصحيح الإبصار</p>
       <p class="hero-sub">
-        احصل على تصحيح النظر بتقنية سمايل برو بدون رفرف للقرنية في إيتيرنا ميديكال سيتي، القاهرة الجديدة.
+        احصل على تصحيح النظر بتقنية سمايل برو بدون رفرف للقرنية في {{ site.address.ar[0] }}، {{ site.location.locality.ar }}.
         دقة ألمانية متطورة مع فترة تعافي سريعة وبدون ألم.
       </p>
       <div class="hero-proof">
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           بدون رفرف قرنية
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           فتحة دقيقة &lt; 2 مم
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           قيادة السيارة في نفس اليوم
         </div>
+      </div>
+      <div class="doctor-trust doctor-trust--light">
+        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+        <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
       </div>
     </div>
 
     <!-- HERO FORM CARD -->
     <div class="form-card" id="book">
       <h2 class="form-card-title">احجز فحص النظر</h2>
-      <p class="form-card-sub">احجز موعد تقييم حالتك في إيتيرنا ميديكال سيتي، التجمع الخامس</p>
+      <p class="form-card-sub">احجز موعد تقييم حالتك في {{ site.address.ar[0] }}، {{ site.location.district.ar }}</p>
 
-      {{ consultation('ar', 'consultation', 'main-form', 'main', false, 'smile-pro') }}
+      {{ consultation('ar', 'consultation', 'main-form', 'main', '', 'home-hero') }}
 
       <a href="tel:{{ site.contact.phone_e164 }}" class="form-call-btn">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        اتصل بنا {{ site.contact.phone_display_ar }}
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        اتصل بنا <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('ar') }}</span>
       </a>
 
       <div class="form-wa">
         <span>تفضل المراسلة الفورية؟</span>
-        <a href="https://wa.me/{{ site.contact.whatsapp }}" target="_blank" class="wa-link" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12.031 2c-5.514 0-9.998 4.486-9.998 10 0 2.012.602 3.88 1.637 5.441l-1.67 6.109 6.284-1.646c1.487.818 3.197 1.296 5.011 1.296 5.514 0 9.998-4.486 9.998-10 0-5.514-4.484-10-9.998-10zm0 18.002c-1.633 0-3.155-.443-4.469-1.215l-.321-.189-3.321.87.886-3.238-.211-.336c-.927-1.479-1.421-3.189-1.421-4.992 0-4.687 3.813-8.502 8.502-8.502 4.687 0 8.5 3.815 8.5 8.502 0 4.687-3.813 8.502-8.502 8.502z"/></svg>
+        <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" class="wa-link" rel="noopener">
+          {{ whatsappIcon() }}
           تحدث عبر واتساب
         </a>
       </div>
@@ -96,6 +96,8 @@ sitemap: true
   </div>
 </header>
 
+{% include "partials/testimonials.njk" %}
+
 <!-- BENEFITS SECTION -->
 <section class="section" id="benefits">
   <div class="container">
@@ -109,7 +111,7 @@ sitemap: true
     <div class="benefits-grid fade-up">
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>بدون عمل رفرف في القرنية</h3>
         <p>عن طريق تجنب إنشاء رفرف في القرنية كما هو الحال في الليزك التقليدي، تضمن عملية سمايل برو الحفاظ على الثبات الهيكلي للقرنية وتقليل الحساسية بعد العملية.</p>
@@ -118,7 +120,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>ليزر في 8 ثوانٍ فقط</h3>
         <p>يطلق جهاز ZEISS VisuMax 800 نبضات الليزر فائقة السرعة والدقة في أقل من 10 ثوانٍ لكل عين، مما يقدم تجربة جراحية مريحة للغاية.</p>
@@ -127,7 +129,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>عودة سريعة للحياة اليومية</h3>
         <p>يستطيع معظم المرضى العودة للقراءة واستخدام الشاشات الذكية وممارسة الأنشطة اليومية خلال 24 ساعة من الجراحة.</p>
@@ -148,7 +150,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <span class="tl-dot-num">01</span>
         </div>
@@ -157,7 +159,7 @@ sitemap: true
           <h3 class="tl-title">رسم خريطة القرنية والنظر</h3>
           <p class="tl-desc">فحوصات تشخيصية دقيقة لقياس سمك القرنية، انحنائها، ودقة مقاس النظارة للتأكد التام من مناسبة العملية لك.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             خطة علاجية مخصصة لكل حالة
           </div>
         </div>
@@ -166,7 +168,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
           <span class="tl-dot-num">02</span>
         </div>
@@ -175,7 +177,7 @@ sitemap: true
           <h3 class="tl-title">15 دقيقة بالليزر عبر فتحة دقيقة</h3>
           <p class="tl-desc">يتم وضع قطرات مخدرة لضمان الراحة التامة. يقوم جهاز ZEISS VisuMax 800 بتشكيل طبقة النسيج في 8 ثوانٍ تقريباً لكل عين، ثم إزالتها عبر فتحة ميكرونية دقيقة.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             بدون غرز أو قطوع بالقرنية
           </div>
         </div>
@@ -184,7 +186,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <span class="tl-dot-num">03</span>
         </div>
@@ -193,7 +195,7 @@ sitemap: true
           <h3 class="tl-title">وضوح النظر في اليوم التالي ومتابعة لمدة عام</h3>
           <p class="tl-desc">تستقر الرؤية بسرعة خلال أول 24 ساعة. تشمل التكلفة جميع زيارات المتابعة والقطرات العلاجية الموصوفة لمدة عام كامل.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             رعاية ومتابعة لمدة سنة كاملة
           </div>
         </div>
@@ -248,10 +250,10 @@ sitemap: true
             <td class="col-s">24 ساعة / نفس اليوم</td>
           </tr>
           <tr>
-            <td>العودة للرياضة والسباحة</td>
+            <td>العودة للرياضة الخفيفة والسباحة</td>
             <td>أسبوع إلى أسبوعين</td>
             <td>أسبوعان إلى 4 أسابيع</td>
-            <td class="col-s">أسبوع واحد فقط</td>
+            <td class="col-s">{{ clinical.aftercare.ar.comparison_summary }}</td>
           </tr>
         </tbody>
       </table>
@@ -271,33 +273,35 @@ sitemap: true
       </p>
     </div>
 
-    <div class="calc-wrap fade-up">
+    {% set lifetimeExample = (pricing.savings.end_age - pricing.savings.default_age) * pricing.savings.default_annual_spend %}
+    {% set savingsExample = lifetimeExample - pricing.savings.reference_price %}
+    <div class="calc-wrap fade-up" data-end-age="{{ pricing.savings.end_age }}" data-procedure-cost="{{ pricing.savings.reference_price }}">
       <div class="calc-grid">
         <div class="calc-input-group">
           <label for="calc-age">العمر الحالي</label>
-          <input type="number" id="calc-age" value="28" min="18" max="60" oninput="calculateSavings()" />
+          <input type="number" id="calc-age" value="{{ pricing.savings.default_age }}" min="18" max="{{ pricing.savings.end_age }}" oninput="calculateSavings()" />
         </div>
         <div class="calc-input-group">
           <label for="calc-spend">الإنفاق السنوي على العدسات/النظارات (جنيه)</label>
-          <input type="number" id="calc-spend" value="8000" step="500" oninput="calculateSavings()" />
+          <input type="number" id="calc-spend" value="{{ pricing.savings.default_annual_spend }}" step="500" oninput="calculateSavings()" />
         </div>
       </div>
 
       <div class="calc-result">
         <div>
           <div class="calc-col-lbl">إجمالي الإنفاق حتى سن 60</div>
-          <div class="calc-col-num" id="res-lifetime">256,000</div>
+          <div class="calc-col-num" id="res-lifetime">{{ lifetimeExample | formatNumber('ar-EG') }}</div>
           <div class="calc-col-sub">جنيه مصري إنفاق متوقع</div>
         </div>
         <div>
           <div class="calc-col-lbl">التوفير المتوقع طوال العمر</div>
-          <div class="calc-col-num savings" id="res-savings">208,000</div>
+          <div class="calc-col-num savings" id="res-savings">{{ savingsExample | formatNumber('ar-EG') }}</div>
           <div class="calc-col-sub">جنيه توفير مع سمايل برو</div>
         </div>
       </div>
 
       <p class="calc-note">
-        *بناءً على تكلفة العملية الموحدة (55,000 جنيه مصري) مقارنة بالاستهلاك السنوي للنظارات والعدسات حتى سن الـ 60.
+        *تقدير توضيحي بناءً على تكلفة عملية قدرها {{ pricing.savings.reference_price | formatNumber('ar-EG') }} جنيه مصري، مقارنةً بالاستهلاك المتكرر للنظارات والعدسات حتى سن {{ pricing.savings.end_age | formatNumber('ar-EG') }}. يتحدد العلاج والسعر النهائيان بعد الفحص الطبي.
       </p>
     </div>
   </div>
@@ -308,7 +312,7 @@ sitemap: true
   <div class="container">
     <div class="doctor-grid fade-up">
       <div class="doc-img">
-        <img src="/images/Naggar6.png" alt="دكتور محمد النجار" width="896" height="1200" loading="lazy" />
+        <img src="/images/Naggar6.webp" alt="{{ site.doctor.ar }}" width="896" height="1200" eleventy:widths="360,600,896" sizes="(max-width: 760px) calc(100vw - 40px), 42vw" loading="lazy" decoding="async" />
         <div class="doc-badge">
           <div class="doc-badge-num">+15</div>
           <div class="doc-badge-lbl">سنوات خبرة</div>
@@ -318,10 +322,10 @@ sitemap: true
       <div>
         <span class="lbl">الجراح المسؤول</span>
         <div class="rule"></div>
-        <h2 class="doc-name">دكتور محمد النجار</h2>
+        <h2 class="doc-name">{{ site.doctor.ar }}</h2>
         <div class="doc-title">استشاري جراحة القرنية وتصحيح الإبصار</div>
         <p class="doc-bio">
-          يتخصص دكتور محمد النجار في جراحات القرنية المتقدمة وتصحيح عيوب الإبصار.
+          يتخصص {{ site.doctor.ar }} في جراحات القرنية المتقدمة وتصحيح عيوب الإبصار.
           حرص دائم على استخدام أحدث أجهزة التشخيص والبروتوكولات الجراحية المعتمدة لضمان أعلى معايير الأمان والدقة في النتائج.
         </p>
 
@@ -360,7 +364,7 @@ sitemap: true
       <div class="tech-features">
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">تردد ليزر فائق السرعة</h3>
@@ -370,7 +374,7 @@ sitemap: true
 
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">نظام التتبع والتثبيت الذكي</h3>
@@ -380,7 +384,7 @@ sitemap: true
 
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">عدسة تلامسية مريحة للعين</h3>
@@ -390,58 +394,11 @@ sitemap: true
       </div>
 
       <div style="border-radius:var(--r);overflow:hidden;max-height:420px;">
-        <video loop muted playsinline preload="none" data-play-when-visible aria-hidden="true" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r);display:block;">
+        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="فيديو تقنية ZEISS VisuMax 800" style="width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r);display:block;">
           <source src="/images/Video1.mp4" type="video/mp4"/>
         </video>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section" id="reviews">
-  <div class="container">
-    <span class="lbl">تجارب المرضى</span>
-    <div class="rule"></div>
-    <h2>نتائج وآراء مرضانا</h2>
-
-    <div class="testi-grid fade-up">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"خطوة الليزر كانت سريعة جداً بشكل لم أتوقعه. عدت لعملي المكتبي وقراءة المستندات في اليوم التالي مباشرة."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">أ</div>
-          <div>
-            <div class="testi-name">أحمد م.</div>
-            <div class="testi-detail">مهندس برمجيات • سمايل برو</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"قام دكتور محمد النجار بشرح نتائج فحص القرنية بالتفصيل. التعامل والتنظيم في العيادة بالتجمع الخامس ممتاز جداً."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">س</div>
-          <div>
-            <div class="testi-name">سارة ك.</div>
-            <div class="testi-detail">مهندسة معمارية • سمايل برو</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"التخلص من جفاف العدسات اللاصقة أثناء التمرين والرياضة اليومية أحدث فرقاً كبيراً في راحتي."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">ع</div>
-          <div>
-            <div class="testi-name">عمر ت.</div>
-            <div class="testi-detail">مدرب لياقة بدنية • سمايل برو</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -490,7 +447,7 @@ sitemap: true
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          تشمل التكلفة (55,000 جنيه مصري) إجراء العملية للعينين، الأدوات والأدوات الطبية المستخدمة، قطرات العناية بعد العملية، والمتابعة الدورية لمدة 12 شهراً مجاناً.
+          يشمل عرض علاجي تقديري بقيمة {{ pricing.savings.reference_price | formatNumber('ar-EG') }} جنيه مصري إجراء العملية للعينين، والمستلزمات الطبية المستخدمة، وقطرات العناية بعد العملية، والمتابعة الدورية لمدة 12 شهراً. يتحدد العلاج والسعر النهائيان بعد الفحص.
         </div>
       </div>
 
@@ -500,7 +457,7 @@ sitemap: true
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          يمكن لملاحظة معظم المرضى العودة لاستخدام الشاشات، العمل المكتبي، وقيادة السيارة خلال 24 ساعة. يمكن ممارسة الرياضة الخفيفة في اليوم التالي والسباحة بعد أسبوع.
+          يمكن لمعظم المرضى العودة لاستخدام الشاشات والعمل المكتبي وقيادة السيارة خلال 24 ساعة. للأنشطة الرياضية حدود منفصلة: الرياضة الخفيفة {{ clinical.aftercare.ar.light_exercise }}، والجيم {{ clinical.aftercare.ar.gym }}، والسباحة {{ clinical.aftercare.ar.swimming }}، والرياضات الالتحامية {{ clinical.aftercare.ar.contact_sports }}.
         </div>
       </div>
     </div>
@@ -512,11 +469,11 @@ sitemap: true
   <div class="container">
     <span class="lbl">موقع العيادة</span>
     <div class="rule"></div>
-    <h2>تفضل بزيارتنا في القاهرة الجديدة</h2>
+    <h2>تفضل بزيارتنا في {{ site.location.locality.ar }}</h2>
 
     <div class="split" style="grid-template-columns:1fr 1fr;margin-top:32px;">
       <div class="card">
-        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">عيادة دكتور محمد النجار للعيون</h3>
+        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">عيادة {{ site.doctor.ar }} للعيون</h3>
         <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;">
           {% for line in site | clinicAddress('ar') %}{{ line }}{% if not loop.last %}<br/>{% endif %}{% endfor %}
         </p>
@@ -527,7 +484,8 @@ sitemap: true
 
       <div style="width:100%;min-height:260px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);">
         <iframe
-          src="https://maps.google.com/maps?q=Eterna%20Medical%20City%20New%20Cairo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="خريطة عيادة {{ site.doctor.ar }} في {{ site.address.ar[0] }}"
+          src="{{ site.location.map_embed_url }}"
           width="100%"
           height="100%"
           style="border:0;min-height:260px;"
@@ -543,13 +501,13 @@ sitemap: true
 <section class="cta-section">
   <div class="container">
     <h2>خذ الخطوة الأولى نحو <em>رؤية واضحة</em></h2>
-    <p>احجز فحص النظر الشامل وتقييم ملاءمة القرنية في إيتيرنا ميديكال سيتي، القاهرة الجديدة.</p>
+    <p>احجز فحص النظر الشامل وتقييم ملاءمة القرنية في {{ site.address.ar[0] }}، {{ site.location.locality.ar }}.</p>
 
     <div class="cta-form-wrap fade-up">
       <h3 class="form-card-title">احجز فحص النظر</h3>
-      <p class="cta-form-sub">إيتيرنا ميديكال سيتي • التجمع الخامس، القاهرة الجديدة</p>
+      <p class="cta-form-sub">{{ site.address.ar | join(' • ') }}</p>
 
-      {{ consultation('ar', 'consultation', 'bottom-form', 'cta', true) }}
+      {{ consultation('ar', 'consultation', 'bottom-form', 'cta', '', 'home-bottom') }}
     </div>
   </div>
 </section>

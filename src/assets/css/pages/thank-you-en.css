@@ -64,7 +64,7 @@
   .step-text span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
   .wa-btn {
     display: inline-flex; align-items: center; gap: 10px;
-    background: #25D366; color: #fff;
+    background: var(--whatsapp); color: #fff;
     font-size: 15px; font-weight: 600;
     padding: 14px 28px; border-radius: 50px; border: none; cursor: pointer;
     text-decoration: none; transition: background .2s, transform .15s;

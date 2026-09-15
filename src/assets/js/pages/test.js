@@ -64,24 +64,22 @@ let currentStep = 1;
         startAcuityTest();
     }
 
-    // Step 4: Color Vision Logic
+    // Step 4: UI-only input demo. It deliberately produces no medical result.
     function checkColorTest() {
-        const ans = document.getElementById('color-answer').value;
-        let colorResult = (ans === '74') ? "تمتلك تمييزاً جيداً للألوان." : "قد يكون لديك صعوبة بسيطة في تمييز بعض الألوان.";
-        showResults(colorResult);
+        showResults();
     }
 
-    // Step 5: Show Final Results
-    function showResults(colorResult) {
+    // Step 5: Confirm completion without interpreting the user's answers.
+    function showResults() {
         nextStep(5);
         const resultText = document.getElementById('result-text');
-        let visionStatus = "";
-
-        if (currentScore >= 3) {
-            visionStatus = "حدة الإبصار المبدئية: **جيدة جداً**.";
-        } else {
-            visionStatus = "حدة الإبصار المبدئية: **منخفضة**، يُنصح بإجراء كشف نظر عند الطبيب.";
-        }
-
-        resultText.innerHTML = `${visionStatus}<br><br>${colorResult}`;
+        resultText.textContent = document.documentElement.lang.startsWith('ar')
+            ? "اكتملت تجربة الواجهة. لم يتم احتساب حدة إبصار أو تمييز ألوان، ولا توجد نتيجة طبية من هذه الصفحة."
+            : "The interface demo is complete. No visual-acuity or colour-vision score was calculated, and this page provides no medical result.";
     }
+
+    window.nextStep = nextStep;
+    window.adjustCardSize = adjustCardSize;
+    window.finishCalibration = finishCalibration;
+    window.checkAnswer = checkAnswer;
+    window.checkColorTest = checkColorTest;

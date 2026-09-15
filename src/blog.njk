@@ -1,27 +1,37 @@
 ---
 layout: layouts/base.njk
 locale: ar
-permalink: /blog.html
-canonical: /blog.html
-alternate_url: /en/blog.html
-x_default_url: /en/blog.html
+permalink: /blog/
+canonical: /blog/
+alternate_url: /en/blog/
+x_default_url: /en/blog/
 page_kind: blog
 page_css: blog.css
-title: مدونة تصحيح النظر والليزك | دكتور محمد النجار - Smile Pro
-description: اقرأ أحدث المقالات الطبية عن جراحات تصحيح النظر والفيمتو ليزك وتقنية Smile Pro مع دكتور محمد النجار.
-image: /images/Naggar6.png
+eleventyComputed:
+  title: "مدونة تصحيح النظر والليزك | {{ site.doctor.ar }} - Smile Pro"
+  description: "اقرأ أحدث المقالات الطبية عن جراحات تصحيح النظر والفيمتو ليزك وتقنية Smile Pro مع {{ site.doctor.ar }}."
+image: /images/Naggar6.webp
+show_sticky: true
+booking_url: "/ar/#book"
 sitemap: true
 ---
 {% set posts = collections.articles | byLocale('ar') | sortByDateDesc %}
 {% set categories = posts | uniqueDataValues('category') %}
 <header class="blog-hero">
   <div class="container">
-    <span class="doc-badge">محتوى طبي بإشراف د. محمد النجار</span>
+    <span class="doc-badge">محتوى طبي بإشراف {{ site.doctor.ar }}</span>
     <h1>دليل تصحيح النظر وصحة القرنية</h1>
     <p>مقالات عملية تساعدك على فهم التقنيات والفحوصات والتعافي قبل اتخاذ قرار تصحيح النظر.</p>
   </div>
 </header>
 <main class="container blog-main">
+  <section class="blog-conversion-panel">
+    <div><strong>تريد ترشيحًا مبدئيًا قبل أن تكمل القراءة؟</strong><span>احسب اختياراتك الآن، أو اطلب اتصالاً من فريق العيادة.</span></div>
+    <div class="conversion-actions">
+      <a class="conversion-actions__secondary" href="/ar/laser-eye-surgery-cost-egypt/" data-cta="blog-top-estimator">احسب التكلفة</a>
+      <a class="conversion-actions__primary" href="/ar/#book" data-cta="blog-top-book">اطلب اتصالاً</a>
+    </div>
+  </section>
   <div class="category-bar" role="group" aria-label="تصنيف المقالات">
     <button class="cat-tab active" type="button" data-blog-filter="all" aria-pressed="true">الكل</button>
     {% for category in categories %}<button class="cat-tab" type="button" data-blog-filter="{{ category }}" aria-pressed="false">{{ category }}</button>{% endfor %}
@@ -29,7 +39,7 @@ sitemap: true
   <div class="blog-grid">
     {% for post in posts %}
     <article class="post-card" data-blog-category="{{ post.data.category }}">
-      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" loading="lazy">
+      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" width="{{ post.data.image_width }}" height="{{ post.data.image_height }}" eleventy:widths="320,640,960" sizes="(max-width: 720px) calc(100vw - 32px), 30vw" loading="{{ 'eager' if loop.first else 'lazy' }}"{% if loop.first %} fetchpriority="high"{% endif %} decoding="async">
       <div class="post-body">
         <span class="tag">{{ post.data.category }}</span>
         <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
@@ -41,7 +51,7 @@ sitemap: true
   </div>
   <section class="cta-banner">
     <h2>هل تريد معرفة العملية الأنسب لعينيك؟</h2>
-    <p>احجز فحصًا شاملًا للقرنية مع د. محمد النجار في القاهرة الجديدة.</p>
-    <a href="/ar/#book" class="cta-btn">احجز فحصك الآن</a>
+    <p>احجز فحصًا شاملًا للقرنية مع {{ site.doctor.ar }} في {{ site.location.locality.ar }}.</p>
+    <div class="conversion-actions"><a href="/ar/#book" class="cta-btn" data-cta="blog-bottom-book">احجز فحصك الآن</a><a href="/ar/laser-eye-surgery-cost-egypt/" class="cta-btn cta-btn--outline" data-cta="blog-bottom-estimator">احسب التكلفة</a></div>
   </section>
 </main>

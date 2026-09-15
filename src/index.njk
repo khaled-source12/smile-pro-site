@@ -1,26 +1,23 @@
 ---
 layout: "layouts/landing.njk"
 locale: "en"
-permalink: "/index.html"
+permalink: "/"
 canonical: "/"
 alternate_url: "/ar/"
 x_default_url: "/"
 page_kind: "home"
 page_css: "home-en.css"
-title: "SMILE Pro Laser Eye Surgery, New Cairo | Dr. Mohamed El Naggar"
-description: "SMILE Pro flapless laser vision correction at Dr. Mohamed El Naggar Eye Clinic, Eterna Medical City, New Cairo. ZEISS VisuMax 800. 15-minute procedure, no corneal flap. Book a vision assessment."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "SMILE Pro Laser Eye Surgery, {{ site.location.locality.en }} | {{ site.doctor.en }}"
+  description: "SMILE Pro flapless laser vision correction with {{ site.doctor.en }} at {{ site.address.en[0] }}, {{ site.location.locality.en }}. ZEISS VisuMax 800. 15-minute procedure, no corneal flap. Book a vision assessment."
+image: "/images/Naggar6.webp"
 schema_type: "clinic"
 show_sticky: true
 sitemap: true
 ---
-{% from "partials/forms.njk" import consultation %}
-<div class="urgency-bar">
-  <span>Limited:</span> Only <strong id="slot-count">8</strong> assessment slots remaining this week at our Mivida clinic
-</div>
-
-
-
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- HERO SECTION -->
 <header class="hero">
   <div class="container hero-grid">
@@ -30,43 +27,46 @@ sitemap: true
         ZEISS VisuMax 800 Technology
       </div>
       <h1>Clear Vision in <em>8 Seconds</em> Per Eye</h1>
-      <p class="hero-kicker">Dr. Mohamed El Naggar — Consultant Corneal & Refractive Surgeon</p>
       <p class="hero-sub">
-        Experience SMILE Pro flapless laser vision correction at Eterna Medical City, New Cairo.
+        Experience SMILE Pro flapless laser vision correction at {{ site.address.en[0] }}, {{ site.location.locality.en }}.
         Advanced German laser precision with minimal disruption and rapid recovery.
       </p>
       <div class="hero-proof">
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           No Corneal Flap
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Micro-Incision &lt; 2mm
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Resume Driving Same Day
         </div>
+      </div>
+      <div class="doctor-trust doctor-trust--light">
+        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+        <div><strong>{{ site.doctor.en }}</strong><span>{{ site.doctor.title_en }} · Clinic {{ site.clinic_number }}, {{ site.address.en[0] }}</span></div>
       </div>
     </div>
 
     <!-- HERO FORM CARD -->
     <div class="form-card" id="book">
       <h2 class="form-card-title">Book Vision Assessment</h2>
-      <p class="form-card-sub">Reserve your evaluation at Eterna Medical City, New Cairo</p>
+      <p class="form-card-sub">Reserve your evaluation at {{ site.address.en[0] }}, {{ site.location.locality.en }}</p>
 
-      {{ consultation('en', 'consultation', 'main-form', 'main', false, 'smile-pro') }}
+      {{ consultation('en', 'consultation', 'main-form', 'main', '', 'home-hero') }}
 
       <a href="tel:{{ site.contact.phone_e164 }}" class="form-call-btn">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Call {{ site.contact.phone_display_en }}
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('en') }}</span>
       </a>
 
       <div class="form-wa">
         <span>Prefer instant messaging?</span>
-        <a href="https://wa.me/{{ site.contact.whatsapp }}" target="_blank" class="wa-link" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12.031 2c-5.514 0-9.998 4.486-9.998 10 0 2.012.602 3.88 1.637 5.441l-1.67 6.109 6.284-1.646c1.487.818 3.197 1.296 5.011 1.296 5.514 0 9.998-4.486 9.998-10 0-5.514-4.484-10-9.998-10zm0 18.002c-1.633 0-3.155-.443-4.469-1.215l-.321-.189-3.321.87.886-3.238-.211-.336c-.927-1.479-1.421-3.189-1.421-4.992 0-4.687 3.813-8.502 8.502-8.502 4.687 0 8.5 3.815 8.5 8.502 0 4.687-3.813 8.502-8.502 8.502z"/></svg>
+        <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" class="wa-link" rel="noopener">
+          {{ whatsappIcon() }}
           Chat on WhatsApp
         </a>
       </div>
@@ -96,6 +96,8 @@ sitemap: true
   </div>
 </header>
 
+{% include "partials/testimonials.njk" %}
+
 <!-- BENEFITS SECTION -->
 <section class="section" id="benefits">
   <div class="container">
@@ -109,7 +111,7 @@ sitemap: true
     <div class="benefits-grid fade-up">
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>No Flap Creation</h3>
         <p>By avoiding a traditional corneal flap, SMILE Pro maintains maximum corneal stability and reduces post-operative sensitivity.</p>
@@ -118,7 +120,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>8-Second Laser Delivery</h3>
         <p>The ZEISS VisuMax 800 delivers precise laser pulses in under 10 seconds per eye, ensuring a quick and smooth process.</p>
@@ -127,7 +129,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>Rapid Daily Return</h3>
         <p>Most patients resume reading, digital screen work, and normal non-contact routines within 24 hours of treatment.</p>
@@ -148,7 +150,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <span class="tl-dot-num">01</span>
         </div>
@@ -157,7 +159,7 @@ sitemap: true
           <h3 class="tl-title">Corneal & Vision Mapping</h3>
           <p class="tl-desc">Detailed diagnostic imaging checks corneal thickness, curvature, and prescription accuracy to confirm complete candidate suitability.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Personalized Treatment Plan
           </div>
         </div>
@@ -166,7 +168,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
           <span class="tl-dot-num">02</span>
         </div>
@@ -175,7 +177,7 @@ sitemap: true
           <h3 class="tl-title">15-Minute Micro-Incision Laser</h3>
           <p class="tl-desc">Numbing eye drops are applied for complete comfort. The ZEISS VisuMax 800 shapes the tissue layer in roughly 8 seconds per eye, followed by removal through a tiny micro-incision.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             No Stitches or Flaps
           </div>
         </div>
@@ -184,7 +186,7 @@ sitemap: true
       <div class="tl-item">
         <div class="tl-dot-wrap">
           <div class="tl-dot">
-            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </div>
           <span class="tl-dot-num">03</span>
         </div>
@@ -193,7 +195,7 @@ sitemap: true
           <h3 class="tl-title">Next-Day Clarity & 12 Months Support</h3>
           <p class="tl-desc">Vision stabilizes rapidly over the first 24 hours. Full post-procedure follow-up visits and prescription drops are included for an entire year.</p>
           <div class="tl-highlight">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             1 Year Follow-Up Care
           </div>
         </div>
@@ -248,10 +250,10 @@ sitemap: true
             <td class="col-s">24 Hours / Same Day</td>
           </tr>
           <tr>
-            <td>Active Sport / Swimming Return</td>
+            <td>Light Exercise / Swimming Return</td>
             <td>1 to 2 Weeks</td>
             <td>2 to 4 Weeks</td>
-            <td class="col-s">1 Week</td>
+            <td class="col-s">{{ clinical.aftercare.en.comparison_summary }}</td>
           </tr>
         </tbody>
       </table>
@@ -271,33 +273,35 @@ sitemap: true
       </p>
     </div>
 
-    <div class="calc-wrap fade-up">
+    {% set lifetimeExample = (pricing.savings.end_age - pricing.savings.default_age) * pricing.savings.default_annual_spend %}
+    {% set savingsExample = lifetimeExample - pricing.savings.reference_price %}
+    <div class="calc-wrap fade-up" data-end-age="{{ pricing.savings.end_age }}" data-procedure-cost="{{ pricing.savings.reference_price }}">
       <div class="calc-grid">
         <div class="calc-input-group">
           <label for="calc-age">Current Age</label>
-          <input type="number" id="calc-age" value="28" min="18" max="60" oninput="calculateSavings()" />
+          <input type="number" id="calc-age" value="{{ pricing.savings.default_age }}" min="18" max="{{ pricing.savings.end_age }}" oninput="calculateSavings()" />
         </div>
         <div class="calc-input-group">
           <label for="calc-spend">Annual Contact/Glass Spend (EGP)</label>
-          <input type="number" id="calc-spend" value="8000" step="500" oninput="calculateSavings()" />
+          <input type="number" id="calc-spend" value="{{ pricing.savings.default_annual_spend }}" step="500" oninput="calculateSavings()" />
         </div>
       </div>
 
       <div class="calc-result">
         <div>
           <div class="calc-col-lbl">Lifetime Spend (to Age 60)</div>
-          <div class="calc-col-num" id="res-lifetime">256,000</div>
+          <div class="calc-col-num" id="res-lifetime">{{ lifetimeExample | formatNumber('en-US') }}</div>
           <div class="calc-col-sub">EGP projected expenditure</div>
         </div>
         <div>
           <div class="calc-col-lbl">Estimated Lifetime Savings</div>
-          <div class="calc-col-num savings" id="res-savings">208,000</div>
+          <div class="calc-col-num savings" id="res-savings">{{ savingsExample | formatNumber('en-US') }}</div>
           <div class="calc-col-sub">EGP saved with SMILE Pro</div>
         </div>
       </div>
 
       <p class="calc-note">
-        *Based on single procedure cost of EGP 55,000 compared to recurring annual lens and optical maintenance up to age 60.
+        *Illustrative estimate based on a procedure cost of EGP {{ pricing.savings.reference_price | formatNumber('en-US') }} compared with recurring lens and optical costs up to age {{ pricing.savings.end_age }}. Your final treatment and quote depend on the clinical examination.
       </p>
     </div>
   </div>
@@ -308,7 +312,7 @@ sitemap: true
   <div class="container">
     <div class="doctor-grid fade-up">
       <div class="doc-img">
-        <img src="/images/Naggar6.png" alt="Dr. Mohamed El Naggar" width="896" height="1200" loading="lazy" />
+        <img src="/images/Naggar6.webp" alt="{{ site.doctor.en }}" width="896" height="1200" eleventy:widths="360,600,896" sizes="(max-width: 760px) calc(100vw - 40px), 42vw" loading="lazy" decoding="async" />
         <div class="doc-badge">
           <div class="doc-badge-num">15+</div>
           <div class="doc-badge-lbl">Years Experience</div>
@@ -318,10 +322,10 @@ sitemap: true
       <div>
         <span class="lbl">Lead Surgeon</span>
         <div class="rule"></div>
-        <h2 class="doc-name">Dr. Mohamed El Naggar</h2>
+        <h2 class="doc-name">{{ site.doctor.en }}</h2>
         <div class="doc-title">Consultant Corneal & Refractive Surgeon</div>
         <p class="doc-bio">
-          Dr. Mohamed El Naggar specializes in advanced corneal surgery and refractive error corrections.
+          {{ site.doctor.en }} specializes in advanced corneal surgery and refractive error corrections.
           Dedicated to utilizing modern diagnostic tools and proven surgical protocols to maintain high safety standards and accurate visual results.
         </p>
 
@@ -360,7 +364,7 @@ sitemap: true
       <div class="tech-features">
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">High Frequency Delivery</h3>
@@ -370,7 +374,7 @@ sitemap: true
 
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">Ocular Alignment Guidance</h3>
@@ -380,7 +384,7 @@ sitemap: true
 
         <div class="tech-feat">
           <div class="tech-feat-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
             <h3 class="tech-feat-title">Gentle Contact Interface</h3>
@@ -390,58 +394,11 @@ sitemap: true
             </div>
 
       <div style="border-radius:var(--r);overflow:hidden;max-height:420px;">
-        <video loop muted playsinline preload="none" data-play-when-visible aria-hidden="true" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r);display:block;">
+        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="ZEISS VisuMax 800 technology video" style="width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r);display:block;">
           <source src="/images/Video1.mp4" type="video/mp4"/>
         </video>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section" id="reviews">
-  <div class="container">
-    <span class="lbl">Patient Experiences</span>
-    <div class="rule"></div>
-    <h2>Real Patient Outcomes</h2>
-
-    <div class="testi-grid fade-up">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"The laser phase felt so quick. I was back at my desk and reviewing documents the very next afternoon."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">A</div>
-          <div>
-            <div class="testi-name">Ahmed M.</div>
-            <div class="testi-detail">Software Engineer • SMILE Pro</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"Dr. El Naggar thoroughly explained my corneal scan results. The entire clinic process in New Cairo was smooth."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">S</div>
-          <div>
-            <div class="testi-name">Sara K.</div>
-            <div class="testi-detail">Architect • SMILE Pro</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">"Not having to deal with contact lens dryness during daily workouts has made a noticeable difference."</div>
-        <div class="testi-author">
-          <div class="testi-avatar">O</div>
-          <div>
-            <div class="testi-name">Omar T.</div>
-            <div class="testi-detail">Fitness Coach • SMILE Pro</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -490,7 +447,7 @@ sitemap: true
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          The EGP 55,000 package includes the procedure on both eyes, all surgical consumables, post-op medicated eye drops, and 12 months of follow-up evaluation appointments.
+          An illustrative EGP {{ pricing.savings.reference_price | formatNumber('en-US') }} treatment quote includes the procedure on both eyes, all surgical consumables, post-op medicated eye drops, and 12 months of follow-up evaluation appointments. The final treatment and fee are confirmed after examination.
         </div>
       </div>
 
@@ -500,7 +457,7 @@ sitemap: true
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          Most patients resume screen reading, general desk work, and driving within 24 hours. Non-contact sports can be resumed within a day, while swimming is cleared after 1 week.
+          Most patients resume screen reading, general desk work, and driving within 24 hours. For exercise, follow the separate recovery limits: light exercise {{ clinical.aftercare.en.light_exercise }}, gym workouts {{ clinical.aftercare.en.gym }}, swimming {{ clinical.aftercare.en.swimming }}, and contact sports {{ clinical.aftercare.en.contact_sports }}.
         </div>
       </div>
     </div>
@@ -512,11 +469,11 @@ sitemap: true
   <div class="container">
     <span class="lbl">Clinic Location</span>
     <div class="rule"></div>
-    <h2>Visit Us in New Cairo</h2>
+    <h2>Visit Us in {{ site.location.locality.en }}</h2>
 
     <div class="split" style="grid-template-columns:1fr 1fr;margin-top:32px;">
       <div class="card">
-        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">Dr. Mohamed El Naggar Eye Clinic</h3>
+        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">{{ site.doctor.en }} Eye Clinic</h3>
         <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;">
           {% for line in site | clinicAddress('en') %}{{ line }}{% if not loop.last %}<br/>{% endif %}{% endfor %}
         </p>
@@ -527,7 +484,8 @@ sitemap: true
 
       <div style="width:100%;min-height:260px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);">
         <iframe
-          src="https://maps.google.com/maps?q=Eterna%20Medical%20City%20New%20Cairo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="Map showing {{ site.doctor.en }} Eye Clinic in {{ site.address.en[0] }}"
+          src="{{ site.location.map_embed_url }}"
           width="100%"
           height="100%"
           style="border:0;min-height:260px;"
@@ -543,13 +501,13 @@ sitemap: true
 <section class="cta-section">
   <div class="container">
     <h2>Take the First Step Toward <em>Clear Vision</em></h2>
-    <p>Schedule your corneal mapping & vision suitability assessment at Eterna Medical City, New Cairo.</p>
+    <p>Schedule your corneal mapping & vision suitability assessment at {{ site.address.en[0] }}, {{ site.location.locality.en }}.</p>
 
     <div class="cta-form-wrap fade-up">
       <h3 class="form-card-title">Book Vision Assessment</h3>
-      <p class="cta-form-sub">Eterna Medical City • Fifth Settlement, New Cairo</p>
+      <p class="cta-form-sub">{{ site.address.en | join(' • ') }}</p>
 
-      {{ consultation('en', 'consultation', 'bottom-form', 'cta', true) }}
+      {{ consultation('en', 'consultation', 'bottom-form', 'cta', '', 'home-bottom') }}
     </div>
   </div>
 </section>

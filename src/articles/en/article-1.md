@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-1.html"
-canonical: "/en/articles/article-1.html"
-alternate_url: "/articles/article-1.html"
-x_default_url: "/en/articles/article-1.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "What Is the Difference Between Femto LASIK and SMILE Pro?"
 seo_title: "What Is the Difference Between Femto LASIK and SMILE Pro? | Smile Pro Egypt"
-description: "A detailed medical comparison of Femto LASIK and flapless SMILE Pro vision correction."
 seo_description: "A detailed medical comparison of Femto LASIK and flapless SMILE Pro vision correction."
 slug: "article-1"
-translation_key: "article-1"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar1.webp"
+image_width: 719
+image_height: 1280
 excerpt: "A detailed medical comparison of Femto LASIK and flapless SMILE Pro vision correction."
 category: "Comparisons"
 read_time: "8 min read"
 published: true
-sitemap: true
 ---
 <p>The field of refractive vision correction has undergone remarkable technological evolutions over recent decades. Modern medicine has transitioned from conventional blade-assisted procedures to ultra-precise femtosecond laser technologies. Among the most advanced and widely performed surgeries today are <strong>Femto LASIK</strong> and <strong>SMILE Pro</strong> technology. Although both procedures share the ultimate goal of restoring natural visual acuity and eliminating dependence on glasses or contacts, their surgical mechanics and biomechanical impacts on corneal tissue differ fundamentally.</p>
 
@@ -103,7 +92,7 @@ sitemap: true
 <div class="doc-profile">
 
 <div class="doc-info">
-<h4>دكتور محمد النجار</h4>
-<p>استشاري جراحات العيون والقرنية وتصحيح العيوب الانكسارية بالليزر...</p>
+<h4>Dr. Mohamed El Naggar</h4>
+<p>Consultant ophthalmic, corneal, and refractive surgeon with extensive experience in SMILE Pro and Femto LASIK using advanced German laser technology.</p>
 </div>
 </div>

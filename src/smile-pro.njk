@@ -1,25 +1,29 @@
 ---
 layout: "layouts/landing.njk"
 locale: "ar"
-permalink: "/smile-pro.html"
-canonical: "/smile-pro.html"
-alternate_url: "/en/smile-pro.html"
-x_default_url: "/en/smile-pro.html"
+permalink: "/smile-pro/"
+canonical: "/smile-pro/"
+alternate_url: "/en/smile-pro/"
+x_default_url: "/en/smile-pro/"
 page_kind: "smile-pro"
 page_css: "smile-pro.css"
-title: "تقنية السمايل برو (SMILE Pro) في مصر | دكتور محمد النجار"
-description: "احصل على أحدث تقنيات تصحيح النظر بالليزر في مصر خلال 8 ثوانٍ فقط بدون فتح شريحة مع دكتور محمد النجار وتقنية ZEISS VisuMax 800."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "تقنية السمايل برو (SMILE Pro) في مصر | {{ site.doctor.ar }}"
+  description: "احصل على أحدث تقنيات تصحيح النظر بالليزر في مصر خلال 8 ثوانٍ فقط بدون فتح شريحة مع {{ site.doctor.ar }} وتقنية ZEISS VisuMax 800."
+image: "/images/Naggar6.webp"
 show_sticky: true
 sitemap: true
 ---
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- Hero Section -->
     <header class="hero">
         <div class="container hero-grid">
             <div>
                 <span class="hero-badge">أحدث جيل لتصحيح النظر 2026</span>
                 <h1 id="heroH1">تقنية السمايل برو (SMILE Pro)<br>تصحيح النظر في 8 ثوانٍ فقط</h1>
-                <p id="heroP">استعد قوة إبصارك بدون فتح شريحة بالقرنية وبدون ألم، باستخدام أحدث جهاز ZEISS VisuMax 800 الألماني مع دكتور محمد النجار.</p>
+                <p id="heroP">استعد قوة إبصارك بدون فتح شريحة بالقرنية وبدون ألم، باستخدام أحدث جهاز ZEISS VisuMax 800 الألماني.</p>
 
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -35,11 +39,21 @@ sitemap: true
                         <p id="stat3">بدون فتح شريحة (Flapless)</p>
                     </div>
                 </div>
+                <div class="doctor-trust">
+                    <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+                    <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
+                </div>
 
-                <a href="#book" class="cta-btn" id="heroCta">احجز كشفك الطبي اليوم</a>
+                <a href="#book" class="cta-btn" id="heroCta" data-cta="smile-hero-book">احجز فحص النظر الآن</a>
             </div>
-            <div>
-                <img src="/images/device1.jpeg" alt="تقنية السمايل برو مع دكتور محمد النجار" class="hero-img" width="554" height="554" fetchpriority="high">
+            <div class="lead-card" id="book">
+                <h2>احجز تقييم ملاءمة العين</h2>
+                <p class="lead-card__sub">اترك بياناتك وسيتصل بك فريقنا لترتيب موعد الفحص والإجابة عن أسئلتك.</p>
+                {{ consultation('ar', 'smile-pro-hero-ar', 'smile-pro-hero-form-ar', 'smile-hero-ar', 'smile-pro', 'smile-pro-hero') }}
+                <div class="lead-card__contact">
+                    <a href="tel:{{ site.contact.phone_e164 }}">اتصل بنا <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('ar') }}</span></a>
+                    <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" rel="noopener">{{ whatsappIcon() }} واتساب</a>
+                </div>
             </div>
         </div>
     </header>
@@ -78,7 +92,7 @@ sitemap: true
         <!-- Technology Overview -->
         <section>
             <div class="tech-box">
-                <img src="/images/device2.jpg" alt="جهاز VisuMax 800" width="690" height="690" loading="lazy">
+                <img src="/images/device2.webp" alt="جهاز VisuMax 800" width="690" height="690" eleventy:widths="320,640,690" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" loading="lazy" decoding="async">
                 <div class="tech-info">
                     <h3 id="techH3">جهاز ZEISS VisuMax 800 العالمي</h3>
                     <p id="techP" style="color:var(--muted); margin-bottom:20px;">الجيل الأحدث عالمياً من شركة كارل زايس الألمانية، والمصمم لتوفير أعلى معدلات النجاح في جراحات الانكسار.</p>
@@ -95,7 +109,7 @@ sitemap: true
         <!-- Step by Step Workflow -->
         <section>
             <div class="sec-title">
-                <h2 id="stepTitle">خطوات إجراء العملية مع دكتور محمد النجار</h2>
+                <h2 id="stepTitle">خطوات إجراء العملية مع {{ site.doctor.ar }}</h2>
                 <p id="stepSub">رحلة علاجية بسيطة ومريحة تستغرق 15 دقيقة فقط داخل غرفة العمليات</p>
             </div>
             <div class="steps-wrapper">
@@ -166,11 +180,14 @@ sitemap: true
         </section>
 
         <!-- Booking CTA Section -->
-        <section id="book">
+        <section id="book-again">
             <div class="cta-box">
                 <h2 id="ctaH2">جاهز للاستغناء عن النظارات والعدسات اللاصقة؟</h2>
-                <p id="ctaP">احجز موعد تقييم القرنية والفحص الشامل مع دكتور محمد النجار لتحديد مدى ملائمة تقنية SMILE Pro لعينيك.</p>
-                <a href="https://wa.me/{{ site.contact.whatsapp }}" class="cta-btn" id="ctaWhatsapp">تواصل عبر الواتساب الآن</a>
+                <p id="ctaP">احجز موعد تقييم القرنية والفحص الشامل مع {{ site.doctor.ar }} لتحديد مدى ملائمة تقنية SMILE Pro لعينيك.</p>
+                <div class="lead-card lead-card--bottom">
+                    {{ consultation('ar', 'smile-pro-bottom-ar', 'smile-pro-bottom-form-ar', 'smile-bottom-ar', 'smile-pro', 'smile-pro-bottom') }}
+                    <div class="lead-card__contact"><a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" rel="noopener">{{ whatsappIcon() }} تواصل عبر واتساب</a></div>
+                </div>
             </div>
         </section>
     </main>

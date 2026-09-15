@@ -1,4 +1,5 @@
 const crypto = require('node:crypto');
+const { cmsOrigins, decodeStateCookie, isAllowedCmsOrigin } = require('../lib/cms-origins.cjs');
 
 const expiredStateCookie = 'decap_oauth_state=; Path=/.netlify/functions/callback; HttpOnly; Secure; SameSite=Lax; Max-Age=0';
 
@@ -37,12 +38,18 @@ exports.handler = async (event = {}) => {
   const clientId = process.env.OAUTH_CLIENT_ID;
   const clientSecret = process.env.OAUTH_CLIENT_SECRET;
   if (!clientId || !clientSecret) return errorResponse(500, 'CMS OAuth environment variables are missing.');
+  const trustedCmsOrigins = cmsOrigins();
+  if (!trustedCmsOrigins.length) return errorResponse(500, 'CMS_ALLOWED_ORIGINS does not contain a valid HTTPS origin.');
 
   const query = event.queryStringParameters || {};
   const cookieHeader = event.headers?.cookie || event.headers?.Cookie || '';
-  const expectedState = readCookie(cookieHeader, 'decap_oauth_state');
+  const stateCookie = decodeStateCookie(readCookie(cookieHeader, 'decap_oauth_state'));
+  const expectedState = stateCookie.state;
   if (!equalState(query.state, expectedState)) return errorResponse(400, 'The OAuth state is missing or invalid. Please try signing in again.');
   if (!query.code) return errorResponse(400, 'GitHub did not return an authorization code. Please try signing in again.');
+  if (stateCookie.origin && !trustedCmsOrigins.includes(stateCookie.origin) && isAllowedCmsOrigin(stateCookie.origin, trustedCmsOrigins)) {
+    trustedCmsOrigins.unshift(stateCookie.origin);
+  }
 
   let token;
   try {
@@ -60,6 +67,7 @@ exports.handler = async (event = {}) => {
   }
 
   const successMessage = JSON.stringify(`authorization:github:success:${JSON.stringify({ token })}`);
+  const allowedOrigins = JSON.stringify(trustedCmsOrigins);
   const script = `<!doctype html>
     <meta charset="utf-8">
     <title>CMS sign-in complete</title>
@@ -71,15 +79,18 @@ exports.handler = async (event = {}) => {
           status.textContent = "The CMS window is no longer open. Return to the admin page and try again.";
           return;
         }
+        var allowedOrigins = ${allowedOrigins};
         function recv(event) {
-          if (event.source !== window.opener) return;
+          if (event.source !== window.opener || !allowedOrigins.includes(event.origin)) return;
           window.opener.postMessage(${successMessage}, event.origin);
           window.removeEventListener("message", recv, false);
           status.textContent = "Sign-in complete. You can close this window.";
           window.close();
         }
         window.addEventListener("message", recv, false);
-        window.opener.postMessage("authorizing:github", "*");
+        allowedOrigins.forEach(function(origin) {
+          window.opener.postMessage("authorizing:github", origin);
+        });
       })();
     <\/script>`;
 

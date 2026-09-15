@@ -1,0 +1,106 @@
+{
+  "installment_months": 18,
+  "savings": {
+    "default_age": 28,
+    "end_age": 60,
+    "default_annual_spend": 8000,
+    "reference_price": 55000
+  },
+  "lead_options": ["smile-pro", "femto-lasik", "custom-lasik", "prk", "icl"],
+  "treatments": {
+    "prk": {
+      "calculator": true,
+      "price_min": 15000,
+      "price_max": 25000,
+      "en": {
+        "name": "PRK / Surface Ablation",
+        "sub": "No flap, no incision",
+        "best_for": "Some thin-cornea profiles after examination, contact sports, budget-conscious",
+        "pros": ["No flap at all", "May suit some thin-cornea profiles after examination", "Most affordable"],
+        "cons": ["Slower recovery (3–5 days)", "More post-op discomfort"]
+      },
+      "ar": {
+        "name": "PRK / إزالة سطحية",
+        "name_en": "PRK",
+        "sub": "من غير فلاب، من غير فتحة",
+        "best_for": "بعض حالات القرنية الرفيعة بعد الفحص، الرياضات العنيفة، الميزانية المحدودة",
+        "pros": ["من غير فلاب خالص", "قد تناسب بعض حالات القرنية الرفيعة بعد الفحص", "الأقل تكلفة"],
+        "cons": ["تعافي أبطأ (٣–٥ أيام)", "ألم أكتر بعد العملية"]
+      }
+    },
+    "custom-lasik": {
+      "calculator": false,
+      "price_min": 18000,
+      "price_max": 28000,
+      "en": {
+        "name": "Custom LASIK",
+        "best_for": "Standard myopia, fast visual recovery"
+      },
+      "ar": {
+        "name": "الليزك التفصيلي",
+        "best_for": "قصر النظر المعتاد، تعافي بصري سريع"
+      }
+    },
+    "femto-lasik": {
+      "calculator": true,
+      "price_min": 30000,
+      "price_max": 48000,
+      "en": {
+        "name": "Femto-LASIK",
+        "sub": "Blade-free flap",
+        "best_for": "Precision flap, zero blade, established option",
+        "pros": ["Precise femtosecond flap", "Fast visual recovery"],
+        "cons": ["A corneal flap is created", "Higher dry eye tendency than flapless options"]
+      },
+      "ar": {
+        "name": "فيمتو ليزك",
+        "name_en": "Femto-LASIK",
+        "sub": "فلاب بدون مشرط",
+        "best_for": "فلاب دقيق، بدون مشرط، تقنية معروفة",
+        "pros": ["فلاب دقيق بالفيمتو سكند", "تعافي نظري سريع"],
+        "cons": ["بيتم إنشاء فلاب في القرنية", "احتمال جفاف أعلى من الخيارات بدون فلاب"]
+      }
+    },
+    "smile-pro": {
+      "calculator": true,
+      "highlight": true,
+      "price_min": 45000,
+      "price_max": 68000,
+      "en": {
+        "name": "SMILE Pro",
+        "sub": "ZEISS VisuMax 800",
+        "best_for": "Flapless treatment, minimal dry eye tendency, active lifestyle",
+        "pros": ["Flapless — 2mm micro-incision", "Lower dry eye tendency than flap-based options", "8-second laser per eye", "Flapless design for active lifestyles"],
+        "cons": []
+      },
+      "ar": {
+        "name": "سمايل برو",
+        "name_en": "SMILE Pro",
+        "sub": "ZEISS VisuMax 800",
+        "best_for": "بدون فلاب، احتمال جفاف أقل، نمط حياة نشط",
+        "pros": ["بدون فلاب — فتحة ٢ مللي بس", "احتمال جفاف أقل من الخيارات التي تستخدم فلاب", "الليزر ٨ ثواني للعين", "تصميم بدون فلاب مناسب لنمط الحياة النشط"],
+        "cons": []
+      }
+    },
+    "icl": {
+      "calculator": true,
+      "price_min": 70000,
+      "price_max": 110000,
+      "en": {
+        "name": "ICL (Implantable Lens)",
+        "sub": "Phakic intraocular lens",
+        "best_for": "Extreme prescription, laser not suitable",
+        "pros": ["Works for extreme prescriptions", "Removable", "No corneal tissue removed"],
+        "cons": ["Surgical implant", "Highest cost"]
+      },
+      "ar": {
+        "name": "عدسة ICL داخلية",
+        "name_en": "ICL",
+        "sub": "عدسة داخل العين",
+        "best_for": "القياسات العالية جدًا، عندما لا يناسب الليزر",
+        "pros": ["بتشتغل مع القياسات العالية جداً", "قابلة للإزالة", "من غير إزالة أي نسيج من القرنية"],
+        "cons": ["عملية زرع جراحية", "أعلى تكلفة"]
+      }
+    }
+  }
+}

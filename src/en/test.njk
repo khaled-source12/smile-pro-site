@@ -1,0 +1,67 @@
+---
+layout: "layouts/standalone.njk"
+locale: "en"
+permalink: "/en/test/"
+canonical: "/en/test/"
+page_kind: "test"
+page_css: "test.css"
+page_js: "test.js"
+title: "Eye-check interface demo — non-diagnostic"
+description: "An experimental interface that does not measure visual acuity or colour vision and provides no medical result."
+image: "/images/Naggar6.webp"
+robots: "noindex, nofollow"
+sitemap: false
+tracking: false
+---
+<main class="container">
+    <a class="test-language" href="/test/" lang="ar" dir="rtl">العربية</a>
+
+    <div id="step-1" class="step active">
+        <h1>Eye-check interface demo</h1>
+        <p><strong>This is an interface demo, not a medical test.</strong> It cannot measure visual acuity or colour vision and must not be used to make a health decision. You can have a bank card ready to visually calibrate the display before you begin.</p>
+        <button type="button" class="btn" onclick="nextStep(2)">Start calibration</button>
+    </div>
+
+    <div id="step-2" class="step">
+        <h2>Screen calibration</h2>
+        <p>Place a bank card over the rectangle below, then move the slider until the rectangle matches the card's size.</p>
+        <div id="credit-card">Place card here</div>
+        <input type="range" id="card-slider" min="150" max="450" value="300" oninput="adjustCardSize(this.value)" style="width: 100%; margin-bottom: 15px;">
+        <button type="button" class="btn" onclick="finishCalibration()">Calibration complete</button>
+    </div>
+
+    <div id="step-3" class="step">
+        <h2>E-direction demo</h2>
+        <p>Stand <strong>1.5 metres</strong> from the screen and cover your left eye. Which direction is the opening of the E facing?</p>
+
+        <div id="e-container">
+            <div id="e-symbol">E</div>
+        </div>
+
+        <div class="controls">
+            <button type="button" class="btn" onclick="checkAnswer('up')" aria-label="Up">⬆️</button>
+            <button type="button" class="btn" onclick="checkAnswer('left')" aria-label="Left">⬅️</button>
+            <button type="button" class="btn" onclick="checkAnswer('right')" aria-label="Right">➡️</button>
+            <button type="button" class="btn" onclick="checkAnswer('down')" aria-label="Down">⬇️</button>
+        </div>
+    </div>
+
+    <div id="step-4" class="step">
+        <h2>Number-entry demo</h2>
+        <p>This circle is a design element only. It is not a validated Ishihara plate and does not test colour vision.</p>
+        <div class="ishihara-img">74</div>
+        <input type="number" id="color-answer" placeholder="Enter the number" aria-label="Number shown in the circle" style="padding: 10px; font-size: 16px; width: 80%; margin-bottom: 15px; text-align: center;">
+        <br>
+        <button type="button" class="btn" onclick="checkColorTest()">Continue</button>
+    </div>
+
+    <div id="step-5" class="step">
+        <h2>Demo complete</h2>
+        <p id="result-text">Finishing the demo...</p>
+        <button type="button" class="btn" onclick="location.reload()">Restart demo</button>
+    </div>
+
+    <div class="disclaimer">
+        ⚠️ Notice: this interface does not provide an eye test or health result. Measuring vision and colour perception requires validated equipment and controlled testing by an ophthalmologist or optometrist.
+    </div>
+</main>

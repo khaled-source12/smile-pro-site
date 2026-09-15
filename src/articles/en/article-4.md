@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-4.html"
-canonical: "/en/articles/article-4.html"
-alternate_url: "/articles/article-4.html"
-x_default_url: "/en/articles/article-4.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "How Can You Prevent Dry Eye After Vision Correction?"
 seo_title: "How Can You Prevent Dry Eye After Vision Correction? | Smile Pro Egypt"
-description: "Why temporary dry eye can occur after laser vision correction and how to reduce it."
 seo_description: "Why temporary dry eye can occur after laser vision correction and how to reduce it."
 slug: "article-4"
-translation_key: "article-4"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar6.webp"
+image_width: 896
+image_height: 1200
 excerpt: "Why temporary dry eye can occur after laser vision correction and how to reduce it."
 category: "Dry eye"
 read_time: "3 min read"
 published: true
-sitemap: true
 ---
 <p>Laser vision correction is one of the most successful and safe surgical advancements in modern ophthalmology. However, <strong>temporary dry eyes</strong> remain a common symptom during the initial post-operative healing period. Understanding why this happens and how to manage it helps ensure a fast, comfortable recovery and crisp visual outcomes.</p>
 

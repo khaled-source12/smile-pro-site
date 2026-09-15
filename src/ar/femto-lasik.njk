@@ -1,0 +1,222 @@
+---
+layout: "layouts/landing.njk"
+locale: "ar"
+permalink: "/ar/femto-lasik/"
+canonical: "/ar/femto-lasik/"
+alternate_url: "/femto-lasik/"
+x_default_url: "/femto-lasik/"
+page_kind: "femto"
+page_css: "femto.css"
+has_form: true
+eleventyComputed:
+  title: "عملية الفيمتو ليزك، {{ site.location.district.ar }} | {{ site.doctor.ar }}"
+  description: "عملية فيمتو ليزك بدون مشرط مع {{ site.doctor.ar }} في {{ site.address.ar[0] }}، {{ site.location.locality.ar }}. تصحيح نظر دقيق بالليزر مع تعافٍ بصري سريع. احجز فحص النظر."
+image: "/images/Naggar6.webp"
+schema_type: "clinic"
+show_sticky: true
+sitemap: true
+---
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        تقنية ليزر كاملة بدون مشرط
+      </div>
+      <h1>فيمتو ليزك <em>لتصحيح النظر بدقة</em></h1>
+      <p class="hero-sub">
+        استعد وضوح رؤيتك بتقنية الفيمتو ليزك. تستخدم العملية نبضات ليزر الفيمتوثانية فائقة السرعة لإنشاء شريحة قرنية دقيقة دون مشرط ميكانيكي، ثم يعيد ليزر الإكسايمر الموجّه بالكمبيوتر تشكيل القرنية.
+      </p>
+      <div class="hero-proof">
+        <div class="hero-proof-item">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          بدون مشرط ميكانيكي
+        </div>
+        <div class="hero-proof-item">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          خريطة قرنية مخصصة
+        </div>
+        <div class="hero-proof-item">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          تعافٍ بصري سريع خلال 24 ساعة
+        </div>
+      </div>
+      <div class="doctor-trust doctor-trust--light">
+        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+        <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
+      </div>
+    </div>
+
+    <div class="form-card" id="book">
+      <h2 class="form-card-title">احجز فحص النظر</h2>
+      <p class="form-card-sub">احجز تقييم ملاءمة الفيمتو ليزك في {{ site.address.ar[0] }}، {{ site.location.locality.ar }}</p>
+
+      {{ consultation('ar', 'femto-consultation-ar', 'femto-form', 'femto', 'femto-lasik', 'femto-hero') }}
+
+      <a href="tel:{{ site.contact.phone_e164 }}" class="form-call-btn">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        اتصل بنا <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('ar') }}</span>
+      </a>
+
+      <div class="form-wa">
+        <span>تفضل المراسلة الفورية؟</span>
+        <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" class="wa-link" rel="noopener">
+          {{ whatsappIcon() }}
+          تحدث عبر واتساب
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="benefits">
+  <div class="container">
+    <span class="lbl">لماذا الفيمتو ليزك؟</span>
+    <div class="rule"></div>
+    <h2>مصمم للدقة والأمان</h2>
+    <p style="color:var(--muted);max-width:700px;margin-bottom:32px;">
+      على عكس الليزك التقليدي الذي يستخدم مشرط الميكروكيراتوم، يعتمد الفيمتو ليزك على طاقة ليزر تحت الحمراء لإنشاء شريحة قرنية رفيعة ومتجانسة بدقة عالية.
+    </p>
+
+    <div class="benefits-grid fade-up">
+      <div class="b-card">
+        <div class="b-icon">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>بدون مشرط بنسبة 100%</h3>
+        <p>يستبدل مخاطر المشرط الميكانيكي بنبضات ليزر مجهرية تنشئ شريحة قرنية مخصصة ودقيقة.</p>
+        <span class="b-tag">دقة مجهرية</span>
+      </div>
+
+      <div class="b-card">
+        <div class="b-icon">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>حواف مخصصة للشريحة</h3>
+        <p>ينشئ الليزر حواف مائلة تتداخل بإحكام عند إعادة الشريحة إلى مكانها، مما يساعد على الالتئام الهيكلي السريع.</p>
+        <span class="b-tag">التئام مثالي</span>
+      </div>
+
+      <div class="b-card">
+        <div class="b-icon">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>نطاق واسع لتصحيح النظر</h3>
+        <p>فعّال في علاج نطاقات متعددة من قصر النظر وطول النظر والاستجماتيزم، وفق نتائج الفحص.</p>
+        <span class="b-tag">ملاءمة واسعة</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process" style="background:var(--cream2);">
+  <div class="container">
+    <span class="lbl">خطوات العملية</span>
+    <div class="rule"></div>
+    <h2>كيف تُجرى عملية الفيمتو ليزك؟</h2>
+
+    <div class="timeline fade-up">
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot">01</div></div>
+        <div class="tl-body">
+          <div class="tl-time">المرحلة الأولى — إنشاء الشريحة بليزر الفيمتوثانية</div>
+          <h3 class="tl-title">شريحة ليزر فائقة الدقة</h3>
+          <p class="tl-desc">يرسل ليزر الفيمتوثانية الموجّه بالكمبيوتر آلاف النبضات الضوئية تحت سطح القرنية لإنشاء شريحة رقيقة خلال نحو 10–12 ثانية.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot">02</div></div>
+        <div class="tl-body">
+          <div class="tl-time">المرحلة الثانية — إعادة التشكيل بليزر الإكسايمر</div>
+          <h3 class="tl-title">تصحيح نظر مخصص</h3>
+          <p class="tl-desc">تُرفع الشريحة برفق، ثم يعيد ليزر الإكسايمر تشكيل انحناء القرنية الداخلي وفق خريطة العين لتصحيح عيوب الإبصار.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot">03</div></div>
+        <div class="tl-body">
+          <div class="tl-time">المرحلة الثالثة — إعادة الشريحة إلى موضعها</div>
+          <h3 class="tl-title">التصاق طبيعي دون غرز</h3>
+          <p class="tl-desc">يعيد الجراح الشريحة إلى مكانها، حيث تلتصق طبيعيًا دون خياطة خلال دقائق وتعمل كضمادة حيوية تساعد على سرعة الراحة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <span class="lbl">الأسئلة والإجابات</span>
+    <div class="rule"></div>
+    <h2>أسئلة شائعة عن الفيمتو ليزك</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+          <span>ما الفرق بين الليزك التقليدي والفيمتو ليزك؟</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          يستخدم الليزك التقليدي مشرط ميكروكيراتوم آليًا لإنشاء شريحة القرنية، بينما يستخدم الفيمتو ليزك ليزرًا عالي الدقة لإنشاء شريحة أرق وأكثر تجانسًا وقابلية للتوقع دون مشرط ميكانيكي.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+          <span>هل عملية الفيمتو ليزك مؤلمة؟</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          لا. تعمل قطرات التخدير الموضعي على تخدير العين قبل بدء العلاج. قد يشعر المريض بضغط خفيف لبضع ثوانٍ أثناء إنشاء الشريحة، لكن دون ألم حاد.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+          <span>متى يتحسن النظر بعد الفيمتو ليزك؟</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          يصل معظم المرضى إلى وضوح بصري وظيفي خلال 24 ساعة، ويمكنهم العودة للعمل والأنشطة اليومية الخفيفة في اليوم التالي وفق تعليمات الطبيب.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="location" style="background:var(--cream2);">
+  <div class="container">
+    <span class="lbl">موقع العيادة</span>
+    <div class="rule"></div>
+    <h2>تفضل بزيارتنا في {{ site.location.locality.ar }}</h2>
+
+    <div class="split" style="grid-template-columns:1fr 1fr;margin-top:32px;">
+      <div class="card">
+        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">عيادة {{ site.doctor.ar }} للعيون</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;">
+          {% for line in site | clinicAddress('ar') %}{{ line }}{% if not loop.last %}<br/>{% endif %}{% endfor %}
+        </p>
+        <p style="font-size:14px;color:var(--text);font-weight:600;">
+          مواعيد العيادة: {{ site.hours.ar }}
+        </p>
+      </div>
+
+      <div style="width:100%;min-height:260px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);">
+        <iframe
+          title="خريطة عيادة {{ site.doctor.ar }} في {{ site.address.ar[0] }}"
+          src="{{ site.location.map_embed_url }}"
+          width="100%"
+          height="100%"
+          style="border:0;min-height:260px;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>

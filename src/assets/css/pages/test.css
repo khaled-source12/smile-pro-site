@@ -25,6 +25,14 @@
             text-align: center;
         }
 
+        .test-language {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #2c3e50;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
         h1, h2 {
             color: #2c3e50;
             margin-bottom: 15px;

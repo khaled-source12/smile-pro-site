@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-1.html"
-canonical: "/articles/article-1.html"
-alternate_url: "/en/articles/article-1.html"
-x_default_url: "/en/articles/article-1.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "ما الفرق بين الفيمتو ليزك وتقنية Smile Pro الحديثة؟"
 seo_title: "ما الفرق بين الفيمتو ليزك وتقنية Smile Pro الحديثة؟ | Smile Pro Egypt"
-description: "مقارنة طبية شاملة بين الفيمتو ليزك وتقنية Smile Pro بدون شريحة قرنية."
 seo_description: "مقارنة طبية شاملة بين الفيمتو ليزك وتقنية Smile Pro بدون شريحة قرنية."
 slug: "article-1"
-translation_key: "article-1"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar1.webp"
+image_width: 719
+image_height: 1280
 excerpt: "مقارنة طبية شاملة بين الفيمتو ليزك وتقنية Smile Pro بدون شريحة قرنية."
 category: "مقارنات"
 read_time: "8 دقائق قراءة"
 published: true
-sitemap: true
 ---
 <!-- Arabic Content (Default) -->
 <p>شهد مجال تصحيح عيوب النظر طفرات تكنولوجية متلاحقة خلال العقود الأخيرة، حيث انتقل الطب المعاصر من الجراحات التقليدية المعتمدة على المشرط الجراحي إلى تقنيات ألترا-دقيقة تسخر طاقة ليزر الفيمتو ثانية. ومن بين أكثر الجراحات انتشاراً وتطوراً في وقتنا الحالي هما تقنيتا <strong>الفيمتو ليزك (Femto LASIK)</strong> و<strong>تقنية سميل برو (Smile Pro)</strong>. وعلى الرغم من أن الهدف النهائي لكليهما هو إعادة النظر إلى حدته الطبيعية والتخلص التام من النظارات والعدسات اللاصقة، إلا أن الميكانيكية الجراحية ومدى تأثير العملية على الأنسجة الحيوية للقرنية يختلفان بشكل جوهري.</p>

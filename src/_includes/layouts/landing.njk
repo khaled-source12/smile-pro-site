@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
 ---
-<div class="legacy-page legacy-page--{{ page_kind }}">
+{% if page_kind == 'smile-pro' %}<div class="legacy-page legacy-page--{{ page_kind }}">{% else %}<main class="legacy-page legacy-page--{{ page_kind }}">{% endif %}
 {{ content | safe }}
-</div>
+{% if page_kind == 'smile-pro' %}</div>{% else %}</main>{% endif %}

@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-3.html"
-canonical: "/articles/article-3.html"
-alternate_url: "/en/articles/article-3.html"
-x_default_url: "/en/articles/article-3.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "هل سمك القرنية لديك يناسب عملية الفيمتو ليزك؟"
 seo_title: "هل سمك القرنية لديك يناسب عملية الفيمتو ليزك؟ | Smile Pro Egypt"
-description: "دليل فحص سمك وخريطة القرنية واختيار تقنية تصحيح النظر المناسبة."
 seo_description: "دليل فحص سمك وخريطة القرنية واختيار تقنية تصحيح النظر المناسبة."
 slug: "article-3"
-translation_key: "article-3"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar5.webp"
+image_width: 896
+image_height: 1200
 excerpt: "دليل فحص سمك وخريطة القرنية واختيار تقنية تصحيح النظر المناسبة."
 category: "الفحوصات"
 read_time: "5 دقائق قراءة"
 published: true
-sitemap: true
 ---
 <!-- Arabic Content (Default) -->
 <p>عندما يفكر الشخص في التخلص من النظارات والعدسات اللاصقة عن طريق جراحات تصحيح النظر، يتردد مصطلح <strong>"سمك القرنية"</strong> مراراً وتكراراً. يُعتبر القياس الدقيق لسمك القرنية الحجر الزواية والشرط الأساسي الذي يحدد ما إذا كنت مرشحاً مثالياً لإجراء الفيمتو ليزك، أم أن عينيك تتطلبان خياراً طبياً بديلاً مثل الفيمتو سمايل / Smile Pro أو الليزك السطحي (PRK).</p>

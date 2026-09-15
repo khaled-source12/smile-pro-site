@@ -3,6 +3,106 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Every deploy may replace HTML, CMS fragments and stable public URLs.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# This directory is generated at build time and contains content hashes only.
+[[headers]]
+  for = "/assets/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Legacy Arabic URLs that selected English with ?lang=en.
+# A replacement query prevents Netlify from forwarding lang=en; site.js removes
+# redirected=1 from the address bar without deciding which content is served.
+[[redirects]]
+  from = "/ar/"
+  to = "/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/index.html"
+  to = "/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/"
+  to = "/en/blog/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/en/blog/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/smile-pro/"
+  to = "/en/smile-pro/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/smile-pro.html"
+  to = "/en/smile-pro/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/laser-eye-surgery-cost-egypt/"
+  to = "/laser-eye-surgery-cost-egypt/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/laser-eye-surgery-cost-egypt.html"
+  to = "/laser-eye-surgery-cost-egypt/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/privacy/"
+  to = "/privacy/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/privacy.html"
+  to = "/privacy/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/femto-lasik/"
+  to = "/femto-lasik/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/femto-lasik.html"
+  to = "/femto-lasik/?redirected=1"
+  query = { lang = "en" }
+  status = 301
+  force = true
+
+# Permanent redirects from previously published .html URLs to clean URLs.
 [[redirects]]
   from = "/index.html"
   to = "/"
@@ -12,6 +112,42 @@
 [[redirects]]
   from = "/ar/index.html"
   to = "/ar/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog.html"
+  to = "/en/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/smile-pro.html"
+  to = "/smile-pro/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/smile-pro.html"
+  to = "/en/smile-pro/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/femto-lasik.html"
+  to = "/femto-lasik/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/femto-lasik.html"
+  to = "/ar/femto-lasik/"
   status = 301
   force = true
 
@@ -31,18 +167,80 @@
   from = "/laser-eye-surgery-cost-egypt.html"
   to = "/laser-eye-surgery-cost-egypt/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/ar/laser-eye-surgery-cost-egypt.html"
   to = "/ar/laser-eye-surgery-cost-egypt/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/ar/laser-eye-surgery-cost-egypt/.html"
   to = "/ar/laser-eye-surgery-cost-egypt/"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/privacy.html"
+  to = "/ar/privacy/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/thank-you.html"
+  to = "/thank-you/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/thank-you.html"
+  to = "/ar/thank-you/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/test.html"
+  to = "/test/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/test.html"
+  to = "/en/test/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/404.html"
+  to = "/404/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/404.html"
+  to = "/ar/404/"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/robot.txt"
   to = "/robots.txt"
   status = 301
+
+# Existing files win because these localized 404 rewrites are not forced.
+[[redirects]]
+  from = "/ar/*"
+  to = "/ar/404/"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/404/"
+  status = 404

@@ -1,0 +1,46 @@
+{
+  "en": [
+    {
+      "question": "Why is there such a wide price range?",
+      "answer": "Because the technology is different. PRK uses a surface laser with no flap creation. LASIK adds a microkeratome flap. Femto-LASIK replaces the blade with a femtosecond laser. SMILE Pro eliminates the flap entirely using a 2mm keyhole incision on the ZEISS VisuMax 800. Each step up adds precision, safety, and faster recovery — but also cost. The right question isn't \"which is cheapest\" but \"which is safest for my specific cornea.\""
+    },
+    {
+      "question": "Does cheaper mean worse?",
+      "answer": "Not necessarily. PRK has been performed safely for decades and may be the best option for some eye profiles after examination. The issue is when a clinic offers only one technology and fits every patient into it. At {doctor} Eye Clinic, the recommendation follows your Pentacam results — and sometimes that is the most affordable option."
+    },
+    {
+      "question": "What does the price include?",
+      "answer": "At our clinic, the quoted price covers the full procedure on both eyes, prescribed recovery eye drops, and 12 months of follow-up appointments. The initial consultation and Pentacam assessment are arranged separately, and our team confirms the details by phone. There are no hidden add-ons."
+    },
+    {
+      "question": "Can I pay in instalments?",
+      "answer": "Yes. We work with ValU and Premium Card for instalment plans. Depending on the technology and plan length, monthly payments can start from around EGP 2,500/month. Our team can walk you through the exact options after your assessment."
+    },
+    {
+      "question": "What is a Pentacam scan and why do I need one?",
+      "answer": "A Pentacam is a rotating camera that maps your entire cornea in 3D — measuring thickness, curvature, and elevation at thousands of points. It tells us definitively which technologies are safe for your specific eyes and which are not. Without it, any price estimate is just a guess. That's why we start every patient journey with one."
+    }
+  ],
+  "ar": [
+    {
+      "question": "ليه فيه فرق كبير في الأسعار؟",
+      "answer": "لأن التقنية مختلفة. PRK بتستخدم ليزر سطحي من غير فلاب. الليزك بيعمل فلاب بالمشرط. فيمتو ليزك بيعمل الفلاب بالليزر بدل المشرط. سمايل برو بتشيل الفلاب تماماً وبتستخدم فتحة ٢ مللي بس بجهاز ZEISS VisuMax 800. كل درجة فوق بتزوّد الدقة والأمان وسرعة التعافي — بس كمان التكلفة. السؤال الصح مش \"أنهي أرخص\" — السؤال \"أنهي آمن على قرنيتي أنا.\""
+    },
+    {
+      "question": "الأرخص يعني أسوأ؟",
+      "answer": "مش بالضرورة. PRK عملية مجرّبة وقد تكون الأنسب لبعض الحالات بعد الفحص. المشكلة لما عيادة بتقدم تقنية واحدة بس وبتحط كل المرضى فيها. في عيادة {doctor}، الترشيح بيتحدد حسب نتيجة فحص البنتاكام — وساعات بيكون الخيار الأقل تكلفة."
+    },
+    {
+      "question": "السعر شامل إيه بالظبط؟",
+      "answer": "في عيادتنا، السعر شامل العملية للعينين، قطرات التعافي، ومتابعة لمدة ١٢ شهر. الاستشارة الأولى وفحص البنتاكام بيتم ترتيبهم بشكل منفصل، وفريقنا بيأكد التفاصيل في المكالمة. مفيش تكاليف مخفية."
+    },
+    {
+      "question": "ينفع أقسّط؟",
+      "answer": "أيوه. بنتعامل مع ڤاليو وبريميوم كارد للتقسيط. حسب التقنية ومدة التقسيط، القسط الشهري ممكن يبدأ من حوالي ٢,٥٠٠ جنيه/شهر. فريقنا يقدر يوضحلك الخيارات بالظبط بعد الفحص."
+    },
+    {
+      "question": "إيه هو فحص البنتاكام وليه مهم؟",
+      "answer": "البنتاكام كاميرا دوّارة بتعمل خريطة ثلاثية الأبعاد لقرنيتك كلها — بتقيس السُمك والانحناء والارتفاع في آلاف النقاط. بتقولنا بشكل قاطع أنهي تقنية آمنة لعينك وأنهي لأ. من غيرها، أي تقدير سعر مجرد تخمين. عشان كده بنبدأ رحلة كل مريض بالفحص ده."
+    }
+  ]
+}

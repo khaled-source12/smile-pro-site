@@ -1,10 +1,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js')</script>
 <title>{{ seo_title or title }}</title>
 <meta name="description" content="{{ seo_description or description }}">
 <meta name="robots" content="{{ robots or 'index, follow, max-image-preview:large' }}">
 <link rel="canonical" href="{{ site.url }}{{ canonical or page.url }}">
-{% if resolved_alternate_url %}
+{% if resolved_alternate_url and not (robots and 'noindex' in robots) %}
 <link rel="alternate" hreflang="{{ 'ar-EG' if locale == 'en' else 'en-EG' }}" href="{{ site.url }}{{ resolved_alternate_url }}">
 <link rel="alternate" hreflang="{{ 'en-EG' if locale == 'en' else 'ar-EG' }}" href="{{ site.url }}{{ canonical or page.url }}">
 {% if resolved_x_default_url %}<link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ resolved_x_default_url }}">{% endif %}
@@ -19,21 +20,30 @@
 <meta name="twitter:title" content="{{ seo_title or title }}">
 <meta name="twitter:description" content="{{ seo_description or description }}">
 {% if image %}<meta name="twitter:image" content="{{ image | absoluteUrl(site.url) }}">{% endif %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="/images/smile-pro-logo.png">
-{% include "partials/tracking-head.njk" %}
-<link rel="stylesheet" href="/assets/css/tokens.css">
-<link rel="stylesheet" href="/assets/css/base.css">
-{% if page_css %}<link rel="stylesheet" href="/assets/css/pages/{{ page_css }}">{% endif %}
-<link rel="stylesheet" href="/assets/css/components.css">
+{% if locale == 'ar' %}
+<link rel="preload" href="{{ 'font/cairo-arabic' | assetUrl }}" as="font" type="font/woff2" crossorigin>
+{% elif page_kind == 'calculator' or page_kind == 'thank-you' %}
+<link rel="preload" href="{{ 'font/cormorant-garamond' | assetUrl }}" as="font" type="font/woff2" crossorigin>
+{% else %}
+<link rel="preload" href="{{ 'font/dm-sans' | assetUrl }}" as="font" type="font/woff2" crossorigin>
+{% endif %}
+<link rel="icon" type="image/webp" sizes="32x32" href="{{ 'image/favicon' | assetUrl }}">
+<style data-critical-css>{{ page_css | criticalCss(locale, page_kind or 'standard') | safe }}</style>
 {% if schema_type == 'article' %}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MedicalWebPage","headline":{{ title | json | safe }},"description":{{ (seo_description or description) | json | safe }},"image":{{ image | absoluteUrl(site.url) | json | safe }},"datePublished":{{ date | dateOnly | json | safe }},"author":{"@type":"Physician","name":{{ site.doctor[locale] | json | safe }}},"publisher":{"@type":"MedicalOrganization","@id":{{ (site.url + '/#clinic') | json | safe }},"name":{{ site.name | json | safe }}}}
 </script>
 {% elif schema_type == 'clinic' %}
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":["MedicalClinic","LocalBusiness"],"@id":{{ (site.url + '/#clinic') | json | safe }},"name":{{ site.name | json | safe }},"url":{{ (site.url + '/') | json | safe }},"telephone":{{ site.contact.phone_e164 | json | safe }},"image":{{ (site.url + '/images/Naggar6.png') | json | safe }},"sameAs":{{ site.social | nonEmptyValues | json | safe }},"address":{"@type":"PostalAddress","streetAddress":{{ site | clinicAddress(locale) | join(', ') | json | safe }},"addressLocality":{{ ('القاهرة الجديدة' if locale == 'ar' else 'New Cairo') | json | safe }},"addressCountry":"EG"}}
+{"@context":"https://schema.org","@type":["MedicalClinic","LocalBusiness"],"@id":{{ (site.url + '/#clinic') | json | safe }},"name":{{ site.name | json | safe }},"url":{{ (site.url + '/') | json | safe }},"telephone":{{ site.contact.phone_e164 | json | safe }},"image":{{ (site.url + '/images/Naggar6.webp') | json | safe }},"sameAs":{{ site.social | nonEmptyValues | json | safe }},"address":{"@type":"PostalAddress","streetAddress":{{ site | clinicAddress(locale) | join(', ') | json | safe }},"addressLocality":{{ site.location.locality[locale] | json | safe }},"addressCountry":"EG"}}
 </script>
+{% endif %}
+{% if page_kind == 'calculator' %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{% for faq in calculatorFaqs[locale] %}{"@type":"Question","name":{{ faq.question | json | safe }},"acceptedAnswer":{"@type":"Answer","text":{{ faq.answer | replace('{doctor}', site.doctor[locale]) | json | safe }}}}{% if not loop.last %},{% endif %}{% endfor %}]}
+</script>
+{% endif %}
+{% if trackingEnabled and tracking != false %}
+<link rel="preconnect" href="https://www.googletagmanager.com">
+{% include "partials/tracking-head.njk" %}
 {% endif %}

@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-6.html"
-canonical: "/en/articles/article-6.html"
-alternate_url: "/articles/article-6.html"
-x_default_url: "/en/articles/article-6.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "Age and Prescription Stability Requirements for SMILE Pro"
 seo_title: "Age and Prescription Stability Requirements for SMILE Pro | Smile Pro Egypt"
-description: "The age and prescription-stability requirements for safe SMILE Pro treatment."
 seo_description: "The age and prescription-stability requirements for safe SMILE Pro treatment."
 slug: "article-6"
-translation_key: "article-6"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar3.webp"
+image_width: 1280
+image_height: 853
 excerpt: "The age and prescription-stability requirements for safe SMILE Pro treatment."
 category: "Eligibility"
 read_time: "3 min read"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <p>When considering laser vision correction with <strong>SMILE Pro</strong>, the most fundamental qualifying questions involve your age and prescription stability. Dr. Mohamed El Naggar emphasizes strict adherence to these medical criteria to guarantee optimal long-term vision clarity.</p>
 

@@ -1,23 +1,25 @@
 ---
 layout: "layouts/standalone.njk"
 locale: "ar"
-permalink: "/test.html"
-canonical: "/test.html"
+permalink: "/test/"
+canonical: "/test/"
 page_kind: "test"
 page_css: "test.css"
 page_js: "test.js"
-title: "أداة الفحص المبدئي للعين"
-description: "أداة الفحص المبدئي للعين"
-image: "/images/Naggar6.png"
+title: "تجربة واجهة فحص العين — غير تشخيصية"
+description: "صفحة تجريبية لا تقيس حدة الإبصار أو تمييز الألوان ولا تقدم نتيجة طبية."
+image: "/images/Naggar6.webp"
 robots: "noindex, nofollow"
 sitemap: false
+tracking: false
 ---
-<div class="container">
+<main class="container">
+    <a class="test-language" href="/en/test/" lang="en" dir="ltr">English</a>
 
     <!-- Step 1: Introduction -->
     <div id="step-1" class="step active">
-        <h1>فحص النظر المبدئي</h1>
-        <p>مرحباً بك. هذا الاختبار يساعدك في تقييم نظرِك بشكل مبدئي فقط. قبل البدء يرجى تجهيز بطاقة بنكية (كارت إئتمان) لمعايرة الشاشة.</p>
+        <h1>تجربة واجهة فحص العين</h1>
+        <p><strong>هذه صفحة تجريبية وليست فحصاً طبياً.</strong> لا يمكنها قياس حدة الإبصار أو تمييز الألوان، ولا تُستخدم لاتخاذ أي قرار صحي. قبل البدء يمكنك تجهيز بطاقة بنكية لمعايرة العرض بصرياً.</p>
         <button type="button" class="btn" onclick="nextStep(2)">ابدأ المعايرة</button>
     </div>
 
@@ -32,7 +34,7 @@ sitemap: false
 
     <!-- Step 3: Visual Acuity Test (E-Chart) -->
     <div id="step-3" class="step">
-        <h2>اختبار حدة الإبصار</h2>
+        <h2>تجربة اتجاه حرف E</h2>
         <p>قف على مسافة <strong>1.5 متر</strong> من الشاشة، وغطِّ عينك اليسرى. أين اتجاه فتحة حرف E؟</p>
 
         <div id="e-container">
@@ -40,32 +42,32 @@ sitemap: false
         </div>
 
         <div class="controls">
-            <button type="button" class="btn" onclick="checkAnswer('up')">⬆️</button>
-            <button type="button" class="btn" onclick="checkAnswer('left')">⬅️</button>
-            <button type="button" class="btn" onclick="checkAnswer('right')">➡️</button>
-            <button type="button" class="btn" onclick="checkAnswer('down')">⬇️</button>
+            <button type="button" class="btn" onclick="checkAnswer('up')" aria-label="أعلى">⬆️</button>
+            <button type="button" class="btn" onclick="checkAnswer('left')" aria-label="يسار">⬅️</button>
+            <button type="button" class="btn" onclick="checkAnswer('right')" aria-label="يمين">➡️</button>
+            <button type="button" class="btn" onclick="checkAnswer('down')" aria-label="أسفل">⬇️</button>
         </div>
     </div>
 
     <!-- Step 4: Color Vision Test -->
     <div id="step-4" class="step">
-        <h2>اختبار تمييز الألوان</h2>
-        <p>ما هو الرقم الذي تراه داخل الدائرة؟</p>
+        <h2>تجربة إدخال رقم</h2>
+        <p>هذه الدائرة عنصر تصميم فقط وليست لوحة Ishihara معتمدة ولا تقيس تمييز الألوان.</p>
         <div class="ishihara-img">74</div>
-        <input type="number" id="color-answer" placeholder="اكتب الرقم هنا" style="padding: 10px; font-size: 16px; width: 80%; margin-bottom: 15px; text-align: center;">
+        <input type="number" id="color-answer" placeholder="اكتب الرقم هنا" aria-label="الرقم الظاهر داخل الدائرة" style="padding: 10px; font-size: 16px; width: 80%; margin-bottom: 15px; text-align: center;">
         <br>
         <button type="button" class="btn" onclick="checkColorTest()">التالي</button>
     </div>
 
     <!-- Step 5: Results -->
     <div id="step-5" class="step">
-        <h2>نتيجة الفحص المبدئي</h2>
-        <p id="result-text">جاري احتساب النتيجة...</p>
+        <h2>انتهت التجربة</h2>
+        <p id="result-text">جاري إنهاء التجربة...</p>
         <button type="button" class="btn" onclick="location.reload()">إعادة الاختبار</button>
     </div>
 
     <div class="disclaimer">
-        ⚠️ تنبيه: هذا الفحص للاسترشاد والمسح المبدئي فقط، ولا يغني إطلاقاً عن زيارة طبيب العيون أو أخصائي البصريات للحصول على كشف نظارة دقيق.
+        ⚠️ تنبيه: هذه الواجهة لا تقدم فحصاً أو نتيجة صحية. قياس النظر وتمييز الألوان يتطلب أدوات معتمدة وظروف فحص مضبوطة لدى طبيب العيون أو أخصائي البصريات.
     </div>
 
-</div>
+</main>

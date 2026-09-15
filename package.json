@@ -6,9 +6,23 @@
   "scripts": {
     "dev": "eleventy --serve",
     "build": "node scripts/clean-dist.mjs && eleventy",
-    "check": "npm run build && node scripts/check-site.mjs"
+    "check": "npm run build && node scripts/check-site.mjs",
+    "perf:smoke": "ELEVENTY_ENV=production PERF_DISABLE_TRACKING=1 npm run build && PERF_PROFILE=mobile PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs",
+    "perf:full": "ELEVENTY_ENV=production PERF_DISABLE_TRACKING=1 npm run build && PERF_FULL=1 PERF_PROFILE=mobile PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && PERF_FULL=1 PERF_PROFILE=desktop PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && ELEVENTY_ENV=production PERF_DISABLE_TRACKING=0 npm run build && PERF_FULL=1 PERF_PROFILE=mobile PERF_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && PERF_FULL=1 PERF_PROFILE=desktop PERF_TRACKING=1 lhci autorun --config=.lighthouserc.cjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.1.6"
+    "@11ty/eleventy": "3.1.6",
+    "@11ty/eleventy-img": "^7.0.0",
+    "@fontsource-variable/cairo": "^5.3.0",
+    "@fontsource-variable/cormorant-garamond": "^5.3.0",
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@lhci/cli": "^0.15.1",
+    "esbuild": "^0.28.2",
+    "html-minifier-terser": "^7.2.0"
+  },
+  "dependencies": {
+    "intl-tel-input": "29.2.3",
+    "libphonenumber-js": "1.13.13"
   }
 }

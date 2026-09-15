@@ -1,18 +1,23 @@
 ---
 layout: "layouts/landing.njk"
 locale: "en"
-permalink: "/femto-lasik.html"
-canonical: "/femto-lasik.html"
+permalink: "/femto-lasik/"
+canonical: "/femto-lasik/"
+alternate_url: "/ar/femto-lasik/"
+x_default_url: "/femto-lasik/"
 page_kind: "femto"
 page_css: "femto.css"
-title: "Femto LASIK Laser Eye Surgery, New Cairo | Dr. Mohamed El Naggar"
-description: "All-laser Femto LASIK eye surgery at Dr. Mohamed El Naggar Eye Clinic, Eterna Medical City, New Cairo. Ultra-precise blade-free laser vision correction. Book your evaluation."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "Femto LASIK Laser Eye Surgery, {{ site.location.locality.en }} | {{ site.doctor.en }}"
+  description: "All-laser Femto LASIK eye surgery with {{ site.doctor.en }} at {{ site.address.en[0] }}, {{ site.location.locality.en }}. Ultra-precise blade-free laser vision correction. Book your evaluation."
+image: "/images/Naggar6.webp"
 schema_type: "clinic"
 show_sticky: true
 sitemap: true
 ---
-{% from "partials/forms.njk" import consultation %}
+{% from "partials/forms.njk" import consultation with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
 <!-- NAVIGATION -->
 
 
@@ -25,42 +30,45 @@ sitemap: true
         100% Blade-Free All-Laser Technology
       </div>
       <h1>Femto LASIK <em>Precision Vision Correction</em></h1>
-      <p class="hero-kicker">Dr. Mohamed El Naggar — Consultant Corneal & Refractive Surgeon</p>
       <p class="hero-sub">
         Achieve crystal-clear visual independence with Femto LASIK. Utilizing ultra-fast femtosecond laser pulses for micro-precise flap creation without mechanical blades, followed by computer-guided excimer laser corneal reshaping.
       </p>
       <div class="hero-proof">
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Blade-Free Safety
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Customized Corneal Mapping
         </div>
         <div class="hero-proof-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Rapid 24-Hour Visual Recovery
         </div>
+      </div>
+      <div class="doctor-trust doctor-trust--light">
+        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+        <div><strong>{{ site.doctor.en }}</strong><span>{{ site.doctor.title_en }} · Clinic {{ site.clinic_number }}, {{ site.address.en[0] }}</span></div>
       </div>
     </div>
 
     <!-- BOOKING FORM CARD -->
     <div class="form-card" id="book">
       <h2 class="form-card-title">Book Vision Assessment</h2>
-      <p class="form-card-sub">Reserve your Femto LASIK evaluation in New Cairo</p>
+      <p class="form-card-sub">Reserve your Femto LASIK evaluation at {{ site.address.en[0] }}, {{ site.location.locality.en }}</p>
 
-      {{ consultation('en', 'femto-consultation', 'femto-form', 'femto', false, 'femto-lasik') }}
+      {{ consultation('en', 'femto-consultation', 'femto-form', 'femto', 'femto-lasik', 'femto-hero') }}
 
       <a href="tel:{{ site.contact.phone_e164 }}" class="form-call-btn">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Call {{ site.contact.phone_display_en }}
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call <span class="phone-ltr" dir="ltr">{{ site.contact.phone_e164 | phoneDisplay('en') }}</span>
       </a>
 
       <div class="form-wa">
         <span>Prefer instant messaging?</span>
-        <a href="https://wa.me/{{ site.contact.whatsapp }}" target="_blank" class="wa-link" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12.031 2c-5.514 0-9.998 4.486-9.998 10 0 2.012.602 3.88 1.637 5.441l-1.67 6.109 6.284-1.646c1.487.818 3.197 1.296 5.011 1.296 5.514 0 9.998-4.486 9.998-10 0-5.514-4.484-10-9.998-10zm0 18.002c-1.633 0-3.155-.443-4.469-1.215l-.321-.189-3.321.87.886-3.238-.211-.336c-.927-1.479-1.421-3.189-1.421-4.992 0-4.687 3.813-8.502 8.502-8.502 4.687 0 8.5 3.815 8.5 8.502 0 4.687-3.813 8.502-8.502 8.502z"/></svg>
+        <a href="https://wa.me/{{ site.contact.phone_e164 | whatsappDigits }}" target="_blank" class="wa-link" rel="noopener">
+          {{ whatsappIcon() }}
           Chat on WhatsApp
         </a>
       </div>
@@ -81,7 +89,7 @@ sitemap: true
     <div class="benefits-grid fade-up">
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>100% Blade-Free Safety</h3>
         <p>Eliminates blade-related risks by using microscopic laser pulses to construct a custom-contoured corneal flap.</p>
@@ -90,7 +98,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>Customized Edge Architecture</h3>
         <p>The laser creates bevelled flap edges that interlock securely back into place, promoting rapid structural healing.</p>
@@ -99,7 +107,7 @@ sitemap: true
 
       <div class="b-card">
         <div class="b-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>Versatile Correction Range</h3>
         <p>Highly effective for wide ranges of short-sightedness (myopia), long-sightedness (hyperopia), and astigmatism.</p>
@@ -199,11 +207,11 @@ sitemap: true
   <div class="container">
     <span class="lbl">Clinic Location</span>
     <div class="rule"></div>
-    <h2>Visit Us in New Cairo</h2>
+    <h2>Visit Us in {{ site.location.locality.en }}</h2>
 
     <div class="split" style="grid-template-columns:1fr 1fr;margin-top:32px;">
       <div class="card">
-        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">Dr. Mohamed El Naggar Eye Clinic</h3>
+        <h3 style="font-size:20px;color:var(--burg);margin-bottom:12px;">{{ site.doctor.en }} Eye Clinic</h3>
         <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;">
           {% for line in site | clinicAddress('en') %}{{ line }}{% if not loop.last %}<br/>{% endif %}{% endfor %}
         </p>
@@ -214,7 +222,8 @@ sitemap: true
 
       <div style="width:100%;min-height:260px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);">
         <iframe
-          src="https://maps.google.com/maps?q=Eterna%20Medical%20City%20New%20Cairo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="Map showing {{ site.doctor.en }} Eye Clinic in {{ site.address.en[0] }}"
+          src="{{ site.location.map_embed_url }}"
           width="100%"
           height="100%"
           style="border:0;min-height:260px;"

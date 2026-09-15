@@ -1,0 +1,141 @@
+<dialog class="procedure-comparison-modal" id="procedure-comparison-dialog" aria-labelledby="procedure-comparison-title" aria-describedby="procedure-comparison-intro">
+  <div class="procedure-comparison-modal__panel">
+    <header class="procedure-comparison-modal__header">
+      <div>
+        <span>{{ 'اختيار التقنية' if locale == 'ar' else 'Choose a procedure' }}</span>
+        <h2 id="procedure-comparison-title">{{ 'قارن التقنيات واختر ما تريد السؤال عنه' if locale == 'ar' else 'Compare procedures and choose what to ask about' }}</h2>
+      </div>
+      <button type="button" class="procedure-comparison-modal__close" data-procedure-comparison-close aria-label="{{ 'إغلاق المقارنة' if locale == 'ar' else 'Close comparison' }}"><span aria-hidden="true">×</span></button>
+    </header>
+
+    <div class="procedure-comparison-modal__body">
+      <p id="procedure-comparison-intro">{{ 'لا تحتاج إلى معرفة القرار النهائي الآن. اختر التقنية الأقرب لاهتمامك، وسيحدد فحص العين والقرنية الأنسب طبيًا.' if locale == 'ar' else 'You do not need to make a final decision now. Choose the procedure closest to your interest; the eye and corneal examination determines what is medically suitable.' }}</p>
+
+      <div class="procedure-comparison-desktop">
+        <aside class="procedure-featured" aria-label="{{ 'سمايل برو، التقنية الأكثر تطورًا' if locale == 'ar' else 'SMILE Pro, the most advanced option' }}">
+          <div class="procedure-featured__content">
+            <span class="procedure-featured__badge">{{ 'التقنية الأكثر تطورًا' if locale == 'ar' else 'Most advanced option' }}</span>
+            <strong>SMILE Pro</strong>
+            <ul>
+              <li>{{ '٨ ثوانٍ لكل عين' if locale == 'ar' else '8 seconds per eye' }}</li>
+              <li>{{ 'بدون رفرف' if locale == 'ar' else 'Flapless' }}</li>
+              <li>{{ 'فتحة أقل من ٢ مم' if locale == 'ar' else 'Incision under 2mm' }}</li>
+            </ul>
+          </div>
+          <button type="button" class="procedure-choice-button procedure-choice-button--featured" data-procedure-choice="smile-pro" aria-pressed="false">{{ 'اختيار سمايل برو' if locale == 'ar' else 'Select SMILE Pro' }}</button>
+        </aside>
+        <div class="procedure-comparison-scroll" role="region" tabindex="0" aria-label="{{ 'جدول مقارنة التقنيات' if locale == 'ar' else 'Procedure comparison table' }}">
+          <table class="procedure-comparison-table">
+            <caption class="sr-only">{{ 'مقارنة بين PRK وفيمتو ليزك وسمايل برو' if locale == 'ar' else 'Comparison of PRK, Femto-LASIK and SMILE Pro' }}</caption>
+            <thead>
+              <tr>
+                <th scope="col">{{ 'الخاصية' if locale == 'ar' else 'Feature' }}</th>
+                <th scope="col">
+                  <div class="procedure-comparison-table__heading">
+                    <strong>{{ pricing.treatments.prk[locale].name }}</strong>
+                    <button type="button" class="procedure-choice-button" data-procedure-choice="prk" aria-pressed="false">{{ 'اختيار' if locale == 'ar' else 'Select' }}</button>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div class="procedure-comparison-table__heading">
+                    <strong>{{ pricing.treatments['femto-lasik'][locale].name }}</strong>
+                    <button type="button" class="procedure-choice-button" data-procedure-choice="femto-lasik" aria-pressed="false">{{ 'اختيار' if locale == 'ar' else 'Select' }}</button>
+                  </div>
+                </th>
+                <th scope="col" class="procedure-comparison-table__highlight">
+                  <div class="procedure-comparison-table__heading procedure-comparison-table__heading--featured">
+                    <div><span>{{ 'التقنية المميزة' if locale == 'ar' else 'Featured' }}</span><strong>SMILE Pro</strong></div>
+                    <button type="button" class="procedure-choice-button procedure-choice-button--featured" data-procedure-choice="smile-pro" aria-pressed="false">{{ 'اختيار' if locale == 'ar' else 'Select' }}</button>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ 'رفرف القرنية' if locale == 'ar' else 'Corneal flap' }}</th>
+                <td>{{ 'بدون رفرف' if locale == 'ar' else 'No flap' }}</td>
+                <td>{{ 'يتم عمل رفرف بالليزر' if locale == 'ar' else 'Laser-created flap' }}</td>
+                <td class="procedure-comparison-table__highlight">{{ 'بدون رفرف، فتحة أقل من ٢ مم' if locale == 'ar' else 'No flap, incision under 2mm' }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'زمن الليزر' if locale == 'ar' else 'Laser time' }}</th>
+                <td>{{ '٣٠–٦٠ ثانية' if locale == 'ar' else '30–60 seconds' }}</td>
+                <td>{{ '١٥–٣٠ ثانية' if locale == 'ar' else '15–30 seconds' }}</td>
+                <td class="procedure-comparison-table__highlight">{{ 'نحو ٨ ثوانٍ لكل عين' if locale == 'ar' else 'About 8 seconds per eye' }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'احتمالية جفاف العين' if locale == 'ar' else 'Dry-eye tendency' }}</th>
+                <td>{{ 'متوسطة' if locale == 'ar' else 'Moderate' }}</td>
+                <td>{{ 'من متوسطة إلى عالية' if locale == 'ar' else 'Moderate to high' }}</td>
+                <td class="procedure-comparison-table__highlight">{{ 'تأثير أقل على أعصاب القرنية' if locale == 'ar' else 'Fewer corneal nerves affected' }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'العودة الوظيفية للرؤية' if locale == 'ar' else 'Functional visual recovery' }}</th>
+                <td>{{ '٥–٧ أيام' if locale == 'ar' else '5–7 days' }}</td>
+                <td>{{ 'نحو ٢٤ ساعة' if locale == 'ar' else 'About 24 hours' }}</td>
+                <td class="procedure-comparison-table__highlight">{{ '٢٤ ساعة / نفس اليوم' if locale == 'ar' else '24 hours / same day' }}</td>
+              </tr>
+              <tr>
+                <th scope="row">{{ 'الرياضة الخفيفة والسباحة' if locale == 'ar' else 'Light exercise / swimming' }}</th>
+                <td>{{ 'أسبوع إلى أسبوعين' if locale == 'ar' else '1–2 weeks' }}</td>
+                <td>{{ 'أسبوعان إلى ٤ أسابيع' if locale == 'ar' else '2–4 weeks' }}</td>
+                <td class="procedure-comparison-table__highlight">{{ clinical.aftercare.ar.comparison_summary if locale == 'ar' else clinical.aftercare.en.comparison_summary }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="procedure-comparison-alternatives" aria-label="{{ 'تقنيات أخرى' if locale == 'ar' else 'Other procedures' }}">
+          <article>
+            <div><strong>{{ pricing.treatments['custom-lasik'][locale].name }}</strong><span>{{ pricing.treatments['custom-lasik'][locale].best_for }}</span></div>
+            <button type="button" class="procedure-choice-button procedure-choice-button--wide" data-procedure-choice="custom-lasik" aria-pressed="false">{{ 'اختيار التقنية' if locale == 'ar' else 'Select procedure' }}</button>
+          </article>
+          <article>
+            <div><strong>{{ pricing.treatments.icl[locale].name }}</strong><span>{{ pricing.treatments.icl[locale].best_for }}</span></div>
+            <button type="button" class="procedure-choice-button procedure-choice-button--wide" data-procedure-choice="icl" aria-pressed="false">{{ 'اختيار التقنية' if locale == 'ar' else 'Select procedure' }}</button>
+          </article>
+        </div>
+      </div>
+
+      <div class="procedure-comparison-mobile" aria-label="{{ 'التقنيات المتاحة' if locale == 'ar' else 'Available procedures' }}">
+        <article class="procedure-option-card procedure-option-card--highlight">
+          <span class="procedure-option-card__featured-label">{{ 'التقنية الأكثر تطورًا' if locale == 'ar' else 'Most advanced option' }}</span>
+          <header><strong>{{ pricing.treatments['smile-pro'][locale].name }}</strong><span>{{ 'بدون رفرف' if locale == 'ar' else 'Flapless' }}</span></header>
+          <p>{{ pricing.treatments['smile-pro'][locale].best_for }}</p>
+          <ul><li>{{ 'فتحة أقل من ٢ مم' if locale == 'ar' else 'Incision under 2mm' }}</li><li>{{ 'نحو ٨ ثوانٍ ليزر لكل عين' if locale == 'ar' else 'About 8 seconds of laser per eye' }}</li><li>{{ 'عودة وظيفية للرؤية خلال ٢٤ ساعة / نفس اليوم' if locale == 'ar' else 'Functional visual recovery within 24 hours / same day' }}</li></ul>
+          <button type="button" class="procedure-choice-button procedure-choice-button--card procedure-choice-button--featured" data-procedure-choice="smile-pro" aria-pressed="false">{{ 'اختيار سمايل برو' if locale == 'ar' else 'Select SMILE Pro' }}</button>
+        </article>
+        <article class="procedure-option-card">
+          <header><strong>{{ pricing.treatments['femto-lasik'][locale].name }}</strong><span>{{ 'رفرف بالليزر' if locale == 'ar' else 'Laser-created flap' }}</span></header>
+          <p>{{ pricing.treatments['femto-lasik'][locale].best_for }}</p>
+          <ul><li>{{ 'زمن الليزر ١٥–٣٠ ثانية' if locale == 'ar' else '15–30 seconds of laser time' }}</li><li>{{ 'عودة وظيفية للرؤية خلال نحو ٢٤ ساعة' if locale == 'ar' else 'Functional visual recovery in about 24 hours' }}</li></ul>
+          <button type="button" class="procedure-choice-button procedure-choice-button--card" data-procedure-choice="femto-lasik" aria-pressed="false">{{ 'اختيار فيمتو ليزك' if locale == 'ar' else 'Select Femto-LASIK' }}</button>
+        </article>
+        <article class="procedure-option-card">
+          <header><strong>{{ pricing.treatments.prk[locale].name }}</strong><span>{{ 'بدون رفرف' if locale == 'ar' else 'Flapless' }}</span></header>
+          <p>{{ pricing.treatments.prk[locale].best_for }}</p>
+          <ul><li>{{ 'زمن الليزر ٣٠–٦٠ ثانية' if locale == 'ar' else '30–60 seconds of laser time' }}</li><li>{{ 'عودة وظيفية للرؤية خلال ٥–٧ أيام' if locale == 'ar' else 'Functional visual recovery in 5–7 days' }}</li></ul>
+          <button type="button" class="procedure-choice-button procedure-choice-button--card" data-procedure-choice="prk" aria-pressed="false">{{ 'اختيار PRK' if locale == 'ar' else 'Select PRK' }}</button>
+        </article>
+        <article class="procedure-option-card">
+          <header><strong>{{ pricing.treatments['custom-lasik'][locale].name }}</strong></header>
+          <p>{{ pricing.treatments['custom-lasik'][locale].best_for }}</p>
+          <button type="button" class="procedure-choice-button procedure-choice-button--card" data-procedure-choice="custom-lasik" aria-pressed="false">{{ 'اختيار الليزك التفصيلي' if locale == 'ar' else 'Select Custom LASIK' }}</button>
+        </article>
+        <article class="procedure-option-card">
+          <header><strong>{{ pricing.treatments.icl[locale].name }}</strong><span>{{ 'عدسة داخل العين' if locale == 'ar' else 'Implantable lens' }}</span></header>
+          <p>{{ pricing.treatments.icl[locale].best_for }}</p>
+          <ul><li>{{ 'لا تتم إزالة نسيج من القرنية' if locale == 'ar' else 'No corneal tissue is removed' }}</li></ul>
+          <button type="button" class="procedure-choice-button procedure-choice-button--card" data-procedure-choice="icl" aria-pressed="false">{{ 'اختيار عدسة ICL' if locale == 'ar' else 'Select ICL' }}</button>
+        </article>
+      </div>
+
+      <p class="procedure-comparison-modal__note">{{ 'المعلومات إرشادية وليست تشخيصًا. اختيار التقنية النهائي والسعر يتحددان بعد فحص العين والقرنية.' if locale == 'ar' else 'This information is a guide, not a diagnosis. The final procedure and price are determined after the eye and corneal examination.' }}</p>
+    </div>
+
+    <footer class="procedure-comparison-modal__footer">
+      <div><strong>{{ 'ما زلت غير متأكد؟' if locale == 'ar' else 'Still not sure?' }}</strong><span>{{ 'هذا طبيعي؛ يمكن ترك القرار للفحص.' if locale == 'ar' else 'That is normal; the examination can guide the decision.' }}</span></div>
+      <button type="button" class="procedure-choice-unsure" data-procedure-choice="not-sure" aria-pressed="false">{{ 'دع الفحص يحدد الأنسب' if locale == 'ar' else 'Let the examination guide me' }}</button>
+    </footer>
+  </div>
+</dialog>

@@ -1,0 +1,72 @@
+.procedure-comparison-modal button:focus-visible { outline: 3px solid rgba(173,111,66,.28); outline-offset: 2px; }
+.procedure-comparison-modal { width: min(calc(100% - 32px),1040px); max-width: none; max-height: min(90dvh,820px); padding: 0; border: 0; border-radius: 22px; background: var(--surface); color: var(--text); box-shadow: 0 30px 90px rgba(9,31,34,.36); }
+.procedure-comparison-modal::backdrop { background: rgba(9,31,34,.78); }
+.procedure-comparison-modal__panel { max-height: min(90dvh,820px); display: flex; flex-direction: column; }
+.procedure-comparison-modal__header { display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; gap: 24px; padding: 20px 24px 18px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,var(--cream),white); }
+.procedure-comparison-modal__header>div>span { display: block; margin-bottom: 3px; color: var(--accent-2); font-size: .75rem; font-weight: 800; letter-spacing: .04em; }
+.procedure-comparison-modal__header h2 { margin: 0; color: var(--brand); font-size: clamp(1.2rem,3vw,1.65rem); line-height: 1.3; }
+.procedure-comparison-modal__close { width: 44px; height: 44px; flex: 0 0 44px; padding: 0; border: 1px solid var(--border); border-radius: 50%; background: white; color: var(--brand); cursor: pointer; font: 400 1.75rem/1 sans-serif; box-shadow: 0 4px 12px rgba(22,56,61,.07); }
+.procedure-comparison-modal__close:hover { border-color: var(--brand); background: var(--cream); }
+.procedure-comparison-modal__body { overflow-y: auto; padding: 20px 24px 22px; overscroll-behavior: contain; }
+.procedure-comparison-modal__body>p:first-child { max-width: 780px; margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.procedure-featured { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 14px; padding: 15px 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 15px; background: linear-gradient(135deg,var(--brand),var(--brand-2)); color: white; box-shadow: 0 12px 30px rgba(22,56,61,.16); }
+.procedure-featured__content { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 15px; }
+.procedure-featured__badge { flex: 0 0 100%; width: max-content; color: var(--bronze3); font-size: .76rem; font-weight: 800; letter-spacing: .02em; }
+.procedure-featured__content>strong { font-size: 1.08rem; }
+.procedure-featured__content ul { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 19px; margin: 0; padding-inline-start: 19px; color: rgba(255,255,255,.86); font-size: .84rem; font-weight: 600; }
+.procedure-comparison-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 15px; box-shadow: 0 8px 24px rgba(22,56,61,.05); }
+.procedure-comparison-scroll:focus-visible { outline-offset: 3px; }
+.procedure-comparison-table { width: 100%; min-width: 820px; border-collapse: separate; border-spacing: 0; background: white; }
+.procedure-comparison-table th,.procedure-comparison-table td { padding: 13px 14px; border-bottom: 1px solid var(--border); border-inline-end: 1px solid var(--border); font-size: .875rem; line-height: 1.5; text-align: start; vertical-align: middle; }
+.procedure-comparison-table tr:last-child>* { border-bottom: 0; }
+.procedure-comparison-table tr>*:last-child { border-inline-end: 0; }
+.procedure-comparison-table thead th { background: var(--cream-2); color: var(--brand); font-weight: 800; }
+.procedure-comparison-table tbody th { width: 190px; background: var(--cream); color: var(--brand); font-weight: 700; }
+.procedure-comparison-table .procedure-comparison-table__highlight { background: var(--accent-pale); font-weight: 700; }
+.procedure-comparison-table__heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.procedure-comparison-table__heading strong { line-height: 1.35; }
+.procedure-comparison-table__heading--featured>div span,.procedure-comparison-table__heading--featured>div strong { display: block; }
+.procedure-comparison-table__heading--featured>div span { margin-bottom: 2px; color: var(--accent-2); font-size: .7rem; font-weight: 900; }
+.procedure-choice-button { min-height: 36px; padding: 7px 13px; border: 1px solid var(--brand); border-radius: 9px; background: white; color: var(--brand); cursor: pointer; font-size: .82rem; font-weight: 800; white-space: nowrap; transition: background-color .18s ease,color .18s ease,border-color .18s ease; }
+.procedure-choice-button:hover,.procedure-choice-button.is-selected,.procedure-choice-button[aria-pressed="true"] { border-color: var(--brand); background: var(--brand); color: white; }
+.procedure-choice-button.is-selected,.procedure-choice-button[aria-pressed="true"] { box-shadow: inset 0 0 0 2px rgba(255,255,255,.28); }
+.procedure-choice-button--featured { border-color: var(--bronze3); background: var(--bronze3); color: var(--brand); box-shadow: 0 5px 15px rgba(0,0,0,.14); }
+.procedure-choice-button--featured:hover { border-color: white; background: white; color: var(--brand); }
+.procedure-choice-button--featured.is-selected,.procedure-choice-button--featured[aria-pressed="true"] { border-color: white; background: var(--bronze3); color: var(--brand); box-shadow: 0 0 0 3px rgba(255,255,255,.34),0 5px 15px rgba(0,0,0,.14); }
+.procedure-comparison-alternatives { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 14px; }
+.procedure-comparison-alternatives>article { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px; border: 1px solid var(--border); border-radius: 13px; background: var(--cream); }
+.procedure-comparison-alternatives strong,.procedure-comparison-alternatives span { display: block; }
+.procedure-comparison-alternatives strong { color: var(--brand); font-size: .92rem; }
+.procedure-comparison-alternatives span { margin-top: 3px; color: var(--muted); font-size: .82rem; line-height: 1.5; }
+.procedure-choice-button--wide { flex: 0 0 auto; }
+.procedure-comparison-mobile { display: none; }
+.procedure-comparison-modal__note { margin: 16px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+.procedure-comparison-modal__footer { display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; gap: 18px; padding: 14px 24px max(14px,env(safe-area-inset-bottom)); border-top: 1px solid var(--border); background: white; box-shadow: 0 -8px 24px rgba(22,56,61,.05); }
+.procedure-comparison-modal__footer strong,.procedure-comparison-modal__footer span { display: block; }
+.procedure-comparison-modal__footer strong { color: var(--brand); font-size: .92rem; }
+.procedure-comparison-modal__footer span { margin-top: 2px; color: var(--muted); font-size: .8rem; }
+.procedure-choice-unsure { min-height: 46px; padding: 10px 18px; border: 2px solid var(--accent); border-radius: 11px; background: var(--accent); color: white; cursor: pointer; font-size: .9rem; font-weight: 900; white-space: nowrap; box-shadow: 0 7px 18px rgba(47,125,36,.22); transition: transform .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease; }
+.procedure-choice-unsure:hover,.procedure-choice-unsure.is-selected,.procedure-choice-unsure[aria-pressed="true"] { border-color: var(--accent-2); background: var(--accent-2); color: white; box-shadow: 0 9px 22px rgba(47,125,36,.28); }
+.procedure-choice-unsure:hover { transform: translateY(-1px); }
+body.has-open-dialog { overflow: hidden; }
+@media (max-width:720px) {
+  .procedure-comparison-modal { inset-block-start: auto; width: 100%; max-height: calc(100dvh - 8px); margin: auto 0 0; border-radius: 22px 22px 0 0; }
+  .procedure-comparison-modal__panel { max-height: calc(100dvh - 8px); }
+  .procedure-comparison-modal__header { gap: 14px; padding: 16px; }
+  .procedure-comparison-modal__header h2 { font-size: 1.18rem; }
+  .procedure-comparison-modal__body { padding: 16px; }
+  .procedure-comparison-modal__body>p:first-child { margin-bottom: 14px; font-size: .9rem; line-height: 1.6; }
+  .procedure-comparison-desktop { display: none; }
+  .procedure-comparison-mobile { display: grid; gap: 12px; }
+  .procedure-option-card { padding: 16px; border: 1px solid var(--border); border-radius: 15px; background: white; box-shadow: 0 6px 20px rgba(22,56,61,.05); }
+  .procedure-option-card--highlight { position: relative; border: 2px solid var(--accent-2); background: linear-gradient(145deg,var(--accent-pale),white 72%); box-shadow: 0 12px 30px rgba(22,56,61,.13); }
+  .procedure-option-card__featured-label { display: inline-flex; margin-bottom: 12px; padding: 5px 9px; border-radius: 999px; background: var(--brand); color: white; font-size: .76rem; font-weight: 900; }
+  .procedure-option-card header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .procedure-option-card header strong { color: var(--brand); font-size: 1rem; }
+  .procedure-option-card header span { flex: 0 0 auto; padding: 4px 8px; border-radius: 999px; background: var(--cream-2); color: var(--accent-2); font-size: .75rem; font-weight: 800; }
+  .procedure-option-card p { margin: 8px 0; color: var(--muted); font-size: .875rem; line-height: 1.55; }
+  .procedure-option-card ul { margin: 10px 0 14px; padding-inline-start: 20px; color: var(--text); font-size: .875rem; line-height: 1.65; }
+  .procedure-choice-button--card { width: 100%; min-height: 44px; margin-top: 8px; }
+  .procedure-comparison-modal__footer { align-items: stretch; flex-direction: column; gap: 10px; padding: 12px 16px max(12px,env(safe-area-inset-bottom)); }
+  .procedure-choice-unsure { width: 100%; min-height: 44px; }
+}

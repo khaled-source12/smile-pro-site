@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_ar"]
-locale: "ar"
-permalink: "/articles/article-7.html"
-canonical: "/articles/article-7.html"
-alternate_url: "/en/articles/article-7.html"
-x_default_url: "/en/articles/article-7.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "مقارنة بين سميل برو وكونتورا ليزك"
 seo_title: "مقارنة بين سميل برو وكونتورا ليزك | Smile Pro Egypt"
-description: "مقارنة بين SMILE Pro وContoura LASIK من حيث الدقة والتعافي والأمان."
 seo_description: "مقارنة بين SMILE Pro وContoura LASIK من حيث الدقة والتعافي والأمان."
 slug: "article-7"
-translation_key: "article-7"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar2.webp"
+image_width: 1280
+image_height: 1187
 excerpt: "مقارنة بين SMILE Pro وContoura LASIK من حيث الدقة والتعافي والأمان."
 category: "مقارنات"
 read_time: "5 دقائق قراءة"
 published: true
-sitemap: true
 ---
 <p>يعد كل من <strong>سميل برو</strong> و<strong>كونتورا ليزك</strong> من أحدث التقنيات في عالم تصحيح النظر بالليزر. ورغم أن كلا الخيارين يوفران دقة عالية جداً ورؤية فائقة الوضوح، إلا أن طريقة العمل والخصائص العلاجية تختلف بشكل جذري بينهما.</p>
 

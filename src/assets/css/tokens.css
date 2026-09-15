@@ -8,8 +8,8 @@
   --burg: var(--brand);
   --burg2: var(--brand-2);
   --burg3: #2a6670;
-  --accent: #5fbf3b;
-  --accent-2: #7fd957;
+  --accent: #2f7d24;
+  --accent-2: #286b21;
   --accent-pale: #e8f7e1;
   --bronze: var(--accent);
   --bronze2: var(--accent-2);
@@ -17,6 +17,7 @@
   --bpale: var(--accent-pale);
   --gold: var(--accent);
   --gold-l: var(--accent-2);
+  --whatsapp: #075e54;
   --surface: #ffffff;
   --white: var(--surface);
   --text: #18080c;

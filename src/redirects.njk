@@ -1,0 +1,14 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Translation-aware article redirects plus permanent redirects from the old
+# .html URLs. Language rules are emitted only when both versions are published.
+{% for article in collections.articles | byLocale('ar') %}
+{% set english_url = collections.articles | translationUrl(article.data.translation_key, 'ar') %}
+{% if english_url %}{{ article.url }} lang=en {{ english_url }}?redirected=1 301!
+/articles/{{ article.data.slug }}.html lang=en {{ english_url }}?redirected=1 301!
+{% endif %}/articles/{{ article.data.slug }}.html {{ article.url }} 301!
+{% if english_url %}/en/articles/{{ article.data.slug }}.html {{ english_url }} 301!
+{% endif %}
+{% endfor %}

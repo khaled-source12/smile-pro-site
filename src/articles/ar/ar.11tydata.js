@@ -4,10 +4,14 @@ export default {
   locale: "ar",
   page_kind: "article",
   page_css: "article.css",
+  has_form: true,
+  show_sticky: true,
+  booking_url: "#article-book",
   schema_type: "article",
   sitemap: true,
   eleventyComputed: {
-    permalink: (data) => data.published === false ? false : `/articles/${data.slug || data.page.fileSlug}.html`,
-    canonical: (data) => `/articles/${data.slug || data.page.fileSlug}.html`
+    translation_key: (data) => data.slug || data.page.fileSlug,
+    permalink: (data) => data.published === false ? false : `/articles/${data.slug || data.page.fileSlug}/`,
+    canonical: (data) => `/articles/${data.slug || data.page.fileSlug}/`
   }
 };

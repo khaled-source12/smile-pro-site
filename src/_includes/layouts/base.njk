@@ -7,7 +7,7 @@
   {% if translation_key %}{% set resolved_x_default_url = (canonical or page.url) if locale == 'en' else resolved_alternate_url %}{% endif %}
   {% include "partials/head.njk" %}
 </head>
-<body class="page-{{ page_kind or 'standard' }} locale-{{ locale }}" data-whatsapp="{{ site.contact.whatsapp }}"{% if locale == 'ar' and resolved_alternate_url %} data-legacy-english-url="{{ resolved_alternate_url }}"{% endif %}>
+<body class="page-{{ page_kind or 'standard' }} locale-{{ locale }}{% if show_sticky %} has-sticky-actions{% endif %}" data-page-kind="{{ page_kind or 'standard' }}" data-locale="{{ locale }}" data-whatsapp="{{ site.contact.phone_e164 | whatsappDigits }}"{% if has_form %} data-phone-css="{{ 'css/phone.css' | assetUrl }}" data-procedure-comparison-css="{{ 'css/procedure-comparison.css' | assetUrl }}" data-procedure-comparison-url="/assets/fragments/procedure-comparison-{{ locale }}.html"{% endif %}{% if locale == 'ar' and resolved_alternate_url %} data-legacy-english-url="{{ resolved_alternate_url }}"{% endif %}>
   {% set resolved_booking_url = booking_url %}
   {% if not resolved_booking_url %}
     {% if page_kind == 'calculator' %}
@@ -18,13 +18,16 @@
       {% set resolved_booking_url = '/ar/#book' if locale == 'ar' else '/#book' %}
     {% endif %}
   {% endif %}
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZRLPZN2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  {% if trackingEnabled and tracking != false %}<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-PZRLPZN2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>{% endif %}
+  {% include "partials/urgency-bar.njk" %}
   {% include "partials/header.njk" %}
   {{ content | safe }}
   {% include "partials/footer.njk" %}
   {% include "partials/sticky-actions.njk" %}
-  <script src="/assets/js/site.js" defer></script>
-  <script src="/assets/js/forms.js" defer></script>
-  {% if page_js %}<script src="/assets/js/pages/{{ page_js }}" defer></script>{% endif %}
+  <script type="module" src="{{ 'js/site.js' | assetUrl }}"></script>
+  {% if has_form %}
+  <script type="module" src="{{ 'js/forms.js' | assetUrl }}"></script>
+  {% endif %}
+  {% if page_js %}<script type="module" src="{{ ('js/pages/' + page_js) | assetUrl }}"></script>{% endif %}
 </body>
 </html>

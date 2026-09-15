@@ -1,20 +1,25 @@
 ---
 layout: "layouts/landing.njk"
 locale: "en"
-permalink: "/laser-eye-surgery-cost-egypt/index.html"
+permalink: "/laser-eye-surgery-cost-egypt/"
 canonical: "/laser-eye-surgery-cost-egypt/"
 alternate_url: "/ar/laser-eye-surgery-cost-egypt/"
 x_default_url: "/laser-eye-surgery-cost-egypt/"
 page_kind: "calculator"
 page_css: "calculator-en.css"
 page_js: "calculator-en.js"
-title: "Laser Eye Surgery Cost in Egypt 2026 — SMILE Pro, LASIK & More | Smile Pro Egypt"
-description: "Find out how much laser eye surgery costs in Egypt. Get a personalised price estimate for SMILE Pro, Femto-LASIK, PRK and ICL based on your prescription — free Pentacam assessment at our Mivida clinic."
-image: "/images/Naggar6.png"
+has_form: true
+eleventyComputed:
+  title: "Laser Eye Surgery Cost in Egypt 2026 — SMILE Pro, LASIK & More | Smile Pro Egypt"
+  description: "Find out how much laser eye surgery costs in Egypt. Get a personalised price estimate for SMILE Pro, Femto-LASIK, PRK and ICL based on your prescription."
+image: "/images/Naggar6.webp"
 show_sticky: true
 sitemap: true
 ---
-{% from "partials/forms.njk" import estimator %}
+{% from "partials/forms.njk" import estimator with context %}
+{% from "partials/icons.njk" import whatsappIcon %}
+<script type="application/json" id="pricing-data">{{ pricing | json | safe }}</script>
+<script type="application/json" id="aftercare-data">{{ clinical.aftercare | json | safe }}</script>
 <!-- Google Tag Manager (noscript) -->
 
 <!-- End Google Tag Manager (noscript) -->
@@ -30,7 +35,7 @@ sitemap: true
       Updated September 2026 · real clinic prices
     </div>
     <h1>How much does laser eye<br/>surgery <em>actually cost</em> in Egypt?</h1>
-    <p class="hero-sub">Answer 3 quick questions about your eyes. Get a personalised price estimate for SMILE Pro, Femto-LASIK, PRK, or ICL — and find out which one your eyes actually need.</p>
+    <p class="hero-sub">Answer a few quick questions about your eyes. Get a personalised price estimate and an initial recommendation for SMILE Pro, Femto-LASIK, PRK, or ICL.</p>
   </div>
 </section>
 
@@ -65,6 +70,10 @@ sitemap: true
               <span class="opt-icon">🌫️</span>
               <span><span class="opt-label">High</span><span class="opt-desc">Everything past arm's length is a blur — I'm helpless without glasses</span></span>
             </button>
+            <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','extreme')">
+              <span class="opt-icon">➖</span>
+              <span><span class="opt-label">Very high</span><span class="opt-desc">Around −10.00 D or stronger, or I was told laser may not be suitable</span></span>
+            </button>
             <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'rx','unsure')">
               <span class="opt-icon">🤷</span>
               <span><span class="opt-label">I'm not sure</span><span class="opt-desc">I know I need correction but don't know how strong</span></span>
@@ -82,36 +91,36 @@ sitemap: true
           <div class="wiz-hint">Select all that apply — or skip if none.</div>
           <div class="chk-grid">
             <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'thin-cornea')">
-              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="chk-box"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span><span style="font-weight:500">Thin corneas</span><span style="font-size:12px;color:var(--muted)">Told by a doctor before</span></span>
             </button>
             <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'dry-eyes')">
-              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="chk-box"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span><span style="font-weight:500">Dry or sensitive eyes</span><span style="font-size:12px;color:var(--muted)">Eyes water or sting often</span></span>
             </button>
             <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'active')">
-              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="chk-box"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span><span style="font-weight:500">Active lifestyle / sports</span><span style="font-size:12px;color:var(--muted)">Gym, football, swimming, etc.</span></span>
             </button>
             <button type="button" class="chk-card" aria-pressed="false" onclick="toggleChk(this,'keratoconus')">
-              <span class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="chk-box"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span><span style="font-weight:500">Keratoconus / eye rubbing</span><span style="font-size:12px;color:var(--muted)">Diagnosed or suspected</span></span>
             </button>
           </div>
 
           <div style="margin-top:24px">
             <div class="wiz-q" style="font-size:22px">What matters most to you?</div>
-            <div class="wiz-hint">Pick one priority.</div>
+            <div class="wiz-hint" id="priority-hint">Pick one priority to continue.</div>
             <div class="opt-grid">
-              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','no-dryeye')" style="padding:13px 18px">
+              <button type="button" class="opt-card" data-priority-option aria-pressed="false" onclick="selectOpt(this,'priority','no-dryeye')" style="padding:13px 18px">
                 <span class="opt-icon" style="width:32px;height:32px;font-size:15px">💧</span>
-                <span><span class="opt-label" style="font-size:14px">No dry eye risk</span></span>
+                <span><span class="opt-label" style="font-size:14px">Minimise dry eye risk</span></span>
               </button>
-              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','fast-recovery')" style="padding:13px 18px">
+              <button type="button" class="opt-card" data-priority-option aria-pressed="false" onclick="selectOpt(this,'priority','fast-recovery')" style="padding:13px 18px">
                 <span class="opt-icon" style="width:32px;height:32px;font-size:15px">⚡</span>
                 <span><span class="opt-label" style="font-size:14px">Fastest recovery</span></span>
               </button>
-              <button type="button" class="opt-card" aria-pressed="false" onclick="selectOpt(this,'priority','lowest-cost')" style="padding:13px 18px">
+              <button type="button" class="opt-card" data-priority-option aria-pressed="false" onclick="selectOpt(this,'priority','lowest-cost')" style="padding:13px 18px">
                 <span class="opt-icon" style="width:32px;height:32px;font-size:15px">💰</span>
                 <span><span class="opt-label" style="font-size:14px">Lowest cost</span></span>
               </button>
@@ -120,7 +129,7 @@ sitemap: true
 
           <div class="wiz-nav">
             <button type="button" class="wiz-back" onclick="goStep(1)">← Back</button>
-            <button type="button" class="wiz-next" id="next2" onclick="goStep(3)">See my estimate</button>
+            <button type="button" class="wiz-next" id="next2" aria-describedby="priority-hint" disabled onclick="goStep(3)">See my estimate</button>
           </div>
         </div>
 
@@ -135,15 +144,16 @@ sitemap: true
             <div class="gate-title">Get your full breakdown</div>
             <div class="gate-sub">We'll send your personalised estimate on WhatsApp and book your Pentacam assessment.</div>
             {{ estimator('en') }}
-            <p class="form-note">No cost for consultation · No commitment · Your results stay confidential</p>
+            <p class="form-note">Questions before you visit? Our team can answer them by phone at no charge.</p>
             <div class="wa-alt">
               <span>Prefer to chat first?</span>
               <a href="#" id="wa-results-link" class="wa-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.135.562 4.139 1.541 5.875L0 24l6.302-1.519A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.999-1.366l-.357-.212-3.742.902.948-3.631-.232-.372A9.78 9.78 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+                {{ whatsappIcon() }}
                 WhatsApp my results
               </a>
             </div>
           </div>
+          <div class="result-details" id="result-details"></div>
         </div>
 
       </div>
@@ -162,15 +172,13 @@ sitemap: true
     <table class="price-table">
       <thead><tr><th>Technology</th><th>Price (EGP, both eyes)</th><th>Best for</th></tr></thead>
       <tbody>
-        <tr><td>PRK / Surface Ablation</td><td>15,000 – 25,000</td><td>Thin corneas, contact sports, budget-conscious</td></tr>
-        <tr><td>Custom LASIK</td><td>18,000 – 28,000</td><td>Standard myopia, fast visual recovery</td></tr>
-        <tr><td>Femto-LASIK (blade-free)</td><td>30,000 – 48,000</td><td>Precision flap, zero blade, gold standard</td></tr>
-        <tr class="highlight-row"><td>SMILE Pro (ZEISS VisuMax 800)</td><td>45,000 – 68,000</td><td>Flapless, minimal dry eye, active lifestyle</td></tr>
-        <tr><td>ICL (implantable lens)</td><td>70,000 – 110,000</td><td>Extreme prescription, laser not suitable</td></tr>
+        {% for id, treatment in pricing.treatments %}
+        <tr{% if treatment.highlight %} class="highlight-row"{% endif %}><td>{{ treatment.en.name }}{% if id == 'smile-pro' %} ({{ treatment.en.sub }}){% endif %}</td><td>{{ treatment.price_min | formatNumber('en-EG') }} – {{ treatment.price_max | formatNumber('en-EG') }}</td><td>{{ treatment.en.best_for }}</td></tr>
+        {% endfor %}
       </tbody>
     </table>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:14px">Instalment plans available through ValU and Premium Card. Prices at El Naggar Center, Mivida, New Cairo.</p>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px">Instalment plans available through ValU and Premium Card. Prices at {{ site.doctor.en }} Eye Clinic, {{ site.address.en | join(', ') }}.</p>
   </div>
 </section>
 
@@ -181,26 +189,12 @@ sitemap: true
     <div class="rule"></div>
     <h2>Before you compare prices, <em>read this</em></h2>
     <div class="faq-list">
+      {% for faq in calculatorFaqs.en %}
       <div class="faq-item">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">Why is there such a wide price range?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Because the technology is different. PRK uses a surface laser with no flap creation. LASIK adds a microkeratome flap. Femto-LASIK replaces the blade with a femtosecond laser. SMILE Pro eliminates the flap entirely using a 2mm keyhole incision on the ZEISS VisuMax 800. Each step up adds precision, safety, and faster recovery — but also cost. The right question isn't "which is cheapest" but "which is safest for my specific cornea."</div>
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">{{ faq.question }}<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a">{{ faq.answer | replace('{doctor}', site.doctor.en) }}</div>
       </div>
-      <div class="faq-item">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">Does cheaper mean worse?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Not necessarily. PRK has been performed safely for decades and is still the best option for certain eye profiles — particularly thin corneas and patients in contact sports. The issue is when a clinic offers only one technology and fits every patient into it. At El Naggar Center, Dr. El Naggar recommends the technology that matches your Pentacam results — sometimes that's the most affordable option.</div>
-      </div>
-      <div class="faq-item">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">What does the price include?<span class="faq-icon">+</span></button>
-        <div class="faq-a">At our clinic, the quoted price covers the full procedure on both eyes, all pre-operative assessments, the Pentacam scan, prescribed recovery eye drops, and 12 months of follow-up appointments. There are no hidden add-ons. The initial consultation assessment is booked and priced separately from the procedure itself.</div>
-      </div>
-      <div class="faq-item">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">Can I pay in instalments?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. We work with ValU and Premium Card for instalment plans. Depending on the technology and plan length, monthly payments can start from around EGP 2,500/month. Our team can walk you through the exact options after your assessment.</div>
-      </div>
-      <div class="faq-item">
-        <button type="button" class="faq-q" onclick="toggleFaq(this)">What is a Pentacam scan and why do I need one?<span class="faq-icon">+</span></button>
-        <div class="faq-a">A Pentacam is a rotating camera that maps your entire cornea in 3D — measuring thickness, curvature, and elevation at thousands of points. It tells us definitively which technologies are safe for your specific eyes and which are not. Without it, any price estimate is just a guess. That's why we start every patient journey with one.</div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>

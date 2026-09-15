@@ -1,0 +1,10 @@
+[
+  { "slug": "article-1", "ar": "/articles/article-1/", "en": "/en/articles/article-1/", "legacy_ar": "/articles/article-1.html", "legacy_en": "/en/articles/article-1.html" },
+  { "slug": "article-2", "ar": "/articles/article-2/", "en": "/en/articles/article-2/", "legacy_ar": "/articles/article-2.html", "legacy_en": "/en/articles/article-2.html" },
+  { "slug": "article-3", "ar": "/articles/article-3/", "en": "/en/articles/article-3/", "legacy_ar": "/articles/article-3.html", "legacy_en": "/en/articles/article-3.html" },
+  { "slug": "article-4", "ar": "/articles/article-4/", "en": "/en/articles/article-4/", "legacy_ar": "/articles/article-4.html", "legacy_en": "/en/articles/article-4.html" },
+  { "slug": "article-5", "ar": "/articles/article-5/", "en": "/en/articles/article-5/", "legacy_ar": "/articles/article-5.html", "legacy_en": "/en/articles/article-5.html" },
+  { "slug": "article-6", "ar": "/articles/article-6/", "en": "/en/articles/article-6/", "legacy_ar": "/articles/article-6.html", "legacy_en": "/en/articles/article-6.html" },
+  { "slug": "article-7", "ar": "/articles/article-7/", "en": "/en/articles/article-7/", "legacy_ar": "/articles/article-7.html", "legacy_en": "/en/articles/article-7.html" },
+  { "slug": "article-8", "ar": "/articles/article-8/", "en": "/en/articles/article-8/", "legacy_ar": "/articles/article-8.html", "legacy_en": "/en/articles/article-8.html" }
+]

@@ -1,27 +1,17 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-8.html"
-canonical: "/en/articles/article-8.html"
-alternate_url: "/articles/article-8.html"
-x_default_url: "/en/articles/article-8.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "SMILE Pro Recovery Stages and Aftercare"
 seo_title: "SMILE Pro Recovery Stages and Aftercare | Smile Pro Egypt"
-description: "A recovery timeline and the most important aftercare guidance following SMILE Pro."
 seo_description: "A recovery timeline and the most important aftercare guidance following SMILE Pro."
 slug: "article-8"
-translation_key: "article-8"
 date: "2026-09-09"
-image: "/images/Naggar6.png"
+image: "/images/Naggar1.webp"
+image_width: 719
+image_height: 1280
 excerpt: "A recovery timeline and the most important aftercare guidance following SMILE Pro."
 category: "Recovery"
 read_time: "4 min read"
 published: true
-sitemap: true
+form_procedure: "smile-pro"
 ---
 <p>Thanks to its minimally invasive keyhole technique, <strong>SMILE Pro</strong> offers one of the fastest post-operative recovery periods in modern laser refractive surgery. Here is what to expect during your visual recovery journey.</p>
 

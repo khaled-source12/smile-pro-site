@@ -1,27 +1,16 @@
 ---
-layout: "layouts/article.njk"
-tags: ["article","article_en"]
-locale: "en"
-permalink: "/en/articles/article-3.html"
-canonical: "/en/articles/article-3.html"
-alternate_url: "/articles/article-3.html"
-x_default_url: "/en/articles/article-3.html"
-page_kind: "article"
-page_css: "article.css"
-schema_type: "article"
 title: "Is Your Corneal Thickness Suitable for Femto LASIK?"
 seo_title: "Is Your Corneal Thickness Suitable for Femto LASIK? | Smile Pro Egypt"
-description: "How corneal thickness and Pentacam mapping guide the safest vision correction choice."
 seo_description: "How corneal thickness and Pentacam mapping guide the safest vision correction choice."
 slug: "article-3"
-translation_key: "article-3"
 date: "2026-09-09"
-image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80"
+image: "/images/Naggar5.webp"
+image_width: 896
+image_height: 1200
 excerpt: "How corneal thickness and Pentacam mapping guide the safest vision correction choice."
 category: "Assessment"
 read_time: "5 min read"
 published: true
-sitemap: true
 ---
 <p>When considering laser vision correction to eliminate dependency on glasses or contact lenses, the term <strong>"corneal thickness"</strong> appears repeatedly. Precise measurement of corneal thickness is the bedrock requirement for determining whether you are an ideal candidate for Femto LASIK, or if your eyes require an alternative procedure such as SMILE Pro or Photorefractive Keratectomy (PRK).</p>
 
