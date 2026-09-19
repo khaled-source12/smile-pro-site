@@ -2,7 +2,7 @@
 
 Eleventy-based static website for Smile Pro Egypt. Eleventy runs only at build time; Netlify serves the generated HTML, CSS, JavaScript, and media from `dist`.
 
-For a step-by-step Arabic guide covering local setup, editing, GitHub, Netlify, forms, and Decap CMS, see [`SETUP.md`](SETUP.md).
+For a step-by-step Arabic guide covering local setup, editing, GitHub, Netlify, forms, and Decap CMS, see [`SETUP.md`](SETUP.md). The versioned Data Layer contract and exact GTM configuration are documented in [`TRACKING.md`](TRACKING.md).
 
 ## Local development
 
@@ -41,7 +41,7 @@ Phone fields use `intl-tel-input` with Egypt selected by default, searchable cou
 
 Analytics and advertising tags are included when Netlify builds Production or a Deploy Preview (or when `ELEVENTY_ENV=production` is set deliberately). This makes it possible to validate every platform with GTM Preview before release. Plain local development does not send traffic to production analytics.
 
-Google Tag Manager is the single browser entry point for GA4, Google Ads, Meta, Snapchat, and Clarity; none of those vendor loaders are initialized directly by the templates. The site pushes funnel events for CTA, call and WhatsApp clicks, form views/starts/errors, valid phone numbers, the single `smile_pro_lead` conversion, and estimator starts/results. Every Netlify submission also carries a generated lead ID, first landing page, source page, referrer, UTM values, and supported ad click IDs so campaign quality can be reconciled after the call.
+Google Tag Manager is the single browser entry point for GA4, Google Ads, Meta, TikTok, Snapchat, ChatGPT Ads, and Clarity; none of those vendor loaders are initialized directly by the templates. The site pushes a versioned Data Layer for page/content views, CTA, call and WhatsApp clicks, form views/starts/errors, the single `smile_pro_lead` conversion, and estimator interactions. Every Netlify submission carries lead/session/attempt IDs, 90-day first-touch and last-non-direct attribution, UTM values, and supported ad click IDs. A successful lead contains only platform-ready phone hashes; the raw phone never enters Data Layer or attribution storage.
 
 `PERF_DISABLE_TRACKING=1` is used only by local Lighthouse scripts to isolate first-party performance. Do not configure it in Netlify. The GTM container itself must use one Google tag with both the GA4 and Google Ads destinations and must fire each platform's Page View and `smile_pro_lead` conversion once; the repository cannot modify remote GTM container tags.
 

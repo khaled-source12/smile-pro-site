@@ -1,16 +1,25 @@
 {% macro attributionFields(formPosition) %}
   <input type="hidden" name="form-position" value="{{ formPosition }}">
   <input type="hidden" name="lead-id" value="">
+  <input type="hidden" name="attempt-id" value="">
+  <input type="hidden" name="session-id" value="">
   <input type="hidden" name="landing-page" value="">
   <input type="hidden" name="source-page" value="">
   <input type="hidden" name="referrer" value="">
+  <input type="hidden" name="first-touch" value="">
+  <input type="hidden" name="last-non-direct" value="">
   <input type="hidden" name="utm-source" value="">
   <input type="hidden" name="utm-medium" value="">
   <input type="hidden" name="utm-campaign" value="">
   <input type="hidden" name="utm-term" value="">
   <input type="hidden" name="utm-content" value="">
   <input type="hidden" name="gclid" value="">
+  <input type="hidden" name="wbraid" value="">
+  <input type="hidden" name="gbraid" value="">
   <input type="hidden" name="fbclid" value="">
+  <input type="hidden" name="ttclid" value="">
+  <input type="hidden" name="sccid" value="">
+  <input type="hidden" name="oppref" value="">
   <input type="hidden" name="msclkid" value="">
 {% endmacro %}
 
@@ -39,11 +48,11 @@
   {{ attributionFields(formPosition) }}
   <div class="fg">
     <label for="{{ fieldPrefix }}-name">{{ 'الاسم بالكامل' if locale == 'ar' else 'Full Name' }}</label>
-    <input type="text" id="{{ fieldPrefix }}-name" name="name" placeholder="{{ 'أدخل اسمك بالكامل' if locale == 'ar' else 'Enter your full name' }}" autocomplete="name" required>
+    <input type="text" id="{{ fieldPrefix }}-name" name="name" placeholder="{{ 'أدخل اسمك بالكامل' if locale == 'ar' else 'Enter your full name' }}" autocomplete="name" data-clarity-mask="true" required>
   </div>
   <div class="fg">
     <label for="{{ fieldPrefix }}-phone">{{ 'رقم الهاتف' if locale == 'ar' else 'Phone Number' }}</label>
-    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="{{ fieldPrefix }}-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="{{ fieldPrefix }}-phone-error" aria-invalid="false" data-phone-input data-default-country="EG" dir="ltr" required></div>
+    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="{{ fieldPrefix }}-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="{{ fieldPrefix }}-phone-error" aria-invalid="false" data-phone-input data-default-country="EG" data-clarity-mask="true" dir="ltr" required></div>
     <div class="field-error" id="{{ fieldPrefix }}-phone-error" role="alert" hidden>{{ 'من فضلك اكتب رقم هاتف صحيحاً مع كود الدولة عند الحاجة' if locale == 'ar' else 'Enter a valid phone number, including the country code when needed' }}</div>
   </div>
   {{ procedureField(locale, fieldPrefix, defaultProcedure or 'not-sure') }}
@@ -67,11 +76,11 @@
   <input type="hidden" name="price-range" id="h-price" value="">
   <div class="fg">
     <label for="est-name">{{ 'الاسم بالكامل' if locale == 'ar' else 'Full name' }}</label>
-    <input type="text" id="est-name" name="name" placeholder="{{ 'أحمد محمد' if locale == 'ar' else 'Ahmed Mohamed' }}" autocomplete="name" required>
+    <input type="text" id="est-name" name="name" placeholder="{{ 'أحمد محمد' if locale == 'ar' else 'Ahmed Mohamed' }}" autocomplete="name" data-clarity-mask="true" required>
   </div>
   <div class="fg">
     <label for="est-phone">{{ 'رقم الواتساب' if locale == 'ar' else 'WhatsApp number' }}</label>
-    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="est-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="phone-error" aria-invalid="false" data-phone-input data-default-country="EG" dir="ltr" required></div>
+    <div class="phone-shell" data-phone-shell><span class="phone-shell__default" aria-hidden="true">🇪🇬 +20</span><input type="tel" id="est-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="010 1234 5678" aria-describedby="phone-error" aria-invalid="false" data-phone-input data-default-country="EG" data-clarity-mask="true" dir="ltr" required></div>
     <div class="field-error" id="phone-error" role="alert" hidden>{{ 'من فضلك اكتب رقم هاتف صحيحاً مع كود الدولة عند الحاجة' if locale == 'ar' else 'Enter a valid phone number, including the country code when needed' }}</div>
   </div>
   {{ procedureField(locale, 'est') }}

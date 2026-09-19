@@ -9,6 +9,8 @@ body {
 }
 html[dir="rtl"] body { font-family: "Cairo", "DM Sans", sans-serif; }
 img, video, iframe { max-width: 100%; }
+picture { display: block; max-width: 100%; }
+img { display: block; height: auto; }
 a { color: inherit; }
 button, input, select, textarea { font: inherit; }
 .site-shell { width: min(100% - 40px, var(--shell)); margin-inline: auto; }

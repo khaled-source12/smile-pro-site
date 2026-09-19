@@ -1,3 +1,10 @@
+import { encodeNetlifyForm, postNetlifyForm } from '../modules/netlify-forms.js';
+import {
+  createLeadConfirmationUrl,
+  dispatchLeadConversion,
+  prepareLeadConversion
+} from '../modules/tracking-core.js';
+
 // ══════════ STATE ══════════
 const state = { rx: null, conditions: new Set(), priority: null };
 const pricingData = JSON.parse(document.getElementById('pricing-data').textContent);
@@ -201,34 +208,54 @@ window.toggleChk = toggleChk;
 // ══════════ FORM HANDLING ══════════
 document.getElementById('estimator-form').addEventListener('submit', async function(e) {
   e.preventDefault();
+  if (this.dataset.submitting === 'true') return;
+  this.dataset.submitting = 'true';
   const phoneInput = document.getElementById('est-phone');
   const phone = await window.preparePhoneInput?.(phoneInput, true);
   if (phone?.available && !phone.valid) {
+    delete this.dataset.submitting;
+    window.trackSiteEvent?.('lead_form_error', {
+      lead_id: this.elements.namedItem('lead-id')?.value || '',
+      attempt_id: this.elements.namedItem('attempt-id')?.value || this.dataset.attemptId || '',
+      form_name: this.getAttribute('name') || this.id || 'unknown',
+      form_position: this.dataset.formPosition || 'unknown',
+      service: this.dataset.service || 'unknown',
+      field_name: 'phone',
+      error_type: 'phone_invalid'
+    });
     phoneInput?.focus();
     return;
   }
+
+  window.trackSiteEvent?.('lead_form_submit_attempt', {
+    lead_id: this.elements.namedItem('lead-id')?.value || '',
+    attempt_id: this.elements.namedItem('attempt-id')?.value || this.dataset.attemptId || '',
+    form_name: this.getAttribute('name') || this.id || 'unknown',
+    form_position: this.dataset.formPosition || 'unknown',
+    service: this.dataset.service || 'unknown'
+  });
 
   const btn = this.querySelector('button[type="submit"]');
   btn.textContent = 'Booking...';
   btn.disabled = true;
 
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(this)).toString()
-  })
-  .then((response) => {
-    if (response.ok) {
-      window.markLeadConversion?.(this);
-      window.location.href = this.getAttribute('action') || '/thank-you/';
-    } else {
-      window.markLeadConversion?.(this);
-      this.submit();
+  const destination = this.action || '/thank-you/';
+  const submission = await postNetlifyForm(encodeNetlifyForm(this));
+  if (!submission.confirmed) {
+    const conversion = await prepareLeadConversion(this, phone?.e164 || '');
+    if (conversion.stored) {
+      this.action = createLeadConfirmationUrl(destination, conversion.lead);
     }
-  })
-  .catch(() => {
-    window.markLeadConversion?.(this);
     this.submit();
+    return;
+  }
+  const conversion = await prepareLeadConversion(this, phone?.e164 || '');
+  if (conversion.stored) {
+    window.location.assign(createLeadConfirmationUrl(destination, conversion.lead));
+    return;
+  }
+  dispatchLeadConversion(conversion.lead, {
+    onComplete: () => window.location.assign(destination)
   });
 });
 

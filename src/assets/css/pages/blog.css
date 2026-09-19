@@ -72,15 +72,16 @@
         .meta-info { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 16px; }
         .read-btn { color: var(--burg); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 30px; margin-bottom: 60px; }
         .post-card {
             background: var(--white); border: 1px solid var(--border);
             border-radius: var(--r); overflow: hidden;
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; min-width: 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .post-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
-        .post-img { width: 100%; height: 210px; object-fit: cover; }
+        .post-card > picture { flex: 0 0 auto; width: 100%; aspect-ratio: 8 / 5; overflow: hidden; }
+        .post-img { width: 100%; height: 100%; aspect-ratio: 8 / 5; object-fit: cover; object-position: center 20%; }
         .post-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
         .post-title { font-size: 18px; color: var(--burg); font-weight: 700; margin: 10px 0; line-height: 1.4; }
         .post-desc { color: var(--muted); font-size: 14px; margin-bottom: 20px; flex-grow: 1; }

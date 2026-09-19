@@ -126,10 +126,11 @@ async function buildComparisonStyles() {
 }
 
 async function buildCriticalCss() {
-  const [tokens, base, componentsSource] = await Promise.all([
+  const [tokens, base, componentsSource, landingComparison] = await Promise.all([
     readFile(path.join(sourceRoot, "assets", "css", "tokens.css"), "utf8"),
     readFile(path.join(sourceRoot, "assets", "css", "base.css"), "utf8"),
-    readFile(path.join(sourceRoot, "assets", "css", "components.css"), "utf8")
+    readFile(path.join(sourceRoot, "assets", "css", "components.css"), "utf8"),
+    readFile(path.join(sourceRoot, "assets", "css", "landing-comparison.css"), "utf8")
   ]);
   const lazyComparisonRule = /(?:procedure-comparison-modal|procedure-featured|procedure-comparison-scroll|procedure-comparison-table|procedure-comparison-desktop|procedure-choice-button|procedure-comparison-alternatives|procedure-comparison-mobile|procedure-option-card|procedure-choice-unsure|has-open-dialog)/;
   const components = componentsSource
@@ -142,13 +143,14 @@ async function buildCriticalCss() {
 
   for (const locale of ["en", "ar"]) {
     for (const pageKind of pageKinds) {
+      const comparisonStyles = pageKind === "home" || pageKind === "smile-pro" ? landingComparison : "";
       for (const file of pageFiles) {
         const pageStyles = await readFile(path.join(pageDirectory, file), "utf8");
-        const source = `${fontCss(locale, pageKind)}\n${tokens}\n${base}\n${components}\n${pageStyles}`;
+        const source = `${fontCss(locale, pageKind)}\n${tokens}\n${base}\n${components}\n${pageStyles}\n${comparisonStyles}`;
         const minified = await transform(source, { loader: "css", minify: true, target: "es2020" });
         criticalCss[`${locale}:${pageKind}:${file}`] = minified.code;
       }
-      const source = `${fontCss(locale, pageKind)}\n${tokens}\n${base}\n${components}`;
+      const source = `${fontCss(locale, pageKind)}\n${tokens}\n${base}\n${components}\n${comparisonStyles}`;
       const minified = await transform(source, { loader: "css", minify: true, target: "es2020" });
       criticalCss[`${locale}:${pageKind}:`] = minified.code;
     }

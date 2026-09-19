@@ -4,12 +4,24 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { deriveContact, readWebpDimensions } from "./scripts/site-utils.mjs";
 import { legacyRedirectMiddleware } from "./scripts/dev-server-redirects.mjs";
 import { assetUrl, buildAssets, getCriticalCss } from "./scripts/build-assets.mjs";
+import { comparisonText } from "./scripts/comparison-utils.mjs";
+import { getTrackingEnvironment } from "./scripts/tracking-environment.mjs";
+import fs from "node:fs";
+import { fixedRedirectRules } from "./scripts/netlify-artifacts.mjs";
 
 export default function (eleventyConfig) {
-  const isProduction = process.env.CONTEXT === "production" || process.env.ELEVENTY_ENV === "production";
-  const isDeployPreview = process.env.CONTEXT === "deploy-preview";
-  eleventyConfig.addGlobalData("isProduction", isProduction);
-  eleventyConfig.addGlobalData("trackingEnabled", (isProduction || isDeployPreview) && process.env.PERF_DISABLE_TRACKING !== "1");
+  const trackingEnvironment = getTrackingEnvironment();
+  eleventyConfig.addGlobalData("isProduction", trackingEnvironment.isProduction);
+  eleventyConfig.addGlobalData("isStaging", trackingEnvironment.isStaging);
+  eleventyConfig.addGlobalData("trackingEnvironment", trackingEnvironment.name);
+  eleventyConfig.addGlobalData("trackingContainerId", trackingEnvironment.containerId);
+  eleventyConfig.addGlobalData("trackingHostname", trackingEnvironment.hostname);
+  eleventyConfig.addGlobalData("trackingEnabled", trackingEnvironment.enabled);
+  // Netlify Drop reads _redirects, not repository netlify.toml. Emit the same
+  // fixed routes in the artifact as well as the translation-aware article rules.
+  const artifactRedirects = fixedRedirectRules(fs.readFileSync("netlify.toml", "utf8"));
+  eleventyConfig.addGlobalData("fixedRedirectRules", artifactRedirects.filter(rule => !rule.split(' ')[0].includes('*')));
+  eleventyConfig.addGlobalData("fallbackRedirectRules", artifactRedirects.filter(rule => rule.split(' ')[0].includes('*')));
   eleventyConfig.setServerOptions({ middleware: [legacyRedirectMiddleware] });
   eleventyConfig.on("eleventy.before", buildAssets);
   eleventyConfig.addWatchTarget("./src/assets/css/");
@@ -39,6 +51,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter("assetUrl", assetUrl);
   eleventyConfig.addFilter("criticalCss", getCriticalCss);
+  eleventyConfig.addFilter("comparisonText", comparisonText);
 
   eleventyConfig.addFilter("json", (value) => {
     const serialized = JSON.stringify(value);
@@ -116,7 +129,7 @@ export default function (eleventyConfig) {
         token.attrSet("loading", "lazy");
         token.attrSet("decoding", "async");
         token.attrSet("eleventy:widths", "320,640,960,1200");
-        token.attrSet("sizes", "(max-width: 720px) calc(100vw - 44px), 820px");
+        token.attrSet("sizes", "(max-width: 640px) calc(100vw - 78px), (max-width: 768px) calc(100vw - 90px), (max-width: 940px) calc(100vw - 122px), 818px");
       }
       return defaultImageRenderer(tokens, index, options, environment, renderer);
     };

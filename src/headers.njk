@@ -1,0 +1,10 @@
+---
+permalink: /_headers
+eleventyExcludeFromCollections: true
+---
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+{% if isStaging %}  X-Robots-Tag: noindex, nofollow
+{% endif %}
+/assets/generated/*
+  Cache-Control: public, max-age=31536000, immutable

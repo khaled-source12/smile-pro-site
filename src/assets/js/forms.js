@@ -1,4 +1,10 @@
-const conversionKey = 'smile-pro-pending-lead';
+import {
+  createLeadConfirmationUrl,
+  dispatchLeadConversion,
+  prepareLeadConversion
+} from './modules/tracking-core.js';
+import { encodeNetlifyForm, postNetlifyForm } from './modules/netlify-forms.js';
+
 const digitMap = { '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4', '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9' };
 const phoneInstances = new WeakMap();
 const phoneInitializationPromises = new WeakMap();
@@ -18,6 +24,13 @@ const arabicUiTranslations = {
 };
 
 const toAsciiDigits = (value) => String(value || '').replace(/[٠-٩۰-۹]/g, (digit) => digitMap[digit]);
+const formTrackingParameters = (form) => ({
+  lead_id: form?.elements.namedItem('lead-id')?.value || '',
+  attempt_id: form?.elements.namedItem('attempt-id')?.value || form?.dataset.attemptId || '',
+  form_name: form?.getAttribute('name') || form?.id || 'unknown',
+  form_position: form?.dataset.formPosition || 'unknown',
+  service: form?.dataset.service || 'unknown'
+});
 const findError = (input) => {
   const ids = (input.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
   return ids.map((id) => document.getElementById(id)).find((element) => element?.classList.contains('field-error')) || null;
@@ -136,43 +149,30 @@ function validatePhoneInput(input, normalizeForSubmission = false) {
     input.dataset.validPhoneTracked = 'true';
     const form = input.closest('form');
     window.trackSiteEvent?.('lead_phone_valid', {
-      form_name: form?.getAttribute('name') || form?.id || 'unknown',
-      form_position: form?.dataset.formPosition || 'unknown',
-      service: form?.dataset.service || 'unknown'
+      ...formTrackingParameters(form)
     });
   }
   return true;
 }
 
 async function preparePhoneInput(input, normalizeForSubmission = false) {
-  if (!input) return { available: false, valid: false };
+  if (!input) return { available: false, valid: false, e164: '' };
   const instance = await initializePhone(input);
   if (!instance) {
     resetError(input);
-    return { available: false, valid: Boolean(input.value.trim()) };
+    return { available: false, valid: Boolean(input.value.trim()), e164: '' };
   }
   const utilitiesAvailable = await ensureUtils();
   if (!utilitiesAvailable) {
     resetError(input);
-    return { available: false, valid: Boolean(input.value.trim()) };
+    return { available: false, valid: Boolean(input.value.trim()), e164: '' };
   }
-  return { available: true, valid: validatePhoneInput(input, normalizeForSubmission) === true };
+  const valid = validatePhoneInput(input, normalizeForSubmission) === true;
+  return { available: true, valid, e164: valid ? input.dataset.e164 || '' : '' };
 }
 
 window.validatePhoneInput = validatePhoneInput;
 window.preparePhoneInput = preparePhoneInput;
-window.markLeadConversion = (form) => {
-  const lead = {
-    lead_id: form?.elements.namedItem('lead-id')?.value || '',
-    form_name: form?.getAttribute('name') || form?.id || 'unknown',
-    form_position: form?.dataset.formPosition || 'unknown',
-    service: form?.dataset.service || 'unknown',
-    language: document.body.dataset.locale || document.documentElement.lang.slice(0, 2),
-    source_page: window.location.pathname
-  };
-  try { window.sessionStorage.setItem(conversionKey, JSON.stringify(lead)); } catch (_error) {}
-};
-
 document.querySelectorAll('[data-phone-input]').forEach((input) => {
   const startCore = () => initializePhone(input);
   input.addEventListener('focus', startCore, { once: true });
@@ -193,17 +193,17 @@ document.querySelectorAll('form[data-netlify="true"] select[name="procedure"]').
   select.addEventListener('change', sync);
 });
 
-const encode = (form) => new URLSearchParams(new FormData(form)).toString();
 document.querySelectorAll('form[data-netlify="true"]:not([data-managed-form="custom"])').forEach((form) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (form.dataset.submitting === 'true') return;
+    form.dataset.submitting = 'true';
     const phoneInput = form.querySelector('[data-phone-input]');
     const phone = await preparePhoneInput(phoneInput, true);
     if (phone.available && !phone.valid) {
+      delete form.dataset.submitting;
       window.trackSiteEvent?.('lead_form_error', {
-        form_name: form.getAttribute('name') || form.id || 'unknown',
-        form_position: form.dataset.formPosition || 'unknown',
-        service: form.dataset.service || 'unknown',
+        ...formTrackingParameters(form),
         field_name: 'phone',
         error_type: 'phone_invalid'
       });
@@ -211,9 +211,7 @@ document.querySelectorAll('form[data-netlify="true"]:not([data-managed-form="cus
       return;
     }
     window.trackSiteEvent?.('lead_form_submit_attempt', {
-      form_name: form.getAttribute('name') || form.id || 'unknown',
-      form_position: form.dataset.formPosition || 'unknown',
-      service: form.dataset.service || 'unknown'
+      ...formTrackingParameters(form)
     });
     const button = form.querySelector('button[type="submit"]');
     if (button) {
@@ -221,18 +219,23 @@ document.querySelectorAll('form[data-netlify="true"]:not([data-managed-form="cus
       button.dataset.originalText = button.textContent;
       button.textContent = isArabic ? 'جاري الإرسال…' : 'Sending…';
     }
-    try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode(form)
-      });
-      if (!response.ok) throw new Error('Form submission failed');
-      window.markLeadConversion(form);
-      window.location.assign(form.action);
-    } catch (_error) {
-      window.markLeadConversion(form);
+    const destination = form.action;
+    const submission = await postNetlifyForm(encodeNetlifyForm(form));
+    if (!submission.confirmed) {
+      const conversion = await prepareLeadConversion(form, phone.e164);
+      if (conversion.stored) {
+        form.action = createLeadConfirmationUrl(destination, conversion.lead);
+      }
       form.submit();
+      return;
     }
+    const conversion = await prepareLeadConversion(form, phone.e164);
+    if (conversion.stored) {
+      window.location.assign(createLeadConfirmationUrl(destination, conversion.lead));
+      return;
+    }
+    dispatchLeadConversion(conversion.lead, {
+      onComplete: () => window.location.assign(destination)
+    });
   });
 });

@@ -91,17 +91,41 @@
 .lead-card__contact a[href*="wa.me"] { color: var(--whatsapp); }
 .lead-card__contact .whatsapp-icon { width: 16px; height: 16px; }
 .doctor-trust {
-  display: flex; align-items: center; gap: 12px; max-width: 520px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px; max-width: 520px;
   margin-top: 22px; padding: 12px 14px;
   border: 1px solid rgba(255,255,255,.2); border-radius: 14px;
   background: rgba(255,255,255,.08); color: white;
 }
+.doctor-trust picture { width: 58px; height: 58px; flex: 0 0 58px; }
+.doctor-trust > div { min-width: 0; }
+.doctor-trust__identity { flex: 1; min-width: 0; }
+.doctor-trust .doctor-trust__identity > strong { font-size: 1rem; line-height: 1.4; }
+.doctor-trust .doctor-trust__identity > span { font-size: .875rem; line-height: 1.5; }
 .doctor-trust img { width: 58px; height: 58px; flex: 0 0 58px; border-radius: 50%; object-fit: cover; object-position: center; border: 2px solid rgba(255,255,255,.78); }
 .doctor-trust strong, .doctor-trust span { display: block; }
 .doctor-trust strong { font-size: .9rem; }
 .doctor-trust span { color: rgba(255,255,255,.76); font-size: .76rem; line-height: 1.5; }
 .doctor-trust--light { border-color: var(--border); background: var(--surface); color: var(--brand); box-shadow: 0 8px 22px rgba(22,56,61,.06); }
 .doctor-trust--light span { color: var(--muted); }
+.doctor-credential-highlight { font-size: .875rem; font-weight: 600; line-height: 1.5; }
+.doctor-trust .doctor-credential-highlight { margin: 5px 0 0; font-size: .875rem; color: inherit; }
+.doctor-credentials { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; text-align: start; }
+.doctor-credentials__group { min-width: 0; }
+.doctor-credentials .doctor-credentials__heading { margin: 0; font-size: .875rem; color: inherit; text-align: start; line-height: 1.5; }
+.doctor-credentials .doctor-credentials__list { display: grid; gap: 12px; margin: 10px 0 0; padding-inline-start: 18px; color: inherit; }
+.doctor-credentials .doctor-credentials__list li { margin: 0; font-size: .875rem; line-height: 1.6; }
+.doctor-credentials__label { display: block; font-weight: 600; overflow-wrap: anywhere; }
+.doctor-credentials__detail { display: block; margin-top: 3px; font-size: .8125rem; opacity: .8; }
+.doctor-credentials-disclosure { margin-top: 12px; border-top: 1px solid var(--border); text-align: start; }
+.doctor-credentials-disclosure > summary { min-height: 44px; padding-block: 10px; font-size: .875rem; font-weight: 700; line-height: 1.6; cursor: pointer; }
+.doctor-credentials-disclosure[open] > summary { margin-bottom: 8px; }
+.doctor-trust > .doctor-credentials-disclosure { flex: 0 0 100%; margin-top: 0; }
+.doctor-trust .doctor-credentials { grid-template-columns: minmax(0, 1fr); }
+.doctor-trust:not(.doctor-trust--light) > .doctor-credentials-disclosure { border-color: rgba(255,255,255,.2); }
+.doctor-trust .doctor-credentials__label { color: inherit; font-size: .875rem; }
+.doctor-trust .doctor-credentials__detail { color: inherit; font-size: .8125rem; }
+.doc-profile .doctor-credential-highlight { margin: 10px 0 0; font-size: .875rem; color: var(--brand); text-align: start; }
+@media (max-width: 640px) { .doctor-credentials { grid-template-columns: minmax(0, 1fr); } }
 .urgency-bar {
   width: 100%;
   padding-inline: 16px;

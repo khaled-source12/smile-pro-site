@@ -2,6 +2,9 @@
 permalink: /_redirects
 eleventyExcludeFromCollections: true
 ---
+# Fixed legacy routes are duplicated from netlify.toml for manual deploys.
+{% for rule in fixedRedirectRules %}{{ rule }}
+{% endfor %}
 # Translation-aware article redirects plus permanent redirects from the old
 # .html URLs. Language rules are emitted only when both versions are published.
 {% for article in collections.articles | byLocale('ar') %}
@@ -11,4 +14,7 @@ eleventyExcludeFromCollections: true
 {% endif %}/articles/{{ article.data.slug }}.html {{ article.url }} 301!
 {% if english_url %}/en/articles/{{ article.data.slug }}.html {{ english_url }} 301!
 {% endif %}
+{% endfor %}
+# Catch-all 404 rules must be last so they cannot swallow legacy article URLs.
+{% for rule in fallbackRedirectRules %}{{ rule }}
 {% endfor %}

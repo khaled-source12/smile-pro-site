@@ -18,6 +18,7 @@ sitemap: true
 ---
 {% from "partials/forms.njk" import consultation with context %}
 {% from "partials/icons.njk" import whatsappIcon %}
+{% from "partials/doctor-profile.njk" import doctorTrust, doctorCredentials with context %}
 <!-- HERO SECTION -->
 <header class="hero">
   <div class="container hero-grid">
@@ -45,10 +46,7 @@ sitemap: true
           قيادة السيارة في نفس اليوم
         </div>
       </div>
-      <div class="doctor-trust doctor-trust--light">
-        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
-        <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
-      </div>
+      {{ doctorTrust(locale) }}
     </div>
 
     <!-- HERO FORM CARD -->
@@ -205,59 +203,16 @@ sitemap: true
 </section>
 
 <!-- COMPARISON SECTION -->
-<section class="section" id="comparison">
+<section class="section" id="comparison" aria-labelledby="comparison-title">
   <div class="container">
     <span class="lbl">مقارنة التقنيات</span>
     <div class="rule"></div>
-    <h2>كيف تختلف تقنية سمايل برو؟</h2>
+    <h2 id="comparison-title">كيف تختلف تقنية سمايل برو؟</h2>
     <p style="color:var(--muted);max-width:700px;margin-bottom:24px;">
       يعتمد اختيار عملية تصحيح النظر المناسبة على التشريح الخاص بالعين ونمط الحياة. توضح المقارنة التالية الفروق الرئيسية بين التقنيات المتاحة.
     </p>
 
-    <div class="fade-up" style="overflow-x:auto;">
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>الخاصية / المعيار</th>
-            <th>الليزك السطحي PRK</th>
-            <th>الفيمتو ليزك Femto LASIK</th>
-            <th class="col-s">سمايل برو SMILE Pro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>الحاجة لقطع/رفرف بالقرنية</td>
-            <td><span class="ci">✓</span> بدون رفرف</td>
-            <td><span class="cx">✗</span> يتم عمل رفرف (~20 مم)</td>
-            <td class="col-s"><span class="ci">✓</span> بدون رفرف (فتحة &lt; 2 مم)</td>
-          </tr>
-          <tr>
-            <td>زمن تسليط الليزر</td>
-            <td>30–60 ثانية</td>
-            <td>15–30 ثانية</td>
-            <td class="col-s">~8 ثوانٍ لكل عين</td>
-          </tr>
-          <tr>
-            <td>احتمالية جفاف العين بعد العملية</td>
-            <td>متوسطة</td>
-            <td>من متوسطة إلى عالية</td>
-            <td class="col-s">أقل نسبة جفاف (حفظ أعصاب القرنية)</td>
-          </tr>
-          <tr>
-            <td>فترة العودة للرؤية الطبيعية</td>
-            <td>5 إلى 7 أيام</td>
-            <td>24 ساعة</td>
-            <td class="col-s">24 ساعة / نفس اليوم</td>
-          </tr>
-          <tr>
-            <td>العودة للرياضة الخفيفة والسباحة</td>
-            <td>أسبوع إلى أسبوعين</td>
-            <td>أسبوعان إلى 4 أسابيع</td>
-            <td class="col-s">{{ clinical.aftercare.ar.comparison_summary }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    {% include "partials/landing-comparison.njk" %}
   </div>
 </section>
 
@@ -312,7 +267,7 @@ sitemap: true
   <div class="container">
     <div class="doctor-grid fade-up">
       <div class="doc-img">
-        <img src="/images/Naggar6.webp" alt="{{ site.doctor.ar }}" width="896" height="1200" eleventy:widths="360,600,896" sizes="(max-width: 760px) calc(100vw - 40px), 42vw" loading="lazy" decoding="async" />
+        <img src="/images/Naggar6.webp" alt="{{ site.doctor.ar }}" width="896" height="1200" eleventy:widths="300,600,896" sizes="(max-width: 398px) calc(100vw - 98px), 300px" loading="lazy" decoding="async" />
         <div class="doc-badge">
           <div class="doc-badge-num">+15</div>
           <div class="doc-badge-lbl">سنوات خبرة</div>
@@ -329,24 +284,7 @@ sitemap: true
           حرص دائم على استخدام أحدث أجهزة التشخيص والبروتوكولات الجراحية المعتمدة لضمان أعلى معايير الأمان والدقة في النتائج.
         </p>
 
-        <div class="creds">
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>زميل كلية الجراحين الملكية (FRCS) — طب وجراحة العيون (المملكة المتحدة)</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>زميل كلية الجراحين الملكية بإدنبرة</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>عضو الجمعية الأوروبية لجراحي المياه البيضاء وتصحيح الإبصار (ESCRS)</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>عضو الأكاديمية الأمريكية لطب العيون (AAO)</div>
-          </div>
-        </div>
+        {{ doctorCredentials(locale) }}
       </div>
     </div>
   </div>
@@ -393,8 +331,8 @@ sitemap: true
         </div>
       </div>
 
-      <div style="border-radius:var(--r);overflow:hidden;max-height:420px;">
-        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="فيديو تقنية ZEISS VisuMax 800" style="width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r);display:block;">
+      <div class="tech-media">
+        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="فيديو تقنية ZEISS VisuMax 800">
           <source src="/images/Video1.mp4" type="video/mp4"/>
         </video>
       </div>
@@ -413,11 +351,21 @@ sitemap: true
     <div class="faq-list">
       <div class="faq-item">
         <button type="button" class="faq-q" onclick="toggleFaq(this)">
-          <span>هل عملية سمايل برو مؤلمة أثناء أو بعد العلاج؟</span>
+          <span>هل سأشعر بألم أثناء عملية سمايل برو أو بعدها؟</span>
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          يتم وضع قطرات مخدرة قبل البدء لمنع الشور بأي ألم. قد تشعر بضغط خفيف جداً على العين لمدة 8 ثوانٍ فقط أثناء تسليط الليزر. الشعور بعد العملية يكون بسيطاً جداً مع إدمالع خفيف لدقات قليلة فقط.
+          عادةً لا تشعر بألم أثناء سمايل برو؛ تُستخدم قطرات التخدير الموضعي للحفاظ على راحتك خلال الإجراء، وقد تلاحظ ضغطاً خفيفاً على العين. بعد العملية، يكون الانزعاج عادةً بسيطاً، وتساعد القطرات الموصوفة على راحة العين أثناء التعافي. إذا شعرت بألم شديد أو تراجعت الرؤية بشكل مفاجئ، تواصل مع طبيبك فوراً.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+          <span>هل نتائج سمايل برو دائمة، أم قد أحتاج إلى نظارة لاحقاً؟</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">
+          نتائج سمايل برو طويلة الأمد في المعتاد، ويستقر النظر تدريجياً خلال فترة التعافي. وإذا احتجت إلى نظارة للقراءة مع التقدم في العمر، فهذا مرتبط بتغيّر طبيعي في قدرة العين على التركيز القريب، ولا يعني بحد ذاته زوال أثر العملية. أما إذا تغيّر مقاس النظر مستقبلاً، فهناك خيارات للتعامل معه، مثل نظارة عند الحاجة أو تصحيح إضافي إذا كان مناسباً لحالتك. يوضح لك الطبيب ما يناسبك بناءً على الفحص والمتابعة.
         </div>
       </div>
 

@@ -39,7 +39,7 @@ sitemap: true
   <div class="blog-grid">
     {% for post in posts %}
     <article class="post-card" data-blog-category="{{ post.data.category }}">
-      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" width="{{ post.data.image_width }}" height="{{ post.data.image_height }}" eleventy:widths="320,640,960" sizes="(max-width: 720px) calc(100vw - 32px), 30vw" loading="{{ 'eager' if loop.first else 'lazy' }}"{% if loop.first %} fetchpriority="high"{% endif %} decoding="async">
+      <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-img" width="{{ post.data.image_width }}" height="{{ post.data.image_height }}" eleventy:widths="320,480,640,960" sizes="(min-width: 1120px) 336px, (min-width: 1068px) calc((100vw - 114px) / 3), (min-width: 718px) calc((100vw - 82px) / 2), calc(100vw - 50px)" loading="{{ 'eager' if loop.first else 'lazy' }}"{% if loop.first %} fetchpriority="high"{% endif %} decoding="async">
       <div class="post-body">
         <span class="tag">{{ post.data.category }}</span>
         <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>

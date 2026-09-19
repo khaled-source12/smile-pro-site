@@ -7,6 +7,10 @@
   <title>Smile Pro Egypt — Admin</title>
 </head>
 <body>
+  {% if isStaging %}
+  <main><h1>Tracking test environment</h1><p>CMS editing is disabled here to protect the production repository. Use this site for tracking tests only.</p></main>
+  {% else %}
   <script src="https://unpkg.com/decap-cms@3.16.1/dist/decap-cms.js" integrity="sha384-hhTu9Y4nUnpebdUoT0bRx5lciIW+n97A7RrydmU92mb8EJj2YfInMzFkP2maNZS+" crossorigin="anonymous"></script>
+  {% endif %}
 </body>
 </html>

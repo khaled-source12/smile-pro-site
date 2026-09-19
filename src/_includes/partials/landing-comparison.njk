@@ -1,0 +1,47 @@
+{% set comparisonRows = landingComparison.rows[page_kind] %}
+<div class="landing-comparison" data-landing-comparison>
+  <p class="landing-comparison__mobile-hint">{{ landingComparison.mobileHint[locale] }}</p>
+  <div class="landing-comparison__desktop">
+    <table class="landing-comparison__table" aria-describedby="landing-comparison-note">
+      <caption class="sr-only">{{ landingComparison.title[locale] }}</caption>
+      <colgroup><col class="landing-comparison__criterion-col">{% for procedure in landingComparison.procedures %}<col>{% endfor %}</colgroup>
+      <thead>
+        <tr>
+          <th scope="col">{{ landingComparison.feature[locale] }}</th>
+          {% for procedure in landingComparison.procedures %}
+          <th scope="col"{% if procedure.featured %} class="landing-comparison__featured"{% endif %}>
+            <span class="landing-comparison__name">{{ procedure.name[locale] }}</span>
+            <span class="landing-comparison__detail"{% if locale == 'ar' %} dir="ltr"{% endif %}>{{ procedure.detail[locale] }}</span>
+          </th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in comparisonRows %}
+        <tr data-comparison-criterion="{{ row.id }}">
+          <th scope="row">{{ row.label[locale] }}</th>
+          {% for procedure in landingComparison.procedures %}
+          <td{% if procedure.featured %} class="landing-comparison__featured"{% endif %}>{{ row.values[locale][loop.index0] | replace('{aftercare}', clinical.aftercare[locale].comparison_summary) | comparisonText | safe }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="landing-comparison__mobile" aria-describedby="landing-comparison-note">
+    {% for row in comparisonRows %}
+    <div class="landing-comparison__card" data-comparison-criterion="{{ row.id }}">
+      <h3>{{ row.label[locale] }}</h3>
+      <dl>
+        {% for procedure in landingComparison.procedures %}
+        <div class="landing-comparison__value{% if procedure.featured %} landing-comparison__featured{% endif %}">
+          <dt>{{ procedure.name[locale] }}{% if procedure.id == 'prk' and locale == 'ar' %} <bdi>PRK</bdi>{% endif %}</dt>
+          <dd>{{ row.values[locale][loop.index0] | replace('{aftercare}', clinical.aftercare[locale].comparison_summary) | comparisonText | safe }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="landing-comparison__note" id="landing-comparison-note">{{ landingComparison.note[locale] }}</p>
+</div>

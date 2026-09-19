@@ -92,5 +92,6 @@ published: true
 <div class="doc-info">
 <h4>Dr. Mohamed El Naggar</h4>
 <p>Consultant Corneal & Refractive Surgeon, specializing in advanced corneal diagnostic evaluation and customized surgical selection for thin corneas.</p>
+{% include "partials/article-doctor-credentials.njk" %}
 </div>
 </div>

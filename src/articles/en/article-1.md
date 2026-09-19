@@ -94,5 +94,6 @@ published: true
 <div class="doc-info">
 <h4>Dr. Mohamed El Naggar</h4>
 <p>Consultant ophthalmic, corneal, and refractive surgeon with extensive experience in SMILE Pro and Femto LASIK using advanced German laser technology.</p>
+{% include "partials/article-doctor-credentials.njk" %}
 </div>
 </div>

@@ -25,5 +25,10 @@ export function toggleFaq(button) {
   if (!item) return;
   const wasOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach((entry) => setFaqState(entry, false));
-  if (!wasOpen) setFaqState(item, true);
+  if (!wasOpen) {
+    setFaqState(item, true);
+    window.trackSiteEvent?.('faq_open', {
+      faq_index: [...document.querySelectorAll('.faq-item')].indexOf(item) + 1
+    });
+  }
 }

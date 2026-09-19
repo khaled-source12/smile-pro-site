@@ -18,6 +18,7 @@ sitemap: true
 ---
 {% from "partials/forms.njk" import consultation with context %}
 {% from "partials/icons.njk" import whatsappIcon %}
+{% from "partials/doctor-profile.njk" import doctorTrust with context %}
 
 <header class="hero">
   <div class="container hero-grid">
@@ -44,10 +45,7 @@ sitemap: true
           تعافٍ بصري سريع خلال 24 ساعة
         </div>
       </div>
-      <div class="doctor-trust doctor-trust--light">
-        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
-        <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
-      </div>
+      {{ doctorTrust(locale) }}
     </div>
 
     <div class="form-card" id="book">

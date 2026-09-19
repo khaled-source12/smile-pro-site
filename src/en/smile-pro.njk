@@ -17,6 +17,7 @@ sitemap: true
 ---
 {% from "partials/forms.njk" import consultation with context %}
 {% from "partials/icons.njk" import whatsappIcon %}
+{% from "partials/doctor-profile.njk" import doctorTrust with context %}
 <!-- Hero Section -->
     <header class="hero">
         <div class="container hero-grid">
@@ -39,10 +40,7 @@ sitemap: true
                         <p id="stat3">Flapless Procedure</p>
                     </div>
                 </div>
-                <div class="doctor-trust">
-                    <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
-                    <div><strong>{{ site.doctor.en }}</strong><span>{{ site.doctor.title_en }} · Clinic {{ site.clinic_number }}, {{ site.address.en[0] }}</span></div>
-                </div>
+                {{ doctorTrust(locale, 'dark') }}
 
                 <a href="#book" class="cta-btn" id="heroCta" data-cta="smile-hero-book">Book Your Vision Assessment</a>
             </div>
@@ -92,7 +90,7 @@ sitemap: true
         <!-- Technology Overview -->
         <section>
             <div class="tech-box">
-                <img src="/images/device2.webp" alt="ZEISS VisuMax 800 laser system" width="690" height="690" eleventy:widths="320,640,690" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" loading="lazy" decoding="async">
+                <img src="/images/device2.webp" alt="ZEISS VisuMax 800 laser system" width="690" height="690" eleventy:widths="240,320,480,640,690" sizes="(max-width: 510px) calc(100vw - 90px), (max-width: 768px) 420px, (max-width: 1100px) calc((100vw - 152px) / 2), 474px" loading="lazy" decoding="async">
                 <div class="tech-info">
                     <h3 id="techH3">Powered by ZEISS VisuMax 800</h3>
                     <p id="techP" style="color:var(--muted); margin-bottom:20px;">The latest generation femtosecond laser system engineered by Carl Zeiss Germany for maximum surgical precision.</p>
@@ -135,44 +133,12 @@ sitemap: true
         </section>
 
         <!-- Comparison Table -->
-        <section>
+        <section id="comparison" aria-labelledby="compTitle">
             <div class="sec-title">
                 <h2 id="compTitle">SMILE Pro vs. Other Laser Procedures</h2>
+                <p>Compare the key differences. Your eye examination determines which procedure is suitable for you.</p>
             </div>
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th id="th1">Feature</th>
-                        <th>SMILE Pro</th>
-                        <th>Femto LASIK</th>
-                        <th>PRK</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"><tr>
-                        <td><strong>Laser Time</strong></td>
-                        <td>8 Seconds</td>
-                        <td>15 - 20 Seconds</td>
-                        <td>30 - 40 Seconds</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Corneal Flap</strong></td>
-                        <td>None (2mm Incision)</td>
-                        <td>Yes (Full Flap)</td>
-                        <td>None (Epithelium Removal)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Dry Eye Risk</strong></td>
-                        <td>Minimal & Temporary</td>
-                        <td>Moderate to High</td>
-                        <td>Temporary (Weeks)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Recovery Time</strong></td>
-                        <td>24 Hours</td>
-                        <td>2 - 3 Days</td>
-                        <td>4 - 7 Days</td>
-                    </tr></tbody>
-            </table>
+            {% include "partials/landing-comparison.njk" %}
         </section>
 
         <!-- Booking CTA Section -->

@@ -3,6 +3,8 @@ permalink: /robots.txt
 eleventyExcludeFromCollections: true
 ---
 User-agent: *
+{% if isStaging %}Disallow: /
+{% else %}
 Allow: /
 Disallow: /.netlify/
 Disallow: /admin/
@@ -11,3 +13,4 @@ Disallow: /*?fbclid=
 Disallow: /*?gclid=
 
 Sitemap: {{ site.url }}/sitemap.xml
+{% endif %}

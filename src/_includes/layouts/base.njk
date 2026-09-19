@@ -18,7 +18,7 @@
       {% set resolved_booking_url = '/ar/#book' if locale == 'ar' else '/#book' %}
     {% endif %}
   {% endif %}
-  {% if trackingEnabled and tracking != false %}<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-PZRLPZN2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>{% endif %}
+  {% if trackingEnabled and tracking != false and not isStaging %}<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id={{ trackingContainerId }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>{% endif %}
   {% include "partials/urgency-bar.njk" %}
   {% include "partials/header.njk" %}
   {{ content | safe }}

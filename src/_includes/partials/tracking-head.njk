@@ -1,7 +1,7 @@
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(w,d,s,l,i){ {% if isStaging %}if(w.location.hostname!=={{ trackingHostname | json | safe }})return;{% endif %}w[l]=w[l]||[];w[l].push({'tracking_environment':{{ trackingEnvironment | json | safe }},'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.fetchPriority='low';j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PZRLPZN2');</script>
-<!-- GA4, Google Ads, Meta, Snapchat and Clarity are loaded once and fired from this GTM container. -->
+})(window,document,'script','dataLayer',{{ trackingContainerId | json | safe }});</script>
+<!-- GA4, Google Ads, Meta, TikTok, Snapchat, ChatGPT Ads and Clarity are owned by this GTM container. -->

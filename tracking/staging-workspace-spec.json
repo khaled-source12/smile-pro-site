@@ -1,0 +1,34 @@
+{
+  "schema_version": "2.0",
+  "environment": "staging",
+  "hostname": "smile-pro-tracking-test.netlify.app",
+  "approved_hostnames": [
+    "smile-pro-tracking-test.netlify.app",
+    "smileproegypt.com",
+    "www.smileproegypt.com"
+  ],
+  "netlify_project": "smile-pro-tracking-test",
+  "gtm_account_id": "6360521865",
+  "gtm_container_numeric_id": "264543391",
+  "container_id": "GTM-NFTVFBKS",
+  "ga4_account_id": "397818498",
+  "ga4_property_id": "554862114",
+  "ga4_stream_id": "15804380417",
+  "ga4_measurement_id": "G-K4989EX8EJ",
+  "google_ads_conversion_id": "18233409981",
+  "google_ads_lead_label": "AzguCIC9vPwcEL2Dr_ZD",
+  "google_ads_conversion_name": "Smile Pro - Confirmed lead - New system TEST",
+  "google_ads_optimization": "secondary",
+  "google_ads_value": 0,
+  "google_ads_count": "one",
+  "google_ads_tag_status": "paused-pending-manual-matching-and-preview-verification",
+  "ga4_linked_to_google_ads": false,
+  "production_platform_pixels": "forbidden-on-staging",
+  "other_platform_test_ids": {
+    "meta": null,
+    "tiktok": null,
+    "snapchat": null,
+    "openai": null,
+    "clarity": null
+  }
+}

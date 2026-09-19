@@ -1,65 +1,78 @@
+import {
+  captureLeadConfirmationToken,
+  createTrackingId,
+  getAttribution,
+  initializeTrackingRuntime,
+  refreshTrackingAttribution,
+  syncFormAttribution,
+  trackSiteEvent
+} from './modules/tracking-core.js';
+
 (() => {
-  const attributionKey = 'smile-pro-attribution-v1';
-  const trackedCampaignFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid'];
-  const pageContext = {
-    page_kind: document.body.dataset.pageKind || 'standard',
-    language: document.body.dataset.locale || document.documentElement.lang.slice(0, 2),
-    page_path: window.location.pathname
-  };
-
-  window.trackSiteEvent = (eventName, parameters = {}) => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: eventName, ...pageContext, ...parameters });
-  };
-
-  const currentParams = new URLSearchParams(window.location.search);
-  let attribution = {
-    landing_page: `${window.location.pathname}${window.location.search}`,
-    referrer: document.referrer || ''
-  };
-  try {
-    const stored = JSON.parse(window.sessionStorage.getItem(attributionKey) || 'null');
-    if (stored && typeof stored === 'object') attribution = { ...attribution, ...stored };
-    trackedCampaignFields.forEach((field) => {
-      const value = currentParams.get(field);
-      if (value) attribution[field] = value;
-    });
-    window.sessionStorage.setItem(attributionKey, JSON.stringify(attribution));
-  } catch (_error) {
-    trackedCampaignFields.forEach((field) => {
-      const value = currentParams.get(field);
-      if (value) attribution[field] = value;
-    });
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('redirected') === '1') {
+    params.delete('redirected');
+    const cleanUrl = window.location.pathname +
+      (params.toString() ? `?${params.toString()}` : '') +
+      window.location.hash;
+    window.history.replaceState(null, '', cleanUrl);
+  }
+  const legacyAlternate = document.body.dataset.legacyEnglishUrl;
+  if (params.get('lang') === 'en') {
+    params.delete('lang');
+    if (legacyAlternate) {
+      const destination = new URL(legacyAlternate, window.location.origin);
+      destination.search = params.toString();
+      destination.hash = window.location.hash;
+      window.location.replace(destination.href);
+      return;
+    }
+    const cleanUrl = window.location.pathname +
+      (params.toString() ? `?${params.toString()}` : '') +
+      window.location.hash;
+    window.history.replaceState(null, '', cleanUrl);
   }
 
-  document.querySelectorAll('form[data-netlify="true"]').forEach((form) => {
-    const leadId = typeof window.crypto?.randomUUID === 'function'
-      ? window.crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const values = {
-      'lead-id': leadId,
-      'landing-page': attribution.landing_page || '',
-      'source-page': `${window.location.pathname}${window.location.search}`,
-      referrer: attribution.referrer || '',
-      'utm-source': attribution.utm_source || '',
-      'utm-medium': attribution.utm_medium || '',
-      'utm-campaign': attribution.utm_campaign || '',
-      'utm-term': attribution.utm_term || '',
-      'utm-content': attribution.utm_content || '',
-      gclid: attribution.gclid || '',
-      fbclid: attribution.fbclid || '',
-      msclkid: attribution.msclkid || ''
-    };
-    Object.entries(values).forEach(([name, value]) => {
-      const field = form.elements.namedItem(name);
-      if (field) field.value = value;
-    });
+  captureLeadConfirmationToken();
+  const trackingRuntime = initializeTrackingRuntime();
+  window.trackSiteEvent = trackSiteEvent;
+  window.getSiteAttribution = getAttribution;
 
-    const formParameters = {
-      lead_id: leadId,
-      form_name: form.getAttribute('name') || form.id || 'unknown',
-      form_position: form.dataset.formPosition || 'unknown'
+  const trackPageView = () => {
+    window.trackSiteEvent('site_page_view', {
+      page_location: `${window.location.origin}${window.location.pathname}${window.location.search}`,
+      page_title: document.title
+    });
+    if (trackingRuntime.page.kind === 'article') {
+      window.trackSiteEvent('content_view', { content_type: 'article' });
+    }
+  };
+  trackPageView();
+
+  const resetFormTracking = [];
+  document.querySelectorAll('form[data-netlify="true"]').forEach((form) => {
+    const originalAction = form.getAttribute('action') || '';
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalSubmitText = submitButton?.textContent || '';
+    syncFormAttribution(form, trackingRuntime.attribution);
+
+    let formParameters;
+    const assignFormTrackingIds = () => {
+      const leadId = createTrackingId('lead');
+      const attemptId = createTrackingId('attempt');
+      form.dataset.attemptId = attemptId;
+      const leadField = form.elements.namedItem('lead-id');
+      const attemptField = form.elements.namedItem('attempt-id');
+      if (leadField) leadField.value = leadId;
+      if (attemptField) attemptField.value = attemptId;
+      formParameters = {
+        lead_id: leadId,
+        attempt_id: attemptId,
+        form_name: form.getAttribute('name') || form.id || 'unknown',
+        form_position: form.dataset.formPosition || 'unknown'
+      };
     };
+    assignFormTrackingIds();
     const currentFormParameters = () => ({
       ...formParameters,
       service: form.dataset.service || 'unknown'
@@ -69,8 +82,8 @@
       form.dataset.trackingStarted = 'true';
       window.trackSiteEvent('lead_form_start', currentFormParameters());
     };
-    form.addEventListener('input', markStarted, { once: true });
-    form.addEventListener('change', markStarted, { once: true });
+    form.addEventListener('input', markStarted);
+    form.addEventListener('change', markStarted);
     form.addEventListener('invalid', (event) => {
       window.trackSiteEvent('lead_form_error', {
         ...currentFormParameters(),
@@ -79,16 +92,48 @@
       });
     }, true);
 
-    if ('IntersectionObserver' in window) {
-      const formObserver = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
+    let formObserver;
+    let viewedAttemptId = '';
+    const observeFormView = () => {
+      formObserver?.disconnect();
+      const observedAttemptId = formParameters.attempt_id;
+      const emitFormView = () => {
+        if (formParameters.attempt_id !== observedAttemptId || viewedAttemptId === observedAttemptId) return;
+        viewedAttemptId = observedAttemptId;
         window.trackSiteEvent('lead_form_view', currentFormParameters());
-        formObserver.disconnect();
-      }, { threshold: .35 });
-      formObserver.observe(form);
-    } else {
-      window.trackSiteEvent('lead_form_view', currentFormParameters());
-    }
+        formObserver?.disconnect();
+      };
+      if ('IntersectionObserver' in window) {
+        formObserver = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          emitFormView();
+        }, { threshold: .35 });
+        formObserver.observe(form);
+      } else {
+        emitFormView();
+      }
+    };
+    observeFormView();
+    resetFormTracking.push(() => {
+      assignFormTrackingIds();
+      syncFormAttribution(form, trackingRuntime.attribution);
+      delete form.dataset.trackingStarted;
+      delete form.dataset.submitting;
+      const phoneInput = form.querySelector('[data-phone-input]');
+      if (phoneInput) delete phoneInput.dataset.validPhoneTracked;
+      if (originalAction) form.setAttribute('action', originalAction);
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalSubmitText;
+      }
+      observeFormView();
+    });
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    refreshTrackingAttribution();
+    resetFormTracking.forEach((resetForm) => resetForm());
+    trackPageView();
   });
 
   document.addEventListener('click', (event) => {
@@ -189,27 +234,4 @@
     import('./modules/blog-filters.js').then(({ initBlogFilters }) => initBlogFilters());
   }
 
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('redirected') === '1') {
-    params.delete('redirected');
-    const cleanUrl = window.location.pathname +
-      (params.toString() ? `?${params.toString()}` : '') +
-      window.location.hash;
-    window.history.replaceState(null, '', cleanUrl);
-  }
-  const legacyAlternate = document.body.dataset.legacyEnglishUrl;
-  if (params.get('lang') === 'en') {
-    params.delete('lang');
-    if (legacyAlternate) {
-      const destination = new URL(legacyAlternate, window.location.origin);
-      destination.search = params.toString();
-      destination.hash = window.location.hash;
-      window.location.replace(destination.href);
-    } else {
-      const cleanUrl = window.location.pathname +
-        (params.toString() ? `?${params.toString()}` : '') +
-        window.location.hash;
-      window.history.replaceState(null, '', cleanUrl);
-    }
-  }
 })();

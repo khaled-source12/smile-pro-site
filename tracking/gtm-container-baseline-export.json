@@ -1,0 +1,321 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2026-09-15 23:48:13",
+    "containerVersion": {
+        "path": "accounts/6360521865/containers/255266576/versions/0",
+        "accountId": "6360521865",
+        "containerId": "255266576",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/6360521865/containers/255266576",
+            "accountId": "6360521865",
+            "containerId": "255266576",
+            "name": "Smile-pro",
+            "publicId": "GTM-PZRLPZN2",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1781253766621",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6360521865/containers/255266576/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true,
+                "supportTransformations": false
+            },
+            "tagIds": [
+                "GTM-PZRLPZN2"
+            ]
+        },
+        "tag": [
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "4",
+                "name": "Google Tag",
+                "type": "googtag",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "tagId",
+                        "value": "G-QSJ0G255BE"
+                    }
+                ],
+                "fingerprint": "1781254380837",
+                "firingTriggerId": [
+                    "2147479573"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "6",
+                "name": "GA4 - Call Click",
+                "type": "gaawe",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendEcommerceData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "call_click"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementIdOverride",
+                        "value": "G-QSJ0G255BE"
+                    }
+                ],
+                "fingerprint": "1781756373846",
+                "firingTriggerId": [
+                    "5"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "7",
+                "name": "Google Tag AW-18233409981",
+                "type": "googtag",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "tagId",
+                        "value": "AW-18233409981"
+                    }
+                ],
+                "fingerprint": "1781866134399",
+                "firingTriggerId": [
+                    "2147479573"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "8",
+                "name": "Call-Conversion",
+                "type": "awct",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableNewCustomerReporting",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableConversionLinker",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableProductReporting",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableShippingData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "conversionId",
+                        "value": "18233409981"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "conversionLabel",
+                        "value": "zbwtCLjs48EcEL2Dr_ZD"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "rdp",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1781866142688",
+                "firingTriggerId": [
+                    "5"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "9",
+                "name": "Meta-Pixel",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<!-- Meta Pixel Code -->\n<script>\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\nn.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\ns.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '1003835282264414');\nfbq('track', 'PageView');\n</script>\n<noscript><img height=\"1\" width=\"1\" style=\"display:none\"\nsrc=\"https://www.facebook.com/tr?id=1003835282264414&ev=PageView&noscript=1\"\n/></noscript>\n<!-- End Meta Pixel Code -->"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1782103553216",
+                "firingTriggerId": [
+                    "2147479573"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "tagId": "10",
+                "name": "Conversion Linker",
+                "type": "gclidw",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enableCrossDomain",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "linkerDomains",
+                        "value": "6a2bcf954c6ceb0008d3806b--smile-pro-eg.netlify.app, 6a2c094c7c524000087762d3--smile-pro-eg.netlify.app, 6a2c0a77e6e7c50008709442--smile-pro-eg.netlify.app, 6a2c0bce10c9a800087b8d46--smile-pro-eg.netlify.app, 6a2c0d4c3250cc00081ffe42--smile-pro-eg.netlify.app, 6a2c0d964e1c240008016f9c--smile-pro-eg.netlify.app, 6a2c0e826452960008b40948--smile-pro-eg.netlify.app, 6a2cd5a5deacfa0008e2ffee--smile-pro-eg.netlify.app, 6a2cdb6e4c9f28000815b188--smile-pro-eg.netlify.app, 6a336c14e951250008961b69--smile-pro-eg.netlify.app, 6a336deb782a4b000826ae55--smile-pro-eg.netlify.app, 6a336e456de3fb0008d7104d--smile-pro-eg.netlify.app, 6a34d2f67cd9f40008e29723--smile-pro-eg.netlify.app, 6a382eceb9eca20008250c0c--smile-pro-eg.netlify.app, smileproegypt.com"
+                    }
+                ],
+                "fingerprint": "1782103683736",
+                "firingTriggerId": [
+                    "2147479573"
+                ],
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "triggerId": "5",
+                "name": "Call Button Click",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "CONTAINS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "tel:+201113524230"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1781756246909"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "EVENT",
+                "name": "Event"
+            },
+            {
+                "accountId": "6360521865",
+                "containerId": "255266576",
+                "type": "CLICK_URL",
+                "name": "Click URL"
+            }
+        ],
+        "fingerprint": "1789516093224",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6360521865/containers/255266576/versions/0?apiLink=version"
+    }
+}

@@ -655,8 +655,9 @@ Authorization callback URL
 - جميع النماذج تعرض قائمة «التقنية المطلوبة» وزر «قارن التقنيات». الخيار الافتراضي في الصفحات العامة هو «غير متأكد، أحتاج إلى فحص»، بينما تبدأ صفحات التقنية المحددة بتقنيتها مع السماح للزائر بتغييرها.
 - نموذج الحاسبة يحفظ اختيار العميل في `procedure` ويحفظ ترشيح الحاسبة بصورة مستقلة في `recommended-tech` حتى لا تضيع نية العميل الأصلية.
 - تنويه خصوصية صغير مع رابط السياسة؛ لا توجد خانة موافقة تعطل إرسال النموذج.
-- رقم Lead فريد وموضع النموذج وصفحة الدخول والصفحة الحالية ومصدر الإحالة.
-- قيم `utm_source` و`utm_medium` و`utm_campaign` و`utm_term` و`utm_content` ومعرّفات `gclid` و`fbclid` و`msclkid` عند وجودها في رابط الزيارة.
+- أرقام `lead_id` و`attempt_id` و`session_id` (ويُرسل الأخير إلى Netlify باسم `session-id`)، وموضع النموذج، وصفحة الدخول، والصفحة الحالية، ومصدر الإحالة.
+- first-touch وlast-non-direct محفوظان 90 يومًا، مع قيم UTM ومعرّفات `gclid` و`wbraid` و`gbraid` و`fbclid` و`ttclid` و`ScCid` و`oppref` و`msclkid` عند وجودها.
+- بعد نجاح Netlify فقط، ينشئ المتصفح نسختي SHA-256 من رقم E.164 للمطابقة اليدوية مع منصات الإعلان. الرقم الخام لا يدخل `dataLayer` ولا تخزين الإسناد.
 
 لا يستخدم الموقع اكتشاف الدولة عبر IP. مكتبة `intl-tel-input` توفر مكانًا لربط دالة lookup، لكنها لا تحتوي على خدمة IP مدمجة؛ وتفعيلها يحتاج إرسال طلب إلى مزود خارجي. لذلك تظل مصر هي الافتراضية وفق متطلبات المشروع، ويمكن لأي زائر تغيير الدولة من القائمة.
 
@@ -672,11 +673,13 @@ Authorization callback URL
 
 ### قياس التحويلات داخل Google Tag Manager
 
-الموقع لا يحمل GA4 وGoogle Ads مباشرة بجانب GTM؛ يجب أن يبقى **Google Tag Manager هو المصدر الوحيد** لتشغيل هذه العلامات حتى لا تتكرر الزيارات والتحويلات.
+الموقع لا يحمل أي منصة إعلانية مباشرة بجانب GTM؛ يجب أن يبقى **Google Tag Manager هو المصدر الوحيد** لتشغيل GA4 وGoogle Ads وMeta وTikTok وSnapchat وChatGPT Ads وClarity حتى لا تتكرر الزيارات والتحويلات. التفاصيل الدقيقة والمتغيرات والـallowlists موجودة في `TRACKING.md`.
 
 يدفع الموقع الأحداث الآتية إلى `dataLayer`:
 
 - `cta_click`: الضغط على زر داخلي للحجز أو الحاسبة.
+- `site_page_view`: مشاهدة الصفحة، وهو المصدر الوحيد لـPage View الخاصة بالمنصات.
+- `content_view`: مشاهدة مقال محدد.
 - `click_call`: الضغط على رقم الهاتف.
 - `click_whatsapp`: فتح WhatsApp.
 - `lead_form_view`: ظهور النموذج للزائر.
@@ -684,31 +687,32 @@ Authorization callback URL
 - `lead_phone_valid`: إدخال رقم صالح للدولة المختارة.
 - `lead_form_error`: وجود حقل ناقص أو رقم غير صالح.
 - `lead_form_submit_attempt`: محاولة إرسال النموذج بعد نجاح التحقق.
-- `smile_pro_lead`: الوصول إلى صفحة الشكر بعد إرسال نموذج من الموقع، وهو حدث التحويل الوحيد الذي تستخدمه منصات الإعلانات.
+- `smile_pro_lead`: نجاح Netlify في استقبال النموذج، وهو حدث التحويل الأساسي الوحيد الذي تستخدمه منصات الإعلانات. صفحة الشكر لا تقبله إلا برمز تأكيد مطابق للمحاولة، لذلك زيارتها مباشرة أو عمل refresh لا يطلق الحدث.
 - `estimator_start` و`estimator_step` و`estimator_result`: مراحل حاسبة التكلفة.
 - `fomo_banner_view`: مشاهدة شريط عدد الأماكن المشترك في صفحات الموقع المبنية بالقالب العام، بما فيها صفحات الهبوط والحاسبة والمدونة والمقالات.
+- `faq_open` و`video_start`: فتح سؤال شائع وبدء تشغيل الفيديو؛ وهما للتحليلات فقط ولا يشغّلان Pixel إعلانيًا.
 
 داخل GTM:
 
-1. استخدم **Google tag واحدًا** فقط، ثم اربط به الوجهتين `G-QSJ0G255BE` و`AW-18233409981`. لا تنشئ علامتي Google منفصلتين تحمل كل منهما `gtag.js`.
-2. أنشئ Custom Event Trigger لكل حدث تريد استخدامه في التقارير.
-3. اجعل `smile_pro_lead` هو الـCustom Event الوحيد الذي يشغّل تحويل إرسال النموذج في GA4 وGoogle Ads وMeta وSnapchat.
+1. استخدم **Google tag واحدًا** فقط واربط به وجهتي GA4 وGoogle Ads من خلال Constant Variables. لا تنشئ علامتي Google منفصلتين تحمل كل منهما `gtag.js`.
+2. أنشئ exact-match Custom Event Trigger لكل حدث؛ لا تستخدم Trigger شاملًا.
+3. اجعل `smile_pro_lead` هو الـCustom Event الوحيد الذي يشغّل تحويل إرسال النموذج في GA4 وGoogle Ads وMeta وTikTok وSnapchat وChatGPT Ads.
 4. سجل `click_call` و`click_whatsapp` كتحويلات مساعدة، ولا تجمعهما مع إرسال النموذج في رقم واحد.
-5. استخدم `lead_id` و`form_position` و`service` و`page_kind` و`language` كـEvent Parameters.
+5. استخدم `lead_id` و`attempt_id` و`form_position` و`service` و`page_kind` و`language` في GA4 فقط. لا ترسل `service` أو ترشيح الحاسبة أو معلومات العين إلى Advertising Pixels.
 6. اختبر الأحداث من Preview داخل GTM وDebugView في GA4 على الموقع المنشور.
-7. احذف أي Trigger قديم باسم `generate_lead` وأي Custom HTML يستدعي `fbq` أو `snaptr` للـLead مباشرة؛ الموقع يدفع حدث `smile_pro_lead` مرة واحدة وتوزعه GTM على المنصات.
+7. احذف أي Trigger قديم باسم `generate_lead` وأي Custom HTML مكرر؛ الموقع يدفع حدث `smile_pro_lead` مرة واحدة وتوزعه GTM على المنصات.
 
 ### مراجعة حاوية GTM قبل النشر
 
-كود الموقع يضع GTM مرة واحدة فقط في نهاية `<head>`، ولا يحمل GA4 أو Ads أو Meta أو Snapchat أو Clarity مباشرة. لكن محتوى الحاوية نفسها محفوظ داخل حساب Google وليس داخل repository، ولذلك راجعه من **GTM → Preview** بهذه القائمة:
+كود الموقع يضع GTM مرة واحدة فقط في نهاية `<head>`، ولا يحمل أي SDK إعلاني مباشرة. محتوى الحاوية محفوظ داخل حساب Google؛ مواصفة الـWorkspace وقالب ChatGPT Ads موجودان في مجلد `tracking`. الملف `gtm-container-baseline-export.json` هو نسخة مرجعية للحالة القديمة فقط، وليس إعدادًا مستهدفًا أو ملفًا مطلوبًا استيراده. راجع الإعداد الجديد من **GTM → Preview** بهذه القائمة:
 
 1. افتح صفحة من Deploy Preview، وليس localhost فقط؛ بعض العلامات قد تحتوي شرطًا على اسم الدومين.
-2. في حدث `Container Loaded` تأكد من وجود Google tag واحد وMeta Pixel واحد وSnapchat Pixel واحد وClarity tag واحد.
+2. في حدث `Container Loaded` تأكد من وجود Base Tag واحدة لكل منصة، بما فيها TikTok وChatGPT Ads.
 3. افتح Network وابحث عن `gtag/js`. يجب أن يظهر تحميل مكتبة Google مرة واحدة، لا مرة للـGA4 ومرة للـAds.
 4. تأكد أن Page View يصل مرة واحدة فقط لكل منصة عند فتح الصفحة.
 5. أرسل نموذج TEST واحدًا، ثم تأكد أن `smile_pro_lead` ظهر مرة واحدة وأن كل Conversion tag اشتغل مرة واحدة فقط.
 6. تأكد أن علامات التحويل لا تعمل مع `Page View` أو `click_call` أو `click_whatsapp` بالخطأ.
-7. افحص DebugView وTag Assistant وأدوات Meta وSnapchat وClarity قبل الضغط على **Publish** داخل GTM.
+7. افحص DebugView وTag Assistant وأدوات Meta وTikTok وSnapchat وOpenAI وClarity قبل الضغط على **Publish** داخل GTM.
 
 في مراجعة الأداء المحلية بتاريخ 15 سبتمبر 2026 ظهر تحميلان منفصلان لـGoogle tag من الحاوية الحالية: واحد لـGA4 وآخر لـGoogle Ads. كما لم تظهر طلبات Snapchat أو Clarity على localhost؛ قد يكون السبب شرط الدومين داخل GTM، لذلك يجب تأكيدهما على Deploy Preview. تعديل هذه العلامات يتم من حساب GTM ولا يمكن لملفات الموقع وحدها تغييره.
 

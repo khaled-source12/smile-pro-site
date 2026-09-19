@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "id": "fellowships",
+      "heading": { "ar": "الزمالات", "en": "Fellowships" },
+      "items": [
+        {
+          "id": "frcs",
+          "label": { "ar": "زميل كلية الجراحين الملكية", "en": "Fellow of the Royal College of Surgeons" },
+          "abbreviation": "FRCS",
+          "detail": { "ar": "طب وجراحة العيون — المملكة المتحدة", "en": "Ophthalmology — United Kingdom" }
+        },
+        {
+          "id": "edinburgh",
+          "label": { "ar": "زميل كلية الجراحين الملكية بإدنبرة", "en": "Fellow of the Royal College of Surgeons of Edinburgh" },
+          "abbreviation": "FRCSEd",
+          "detail": { "ar": "إدنبرة، اسكتلندا — المملكة المتحدة", "en": "Edinburgh, Scotland — United Kingdom" },
+          "reference_urls": [
+            "https://www.rcsed.ac.uk/the-college/join-us/member-benefits",
+            "https://www.rcsed.ac.uk/membership"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memberships",
+      "heading": { "ar": "العضويات المهنية", "en": "Professional memberships" },
+      "items": [
+        {
+          "id": "escrs",
+          "label": { "ar": "عضو الجمعية الأوروبية لجراحي المياه البيضاء وتصحيح الإبصار", "en": "Member of the European Society of Cataract and Refractive Surgeons" },
+          "abbreviation": "ESCRS"
+        },
+        {
+          "id": "aao",
+          "label": { "ar": "عضو الأكاديمية الأمريكية لطب العيون", "en": "Member of the American Academy of Ophthalmology" },
+          "abbreviation": "AAO"
+        }
+      ]
+    }
+  ]
+}

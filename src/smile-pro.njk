@@ -17,6 +17,7 @@ sitemap: true
 ---
 {% from "partials/forms.njk" import consultation with context %}
 {% from "partials/icons.njk" import whatsappIcon %}
+{% from "partials/doctor-profile.njk" import doctorTrust with context %}
 <!-- Hero Section -->
     <header class="hero">
         <div class="container hero-grid">
@@ -39,10 +40,7 @@ sitemap: true
                         <p id="stat3">بدون فتح شريحة (Flapless)</p>
                     </div>
                 </div>
-                <div class="doctor-trust">
-                    <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
-                    <div><strong>{{ site.doctor.ar }}</strong><span>{{ site.doctor.title_ar }} · عيادة {{ site.clinic_number }}، {{ site.address.ar[0] }}</span></div>
-                </div>
+                {{ doctorTrust(locale, 'dark') }}
 
                 <a href="#book" class="cta-btn" id="heroCta" data-cta="smile-hero-book">احجز فحص النظر الآن</a>
             </div>
@@ -92,7 +90,7 @@ sitemap: true
         <!-- Technology Overview -->
         <section>
             <div class="tech-box">
-                <img src="/images/device2.webp" alt="جهاز VisuMax 800" width="690" height="690" eleventy:widths="320,640,690" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" loading="lazy" decoding="async">
+                <img src="/images/device2.webp" alt="جهاز VisuMax 800" width="690" height="690" eleventy:widths="240,320,480,640,690" sizes="(max-width: 510px) calc(100vw - 90px), (max-width: 768px) 420px, (max-width: 1100px) calc((100vw - 152px) / 2), 474px" loading="lazy" decoding="async">
                 <div class="tech-info">
                     <h3 id="techH3">جهاز ZEISS VisuMax 800 العالمي</h3>
                     <p id="techP" style="color:var(--muted); margin-bottom:20px;">الجيل الأحدث عالمياً من شركة كارل زايس الألمانية، والمصمم لتوفير أعلى معدلات النجاح في جراحات الانكسار.</p>
@@ -137,46 +135,12 @@ sitemap: true
         </section>
 
         <!-- Comparison Table -->
-        <section>
+        <section id="comparison" aria-labelledby="compTitle">
             <div class="sec-title">
                 <h2 id="compTitle">مقارنة SMILE Pro مع تقنيات تصحيح النظر الأخرى</h2>
+                <p>قارن أهم الفروق. يحدد فحص العين التقنية المناسبة لحالتك.</p>
             </div>
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th id="th1">وجه المقارنة</th>
-                        <th>SMILE Pro</th>
-                        <th>الفيمتو ليزك (Femto LASIK)</th>
-                        <th>الليزك السطحي (PRK)</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td><strong>زمن تطبيق الليزر</strong></td>
-                        <td>8 ثوانٍ فقط</td>
-                        <td>15 - 20 ثانية</td>
-                        <td>30 - 40 ثانية</td>
-                    </tr>
-                    <tr>
-                        <td><strong>قطع شريحة بالقرنية (Flap)</strong></td>
-                        <td>لا يوجد (شق 2 ملم)</td>
-                        <td>نعم (قطع دائم للشريحة)</td>
-                        <td>لا يوجد (كشط سطحي)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>مستوى جفاف العين</strong></td>
-                        <td>نادر جداً ومؤقت</td>
-                        <td>متوسط إلى مرتفع</td>
-                        <td>مؤقت لعدة أسابيع</td>
-                    </tr>
-                    <tr>
-                        <td><strong>فترة التعافي للعودة للعمل</strong></td>
-                        <td>خلال 24 ساعة</td>
-                        <td>2 - 3 أيام</td>
-                        <td>4 - 7 أيام</td>
-                    </tr>
-                </tbody>
-            </table>
+            {% include "partials/landing-comparison.njk" %}
         </section>
 
         <!-- Booking CTA Section -->

@@ -93,5 +93,6 @@ published: true
 <div class="doc-info">
 <h4>دكتور محمد النجار</h4>
 <p>استشاري جراحات العيون والقرنية وتصحيح العيوب الانكسارية بالليزر، متخصص في تقييم القرنيات النحيفة واختيار التقنية الأكثر أماناً لكل مريض.</p>
+{% include "partials/article-doctor-credentials.njk" %}
 </div>
 </div>

@@ -18,6 +18,7 @@ sitemap: true
 ---
 {% from "partials/forms.njk" import consultation with context %}
 {% from "partials/icons.njk" import whatsappIcon %}
+{% from "partials/doctor-profile.njk" import doctorTrust, doctorCredentials with context %}
 <!-- HERO SECTION -->
 <header class="hero">
   <div class="container hero-grid">
@@ -45,10 +46,7 @@ sitemap: true
           Resume Driving Same Day
         </div>
       </div>
-      <div class="doctor-trust doctor-trust--light">
-        <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
-        <div><strong>{{ site.doctor.en }}</strong><span>{{ site.doctor.title_en }} · Clinic {{ site.clinic_number }}, {{ site.address.en[0] }}</span></div>
-      </div>
+      {{ doctorTrust(locale) }}
     </div>
 
     <!-- HERO FORM CARD -->
@@ -205,59 +203,16 @@ sitemap: true
 </section>
 
 <!-- COMPARISON SECTION -->
-<section class="section" id="comparison">
+<section class="section" id="comparison" aria-labelledby="comparison-title">
   <div class="container">
     <span class="lbl">Technology Comparison</span>
     <div class="rule"></div>
-    <h2>How SMILE Pro Compares</h2>
+    <h2 id="comparison-title">How SMILE Pro Compares</h2>
     <p style="color:var(--muted);max-width:700px;margin-bottom:24px;">
       Selecting a laser eye procedure depends on individual eye anatomy and personal routine. Below is a feature comparison across primary vision correction methods.
     </p>
 
-    <div class="fade-up" style="overflow-x:auto;">
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>Feature / Parameter</th>
-            <th>PRK / Surface</th>
-            <th>Femto LASIK</th>
-            <th class="col-s">SMILE Pro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Corneal Flap Required</td>
-            <td><span class="ci">✓</span> No Flap</td>
-            <td><span class="cx">✗</span> Flap Created (~20mm)</td>
-            <td class="col-s"><span class="ci">✓</span> No Flap (&lt;2mm Incision)</td>
-          </tr>
-          <tr>
-            <td>Laser Treatment Time</td>
-            <td>30–60 Seconds</td>
-            <td>15–30 Seconds</td>
-            <td class="col-s">~8 Seconds Per Eye</td>
-          </tr>
-          <tr>
-            <td>Post-Op Dry Eye Tendency</td>
-            <td>Moderate</td>
-            <td>Moderate to High</td>
-            <td class="col-s">Minimally Affected Nerves</td>
-          </tr>
-          <tr>
-            <td>Functional Visual Recovery</td>
-            <td>5 to 7 Days</td>
-            <td>24 Hours</td>
-            <td class="col-s">24 Hours / Same Day</td>
-          </tr>
-          <tr>
-            <td>Light Exercise / Swimming Return</td>
-            <td>1 to 2 Weeks</td>
-            <td>2 to 4 Weeks</td>
-            <td class="col-s">{{ clinical.aftercare.en.comparison_summary }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    {% include "partials/landing-comparison.njk" %}
   </div>
 </section>
 
@@ -312,7 +267,7 @@ sitemap: true
   <div class="container">
     <div class="doctor-grid fade-up">
       <div class="doc-img">
-        <img src="/images/Naggar6.webp" alt="{{ site.doctor.en }}" width="896" height="1200" eleventy:widths="360,600,896" sizes="(max-width: 760px) calc(100vw - 40px), 42vw" loading="lazy" decoding="async" />
+        <img src="/images/Naggar6.webp" alt="{{ site.doctor.en }}" width="896" height="1200" eleventy:widths="300,600,896" sizes="(max-width: 398px) calc(100vw - 98px), 300px" loading="lazy" decoding="async" />
         <div class="doc-badge">
           <div class="doc-badge-num">15+</div>
           <div class="doc-badge-lbl">Years Experience</div>
@@ -329,24 +284,7 @@ sitemap: true
           Dedicated to utilizing modern diagnostic tools and proven surgical protocols to maintain high safety standards and accurate visual results.
         </p>
 
-        <div class="creds">
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>Fellow of the Royal College of Surgeons (FRCS) — Ophthalmology</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>Fellow of the Royal College of Surgeons of Edinburgh</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>Member of the European Society of Cataract and Refractive Surgeons (ESCRS)</div>
-          </div>
-          <div class="cred">
-            <div class="cred-dot"></div>
-            <div>Member of the American Academy of Ophthalmology (AAO)</div>
-          </div>
-        </div>
+        {{ doctorCredentials(locale) }}
       </div>
     </div>
   </div>
@@ -393,8 +331,8 @@ sitemap: true
         </div>
             </div>
 
-      <div style="border-radius:var(--r);overflow:hidden;max-height:420px;">
-        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="ZEISS VisuMax 800 technology video" style="width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r);display:block;">
+      <div class="tech-media">
+        <video width="360" height="360" poster="/images/device2.webp" loop muted playsinline controls preload="none" data-play-when-visible aria-label="ZEISS VisuMax 800 technology video">
           <source src="/images/Video1.mp4" type="video/mp4"/>
         </video>
       </div>
@@ -413,11 +351,21 @@ sitemap: true
     <div class="faq-list">
       <div class="faq-item">
         <button type="button" class="faq-q" onclick="toggleFaq(this)">
-          <span>Does SMILE Pro hurt during or after treatment?</span>
+          <span>Will I feel pain during or after SMILE Pro?</span>
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          Numbing eye drops are administered before starting, eliminating sharp sensation. You may feel mild pressure on the eye for about 8 seconds during laser application. Post-procedure sensation is typically minimal, with slight watery feeling for a few hours.
+          You usually do not feel pain during SMILE Pro. Numbing eye drops help keep you comfortable throughout the procedure, and you may notice mild pressure on your eye. Afterwards, discomfort is usually mild, and your prescribed eye drops help keep your eyes comfortable as they heal. If you experience severe pain or a sudden decline in vision, contact your doctor immediately.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
+          <span>Are SMILE Pro results permanent, or might I need glasses later?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">
+          SMILE Pro results are usually long-lasting, and your vision gradually stabilizes during recovery. If you need reading glasses as you get older, this reflects a natural change in your ability to focus up close and does not, by itself, mean the procedure has lost its effect. If your prescription changes in the future, there are options to address it, such as glasses when needed or an enhancement if suitable for your eyes. Your doctor will explain the options based on your examination and follow-up.
         </div>
       </div>
 

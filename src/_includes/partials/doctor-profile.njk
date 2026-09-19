@@ -1,0 +1,41 @@
+{% macro credentialHighlight(locale) %}
+{% set credential = doctorProfile.groups[0].items[0] %}
+<p class="doctor-credential-highlight">{{ credential.label[locale] }} <bdi dir="ltr">({{ credential.abbreviation }})</bdi></p>
+{% endmacro %}
+
+{% macro doctorCredentials(locale) %}
+<div class="doctor-credentials" data-doctor-credentials>
+  {% for group in doctorProfile.groups %}
+  <div class="doctor-credentials__group" data-credential-group="{{ group.id }}">
+    <p class="doctor-credentials__heading"><strong>{{ group.heading[locale] }}</strong></p>
+    <ul class="doctor-credentials__list">
+      {% for item in group.items %}
+      <li data-credential="{{ item.id }}">
+        <span class="doctor-credentials__label">{{ item.label[locale] }}{% if item.abbreviation %} <bdi dir="ltr">({{ item.abbreviation }})</bdi>{% endif %}</span>
+        {% if item.detail %}<span class="doctor-credentials__detail">{{ item.detail[locale] }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro credentialDisclosure(locale) %}
+<details class="doctor-credentials-disclosure">
+  <summary>{{ 'الزمالات والعضويات' if locale == 'ar' else 'Fellowships & memberships' }}</summary>
+  {{ doctorCredentials(locale) }}
+</details>
+{% endmacro %}
+
+{% macro doctorTrust(locale, tone = 'light') %}
+<div class="doctor-trust{% if tone == 'light' %} doctor-trust--light{% endif %}">
+  <img src="/images/doctor-card-avatar.webp" alt="" width="58" height="58" eleventy:widths="58,116" sizes="58px" loading="eager" decoding="async">
+  <div class="doctor-trust__identity">
+    <strong>{{ site.doctor[locale] }}</strong>
+    <span>{{ site.doctor.title_ar if locale == 'ar' else site.doctor.title_en }}</span>
+    {{ credentialHighlight(locale) }}
+  </div>
+  {{ credentialDisclosure(locale) }}
+</div>
+{% endmacro %}

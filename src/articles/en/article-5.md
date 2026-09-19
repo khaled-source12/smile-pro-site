@@ -90,5 +90,6 @@ form_procedure: "smile-pro"
 <div class="doc-info">
 <h4>Dr. Mohamed El Naggar</h4>
 <p>Consultant Corneal & Refractive Surgeon, specializing in advanced Zeiss VISUMAX 800 applications for correcting complex and high astigmatism.</p>
+{% include "partials/article-doctor-credentials.njk" %}
 </div>
 </div>

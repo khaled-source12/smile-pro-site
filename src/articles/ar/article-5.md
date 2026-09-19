@@ -91,5 +91,6 @@ form_procedure: "smile-pro"
 <div class="doc-info">
 <h4>دكتور محمد النجار</h4>
 <p>استشاري جراحات العيون والقرنية وتصحيح العيوب الانكسارية بالليزر، متخصص في استخدام أحدث تقنيات VISUMAX 800 لتصحيح درجات الاستجماتيزم المعقدة والعالية.</p>
+{% include "partials/article-doctor-credentials.njk" %}
 </div>
 </div>

@@ -13,7 +13,10 @@ layout: layouts/base.njk
       {% if read_time %}<span>{{ read_time }}</span>{% endif %}
     </div>
   </header>
-  {% if image %}<img class="main-img" src="{{ image }}" alt="{{ title }}" width="{{ image_width }}" height="{{ image_height }}" eleventy:widths="320,640,960,1200" sizes="(max-width: 720px) calc(100vw - 32px), 900px" loading="eager" decoding="async" fetchpriority="high">{% endif %}
+  {% if image %}
+  {% set imageMaxWidth = (560 * image_width / image_height) | round(0, 'ceil') %}
+  <img class="main-img" src="{{ image }}" alt="{{ title }}" width="{{ image_width }}" height="{{ image_height }}" eleventy:widths="320,480,640,960,1200" sizes="(max-width: 640px) min(calc(100vw - 28px), {{ imageMaxWidth }}px), min(calc(100vw - 40px), 900px, {{ imageMaxWidth }}px)" loading="eager" decoding="async" fetchpriority="high">
+  {% endif %}
   <aside class="article-quick-conversion" aria-label="{{ 'خطوات المتابعة' if locale == 'ar' else 'Next steps' }}">
     <div>
       <strong>{{ 'لا تعرف العملية الأنسب لك؟' if locale == 'ar' else 'Not sure which procedure suits your eyes?' }}</strong>

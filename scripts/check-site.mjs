@@ -6,6 +6,12 @@ import { transformSync } from "esbuild";
 import { parsePhoneNumberFromString } from "libphonenumber-js/max";
 import { getDevRedirect } from "./dev-server-redirects.mjs";
 import { deriveContact, readWebpDimensions } from "./site-utils.mjs";
+import landingComparison from "../src/_data/landingComparison.js";
+import { comparisonText } from "./comparison-utils.mjs";
+import { getTrackingEnvironment, LEGACY_CONTAINER_ID, PRODUCTION_CONTAINER_ID } from "./tracking-environment.mjs";
+import { fixedRedirectRules } from "./netlify-artifacts.mjs";
+
+const trackingEnvironment = getTrackingEnvironment();
 
 const root = process.cwd();
 const sourceRoot = path.join(root, "src");
@@ -23,7 +29,17 @@ function fail(message) {
   errors.push(message);
 }
 
+for (const [input, expected] of [
+  ["15–30 ثانية", '<bdi dir="ltr">15–30</bdi> ثانية'],
+  ["٣–٥ أيام", '<bdi dir="ltr">٣–٥</bdi> أيام'],
+  ["<script>&", "&lt;script&gt;&amp;"],
+  ['O\'Brien "eye"', "O&#39;Brien &quot;eye&quot;"],
+]) {
+  if (comparisonText(input) !== expected) fail(`Comparison text is not safely direction-isolated: ${input}`);
+}
+
 const settings = JSON.parse(fs.readFileSync(path.join(sourceRoot, "_data/site.json"), "utf8"));
+const doctorProfile = JSON.parse(fs.readFileSync(path.join(sourceRoot, "_data/doctorProfile.json"), "utf8"));
 const pricing = JSON.parse(fs.readFileSync(path.join(sourceRoot, "_data/pricing.json"), "utf8"));
 const clinical = JSON.parse(fs.readFileSync(path.join(sourceRoot, "_data/clinical.json"), "utf8"));
 const calculatorFaqs = JSON.parse(fs.readFileSync(path.join(sourceRoot, "_data/calculatorFaqs.json"), "utf8"));
@@ -320,6 +336,48 @@ for (const file of requiredOutputs) {
   if (!fs.existsSync(path.join(outputRoot, file))) fail(`Missing output: ${file}`);
 }
 const assetManifestPath = path.join(outputRoot, "assets/asset-manifest.json");
+for (const [file, locale, kind] of [
+  ["index.html", "en", "home"], ["ar/index.html", "ar", "home"],
+  ["smile-pro/index.html", "ar", "smile-pro"], ["en/smile-pro/index.html", "en", "smile-pro"],
+]) {
+  const html = fs.readFileSync(path.join(outputRoot, file), "utf8");
+  const section = html.match(/<section\b[^>]*\bid="comparison"[^>]*>([\s\S]*?)<\/section>/)?.[1] || "";
+  const table = section.match(/<table class="landing-comparison__table"[^>]*>([\s\S]*?)<\/table>/)?.[1] || "";
+  const rows = landingComparison.rows[kind];
+  if (!section || !table || !table.includes(`<caption class="sr-only">${landingComparison.title[locale]}</caption>`)) {
+    fail(`Standalone landing comparison is missing its accessible table in ${file}`);
+  }
+  if ((table.match(/scope="col"/g) || []).length !== 4 || (table.match(/scope="row"/g) || []).length !== rows.length) {
+    fail(`Standalone comparison must expose all row and column headers in ${file}`);
+  }
+  if ((section.match(/class="landing-comparison__card"/g) || []).length !== rows.length ||
+      (section.match(/<dt>/g) || []).length !== rows.length * landingComparison.procedures.length) {
+    fail(`Standalone mobile comparison is missing labelled feature values in ${file}`);
+  }
+  const columnNames = [...table.matchAll(/class="landing-comparison__name">([^<]+)<\/span>/g)].map((match) => match[1]);
+  if (JSON.stringify(columnNames) !== JSON.stringify(landingComparison.procedures.map((procedure) => procedure.name[locale]))) {
+    fail(`Standalone comparison technique order is inconsistent in ${file}`);
+  }
+  for (const row of rows) {
+    if (row.values[locale].length !== landingComparison.procedures.length ||
+        (section.match(new RegExp(`data-comparison-criterion="${row.id}"`, "g")) || []).length !== 2) {
+      fail(`Standalone comparison criterion ${row.id} is incomplete in ${file}`);
+    }
+  }
+  const tableValues = [...table.matchAll(/<tr data-comparison-criterion="[^"]+">([\s\S]*?)<\/tr>/g)]
+    .map((row) => [...row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)].map((cell) => cell[1]));
+  const mobileValues = [...section.matchAll(/<dl>([\s\S]*?)<\/dl>/g)]
+    .map((row) => [...row[1].matchAll(/<dd>([\s\S]*?)<\/dd>/g)].map((cell) => cell[1]));
+  const expectedValues = rows.map((row) => row.values[locale]
+    .map((value) => comparisonText(value.replaceAll("{aftercare}", clinical.aftercare[locale].comparison_summary))));
+  if (JSON.stringify(tableValues) !== JSON.stringify(expectedValues) || JSON.stringify(mobileValues) !== JSON.stringify(expectedValues)) {
+    fail(`Standalone desktop and mobile comparison values must match their shared data in ${file}`);
+  }
+  if (!section.includes('id="landing-comparison-note"') || /class="comp-table"|data-procedure-comparison-open/.test(section)) {
+    fail(`Standalone comparison must stay separate from the form dialog in ${file}`);
+  }
+  if (!table.includes('<bdi dir="ltr">')) fail(`Standalone comparison numbers are not direction-isolated in ${file}`);
+}
 const assetManifest = fs.existsSync(assetManifestPath) ? JSON.parse(fs.readFileSync(assetManifestPath, "utf8")) : {};
 for (const entry of [
   "js/site.js", "js/forms.js", "js/pages/calculator-en.js", "js/pages/calculator-ar.js",
@@ -383,7 +441,7 @@ for (const legacy of legacyArticleRoutes) {
       fail(`Indexed article route changed its canonical URL: ${route}`);
     }
     const counterpart = legacy[locale === "ar" ? "en" : "ar"];
-    if (!html.includes(`href="${settings.url}${counterpart}"`)) {
+    if (!trackingEnvironment.isStaging && !html.includes(`href="${settings.url}${counterpart}"`)) {
       fail(`Indexed article route lost its bilingual alternate: ${route}`);
     }
   }
@@ -427,10 +485,15 @@ if (!arabicThankYou.includes('href="/ar/">العودة إلى الصفحة ال�
 const adminHtml = fs.readFileSync(path.join(outputRoot, "admin/index.html"), "utf8");
 const decapScriptUrl = "https://unpkg.com/decap-cms@3.16.1/dist/decap-cms.js";
 const decapScriptIntegrity = "sha384-hhTu9Y4nUnpebdUoT0bRx5lciIW+n97A7RrydmU92mb8EJj2YfInMzFkP2maNZS+";
-if (!adminHtml.includes(`src="${decapScriptUrl}"`)) {
+const checkedAdminHtml = trackingEnvironment.isStaging
+  ? fs.readFileSync(path.join(sourceRoot, "admin/index.html"), "utf8") : adminHtml;
+if (trackingEnvironment.isStaging && (adminHtml.includes(decapScriptUrl) || !adminHtml.includes("CMS editing is disabled here"))) {
+  fail("Staging CMS must not allow writes to the production repository");
+}
+if (!checkedAdminHtml.includes(`src="${decapScriptUrl}"`)) {
   fail("Decap CMS browser dependency must use an exact version");
 }
-if (!adminHtml.includes(`integrity="${decapScriptIntegrity}"`) || !adminHtml.includes('crossorigin="anonymous"')) {
+if (!checkedAdminHtml.includes(`integrity="${decapScriptIntegrity}"`) || !checkedAdminHtml.includes('crossorigin="anonymous"')) {
   fail("Decap CMS browser dependency must use the verified SRI digest and anonymous CORS");
 }
 const adminConfig = fs.readFileSync(path.join(sourceRoot, "admin/config.yml"), "utf8");
@@ -478,13 +541,35 @@ if (!cmsFieldLine("published").includes("default: false")) {
 const sharedScript = fs.readFileSync(path.join(sourceRoot, "assets/js/site.js"), "utf8");
 const formsScript = fs.readFileSync(path.join(sourceRoot, "assets/js/forms.js"), "utf8");
 const conversionScript = fs.readFileSync(path.join(sourceRoot, "assets/js/pages/conversion.js"), "utf8");
+const trackingCoreScript = fs.readFileSync(path.join(sourceRoot, "assets/js/modules/tracking-core.js"), "utf8");
+const formsTemplate = fs.readFileSync(path.join(sourceRoot, "_includes/partials/forms.njk"), "utf8");
 const featureScripts = walk(path.join(sourceRoot, "assets/js/modules"))
   .filter((file) => file.endsWith(".js"))
   .map((file) => fs.readFileSync(file, "utf8"))
   .join("\n");
-const browserSource = `${sharedScript}\n${formsScript}\n${featureScripts}`;
+const browserSource = `${sharedScript}\n${formsScript}\n${trackingCoreScript}\n${featureScripts}`;
 const baseStyles = fs.readFileSync(path.join(sourceRoot, "assets/css/base.css"), "utf8");
 const sharedStyles = fs.readFileSync(path.join(sourceRoot, "assets/css/components.css"), "utf8");
+if (!/picture\s*\{[^}]*display:\s*block[^}]*max-width:\s*100%/.test(baseStyles) ||
+    !/(?:^|\})\s*img\s*\{[^}]*height:\s*auto/.test(baseStyles)) {
+  fail("Responsive images must preserve their proportions and avoid inline picture gaps");
+}
+if (!/\.doctor-trust picture\s*\{[^}]*width:\s*58px[^}]*height:\s*58px[^}]*flex:\s*0 0 58px/.test(sharedStyles)) {
+  fail("Doctor trust portraits must remain square without flex compression");
+}
+const blogImageStyles = fs.readFileSync(path.join(sourceRoot, "assets/css/pages/blog.css"), "utf8");
+if (!blogImageStyles.includes("minmax(min(100%, 320px), 1fr)") ||
+    !/\.post-card > picture\s*\{[^}]*aspect-ratio:\s*8\s*\/\s*5/.test(blogImageStyles)) {
+  fail("Blog image cards must fit narrow screens and reserve consistent image proportions");
+}
+const articleImageStyles = fs.readFileSync(path.join(sourceRoot, "assets/css/pages/article.css"), "utf8");
+if (!/\.main-img\s*\{[^}]*width:\s*auto[^}]*height:\s*auto[^}]*max-width:\s*100%[^}]*object-fit:\s*contain/.test(articleImageStyles)) {
+  fail("Article main images must stay fully visible without stretching or cropping");
+}
+const deviceImageStyles = fs.readFileSync(path.join(sourceRoot, "assets/css/pages/smile-pro.css"), "utf8");
+if (!/\.tech-box img\s*\{[^}]*height:\s*auto[^}]*aspect-ratio:\s*1\s*\/\s*1[^}]*object-fit:\s*contain/.test(deviceImageStyles)) {
+  fail("The laser device image must preserve its square proportions");
+}
 const sharedHead = fs.readFileSync(path.join(sourceRoot, "_includes/partials/head.njk"), "utf8");
 const baseLayout = fs.readFileSync(path.join(sourceRoot, "_includes/layouts/base.njk"), "utf8");
 if (baseLayout.indexOf('partials/urgency-bar.njk') > baseLayout.indexOf('partials/header.njk')) {
@@ -529,11 +614,78 @@ if (/lifetime\s*-\s*\d+/.test(browserSource)) {
 for (const redirectStep of ["params.delete('lang')", "destination.search = params.toString()", "destination.hash = window.location.hash"]) {
   if (!sharedScript.includes(redirectStep)) fail(`Legacy language redirect is missing: ${redirectStep}`);
 }
+if (sharedScript.indexOf("window.location.replace(destination.href)") > sharedScript.indexOf("initializeTrackingRuntime()")) {
+  fail("The legacy language redirect can emit a duplicate page view before navigation");
+}
 if (!sharedScript.includes("params.delete('redirected')") || !sharedScript.includes("history.replaceState")) {
   fail("The legacy server redirect marker is not removed from the address bar");
 }
-if (!formsScript.includes("window.markLeadConversion") || !conversionScript.includes("sessionStorage.removeItem")) {
-  fail("Lead conversions are not restricted to a completed form submission");
+for (const marker of [
+  "TRACKING_SCHEMA_VERSION = '2.0'",
+  "ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000",
+  "PENDING_LEAD_TTL_MS = 15 * 60 * 1000",
+  "status: 'pending'",
+  "status: 'dispatched'",
+  "phone_sha256_e164",
+  "phone_sha256_digits",
+  "eventName !== 'smile_pro_lead'",
+]) {
+  if (!trackingCoreScript.includes(marker)) fail(`Unified tracking core is missing: ${marker}`);
+}
+for (const clickId of ["gclid", "wbraid", "gbraid", "fbclid", "ttclid", "sccid", "oppref", "msclkid"]) {
+  if (!trackingCoreScript.includes(`'${clickId}'`)) fail(`Unified attribution does not capture ${clickId}`);
+}
+if (
+  !sharedScript.includes("window.trackSiteEvent('site_page_view'") ||
+  !sharedScript.includes("window.trackSiteEvent('content_view'") ||
+  !formsScript.includes("prepareLeadConversion(form, phone.e164)") ||
+  !formsScript.includes("createLeadConfirmationUrl(destination, conversion.lead)") ||
+  !formsScript.includes("if (!submission.confirmed)") ||
+  !conversionScript.includes("readPendingLead(confirmationToken)") ||
+  !conversionScript.includes("markLeadDispatched(lead)") ||
+  !conversionScript.includes("dispatchLeadConversion(lead)")
+) {
+  fail("Unified page or successful-lead event lifecycle is incomplete");
+}
+if (
+  !sharedScript.includes("captureLeadConfirmationToken()") ||
+  sharedScript.indexOf("captureLeadConfirmationToken()") > sharedScript.indexOf("window.trackSiteEvent('site_page_view'") ||
+  !conversionScript.includes("const confirmationToken = captureLeadConfirmationToken()")
+) {
+  fail("Lead confirmation tokens are not removed before advertising page-view events");
+}
+if (
+  !sharedHead.includes("smile-pro-lead-confirmation-token") ||
+  sharedHead.indexOf("lead_confirmation") > sharedHead.indexOf('{% include "partials/tracking-head.njk" %}')
+) {
+  fail("Lead confirmation tokens are not removed before the GTM loader starts");
+}
+if (
+  !sharedScript.includes("window.addEventListener('pageshow'") ||
+  !sharedScript.includes("if (!event.persisted) return") ||
+  !sharedScript.includes("resetFormTracking.forEach") ||
+  !sharedScript.includes("delete form.dataset.trackingStarted") ||
+  !sharedScript.includes("delete form.dataset.submitting") ||
+  !sharedScript.includes("submitButton.disabled = false") ||
+  (sharedScript.match(/trackPageView\(\)/g) || []).length < 2
+) {
+  fail("Forms restored from bfcache do not start a fresh page and form attempt");
+}
+for (const calculator of [
+  fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-en.js"), "utf8"),
+  fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-ar.js"), "utf8")
+]) {
+  if (!calculator.includes("error_type: 'phone_invalid'")) {
+    fail("Calculator phone validation failures are missing from the form funnel");
+  }
+}
+for (const formHandler of [formsScript, fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-en.js"), "utf8"), fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-ar.js"), "utf8")]) {
+  if (!formHandler.includes("dataset.submitting === 'true'") || !formHandler.includes("dataset.submitting = 'true'")) {
+    fail("A lead form can start duplicate submissions while lazy phone validation is loading");
+  }
+  if (/catch\s*\([^)]*\)\s*\{[^}]*markLeadConversion/s.test(formHandler)) {
+    fail("A form marks a lead as successful from its network-error fallback");
+  }
 }
 for (const marker of ["import('intl-tel-input')", "attachUtils(() => import('intl-tel-input/utils'))", "instance.isValidNumber()", "instance.getNumber()", "initialCountry:", "countryOrder:", "placeholderNumberPolicy: 'AGGRESSIVE'", "separateDialCode: true", "phoneInitializationPromises", "window.validatePhoneInput", "window.preparePhoneInput"]) {
   if (!formsScript.includes(marker)) fail(`Forms do not use the shared intl-tel-input behavior: ${marker}`);
@@ -544,10 +696,21 @@ if (formsScript.includes("initialCountryLookup")) {
 if (baseLayout.includes("libphonenumber-max.js") || baseLayout.includes("intlTelInputWithUtils.min.js") || !baseLayout.includes("'js/forms.js' | assetUrl")) {
   fail("Form pages do not use the lazy, bundled intl-tel-input integration");
 }
-if (!conversionScript.includes("let lead = null") || !conversionScript.includes("JSON.parse(storedLead || 'null')")) {
+if (
+  !conversionScript.includes("const lead = readPendingLead(confirmationToken)") ||
+  !trackingCoreScript.includes("lead.status !== 'pending'") ||
+  !trackingCoreScript.includes("cleanValue(confirmationToken, 200) !== lead.confirmation_token")
+) {
   fail("Thank-you pages can count a direct visit as a lead when storage is unavailable");
 }
-if (!conversionScript.includes("'smile_pro_lead'") || !conversionScript.includes("window.dataLayer.push")) {
+if (!trackingCoreScript.includes("eventCallback: complete") || !trackingCoreScript.includes("eventTimeout: timeoutMs")) {
+  fail("Storage-blocked lead dispatch does not wait for GTM or its timeout before navigation");
+}
+if (!formsTemplate.includes('name="session-id"') || !trackingCoreScript.includes("'session-id': state.sessionId") ||
+  !sharedScript.includes("syncFormAttribution(form, trackingRuntime.attribution)")) {
+  fail("Netlify Forms do not receive the unified tracking session id");
+}
+if (!trackingCoreScript.includes("trackSiteEvent('smile_pro_lead'") || !trackingCoreScript.includes("window.dataLayer.push")) {
   fail("Thank-you pages do not emit the single GTM-owned lead event");
 }
 if (/\b(?:fbq|snaptr|gtag)\s*\(/.test(conversionScript) || conversionScript.includes("'generate_lead'")) {
@@ -558,7 +721,7 @@ if (!sharedHead.includes("document.documentElement.classList.add('js')")) {
 }
 if (
   !sharedHead.includes("{% if trackingEnabled and tracking != false %}") ||
-  !baseLayout.includes("{% if trackingEnabled and tracking != false %}<noscript>")
+  !baseLayout.includes("{% if trackingEnabled and tracking != false and not isStaging %}<noscript>")
 ) {
   fail("Published-site tracking is not gated away from ordinary local builds");
 }
@@ -579,21 +742,74 @@ if (trackingHead.includes("fbq('init'") || trackingHead.includes('fbq("init"')) 
 if (/googletagmanager\.com\/gtag\/js|gtag\(['"]config['"]/.test(trackingHead)) {
   fail("GA4 or Google Ads is loaded directly as well as through GTM");
 }
+if (!trackingHead.includes("TikTok") || !trackingHead.includes("ChatGPT Ads")) {
+  fail("The GTM ownership note does not include every supported advertising platform");
+}
+const trackingGuide = fs.readFileSync(path.join(root, "TRACKING.md"), "utf8");
+const trackingManifestPath = path.join(root, "tracking", "gtm-workspace-spec.json");
+const trackingBaselinePath = path.join(root, "tracking", "gtm-container-baseline-export.json");
+const openAiTemplate = fs.readFileSync(path.join(root, "tracking", "openai-ads-pixel.tpl"), "utf8");
+let trackingManifest = {};
+let trackingBaseline = {};
+try {
+  trackingManifest = JSON.parse(fs.readFileSync(trackingManifestPath, "utf8"));
+} catch (error) {
+  fail(`Invalid GTM workspace specification: ${error.message}`);
+}
+try {
+  trackingBaseline = JSON.parse(fs.readFileSync(trackingBaselinePath, "utf8"));
+} catch (error) {
+  fail(`Invalid GTM baseline export: ${error.message}`);
+}
+if (trackingManifest.schema_version !== "2.0" || trackingManifest.container_id !== PRODUCTION_CONTAINER_ID) {
+  fail("GTM workspace specification does not match the site tracking contract");
+}
+if (
+  trackingBaseline.containerVersion?.container?.publicId !== LEGACY_CONTAINER_ID ||
+  !Array.isArray(trackingBaseline.containerVersion?.tag) ||
+  !Array.isArray(trackingBaseline.containerVersion?.trigger)
+) {
+  fail("GTM baseline export is missing or belongs to another container");
+}
+for (const eventName of ["site_page_view", "content_view", "click_call", "click_whatsapp", "smile_pro_lead"]) {
+  if (!trackingManifest.data_layer_events?.[eventName]) fail(`GTM workspace specification is missing ${eventName}`);
+}
+for (const marker of [
+  "https://bzrcdn.openai.com/sdk/oaiq.min.js",
+  "createArgumentsQueue('oaiq', 'oaiq.q')",
+  "phone_number_sha256",
+  "oaiq('measure', operation, eventData, { event_id: eventId })",
+  "___WEB_PERMISSIONS___",
+]) {
+  if (!openAiTemplate.includes(marker)) fail(`OpenAI GTM template is missing: ${marker}`);
+}
+if (!trackingGuide.includes("Automatic Advanced Matching") || !trackingGuide.includes("user_data.phone_sha256_digits")) {
+  fail("Tracking guide does not document manual phone matching and automatic-matching opt-out");
+}
+for (const privacyPath of ["privacy.njk", path.join("ar", "privacy.njk")]) {
+  const privacy = fs.readFileSync(path.join(sourceRoot, privacyPath), "utf8");
+  for (const disclosure of ["TikTok", "OpenAI/ChatGPT Ads", "SHA-256"]) {
+    if (!privacy.includes(disclosure)) fail(`Privacy disclosure is missing ${disclosure}: ${privacyPath}`);
+  }
+}
 for (const marker of ["clarity.ms/tag/", "sc-static.net/scevent", "snaptr('init'", 'snaptr("init"']) {
   if (trackingHead.includes(marker)) fail(`Tracking loader must be owned by GTM, not the page template: ${marker}`);
 }
-for (const marker of ["lead_form_view", "lead_form_start", "lead_form_error", "click_whatsapp", "click_call", "fomo_banner_view", "procedure_comparison_open", "procedure_comparison_choice"]) {
+for (const marker of ["lead_form_view", "lead_form_start", "lead_form_error", "click_whatsapp", "click_call", "fomo_banner_view", "procedure_comparison_open", "procedure_comparison_choice", "faq_open", "video_start"]) {
   if (!browserSource.includes(marker)) fail(`Shared conversion tracking is missing: ${marker}`);
 }
 if (!sharedScript.includes("const currentFormParameters") ||
-    (sharedScript.match(/currentFormParameters\(\)/g) || []).length < 4) {
+    (sharedScript.match(/currentFormParameters\(\)/g) || []).length < 3) {
   fail("Form analytics must read the currently selected service when each event is emitted");
 }
 if (!sharedScript.includes("smile-pro-fomo-sitewide-v2")) {
   fail("The FOMO counter is not kept consistent while the visitor moves between pages");
 }
-for (const marker of ["landing-page", "source-page", "utm-source", "utm-campaign", "gclid", "fbclid", "msclkid", "lead-id"]) {
-  if (!formsScript.includes(marker) && !sharedScript.includes(marker)) fail(`Lead attribution is missing: ${marker}`);
+for (const marker of ["landing-page", "source-page", "first-touch", "last-non-direct", "utm-source", "utm-campaign", "gclid", "wbraid", "gbraid", "fbclid", "ttclid", "sccid", "oppref", "msclkid", "lead-id", "attempt-id", "session-id"]) {
+  if (!formsTemplate.includes(`name=\"${marker}\"`)) fail(`Lead attribution form field is missing: ${marker}`);
+}
+if ((formsTemplate.match(/data-clarity-mask="true"/g) || []).length < 4) {
+  fail("Personally identifying form fields are not explicitly masked from Clarity recordings");
 }
 if (!adminConfig.includes('buttons: ["bold", "italic", "link"') || !fs.readFileSync(path.join(root, "eleventy.config.js"), "utf8").includes('amendLibrary("md"')) {
   fail("CMS Markdown images are not routed through intrinsic-dimension handling");
@@ -632,6 +848,10 @@ for (const file of ["home-en.css", "home-ar.css"]) {
       !/\.doc-img img\s*\{[^}]*width\s*:\s*100%[^}]*height\s*:\s*100%[^}]*object-fit\s*:\s*cover/i.test(styles)) {
     fail(`Homepage doctor image sizing is not constrained correctly in ${file}`);
   }
+  if (!/\.doc-img picture\s*\{[^}]*width:\s*100%[^}]*height:\s*100%/.test(styles) ||
+      !/\.tech-media\s*\{[^}]*max-width:\s*420px[^}]*aspect-ratio:\s*1\s*\/\s*1/.test(styles)) {
+    fail(`Homepage media wrappers must match their images and video without clipping in ${file}`);
+  }
 }
 for (const file of ["calculator-en.css", "calculator-ar.css"]) {
   const styles = fs.readFileSync(path.join(sourceRoot, "assets/css/pages", file), "utf8");
@@ -643,7 +863,7 @@ for (const file of walk(path.join(sourceRoot, "assets/css")).filter((entry) => e
 }
 
 const robots = fs.readFileSync(path.join(outputRoot, "robots.txt"), "utf8");
-if (!robots.includes(`Sitemap: ${settings.url}/sitemap.xml`)) {
+if (trackingEnvironment.isStaging ? !/Disallow: \/\s*$/.test(robots.trim()) : !robots.includes(`Sitemap: ${settings.url}/sitemap.xml`)) {
   fail("robots.txt does not use the configured site URL for its sitemap");
 }
 
@@ -770,9 +990,8 @@ const outputFiles = walk(outputRoot);
 const htmlFiles = outputFiles.filter((file) => file.endsWith(".html"));
 const jsFiles = outputFiles.filter((file) => file.endsWith(".js"));
 const functionFiles = walk(path.join(root, "netlify/functions")).filter((file) => /\.(?:cjs|mjs|js)$/.test(file));
-const productionBuild = ["production", "deploy-preview"].includes(process.env.CONTEXT) || process.env.ELEVENTY_ENV === "production";
-const trackingMarkers = ["GTM-PZRLPZN2"];
-const trackingExpected = productionBuild && process.env.PERF_DISABLE_TRACKING !== "1";
+const trackingMarkers = [trackingEnvironment.containerId];
+const trackingExpected = trackingEnvironment.enabled;
 const calculatorSchemaPages = new Set();
 
 function attribute(attributes, name) {
@@ -860,6 +1079,9 @@ for (const file of htmlFiles) {
     }
   }
   const hasProductionTracking = trackingMarkers.some((marker) => html.includes(marker));
+  if (html.includes(LEGACY_CONTAINER_ID)) {
+    fail(`Legacy GTM leaked into the current build: ${relativeFile}`);
+  }
   if (!trackingExpected && hasProductionTracking) {
     fail(`Production tracking leaked into a local or preview build: ${relativeFile}`);
   }
@@ -889,6 +1111,40 @@ for (const file of htmlFiles) {
     if (trustLeadIn.includes(settings.doctor[documentLocale])) {
       fail(`Doctor name is repeated immediately before its trust card in ${relativeFile}`);
     }
+    if (!html.includes('class="doctor-credential-highlight"') || !html.includes('class="doctor-credentials-disclosure"')) {
+      fail(`Doctor trust card has no visible fellowship or optional credential details in ${relativeFile}`);
+    }
+  }
+  const credentialBlocks = (html.match(/<div\b[^>]*\bdata-doctor-credentials(?:[\s=>])/gi) || []).length;
+  const expectedCredentialBlocks = Number(doctorTrustIndex !== -1) +
+    Number(html.includes('<div class="doctor-grid ')) + Number(html.includes('<div class="doc-profile">'));
+  if (credentialBlocks !== expectedCredentialBlocks) {
+    fail(`An existing doctor card is missing its shared credentials in ${relativeFile}`);
+  }
+  if (credentialBlocks) {
+    for (const group of doctorProfile.groups) {
+      if (!html.includes(`data-credential-group="${group.id}"`) || !html.includes(group.heading[documentLocale])) {
+        fail(`Doctor credentials are not grouped correctly in ${relativeFile}`);
+      }
+      for (const item of group.items) {
+        const occurrences = html.split(`data-credential="${item.id}"`).length - 1;
+        if (occurrences !== credentialBlocks || !html.includes(item.label[documentLocale]) ||
+            (item.detail && !html.includes(item.detail[documentLocale])) ||
+            (item.abbreviation && !html.includes(`<bdi dir="ltr">(${item.abbreviation})</bdi>`))) {
+          fail(`Doctor credential ${item.id} is missing, duplicated or mislocalized in ${relativeFile}`);
+        }
+      }
+    }
+  }
+  for (const disclosure of html.matchAll(/<details\b([^>]*\bclass="doctor-credentials-disclosure"[^>]*)>([\s\S]*?)<\/details>/gi)) {
+    if (/\bopen(?:\s|=|$)/i.test(disclosure[1]) || !/^\s*<summary>[^<]+<\/summary>/.test(disclosure[2])) {
+      fail(`Doctor credential details must use a labelled, initially collapsed native disclosure in ${relativeFile}`);
+    }
+  }
+  for (const list of html.matchAll(/<ul class="doctor-credentials__list">([\s\S]*?)<\/ul>/gi)) {
+    if (/<p\b/i.test(list[1])) {
+      fail(`Markdown inserted invalid paragraph wrappers into the doctor credential list in ${relativeFile}`);
+    }
   }
   if (html.includes('data-netlify="true"')) {
     if (!html.includes(`src="${assetManifest["js/forms.js"]}"`) || !html.includes(`data-phone-css="${assetManifest["css/phone.css"]}"`)) {
@@ -915,6 +1171,9 @@ for (const file of htmlFiles) {
   for (const match of html.matchAll(/<img\b([^>]*)>/gi)) {
     if (!attribute(match[1], "width") || !attribute(match[1], "height")) {
       fail(`Image without intrinsic dimensions in ${relativeFile}`);
+    }
+    if (attribute(match[1], "srcset") && !attribute(match[1], "sizes")) {
+      fail(`Responsive image without a display-size hint in ${relativeFile}`);
     }
   }
   for (const match of html.matchAll(/<iframe\b([^>]*)>/gi)) {
@@ -978,6 +1237,10 @@ for (const file of htmlFiles) {
   }
   for (const match of html.matchAll(/<video\b([^>]*)>/gi)) {
     const videoAttributes = match[1];
+    if ((relativeFile === "index.html" || relativeFile === path.join("ar", "index.html")) &&
+        !html.includes('class="tech-media"')) {
+      fail(`Homepage video is missing its responsive, non-clipping frame in ${relativeFile}`);
+    }
     if (/\bautoplay\b/i.test(videoAttributes) || attribute(videoAttributes, "preload") !== "none" || !/\bdata-play-when-visible\b/i.test(videoAttributes)) {
       fail(`Video is not deferred until it approaches the viewport in ${relativeFile}`);
     }
@@ -1074,7 +1337,7 @@ for (const file of htmlFiles) {
         }
       }
     }
-    for (const attributionField of ["lead-id", "form-position", "landing-page", "source-page", "referrer", "utm-source", "utm-medium", "utm-campaign", "gclid", "fbclid", "msclkid"]) {
+    for (const attributionField of ["lead-id", "attempt-id", "session-id", "form-position", "landing-page", "source-page", "referrer", "utm-source", "utm-medium", "utm-campaign", "gclid", "fbclid", "msclkid"]) {
       if (!new RegExp(`<input\\b[^>]*name=["']${attributionField}["']`, "i").test(body)) {
         fail(`Form is missing attribution field ${attributionField} in ${relativeFile}`);
       }
@@ -1302,6 +1565,10 @@ if (redirectBlocks.some((block) => block.includes('from = "/articles/*"'))) {
   fail("Wildcard article language redirect can send untranslated content to a missing English page");
 }
 const generatedRedirects = fs.readFileSync(path.join(outputRoot, "_redirects"), "utf8");
+const expectedFixedRules = fixedRedirectRules(netlifyConfig);
+for (const rule of expectedFixedRules) {
+  if (!generatedRedirects.split(/\r?\n/).includes(rule)) fail(`Missing artifact redirect from netlify.toml: ${rule}`);
+}
 const generatedLanguageRules = generatedRedirects
   .split(/\r?\n/)
   .map((line) => line.trim())
@@ -1311,6 +1578,10 @@ const generatedRules = generatedRedirects
   .split(/\r?\n/)
   .map((line) => line.trim())
   .filter((line) => line && !line.startsWith("#"));
+const firstCatchAll = generatedRules.findIndex(rule => rule.split(/\s+/)[0].includes('*'));
+if (firstCatchAll !== -1 && generatedRules.slice(firstCatchAll).some(rule => !rule.split(/\s+/)[0].includes('*'))) {
+  fail("Catch-all 404 redirects must follow all explicit page and article redirects");
+}
 const expectedLegacyArticleRules = [];
 for (const article of articles.filter((entry) => entry.locale === "ar")) {
   const english = articles.find((entry) =>
@@ -1344,12 +1615,12 @@ for (const article of articles.filter((entry) => entry.locale === "ar")) {
   }
 }
 for (const rule of generatedLanguageRules) {
-  if (!expectedLanguageRules.includes(rule)) fail(`Unexpected generated language redirect: ${rule}`);
+  if (!expectedLanguageRules.includes(rule) && !expectedFixedRules.includes(rule)) fail(`Unexpected generated language redirect: ${rule}`);
   const destination = rule.split(/\s+/)[2] || "";
   validateExtensionlessReference(destination, "generated _redirects destination");
 }
 for (const rule of generatedRules.filter((entry) => !entry.includes(" lang=en "))) {
-  if (!expectedLegacyArticleRules.includes(rule)) fail(`Unexpected generated canonical redirect: ${rule}`);
+  if (!expectedLegacyArticleRules.includes(rule) && !expectedFixedRules.includes(rule)) fail(`Unexpected generated canonical redirect: ${rule}`);
   const destination = rule.split(/\s+/)[1] || "";
   validateExtensionlessReference(destination, "generated _redirects destination");
 }
@@ -1407,7 +1678,7 @@ for (const [homepage, locale] of [["index.html", "en"], ["ar/index.html", "ar"]]
     `data-procedure-cost="${pricing.savings.reference_price}"`,
     new Intl.NumberFormat(numberLocale).format(lifetime),
     new Intl.NumberFormat(numberLocale).format(savings),
-    clinical.aftercare[locale].comparison_summary,
+    comparisonText(clinical.aftercare[locale].comparison_summary),
   ]) {
     if (!html.includes(marker)) fail(`Shared savings or aftercare data is missing from ${homepage}: ${marker}`);
   }

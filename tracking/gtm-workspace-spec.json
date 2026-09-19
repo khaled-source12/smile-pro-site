@@ -1,0 +1,108 @@
+{
+  "schema_version": "2.0",
+  "container_id": "GTM-NFTVFBKS",
+  "legacy_container_id": "GTM-PZRLPZN2",
+  "status": "configuration-source-of-truth-not-an-importable-container-export",
+  "platform_ids": {
+    "ga4_measurement_id": "G-K4989EX8EJ",
+    "google_ads_conversion_id": "AW-18233409981",
+    "google_ads_lead_label": "AzguCIC9vPwcEL2Dr_ZD",
+    "meta_pixel_id": "1003835282264414",
+    "tiktok_pixel_id": "DAMI1ERC77U5PB5VTVRG",
+    "snapchat_pixel_id": "d34f007b-056b-48fe-a1a9-9e4d2340907c",
+    "openai_pixel_id": "D75vs25S8kHCy2t9f3RK1c",
+    "clarity_project_id": "x8s5tnix4i"
+  },
+  "base_tags": {
+    "trigger": "Initialization - All Pages",
+    "firing_option": "once_per_page",
+    "automatic_ad_platform_page_view": false,
+    "platforms": [
+      "google_tag_with_ga4_and_ads_destinations",
+      "meta_init_only",
+      "tiktok_load_only",
+      "snapchat_init_only",
+      "openai_initialize_only",
+      "clarity_base"
+    ]
+  },
+  "data_layer_events": {
+    "site_page_view": {
+      "ga4": "page_view",
+      "meta": "PageView",
+      "tiktok": "PageView",
+      "snapchat": "PAGE_VIEW",
+      "openai": "page_viewed"
+    },
+    "content_view": {
+      "ga4": "content_view",
+      "meta": "ViewContent",
+      "tiktok": "ViewContent",
+      "snapchat": "VIEW_CONTENT",
+      "openai": "contents_viewed"
+    },
+    "click_call": {
+      "ga4": "click_call",
+      "google_ads": "secondary",
+      "meta": "Contact",
+      "tiktok": "Contact",
+      "snapchat": "CUSTOM"
+    },
+    "click_whatsapp": {
+      "ga4": "click_whatsapp",
+      "google_ads": "secondary",
+      "meta": "Contact",
+      "tiktok": "Contact",
+      "snapchat": "CUSTOM"
+    },
+    "smile_pro_lead": {
+      "ga4": "generate_lead",
+      "google_ads": "primary",
+      "meta": "Lead",
+      "tiktok": "SubmitForm",
+      "snapchat": "SIGN_UP",
+      "openai": "lead_created"
+    }
+  },
+  "phone_hash_mapping": {
+    "google_ads": "user_data.phone_sha256_e164",
+    "tiktok": "user_data.phone_sha256_e164",
+    "meta": "user_data.phone_sha256_digits",
+    "snapchat": "user_data.phone_sha256_digits",
+    "openai": "user_data.phone_sha256_digits",
+    "ga4": null,
+    "clarity": null
+  },
+  "lead_deduplication": {
+    "meta": "event_id",
+    "tiktok": "event_id",
+    "snapchat": "client_dedup_id=event_id",
+    "openai": "event_id"
+  },
+  "analytics_only_events": [
+    "cta_click",
+    "lead_form_view",
+    "lead_form_start",
+    "lead_form_error",
+    "lead_form_submit_attempt",
+    "lead_phone_valid",
+    "estimator_start",
+    "estimator_step",
+    "estimator_result",
+    "procedure_comparison_open",
+    "procedure_comparison_choice",
+    "fomo_banner_view",
+    "faq_open",
+    "video_start"
+  ],
+  "forbidden_ad_fields": [
+    "service",
+    "recommended_treatment",
+    "alternative_treatment",
+    "prescription",
+    "conditions",
+    "priority",
+    "price",
+    "price_range"
+  ]
+}

@@ -14,6 +14,7 @@
         /* Hero Section */
         .hero { padding: 60px 0; background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: #fff; border-radius: 0 0 30px 30px; }
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-grid > * { min-width: 0; }
         .hero-badge { display: inline-block; background: rgba(95, 191, 59, 0.2); color: var(--bronze3); border: 1px solid var(--bronze3); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
         .hero h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; line-height: 1.25; margin-bottom: 15px; }
         .hero p { font-size: 17px; opacity: 0.9; margin-bottom: 25px; }
@@ -50,32 +51,29 @@
         .step-card p { font-size: 13px; color: #555; }
 
         /* Tech Section */
-        .tech-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
-        .tech-box img { width: 100%; border-radius: 12px; }
+        .tech-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 30px; align-items: center; }
+        .tech-box picture { width: 100%; max-width: 474px; justify-self: center; }
+        .tech-box img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; border-radius: 12px; }
         .tech-info h3 { font-size: 24px; color: var(--burg); margin-bottom: 15px; }
         .tech-info ul { list-style: none; }
         .tech-info li { position: relative; padding-right: 25px; margin-bottom: 12px; font-size: 15px; }
         .tech-info li::before { content: "✓"; position: absolute; right: 0; color: var(--bronze); font-weight: bold; }
 
-        /* Comparison Table */
-        .comp-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); margin-top: 20px; }
-        .comp-table th, .comp-table td { padding: 16px 20px; text-align: start; font-size: 14px; border-bottom: 1px solid var(--border); }
-        .comp-table th { background: var(--burg); color: #fff; font-size: 15px; }
-        .comp-table tr:hover { background: var(--bpale); }
-
         /* CTA Banner */
         .cta-box { background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: #fff; padding: 50px; border-radius: var(--r); text-align: center; margin-top: 40px; }
         .cta-box h2 { font-size: 28px; margin-bottom: 10px; }
         .cta-box p { font-size: 16px; opacity: 0.9; margin-bottom: 25px; }
-        .cta-btn { background: var(--bronze); color: #fff; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+        .cta-btn { background: var(--bronze); color: #fff; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; max-width: 100%; transition: 0.3s; }
         .cta-btn:hover { background: var(--bronze2); }
         .lead-card--bottom { max-width: 470px; margin: 26px auto 0; text-align: start; }
         .cta-box .lead-card--bottom p { opacity: 1; }
 
         @media (max-width: 768px) {
             .hero-grid, .tech-box { grid-template-columns: 1fr; text-align: center; }
-            .hero-stats { justify-content: center; }
+            .tech-box { padding: 24px; }
+            .tech-box picture { max-width: 420px; }
+            .hero-stats { justify-content: center; gap: 10px; }
+            .stat-item { flex: 1; min-width: 0; padding: 12px 8px; }
             .tech-info li { padding-right: 0; padding-top: 20px; }
             .tech-info li::before { right: 50%; transform: translateX(50%); top: 0; }
-            .comp-table { display: block; overflow-x: auto; }
         }
