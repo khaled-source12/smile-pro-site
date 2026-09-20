@@ -41,7 +41,7 @@
 {% endmacro %}
 
 {% macro consultation(locale='en', formName='consultation', formId='main-form', fieldPrefix='main', defaultProcedure='not-sure', formPosition='primary') %}
-<form name="{{ formName }}" id="{{ formId }}" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-form-position="{{ formPosition }}" data-service="{{ defaultProcedure or 'not-sure' }}">
+<form name="{{ formName }}" id="{{ formId }}" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-lead-form="true" data-form-position="{{ formPosition }}" data-service="{{ defaultProcedure or 'not-sure' }}">
   <input type="hidden" name="form-name" value="{{ formName }}">
   <input type="hidden" name="bot-field">
   <input type="hidden" name="language" value="{{ locale }}">
@@ -63,7 +63,7 @@
 {% endmacro %}
 
 {% macro estimator(locale='en') %}
-<form name="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-managed-form="custom" data-form-position="calculator-result" data-service="not-sure">
+<form name="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}" id="estimator-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="{{ '/ar/thank-you/' if locale == 'ar' else '/thank-you/' }}" data-lead-form="true" data-managed-form="custom" data-form-position="calculator-result" data-service="not-sure">
   <input type="hidden" name="form-name" value="{{ 'price-estimator-ar' if locale == 'ar' else 'price-estimator' }}">
   <input type="hidden" name="bot-field">
   <input type="hidden" name="language" value="{{ locale }}">

@@ -186,14 +186,14 @@ document.querySelectorAll('[data-phone-input]').forEach((input) => {
   });
 });
 
-document.querySelectorAll('form[data-netlify="true"] select[name="procedure"]').forEach((select) => {
+document.querySelectorAll('form[data-lead-form] select[name="procedure"]').forEach((select) => {
   const form = select.closest('form');
   const sync = () => { if (form) form.dataset.service = select.value || 'not-sure'; };
   sync();
   select.addEventListener('change', sync);
 });
 
-document.querySelectorAll('form[data-netlify="true"]:not([data-managed-form="custom"])').forEach((form) => {
+document.querySelectorAll('form[data-lead-form]:not([data-managed-form="custom"])').forEach((form) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (form.dataset.submitting === 'true') return;

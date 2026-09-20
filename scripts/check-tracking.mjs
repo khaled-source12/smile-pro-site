@@ -403,7 +403,7 @@ runInNewContext(siteScript, {
   URL, URLSearchParams, window: observerWindow, IntersectionObserver: TestObserver,
   document: {
     body: { dataset: {} },
-    querySelectorAll: (selector) => selector === 'form[data-netlify="true"]' ? [observedForm] : [],
+    querySelectorAll: (selector) => selector === 'form[data-lead-form]' ? [observedForm] : [],
     querySelector: () => null, getElementById: () => null, addEventListener: () => {}
   },
   captureLeadConfirmationToken: () => '',

@@ -832,6 +832,11 @@ if (/name:\s*"(?:phone_display_en|phone_display_ar|whatsapp)"/.test(adminConfig)
 for (const marker of ['select[name="procedure"]', "form.dataset.service = select.value || 'not-sure'"]) {
   if (!formsScript.includes(marker)) fail(`Lead procedure analytics are not synchronized: ${marker}`);
 }
+for (const script of [sharedScript, formsScript]) {
+  if (!script.includes('form[data-lead-form]') || script.includes('form[data-netlify="true"]')) {
+    fail("Browser form handlers must use the stable data-lead-form marker, not Netlify's removable build marker");
+  }
+}
 if (!sharedStyles.includes(".has-sticky-actions") || !sharedStyles.includes("html:not(.js) .site-menu")) {
   fail("Shared sticky spacing or no-JavaScript navigation fallback is missing");
 }
@@ -1304,6 +1309,9 @@ for (const file of htmlFiles) {
     const attributes = formMatch[1];
     const body = formMatch[2];
     if (attribute(attributes, "data-netlify") !== "true") continue;
+    if (attribute(attributes, "data-lead-form") !== "true") {
+      fail(`Netlify form is missing its production-stable JavaScript marker in ${relativeFile}`);
+    }
     const name = attribute(attributes, "name");
     const action = attribute(attributes, "action");
     const honeypot = attribute(attributes, "netlify-honeypot");

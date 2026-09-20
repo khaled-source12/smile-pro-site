@@ -50,7 +50,7 @@ import {
   trackPageView();
 
   const resetFormTracking = [];
-  document.querySelectorAll('form[data-netlify="true"]').forEach((form) => {
+  document.querySelectorAll('form[data-lead-form]').forEach((form) => {
     const originalAction = form.getAttribute('action') || '';
     const submitButton = form.querySelector('button[type="submit"]');
     const originalSubmitText = submitButton?.textContent || '';
