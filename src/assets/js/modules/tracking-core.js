@@ -486,3 +486,9 @@ export function dispatchLeadConversion(lead, { onComplete, timeoutMs = 2000 } = 
   });
   return event;
 }
+
+export function dispatchConfirmedLead(lead, options = {}) {
+  const event = dispatchLeadConversion(lead, options);
+  if (event) markLeadDispatched(lead);
+  return event;
+}

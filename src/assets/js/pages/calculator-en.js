@@ -1,7 +1,7 @@
 import { encodeNetlifyForm, postNetlifyForm } from '../modules/netlify-forms.js';
 import {
   createLeadConfirmationUrl,
-  dispatchLeadConversion,
+  dispatchConfirmedLead,
   prepareLeadConversion
 } from '../modules/tracking-core.js';
 
@@ -250,11 +250,7 @@ document.getElementById('estimator-form').addEventListener('submit', async funct
     return;
   }
   const conversion = await prepareLeadConversion(this, phone?.e164 || '');
-  if (conversion.stored) {
-    window.location.assign(createLeadConfirmationUrl(destination, conversion.lead));
-    return;
-  }
-  dispatchLeadConversion(conversion.lead, {
+  dispatchConfirmedLead(conversion.lead, {
     onComplete: () => window.location.assign(destination)
   });
 });

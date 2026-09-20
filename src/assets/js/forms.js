@@ -1,6 +1,6 @@
 import {
   createLeadConfirmationUrl,
-  dispatchLeadConversion,
+  dispatchConfirmedLead,
   prepareLeadConversion
 } from './modules/tracking-core.js';
 import { encodeNetlifyForm, postNetlifyForm } from './modules/netlify-forms.js';
@@ -230,11 +230,7 @@ document.querySelectorAll('form[data-netlify="true"]:not([data-managed-form="cus
       return;
     }
     const conversion = await prepareLeadConversion(form, phone.e164);
-    if (conversion.stored) {
-      window.location.assign(createLeadConfirmationUrl(destination, conversion.lead));
-      return;
-    }
-    dispatchLeadConversion(conversion.lead, {
+    dispatchConfirmedLead(conversion.lead, {
       onComplete: () => window.location.assign(destination)
     });
   });

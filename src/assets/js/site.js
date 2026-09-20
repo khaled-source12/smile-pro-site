@@ -77,14 +77,28 @@ import {
       ...formParameters,
       service: form.dataset.service || 'unknown'
     });
+    let formObserver;
+    let viewedAttemptId = '';
+    const emitFormView = () => {
+      const attemptId = formParameters.attempt_id;
+      if (!attemptId || viewedAttemptId === attemptId) return;
+      viewedAttemptId = attemptId;
+      window.trackSiteEvent('lead_form_view', currentFormParameters());
+      formObserver?.disconnect();
+    };
     const markStarted = () => {
+      // Any interaction proves that the form was viewed, even when a long form
+      // can never occupy enough of a short mobile viewport for an observer ratio.
+      emitFormView();
       if (form.dataset.trackingStarted) return;
       form.dataset.trackingStarted = 'true';
       window.trackSiteEvent('lead_form_start', currentFormParameters());
     };
     form.addEventListener('input', markStarted);
     form.addEventListener('change', markStarted);
+    form.addEventListener('submit', markStarted, true);
     form.addEventListener('invalid', (event) => {
+      markStarted();
       window.trackSiteEvent('lead_form_error', {
         ...currentFormParameters(),
         field_name: event.target.name || 'unknown',
@@ -92,25 +106,21 @@ import {
       });
     }, true);
 
-    let formObserver;
-    let viewedAttemptId = '';
     const observeFormView = () => {
       formObserver?.disconnect();
       const observedAttemptId = formParameters.attempt_id;
-      const emitFormView = () => {
-        if (formParameters.attempt_id !== observedAttemptId || viewedAttemptId === observedAttemptId) return;
-        viewedAttemptId = observedAttemptId;
-        window.trackSiteEvent('lead_form_view', currentFormParameters());
-        formObserver?.disconnect();
+      const emitObservedView = () => {
+        if (formParameters.attempt_id !== observedAttemptId) return;
+        emitFormView();
       };
       if ('IntersectionObserver' in window) {
         formObserver = new IntersectionObserver((entries) => {
           if (!entries.some((entry) => entry.isIntersecting)) return;
-          emitFormView();
-        }, { threshold: .35 });
+          emitObservedView();
+        }, { threshold: 0 });
         formObserver.observe(form);
       } else {
-        emitFormView();
+        emitObservedView();
       }
     };
     observeFormView();

@@ -14,6 +14,7 @@ import {
   createLeadConfirmationUrl,
   createPendingLead,
   createPhoneHashes,
+  dispatchConfirmedLead,
   dispatchLeadConversion,
   getAttribution,
   markLeadDispatched,
@@ -260,6 +261,30 @@ assert.equal(completionCount, 1);
 assert.deepEqual(window.dataLayer.at(-1), { user_data: null });
 assert.equal(JSON.stringify(window.dataLayer).includes('+201012345678'), false);
 
+const confirmedLead = {
+  ...runtimeLead,
+  event_id: 'lead_confirmed_test',
+  lead_id: 'lead_confirmed_test',
+  confirmation_token: 'confirm_confirmed_test'
+};
+assert.equal(storePendingLead(confirmedLead), true);
+let confirmedCompletionCount = 0;
+const confirmedEvent = dispatchConfirmedLead(confirmedLead, {
+  onComplete: () => { confirmedCompletionCount += 1; },
+  timeoutMs: 50
+});
+assert.equal(confirmedEvent.event, 'smile_pro_lead');
+assert.equal(confirmedEvent.lead_id, 'lead_confirmed_test');
+assert.equal(readPendingLead('confirm_confirmed_test'), null);
+assert.equal(JSON.parse(window.sessionStorage.getItem(PENDING_LEAD_STORAGE_KEY)).status, 'dispatched');
+confirmedEvent.eventCallback();
+confirmedEvent.eventCallback();
+assert.equal(confirmedCompletionCount, 1);
+assert.equal(
+  window.dataLayer.filter((entry) => entry.event === 'smile_pro_lead' && entry.lead_id === 'lead_confirmed_test').length,
+  1
+);
+
 // A restored document must read the newer touch, not replay the old campaign parameters in its URL.
 const cachedAttribution = getAttribution();
 const campaignTime = Date.now();
@@ -348,7 +373,15 @@ const observedForm = {
   getAttribute: (name) => name === 'name' ? 'consultation' : name === 'action' ? '/ar/thank-you/' : '',
   setAttribute: () => {},
   querySelector: () => null,
-  addEventListener: () => {}
+  listeners: new Map(),
+  addEventListener(name, callback) {
+    const callbacks = this.listeners.get(name) || [];
+    callbacks.push(callback);
+    this.listeners.set(name, callbacks);
+  },
+  dispatch(name, event = {}) {
+    for (const callback of this.listeners.get(name) || []) callback(event);
+  }
 };
 const observerRuntime = { page: { kind: 'home' }, attribution: { gclid: 'campaign-A' } };
 const observerWindow = {
@@ -398,13 +431,22 @@ observers[1].deliver();
 assert.equal(formViews().length, 1);
 assert.equal(formViews()[0].attempt_id, observedFields.get('attempt-id').value);
 assert.equal(formViews()[0].service, 'femto-lasik');
+const formStarts = () => observerWindow.dataLayer.filter((entry) => entry.event === 'lead_form_start');
+observedForm.dispatch('input');
+observedForm.dispatch('change');
+observedForm.dispatch('submit');
+assert.equal(formViews().length, 1);
+assert.equal(formStarts().length, 1);
 pageShow({ persisted: true });
 observers[1].deliver();
 observedForm.dataset.service = 'smile-pro';
-observers[2].deliver();
+observedForm.dispatch('submit');
 observers[2].deliver();
 assert.equal(formViews().length, 2);
+assert.equal(formStarts().length, 2);
 assert.notEqual(formViews()[0].attempt_id, formViews()[1].attempt_id);
 assert.equal(formViews()[1].service, 'smile-pro');
+assert.equal(formViews()[1].attempt_id, formStarts()[1].attempt_id);
+assert.ok(observerWindow.dataLayer.indexOf(formViews()[1]) < observerWindow.dataLayer.indexOf(formStarts()[1]));
 
 console.log('Tracking checks passed: attribution refresh, submission snapshots, header storage failures, form observers, phone hashes and lead deduplication.');

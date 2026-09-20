@@ -641,9 +641,9 @@ if (
   !formsScript.includes("prepareLeadConversion(form, phone.e164)") ||
   !formsScript.includes("createLeadConfirmationUrl(destination, conversion.lead)") ||
   !formsScript.includes("if (!submission.confirmed)") ||
+  !formsScript.includes("dispatchConfirmedLead(conversion.lead") ||
   !conversionScript.includes("readPendingLead(confirmationToken)") ||
-  !conversionScript.includes("markLeadDispatched(lead)") ||
-  !conversionScript.includes("dispatchLeadConversion(lead)")
+  !conversionScript.includes("dispatchConfirmedLead(lead)")
 ) {
   fail("Unified page or successful-lead event lifecycle is incomplete");
 }
@@ -671,6 +671,14 @@ if (
 ) {
   fail("Forms restored from bfcache do not start a fresh page and form attempt");
 }
+if (
+  !sharedScript.includes("form.addEventListener('submit', markStarted, true)") ||
+  !sharedScript.includes("markStarted();\n      window.trackSiteEvent('lead_form_error'") ||
+  !sharedScript.includes("{ threshold: 0 }") ||
+  sharedScript.indexOf("emitFormView();") > sharedScript.indexOf("window.trackSiteEvent('lead_form_start'")
+) {
+  fail("Every form interaction must emit one view before its start or error events");
+}
 for (const calculator of [
   fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-en.js"), "utf8"),
   fs.readFileSync(path.join(sourceRoot, "assets/js/pages/calculator-ar.js"), "utf8")
@@ -685,6 +693,9 @@ for (const formHandler of [formsScript, fs.readFileSync(path.join(sourceRoot, "a
   }
   if (/catch\s*\([^)]*\)\s*\{[^}]*markLeadConversion/s.test(formHandler)) {
     fail("A form marks a lead as successful from its network-error fallback");
+  }
+  if (!formHandler.includes("dispatchConfirmedLead(conversion.lead")) {
+    fail("Every successful form handler must dispatch smile_pro_lead before navigating away");
   }
 }
 for (const marker of ["import('intl-tel-input')", "attachUtils(() => import('intl-tel-input/utils'))", "instance.isValidNumber()", "instance.getNumber()", "initialCountry:", "countryOrder:", "placeholderNumberPolicy: 'AGGRESSIVE'", "separateDialCode: true", "phoneInitializationPromises", "window.validatePhoneInput", "window.preparePhoneInput"]) {
@@ -703,8 +714,9 @@ if (
 ) {
   fail("Thank-you pages can count a direct visit as a lead when storage is unavailable");
 }
-if (!trackingCoreScript.includes("eventCallback: complete") || !trackingCoreScript.includes("eventTimeout: timeoutMs")) {
-  fail("Storage-blocked lead dispatch does not wait for GTM or its timeout before navigation");
+if (!trackingCoreScript.includes("eventCallback: complete") || !trackingCoreScript.includes("eventTimeout: timeoutMs") ||
+    !trackingCoreScript.includes("if (event) markLeadDispatched(lead)")) {
+  fail("Confirmed lead dispatch does not wait for GTM or safely prevent duplicate conversions");
 }
 if (!formsTemplate.includes('name="session-id"') || !trackingCoreScript.includes("'session-id': state.sessionId") ||
   !sharedScript.includes("syncFormAttribution(form, trackingRuntime.attribution)")) {
