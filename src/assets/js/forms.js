@@ -95,6 +95,15 @@ function initializePhone(input) {
 
   const initialization = ensureCore().then((intlTelInput) => {
     if (!intlTelInput) return null;
+    // intl-tel-input moves the input into its generated wrapper. Moving a
+    // focused input detaches it briefly, so preserve the user's first-click
+    // focus and caret across that synchronous DOM change.
+    const wasFocused = document.activeElement === input;
+    const selection = wasFocused ? {
+      start: input.selectionStart,
+      end: input.selectionEnd,
+      direction: input.selectionDirection
+    } : null;
     const instance = intlTelInput(input, {
       initialCountry: (input.dataset.defaultCountry || 'EG').toLowerCase(),
       countryOrder: ['eg', 'sa', 'ae', 'kw', 'qa', 'bh', 'om', 'jo', 'us', 'gb'],
@@ -109,6 +118,12 @@ function initializePhone(input) {
       placeholderNumberType: 'MOBILE',
       strictMode: true
     });
+    if (wasFocused && document.activeElement !== input) {
+      input.focus({ preventScroll: true });
+      if (selection.start !== null && selection.end !== null) {
+        input.setSelectionRange(selection.start, selection.end, selection.direction || 'none');
+      }
+    }
     phoneInstances.set(input, instance);
     input.closest('[data-phone-shell]')?.classList.add('is-enhanced');
     input.addEventListener('blur', () => {
