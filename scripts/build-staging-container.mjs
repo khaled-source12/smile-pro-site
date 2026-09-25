@@ -92,7 +92,11 @@ for (const [siteEvent, gaEvent] of Object.entries(mappings)) {
 }
 const leadTrigger = triggers.find(trigger => trigger.name.includes('smile_pro_lead'));
 tags.push({
-  ...common, tagId: '90', name: `${prefix}Google Ads - confirmed lead - PAUSED until verified`, type: 'awct', paused: true,
+  ...common,
+  tagId: '90',
+  name: production ? 'Google Ads - confirmed lead' : `${prefix}Google Ads - confirmed lead - PAUSED until verified`,
+  type: 'awct',
+  ...(production ? {} : { paused: true }),
   parameter: [
     parameter('conversionId', spec.google_ads_conversion_id),
     parameter('conversionLabel', spec.google_ads_lead_label),
@@ -278,4 +282,4 @@ if (production) {
   assert(!serialized.includes('user_data.phone_sha256_digits'));
 }
 fs.writeFileSync(outputPath, serialized);
-console.log(`Generated ${production ? 'production browser-tracking draft' : 'isolated container'}: ${tags.length} tags, ${triggers.length} approved-hostname triggers, including one Conversion Linker. Ads tag is paused.`);
+console.log(`Generated ${production ? 'production browser-tracking draft' : 'isolated container'}: ${tags.length} tags, ${triggers.length} approved-hostname triggers, including one Conversion Linker. Confirmed-lead Ads tag is ${production ? 'active in the unpublished draft' : 'paused'}.`);

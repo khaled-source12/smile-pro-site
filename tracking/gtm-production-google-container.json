@@ -2856,9 +2856,8 @@
           "consentStatus": "NOT_SET"
         },
         "tagId": "90",
-        "name": "Google Ads - confirmed lead - PAUSED until verified",
+        "name": "Google Ads - confirmed lead",
         "type": "awct",
-        "paused": true,
         "parameter": [
           {
             "type": "TEMPLATE",

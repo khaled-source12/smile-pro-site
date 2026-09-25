@@ -133,13 +133,14 @@ const tagParameter = (tag, key) => tag.parameter?.find(parameter => parameter.ke
 const tableValue = (parameter, key) => parameter?.list?.find(entry =>
   entry.map?.find(item => item.key === 'parameter')?.value === key
 )?.map?.find(item => item.key === 'parameterValue')?.value;
-const validateGoogleAdsLead = (container, source, { requirePaused = false } = {}) => {
+const validateGoogleAdsLead = (container, source, { requirePaused = false, requireActive = false } = {}) => {
   const tags = container.tag || [];
   const variables = container.variable || [];
   const candidates = tags.filter(tag => tag.type === 'awct' && JSON.stringify(tag).includes(expectedIds.google_ads_lead_label));
   assert.equal(candidates.length, 1, `${source} must contain exactly one confirmed-lead Google Ads tag`);
   const leadTag = candidates[0];
   if (requirePaused) assert.equal(leadTag.paused, true, `${source} confirmed-lead tag must remain paused before real-lead Preview`);
+  if (requireActive) assert.notEqual(leadTag.paused, true, `${source} confirmed-lead tag must be active after successful real-lead Preview`);
   assert.equal(tagParameter(leadTag, 'orderId')?.value, '{{DLV - lead_id}}', `${source} must map Transaction ID to lead_id using the native orderId field`);
   assert(!tagParameter(leadTag, 'transactionId'), `${source} contains the ignored transactionId import key; use orderId`);
   assert(!tagParameter(leadTag, 'conversionValue'), `${source} confirmed-lead tag must not send a monetary value`);
@@ -160,7 +161,12 @@ assert(fs.existsSync(productionDraftPath), `${productionDraftPath} is missing; r
 const productionDraft = JSON.parse(fs.readFileSync(productionDraftPath, 'utf8')).containerVersion;
 assert.equal(productionDraft?.container?.publicId, expectedIds.container_id, 'Generated production draft belongs to another container');
 assert.equal(new Set((productionDraft.tag || []).map(tag => String(tag.tagId))).size, (productionDraft.tag || []).length, 'Generated production draft contains duplicate tag IDs');
-validateGoogleAdsLead(productionDraft, 'Generated production draft', { requirePaused: true });
+validateGoogleAdsLead(productionDraft, 'Generated production draft', { requireActive: true });
+assert.equal(
+  productionDraft.tag.find(tag => tag.type === 'awct' && JSON.stringify(tag).includes(expectedIds.google_ads_lead_label))?.name,
+  'Google Ads - confirmed lead',
+  'Generated production draft must not retain the pre-verification tag name'
+);
 for (const tag of productionDraft.tag || []) {
   if (tag.type === 'gaawe') {
     assert(!JSON.stringify(tag).includes('phone_sha256'), `GA4 tag ${tag.name} must not receive a phone hash`);

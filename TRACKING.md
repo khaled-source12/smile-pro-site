@@ -38,13 +38,16 @@
 ### حالة التنفيذ الحالية
 
 - تم إنشاء Click-to-call `7790979748` وClick-to-WhatsApp `7790816120` كتحويلين Secondary مستقلين، ونجح تشغيل كل منهما مرة واحدة على حدثه exact-match داخل GTM Preview.
-- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead`، وضبطه Secondary مؤقتًا، Count One، بلا قيمة مالية، وبلا Account-level goal إلى أن ينجح اختبار Lead حقيقي.
+- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead`، وهو ما زال Secondary، Count One، بلا قيمة مالية، وبلا Account-level goal إلى أن تصدر موافقة صريحة بتحويله إلى Primary.
 - Manual Enhanced Conversions معدة داخل Tag الـLead فقط: معامل `user_data` يقرأ `UPD - Google Ads - Hashed phone E.164`، والذي يقرأ `CJS - Google Ads user_data - SHA256 E.164` ويقدم `sha256_phone_number` من `user_data.phone_sha256_e164`.
 - حقل Transaction ID الأصلي في GTM اسمه الداخلي `orderId` ومربوط بـ`{{DLV - lead_id}}`. المفتاح `transactionId` في ملف import تتجاهله واجهة GTM، ولذلك تمنعه الاختبارات.
-- Tag الـLead ما زالت Paused حتى اختبار إرسال حقيقي وفحص payload وعدم التكرار. لم تُنشر الحاوية بعد.
+- نجح اختبار Lead واحد في GTM Preview على الموقع الإنتاجي بتاريخ 2026-09-25: نجح Netlify، وظهر `smile_pro_lead` مرة واحدة، وعملت Tags الخاصة بـGA4 وGoogle Ads وMeta وTikTok وSnapchat وOpenAI مرة واحدة. طابق Google Ads `transaction_id` مع `lead_id` ووصل إليه SHA-256 الصحيح للهاتف بصيغة E.164 من دون قيمة مالية.
+- لم يظهر الاسم أو الهاتف الخام داخل Data Layer، ولم يتكرر `smile_pro_lead` بعد Refresh أو Back أو فتح صفحة الشكر مباشرة. لا تسجل بيانات الاختبار الخام أو قيم الـhash داخل المستودع.
+- Tag الـLead نشطة الآن في Draft Workspace فقط باسم `Google Ads - confirmed lead`. لم تُنشر الحاوية، ولا يزال النشر محتاجًا موافقة صريحة.
 - التحويلات المتداخلة `7645766110`, `7654283640`, `7654151276`, `7751362991` أصبحت Secondary وخارج Account-level Campaign Goals دون حذفها.
-- Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. إنشاء Key Event لـ`generate_lead` ينتظر وصول الحدث الحقيقي أول مرة.
+- Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. أرسل الاختبار `generate_lead` بنجاح من GTM، لكن إنشاء Key Event ينتظر ظهوره في واجهة أحداث GA4 بعد اكتمال المعالجة؛ لا تنشئ Custom Event مكررًا.
 - ربط GA4 Property `554862114` بحساب Ads المستهدف متوقف لأن واجهة GA4 تعرض حسابًا مختلفًا (`845-423-2402`) ولا تعرض `683-517-3815` ضمن الحسابات المتاحة.
+- Google Tag الحالي في الـWorkspace مضبوط على `G-K4989EX8EJ`. ربط وجهة Ads بالحساب نفسه ما زال متوقفًا مع عائق الصلاحيات السابق؛ لا تضف Google Tag ثانية كحل مؤقت لأن المواصفة تعتمد Google Tag واحدة بوجهتي GA4 وAds.
 
 ## 1. ما ينفذه الموقع
 

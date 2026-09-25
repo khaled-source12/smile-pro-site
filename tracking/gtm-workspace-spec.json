@@ -41,6 +41,7 @@
     "conversion_action_id": "7777230464",
     "conversion_id": "AW-18233409981",
     "conversion_label": "AzguCIC9vPwcEL2Dr_ZD",
+    "current_optimization": "secondary-pending-explicit-primary-approval",
     "optimization_after_preview": "primary",
     "count": "one",
     "value": null,
@@ -55,7 +56,27 @@
     "prehashed_phone_key": "sha256_phone_number",
     "source_variable": "DLV - user_data_phone_sha256_e164",
     "transaction_id_gtm_field": "orderId",
-    "status": "configured-tag-paused-pending-real-lead-preview"
+    "status": "preview-verified-active-draft-pending-publication"
+  },
+  "preview_verification": {
+    "verified_on": "2026-09-25",
+    "environment": "production-site-via-gtm-preview",
+    "successful_netlify_submissions": 1,
+    "smile_pro_lead_events": 1,
+    "lead_tags_fired_once": [
+      "ga4_generate_lead",
+      "google_ads_confirmed_lead",
+      "meta_lead",
+      "tiktok_submit_form",
+      "snapchat_sign_up",
+      "openai_lead_created"
+    ],
+    "google_ads_transaction_id_matches_lead_id": true,
+    "google_ads_enhanced_conversion_phone": "verified_sha256_e164",
+    "raw_name_or_phone_in_data_layer": false,
+    "duplicate_after_refresh_or_back": false,
+    "duplicate_after_direct_thank_you_visit": false,
+    "publication_status": "not_published"
   },
   "google_ads_account_cleanup": {
     "overlapping_actions": [
