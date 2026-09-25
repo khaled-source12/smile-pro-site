@@ -46,8 +46,8 @@
 - Tag الـLead نشطة الآن في Draft Workspace فقط باسم `Google Ads - confirmed lead`. لم تُنشر الحاوية، ولا يزال النشر محتاجًا موافقة صريحة.
 - التحويلات المتداخلة `7645766110`, `7654283640`, `7654151276`, `7751362991` أصبحت Secondary وخارج Account-level Campaign Goals دون حذفها.
 - Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. أرسل الاختبار `generate_lead` بنجاح من GTM، لكن إنشاء Key Event ينتظر ظهوره في واجهة أحداث GA4 بعد اكتمال المعالجة؛ لا تنشئ Custom Event مكررًا.
-- ربط GA4 Property `554862114` بحساب Ads المستهدف متوقف لأن واجهة GA4 تعرض حسابًا مختلفًا (`845-423-2402`) ولا تعرض `683-517-3815` ضمن الحسابات المتاحة.
-- Google Tag الحالي في الـWorkspace مضبوط على `G-K4989EX8EJ`. ربط وجهة Ads بالحساب نفسه ما زال متوقفًا مع عائق الصلاحيات السابق؛ لا تضف Google Tag ثانية كحل مؤقت لأن المواصفة تعتمد Google Tag واحدة بوجهتي GA4 وAds.
+- اكتمل ربط GA4 Property `554862114` بحساب Google Ads `683-517-3815` بتاريخ 2026-09-25. Auto-Tagging مفعّل، بينما Personalized Advertising وإتاحة تعديل Analytics من داخل Google Ads متوقفتان. لا تستورد `generate_lead` كتحويل Ads إضافي.
+- Google Tag الحالي في الـWorkspace مضبوط على `G-K4989EX8EJ`. ظل تحذير `No Google tag found in this container` ظاهرًا مباشرة بعد إنشاء الرابط وإعادة تحميل GTM؛ قد يستغرق ظهور وجهة Ads والبيانات حتى 24 ساعة. تحقق من زوال التحذير قبل النشر، ولا تضف Google Tag ثانية لأن المواصفة تعتمد Google Tag واحدة بوجهتي GA4 وAds.
 
 ## 1. ما ينفذه الموقع
 

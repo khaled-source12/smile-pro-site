@@ -35,6 +35,17 @@
     "google_ads_call_label": "zbwtCLjs48EcEL2Dr_ZD",
     "policy": "audit-and-rollback-only-never-load-or-reuse-for-confirmed-lead"
   },
+  "ga4_google_ads_link": {
+    "status": "completed",
+    "linked_on": "2026-09-25",
+    "ga4_property_id": "554862114",
+    "google_ads_customer_id": "683-517-3815",
+    "personalized_advertising": false,
+    "auto_tagging": true,
+    "analytics_feature_access_from_google_ads": false,
+    "import_generate_lead_as_google_ads_conversion": false,
+    "gtm_ads_destination_detection": "pending-propagation"
+  },
   "google_ads_confirmed_lead": {
     "existing_name": "Smile Pro - Confirmed lead - New system TEST",
     "production_name": "Smile Pro — Confirmed Website Lead",
