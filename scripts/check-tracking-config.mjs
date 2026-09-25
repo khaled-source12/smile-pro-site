@@ -48,6 +48,9 @@ for (const [field, expected] of Object.entries(expectedIds)) {
 
 assert.deepEqual(spec.approved_hostnames, ['smileproegypt.com', 'www.smileproegypt.com']);
 assert.equal(spec.google_ads_confirmed_lead.conversion_action_id, '7777230464');
+assert.equal(spec.google_ads_confirmed_lead.current_optimization, 'primary');
+assert.equal(spec.google_ads_confirmed_lead.account_default_goal, false);
+assert.equal(spec.google_ads_confirmed_lead.campaign_goal_change_performed, false);
 assert.equal(spec.google_ads_confirmed_lead.count, 'one');
 assert.equal(spec.google_ads_confirmed_lead.value, null);
 assert.equal(spec.google_ads_confirmed_lead.transaction_id, 'lead_id');

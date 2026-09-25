@@ -52,12 +52,15 @@
     "conversion_action_id": "7777230464",
     "conversion_id": "AW-18233409981",
     "conversion_label": "AzguCIC9vPwcEL2Dr_ZD",
-    "current_optimization": "secondary-pending-explicit-primary-approval",
+    "current_optimization": "primary",
+    "promoted_to_primary_on": "2026-09-25",
     "optimization_after_preview": "primary",
     "count": "one",
     "value": null,
     "transaction_id": "lead_id",
-    "enhanced_conversion_phone": "user_data.phone_sha256_e164"
+    "enhanced_conversion_phone": "user_data.phone_sha256_e164",
+    "account_default_goal": false,
+    "campaign_goal_change_performed": false
   },
   "google_ads_enhanced_conversions": {
     "mode": "manual_prehashed_phone",

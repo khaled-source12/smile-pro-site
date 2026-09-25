@@ -38,7 +38,7 @@
 ### حالة التنفيذ الحالية
 
 - تم إنشاء Click-to-call `7790979748` وClick-to-WhatsApp `7790816120` كتحويلين Secondary مستقلين، ونجح تشغيل كل منهما مرة واحدة على حدثه exact-match داخل GTM Preview.
-- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead`، وهو ما زال Secondary، Count One، بلا قيمة مالية، وبلا Account-level goal إلى أن تصدر موافقة صريحة بتحويله إلى Primary.
+- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead` وتحويله إلى Primary بتاريخ 2026-09-25. بقي Count One وبلا قيمة مالية، وEnhanced Conversions مفعّلة. لم يتغير Account-level Campaign Goal؛ هدف `Submit lead form (website)` ليس Account Default ولن يدخل المزايدة إلا للحملات التي تستخدم هذا الهدف.
 - Manual Enhanced Conversions معدة داخل Tag الـLead فقط: معامل `user_data` يقرأ `UPD - Google Ads - Hashed phone E.164`، والذي يقرأ `CJS - Google Ads user_data - SHA256 E.164` ويقدم `sha256_phone_number` من `user_data.phone_sha256_e164`.
 - حقل Transaction ID الأصلي في GTM اسمه الداخلي `orderId` ومربوط بـ`{{DLV - lead_id}}`. المفتاح `transactionId` في ملف import تتجاهله واجهة GTM، ولذلك تمنعه الاختبارات.
 - نجح اختبار Lead واحد في GTM Preview على الموقع الإنتاجي بتاريخ 2026-09-25: نجح Netlify، وظهر `smile_pro_lead` مرة واحدة، وعملت Tags الخاصة بـGA4 وGoogle Ads وMeta وTikTok وSnapchat وOpenAI مرة واحدة. طابق Google Ads `transaction_id` مع `lead_id` ووصل إليه SHA-256 الصحيح للهاتف بصيغة E.164 من دون قيمة مالية.
