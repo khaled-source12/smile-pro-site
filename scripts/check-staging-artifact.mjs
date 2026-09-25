@@ -47,6 +47,7 @@ assert(fs.readFileSync('dist/robots.txt', 'utf8').includes('Disallow: /'));
 assert(!fs.readFileSync('dist/admin/index.html', 'utf8').includes('decap-cms.js'));
 
 const { containerVersion: container } = JSON.parse(fs.readFileSync('tracking/gtm-staging-container.json', 'utf8'));
+const trackingSpec = JSON.parse(fs.readFileSync('tracking/gtm-workspace-spec.json', 'utf8'));
 assert.equal(container.container.publicId, STAGING_CONTAINER_ID);
 for (const trigger of container.trigger) {
   const hostnameCondition = trigger.filter?.find(condition => condition.type === 'MATCH_REGEX');
@@ -60,17 +61,36 @@ for (const trigger of container.trigger) {
   if (trigger.type === 'CUSTOM_EVENT') assert(trigger.customEventFilter?.every(condition => condition.type === 'EQUALS'));
 }
 for (const tag of container.tag) {
-  assert(['googtag', 'gaawe', 'awct'].includes(tag.type), `Non-native Google template: ${tag.name}`);
+  assert(['googtag', 'gaawe', 'awct', 'gclidw'].includes(tag.type), `Non-native Google template: ${tag.name}`);
   if (tag.type === 'gaawe') {
-    // lead_phone_valid is a boolean milestone, not a phone identifier.
     const eventParameters = tag.parameter.find(parameter => parameter.key === 'eventParameters');
     for (const entry of eventParameters?.list || []) {
       const name = entry.map.find(parameter => parameter.key === 'name')?.value;
-      assert(['event_id', 'page_kind', 'language', 'form_name', 'form_position'].includes(name), `Unexpected GA4 parameter ${name}`);
+      const allowed = new Set([
+        ...trackingSpec.ga4_common_parameters,
+        ...Object.values(trackingSpec.ga4_event_parameter_allowlist).flat()
+      ]);
+      assert(allowed.has(name), `Unexpected GA4 parameter ${name}`);
     }
     assert(!JSON.stringify(tag.parameter).includes('phone_sha256'));
     assert(!JSON.stringify(tag.parameter).includes('user_data'));
   }
   if (tag.type === 'awct') assert.equal(tag.paused, true, 'Ads cannot be enabled before manual matching and Preview verification');
 }
-console.log('Staging artifact checks passed: approved-hostname guards, no legacy GTM, noindex, CMS disabled, native templates and paused Ads.');
+assert.equal(container.tag.filter(tag => tag.type === 'gclidw').length, 1, 'Exactly one Conversion Linker is required');
+const leadTag = container.tag.find(tag => tag.type === 'awct' && JSON.stringify(tag).includes(trackingSpec.platform_ids.google_ads_lead_label));
+assert(leadTag, 'Staging artifact is missing the confirmed-lead Google Ads tag');
+const tagParameter = key => leadTag.parameter.find(parameter => parameter.key === key);
+assert.equal(tagParameter('orderId')?.value, '{{DLV - lead_id}}', 'Transaction ID must use the native orderId field and lead_id');
+assert(!tagParameter('transactionId'), 'The ignored transactionId import key must not be used');
+assert(!tagParameter('conversionValue'), 'The confirmed-lead tag must not send a monetary value');
+const userDataValue = tagParameter('eventSettingsTable')?.list?.find(entry =>
+  entry.map?.find(parameter => parameter.key === 'parameter')?.value === 'user_data'
+)?.map?.find(parameter => parameter.key === 'parameterValue')?.value;
+assert.equal(userDataValue, '{{UPD - Google Ads - Hashed phone E.164}}');
+const variables = new Map(container.variable.map(variable => [variable.name, variable]));
+assert.equal(variables.get('CJS - Google Ads user_data - SHA256 E.164')?.type, 'jsm');
+assert.equal(variables.get('UPD - Google Ads - Hashed phone E.164')?.type, 'awec');
+assert(JSON.stringify(variables.get('CJS - Google Ads user_data - SHA256 E.164')).includes('sha256_phone_number'));
+assert(JSON.stringify(variables.get('CJS - Google Ads user_data - SHA256 E.164')).includes('{{DLV - user_data_phone_sha256_e164}}'));
+console.log('Staging artifact checks passed: approved-hostname guards, no legacy GTM, noindex, CMS disabled, native templates, manual Enhanced Conversions and paused Ads.');

@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "eleventy --serve",
     "build": "node scripts/clean-dist.mjs && eleventy",
-    "check": "npm run build && node scripts/check-tracking.mjs && node scripts/check-tracking-environment.mjs && node scripts/check-site.mjs",
+    "check": "npm run build:gtm-production && npm run build && node scripts/check-tracking.mjs && node scripts/check-tracking-config.mjs && node scripts/check-tracking-environment.mjs && node scripts/check-site.mjs",
     "check:staging": "node scripts/build-staging-container.mjs && TRACKING_ENV=staging npm run check && TRACKING_ENV=staging node scripts/check-staging-artifact.mjs",
-    "check:tracking": "node scripts/check-tracking.mjs",
+    "check:tracking": "npm run build:gtm-production && node scripts/check-tracking.mjs && node scripts/check-tracking-config.mjs",
+    "build:gtm-production": "node scripts/build-staging-container.mjs --production",
+    "build:gtm-vendors": "node scripts/build-gtm-vendor-import.mjs",
+    "check:gtm-export": "node scripts/check-tracking-config.mjs --require-export",
     "perf:smoke": "ELEVENTY_ENV=production PERF_DISABLE_TRACKING=1 npm run build && PERF_PROFILE=mobile PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs",
     "perf:full": "ELEVENTY_ENV=production PERF_DISABLE_TRACKING=1 npm run build && PERF_FULL=1 PERF_PROFILE=mobile PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && PERF_FULL=1 PERF_PROFILE=desktop PERF_DISABLE_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && ELEVENTY_ENV=production PERF_DISABLE_TRACKING=0 npm run build && PERF_FULL=1 PERF_PROFILE=mobile PERF_TRACKING=1 lhci autorun --config=.lighthouserc.cjs && PERF_FULL=1 PERF_PROFILE=desktop PERF_TRACKING=1 lhci autorun --config=.lighthouserc.cjs"
   },

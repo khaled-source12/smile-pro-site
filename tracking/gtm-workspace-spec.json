@@ -1,17 +1,110 @@
 {
   "schema_version": "2.0",
   "container_id": "GTM-NFTVFBKS",
+  "gtm_account_id": "6360521865",
+  "gtm_container_numeric_id": "264543391",
+  "approved_hostnames": [
+    "smileproegypt.com",
+    "www.smileproegypt.com"
+  ],
   "legacy_container_id": "GTM-PZRLPZN2",
   "status": "configuration-source-of-truth-not-an-importable-container-export",
   "platform_ids": {
     "ga4_measurement_id": "G-K4989EX8EJ",
+    "ga4_account_id": "397818498",
+    "ga4_property_id": "554862114",
+    "ga4_stream_id": "15804380417",
+    "google_ads_customer_id": "683-517-3815",
     "google_ads_conversion_id": "AW-18233409981",
     "google_ads_lead_label": "AzguCIC9vPwcEL2Dr_ZD",
+    "google_ads_lead_conversion_action_id": "7777230464",
+    "google_ads_call_label": "Vdu7CKTVg4MdEL2Dr_ZD",
+    "google_ads_call_conversion_action_id": "7790979748",
+    "google_ads_whatsapp_label": "grnJCPjW-YIdEL2Dr_ZD",
+    "google_ads_whatsapp_conversion_action_id": "7790816120",
     "meta_pixel_id": "1003835282264414",
     "tiktok_pixel_id": "DAMI1ERC77U5PB5VTVRG",
     "snapchat_pixel_id": "d34f007b-056b-48fe-a1a9-9e4d2340907c",
     "openai_pixel_id": "D75vs25S8kHCy2t9f3RK1c",
     "clarity_project_id": "x8s5tnix4i"
+  },
+  "legacy_ids": {
+    "ga4_measurement_id": "G-QSJ0G255BE",
+    "ga4_property_id": "541403336",
+    "ga4_stream_id": "15061658163",
+    "google_ads_call_label": "zbwtCLjs48EcEL2Dr_ZD",
+    "policy": "audit-and-rollback-only-never-load-or-reuse-for-confirmed-lead"
+  },
+  "google_ads_confirmed_lead": {
+    "existing_name": "Smile Pro - Confirmed lead - New system TEST",
+    "production_name": "Smile Pro — Confirmed Website Lead",
+    "conversion_action_id": "7777230464",
+    "conversion_id": "AW-18233409981",
+    "conversion_label": "AzguCIC9vPwcEL2Dr_ZD",
+    "optimization_after_preview": "primary",
+    "count": "one",
+    "value": null,
+    "transaction_id": "lead_id",
+    "enhanced_conversion_phone": "user_data.phone_sha256_e164"
+  },
+  "google_ads_enhanced_conversions": {
+    "mode": "manual_prehashed_phone",
+    "tag_event_parameter": "user_data",
+    "user_provided_data_variable": "UPD - Google Ads - Hashed phone E.164",
+    "custom_javascript_variable": "CJS - Google Ads user_data - SHA256 E.164",
+    "prehashed_phone_key": "sha256_phone_number",
+    "source_variable": "DLV - user_data_phone_sha256_e164",
+    "transaction_id_gtm_field": "orderId",
+    "status": "configured-tag-paused-pending-real-lead-preview"
+  },
+  "google_ads_account_cleanup": {
+    "overlapping_actions": [
+      {
+        "name": "Smile-Pro (web) generate_lead",
+        "conversion_action_id": "7645766110",
+        "optimization": "secondary",
+        "account_level_goal": false
+      },
+      {
+        "name": "Submit lead form (Page load smileproegypt.com/thank-you.html)",
+        "conversion_action_id": "7654283640",
+        "optimization": "secondary",
+        "account_level_goal": false
+      },
+      {
+        "name": "Smile-Pro (web) Lead_Submit",
+        "conversion_action_id": "7654151276",
+        "optimization": "secondary",
+        "account_level_goal": false
+      },
+      {
+        "name": "Sign-up (smileproegypt.com/)",
+        "conversion_action_id": "7751362991",
+        "optimization": "secondary",
+        "account_level_goal": false
+      }
+    ],
+    "deletion_policy": "do-not-delete"
+  },
+  "google_ads_secondary_conversions": {
+    "click_call": {
+      "name": "Smile Pro — Click-to-call",
+      "conversion_action_id": "7790979748",
+      "conversion_id": "AW-18233409981",
+      "conversion_label": "Vdu7CKTVg4MdEL2Dr_ZD",
+      "optimization": "secondary",
+      "count": "one",
+      "value": null
+    },
+    "click_whatsapp": {
+      "name": "Smile Pro — Click-to-WhatsApp",
+      "conversion_action_id": "7790816120",
+      "conversion_id": "AW-18233409981",
+      "conversion_label": "grnJCPjW-YIdEL2Dr_ZD",
+      "optimization": "secondary",
+      "count": "one",
+      "value": null
+    }
   },
   "base_tags": {
     "trigger": "Initialization - All Pages",
@@ -25,6 +118,28 @@
       "openai_initialize_only",
       "clarity_base"
     ]
+  },
+  "platform_controls": {
+    "automatic_advanced_matching": false,
+    "automatic_event_detection": false,
+    "custom_html_allowlist": [
+      "meta_official_fbevents_sdk_and_explicit_events",
+      "tiktok_official_pixel_base_code",
+      "openai_official_measurement_sdk_and_explicit_events"
+    ],
+    "third_party_meta_template": false,
+    "clarity_custom_events": false,
+    "clarity_masking": "strict",
+    "raw_phone_in_data_layer": false,
+    "raw_phone_in_gtm": false
+  },
+  "gtm_tag_implementations": {
+    "meta_base_and_events": "custom_html_official_sdk",
+    "tiktok_base": "custom_html_official_sdk",
+    "tiktok_events": "cvt_MRQN8",
+    "snapchat": "cvt_K4VXG",
+    "openai": "custom_html_official_sdk",
+    "clarity": "cvt_MQDKZ"
   },
   "data_layer_events": {
     "site_page_view": {
@@ -46,14 +161,14 @@
       "google_ads": "secondary",
       "meta": "Contact",
       "tiktok": "Contact",
-      "snapchat": "CUSTOM"
+      "snapchat": "CUSTOM_EVENT_1"
     },
     "click_whatsapp": {
       "ga4": "click_whatsapp",
       "google_ads": "secondary",
       "meta": "Contact",
       "tiktok": "Contact",
-      "snapchat": "CUSTOM"
+      "snapchat": "CUSTOM_EVENT_2"
     },
     "smile_pro_lead": {
       "ga4": "generate_lead",
@@ -64,6 +179,81 @@
       "openai": "lead_created"
     }
   },
+  "ga4_common_parameters": [
+    "event_id",
+    "page_kind",
+    "language",
+    "page_location",
+    "page_title"
+  ],
+  "ga4_parameter_sources": {
+    "event_id": "event_id",
+    "page_kind": "page_kind",
+    "language": "language",
+    "page_location": "{{Page URL}}",
+    "page_title": "page.title",
+    "page_path": "page_path",
+    "content_type": "content_type",
+    "cta_location": "cta_location",
+    "link_url": "link_url",
+    "form_name": "form_name",
+    "form_position": "form_position",
+    "field_name": "field_name",
+    "error_type": "error_type",
+    "step": "step",
+    "slots_shown": "slots_shown",
+    "faq_index": "faq_index",
+    "video_id": "video_id"
+  },
+  "ga4_event_parameter_allowlist": {
+    "site_page_view": ["page_path"],
+    "content_view": ["content_type"],
+    "click_call": ["cta_location"],
+    "click_whatsapp": ["cta_location"],
+    "smile_pro_lead": ["form_name", "form_position"],
+    "cta_click": ["cta_location", "link_url"],
+    "lead_form_view": ["form_name", "form_position"],
+    "lead_form_start": ["form_name", "form_position"],
+    "lead_form_error": ["form_name", "form_position", "field_name", "error_type"],
+    "lead_form_submit_attempt": ["form_name", "form_position"],
+    "lead_phone_valid": ["form_name", "form_position"],
+    "estimator_start": [],
+    "estimator_step": ["step"],
+    "estimator_result": [],
+    "procedure_comparison_open": ["form_position"],
+    "procedure_comparison_choice": ["form_position"],
+    "fomo_banner_view": ["slots_shown"],
+    "faq_open": ["faq_index"],
+    "video_start": ["video_id"]
+  },
+  "ga4_custom_dimensions": [
+    "page_kind",
+    "language",
+    "form_name",
+    "form_position",
+    "cta_location"
+  ],
+  "data_layer_variables": [
+    "event_id",
+    "lead_id",
+    "page_kind",
+    "language",
+    "page_path",
+    "page.title",
+    "content_type",
+    "cta_location",
+    "link_url",
+    "form_name",
+    "form_position",
+    "field_name",
+    "error_type",
+    "step",
+    "slots_shown",
+    "faq_index",
+    "video_id",
+    "user_data.phone_sha256_e164",
+    "user_data.phone_sha256_digits"
+  ],
   "phone_hash_mapping": {
     "google_ads": "user_data.phone_sha256_e164",
     "tiktok": "user_data.phone_sha256_e164",
@@ -78,6 +268,29 @@
     "tiktok": "event_id",
     "snapchat": "client_dedup_id=event_id",
     "openai": "event_id"
+  },
+  "identifier_handling": {
+    "captured_click_ids": [
+      "gclid",
+      "wbraid",
+      "gbraid",
+      "fbclid",
+      "ttclid",
+      "sccid",
+      "oppref",
+      "msclkid"
+    ],
+    "platform_managed_browser_identifiers": [
+      "_gcl_aw",
+      "_fbc",
+      "_fbp",
+      "_ttp",
+      "snapchat-pixel-cookies",
+      "__obref"
+    ],
+    "copy_platform_cookies_to_data_layer": false,
+    "forward_complete_attribution_object_to_platforms": false,
+    "manual_cookie_forwarding_scope": "future-reviewed-capi-only"
   },
   "analytics_only_events": [
     "cta_click",
@@ -96,7 +309,26 @@
     "video_start"
   ],
   "forbidden_ad_fields": [
+    "name",
+    "phone",
     "service",
+    "recommended_treatment",
+    "alternative_treatment",
+    "prescription",
+    "conditions",
+    "priority",
+    "price",
+    "price_range"
+  ],
+  "forbidden_ga4_fields": [
+    "lead_id",
+    "attempt_id",
+    "session_id",
+    "service",
+    "procedure",
+    "user_data",
+    "phone_sha256_e164",
+    "phone_sha256_digits",
     "recommended_treatment",
     "alternative_treatment",
     "prescription",

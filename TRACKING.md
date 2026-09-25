@@ -1,14 +1,50 @@
 # دليل التتبع الموحد
 
-هذا الملف هو المرجع التنفيذي لربط الموقع بحاوية Google Tag Manager الجديدة رقم `GTM-NFTVFBKS`. الحاوية القديمة `GTM-PZRLPZN2` محفوظة للرجوع والمراجعة فقط ولا تحملها إصدارات Production الجديدة. كود الموقع يجهز الأحداث والإسناد والمطابقة، لكن إنشاء أو نشر Tags داخل حساب GTM يتم من واجهة الحساب ولا يحدث تلقائيًا عند نشر repository.
+هذا الملف هو المرجع التنفيذي لربط الموقع بحاوية Google Tag Manager الجديدة رقم `GTM-NFTVFBKS`. الحاوية القديمة `GTM-PZRLPZN2` محفوظة للرجوع والمراجعة فقط ولا تحملها إصدارات Production الجديدة. كود الموقع يجهز الأحداث والإسناد والمطابقة، بينما إعدادات الحسابات وTags تنفذ من واجهات المنصات وتوثق هنا وفي ملفات `tracking/`.
 
 ملف [`tracking/gtm-workspace-spec.json`](tracking/gtm-workspace-spec.json) هو مواصفة قابلة للمراجعة لما يجب أن تحتويه الحاوية، وليس Container Export قابلًا للاستيراد. وملف [`tracking/gtm-container-baseline-export.json`](tracking/gtm-container-baseline-export.json) هو التصدير الرسمي للحالة القديمة في Default Workspace قبل تنفيذ هذه الخطة: 6 Tags وTrigger واحد، من دون TikTok أو Snapchat أو Clarity أو ChatGPT Ads. لا تستورده باعتباره الإعداد المستهدف؛ احتفظ به للرجوع والمقارنة فقط.
 
-بعد ضبط Workspace الجديد واختباره، نزّل النسخة الرسمية من **Admin → Export Container** واحفظها باسم `tracking/gtm-container-export.json` قبل نشرها في GTM.
+بعد ضبط Workspace الجديد واختباره، نزّل النسخة الرسمية من **Admin → Export Container** واحفظها باسم `tracking/gtm-container-export.json` مع النسخة المنشورة. هذا هو آخر Export رسمي منشور، ولا يعدّل يدويًا.
 
 لا تنشر Workspace الخاص بـGTM مباشرة. اختبره أولًا مع Deploy Preview ثم انشره يدويًا بعد التأكد من عدم تكرار الأحداث.
 
-تحديث 18 سبتمبر 2026: أُضيف معرفا TikTok وOpenAI اللذان زوّد بهما المستخدم إلى ملفات المشروع فقط. لا يعني حفظ المعرفات إعداد أو تفعيل Tags داخل الحساب. لا يبدأ إعداد الحاوية أو نشرها قبل طلب صريح من المستخدم.
+## 0. سجل المعرفات المعتمد
+
+| النظام | العنصر | المعرف |
+|---|---|---|
+| Google Tag Manager | Container Public ID | `GTM-NFTVFBKS` |
+| Google Tag Manager | Account ID | `6360521865` |
+| Google Tag Manager | Container Numeric ID | `264543391` |
+| GA4 | Measurement ID | `G-K4989EX8EJ` |
+| GA4 | Account ID | `397818498` |
+| GA4 | Property ID | `554862114` |
+| GA4 | Web Stream ID | `15804380417` |
+| Google Ads | Customer ID | `683-517-3815` |
+| Google Ads | Conversion ID | `AW-18233409981` (`18233409981`) |
+| Google Ads | Confirmed Lead Label | `AzguCIC9vPwcEL2Dr_ZD` |
+| Google Ads | Confirmed Lead Conversion Action ID | `7777230464` |
+| Google Ads | Click-to-call Label | `Vdu7CKTVg4MdEL2Dr_ZD` |
+| Google Ads | Click-to-call Conversion Action ID | `7790979748` |
+| Google Ads | Click-to-WhatsApp Label | `grnJCPjW-YIdEL2Dr_ZD` |
+| Google Ads | Click-to-WhatsApp Conversion Action ID | `7790816120` |
+| Meta | Pixel ID | `1003835282264414` |
+| TikTok | Pixel ID | `DAMI1ERC77U5PB5VTVRG` |
+| Snapchat | Pixel ID | `d34f007b-056b-48fe-a1a9-9e4d2340907c` |
+| OpenAI Ads | Pixel ID | `D75vs25S8kHCy2t9f3RK1c` |
+| Microsoft Clarity | Project ID | `x8s5tnix4i` |
+
+المعرفات القديمة التالية للمراجعة والـRollback فقط، وممنوع تحميلها أو إعادة استخدامها في التنفيذ الجديد: GTM `GTM-PZRLPZN2`، GA4 `G-QSJ0G255BE`، Property `541403336`، Stream `15061658163`، وGoogle Ads call label `zbwtCLjs48EcEL2Dr_ZD`. لا توضع API keys أو Access Tokens أو CAPI secrets في GTM أو المستودع.
+
+### حالة التنفيذ الحالية
+
+- تم إنشاء Click-to-call `7790979748` وClick-to-WhatsApp `7790816120` كتحويلين Secondary مستقلين، ونجح تشغيل كل منهما مرة واحدة على حدثه exact-match داخل GTM Preview.
+- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead`، وضبطه Secondary مؤقتًا، Count One، بلا قيمة مالية، وبلا Account-level goal إلى أن ينجح اختبار Lead حقيقي.
+- Manual Enhanced Conversions معدة داخل Tag الـLead فقط: معامل `user_data` يقرأ `UPD - Google Ads - Hashed phone E.164`، والذي يقرأ `CJS - Google Ads user_data - SHA256 E.164` ويقدم `sha256_phone_number` من `user_data.phone_sha256_e164`.
+- حقل Transaction ID الأصلي في GTM اسمه الداخلي `orderId` ومربوط بـ`{{DLV - lead_id}}`. المفتاح `transactionId` في ملف import تتجاهله واجهة GTM، ولذلك تمنعه الاختبارات.
+- Tag الـLead ما زالت Paused حتى اختبار إرسال حقيقي وفحص payload وعدم التكرار. لم تُنشر الحاوية بعد.
+- التحويلات المتداخلة `7645766110`, `7654283640`, `7654151276`, `7751362991` أصبحت Secondary وخارج Account-level Campaign Goals دون حذفها.
+- Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. إنشاء Key Event لـ`generate_lead` ينتظر وصول الحدث الحقيقي أول مرة.
+- ربط GA4 Property `554862114` بحساب Ads المستهدف متوقف لأن واجهة GA4 تعرض حسابًا مختلفًا (`845-423-2402`) ولا تعرض `683-517-3815` ضمن الحسابات المتاحة.
 
 ## 1. ما ينفذه الموقع
 
@@ -100,40 +136,38 @@ phone_sha256_digits = SHA256("201012345678")
 
 حقول الاسم والهاتف تحمل `data-clarity-mask="true"` كتأكيد صريح فوق الإخفاء الافتراضي لحقول الإدخال في Clarity. لا تضف Smart Event أو Custom Tag ينسخ قيم الحقول.
 
-`dataLayer` ليست حاجزًا أمنيًا؛ أي Custom HTML Tag يستطيع قراءة الصفحة. لذلك يجب ألا توجد Custom HTML Tags عامة، ويجب أن تُبنى كل Tag من allowlist صريحة.
+`dataLayer` ليست حاجزًا أمنيًا؛ أي Custom HTML Tag يستطيع قراءة الصفحة. الاستثناءات الوحيدة المسموحة هي كود Meta Pixel الرسمي (`fbevents.js` مع نداءات الأحداث الصريحة)، وTikTok Pixel Base Code الرسمي لأن قالب أحداث TikTok الرسمي يشترط وجوده، وOpenAI Measurement SDK الرسمي مع نداءات الأحداث الصريحة. لا تستخدم قالب Meta تابعًا لطرف ثالث، ولا تضف أي Custom HTML عام آخر، ويجب أن تُبنى كل Tag من allowlist صريحة.
+
+### الإسناد ومعرفات الجلسة
+
+| المنصة | الموجود في Data Layer | المعرف الذي يديره Pixel | التنفيذ |
+|---|---|---|---|
+| Google | `gclid`, `wbraid`, `gbraid` | `_gcl_aw` ومعرفات Google | Conversion Linker؛ لا تمرير Cookie يدويًا |
+| Meta | `fbclid` | `_fbc`, `_fbp` | Meta Pixel يديرهما تلقائيًا |
+| TikTok | `ttclid` | `_ttp` | TikTok Pixel يديره تلقائيًا |
+| Snapchat | `sccid` الملتقط من `ScCid` | Cookies الخاصة بـSnap Pixel | Pixel يديرها تلقائيًا |
+| OpenAI | `oppref` | `__obref` | OpenAI Pixel يديرها تلقائيًا |
+| Microsoft | `msclkid` | Cookies UET | حفظ للإسناد فقط؛ Microsoft Ads خارج النطاق |
+| الموقع | `session_id` | `sessionStorage` داخلي | ربط محاولات النماذج فقط، ولا يرسل إلى المنصات |
+
+تبقى Click IDs وUTM في `first_touch`, `last_non_direct` وNetlify submission. لا يرسل كائن `attribution` كاملًا إلى GA4 أوأي منصة، ولا تنسخ Cookies المنصات إلى `dataLayer`. التمرير اليدوي للCookies مؤجل إلى مشروع CAPI منفصل.
 
 ## 4. متغيرات GTM
 
-أنشئ Data Layer Variables بإصدار 2 للأسماء الآتية فقط:
+أنشئ Data Layer Variables بإصدار 2 للأسماء المستخدمة فعليًا فقط:
 
 - `event_id`
 - `lead_id`
-- `attempt_id`
-- `session_id`
-- `page.kind`
-- `page.language`
-- `page.path`
-- `form.name`
-- `form.position`
+- `page_kind`, `language`, `page_path`, `page.title`
+- `content_type`, `cta_location`, `link_url`
+- `form_name`, `form_position`, `field_name`, `error_type`
+- `step`, `slots_shown`, `faq_index`, `video_id`
 - `user_data.phone_sha256_e164`
 - `user_data.phone_sha256_digits`
-- `attribution.oppref`
 
-أنشئ Constant Variable لكل Platform ID وConversion Label. لا تضع أي API key؛ معرفات الـPixels عامة، أما أسرار CAPI فلا تدخل Web Container مطلقًا.
+استخدم `{{Page URL}}` المدمج لمعامل GA4 `page_location`، و`page.title` لمعامل `page_title`. لا تنشئ DLV لـ`attempt_id` أو`session_id` أو`service` أو`procedure` أوCookies المنصات؛ فهي لا تدخل أي Tag في هذا التنفيذ.
 
-المعرفات المحفوظة حاليًا في مواصفة الـWorkspace هي:
-
-- GA4 التجريبي الجديد: `G-K4989EX8EJ`
-- Google Ads: `AW-18233409981`، وLead Conversion Label: `AzguCIC9vPwcEL2Dr_ZD`
-- Meta: `1003835282264414`
-- TikTok: `DAMI1ERC77U5PB5VTVRG` (زوّد به المستخدم)
-- Snapchat: `d34f007b-056b-48fe-a1a9-9e4d2340907c`
-- OpenAI: `D75vs25S8kHCy2t9f3RK1c` (زوّد به المستخدم)
-- Clarity: `x8s5tnix4i`
-
-لم يوجد Conversion Label لإرسال النموذج في الـbaseline commit `96d0d94`؛ الموجود فيه هو Google Ads ID فقط. التصدير المرجعي القديم لـGTM يحتوي Label باسم `zbwtCLjs48EcEL2Dr_ZD` داخل Tag باسم `Call-Conversion` المرتبطة بضغط الاتصال، وليس بتحويل النموذج. نستخدم للـLead الجديد Label مستقلًا هو `AzguCIC9vPwcEL2Dr_ZD`.
-
-معرفا TikTok وOpenAI أصبحا متاحين لإعداد Constant Variables عند طلب إعداد الحاوية. لا تفعّل Tags الخاصة بهما تلقائيًا لمجرد توفر المعرفات.
+أنشئ Constant Variable لكل Platform ID وConversion Label من سجل المعرفات أعلاه. لا تضع أي API key؛ معرفات الـPixels عامة، أما أسرار CAPI فلا تدخل Web Container مطلقًا. التصدير المرجعي القديم يحتوي Label باسم `zbwtCLjs48EcEL2Dr_ZD` داخل `Call-Conversion`؛ هذا خاص بتحويل الاتصال القديم وليس Lead النموذج، ويجب ألا يظهر في الـWorkspace الجديد.
 
 ## 5. Triggers
 
@@ -152,10 +186,10 @@ phone_sha256_digits = SHA256("201012345678")
 أنشئ Base Tag واحدة لكل منصة على `Initialization – All Pages`:
 
 1. Google Tag واحد يضم وجهتي GA4 وGoogle Ads، مع تعطيل إرسال Page View التلقائي.
-2. Meta Base ينفذ `init` فقط دون `PageView` تلقائي.
-3. TikTok Base ينفذ `load` فقط دون `ttq.page()` تلقائي.
+2. Meta Base يستخدم الـCustom HTML الرسمي ويشغّل `fbq('set', 'autoConfig', false, pixelId)` ثم `init` فقط، دون `PageView` تلقائي ودون قالب طرف ثالث.
+3. TikTok Base يستخدم الـCustom HTML الرسمي وينفذ `load` فقط دون `ttq.page()` تلقائي؛ الأحداث تستخدم قالب TikTok الرسمي.
 4. Snapchat Base ينفذ `init` فقط دون `PAGE_VIEW` تلقائي.
-5. ChatGPT Ads يستخدم عملية **Initialize only** من القالب الموجود في [`tracking/openai-ads-pixel.tpl`](tracking/openai-ads-pixel.tpl).
+5. ChatGPT Ads يستخدم Custom HTML محدودًا لتحميل OpenAI Measurement SDK الرسمي وتنفيذ `init` فقط؛ الملف [`tracking/openai-ads-pixel.tpl`](tracking/openai-ads-pixel.tpl) مرجع تاريخي وليس التنفيذ النشط.
 6. Clarity Base واحدة فقط.
 
 اضبط **Tag firing options = Once per page** لكل Base Tag. استخدمها كـSetup Tag في Tag Sequencing عند الحاجة؛ خيار Once per page يمنع إعادة `init` مع كل حدث. يجب أن توجد Page View Tag واحدة لكل منصة وتعمل على `site_page_view` فقط.
@@ -166,8 +200,8 @@ phone_sha256_digits = SHA256("201012345678")
 |---|---|---|---|---|---|---|
 | `site_page_view` | `page_view` | — | `PageView` | `PageView` | `PAGE_VIEW` | `page_viewed` |
 | `content_view` | `content_view` | — | `ViewContent` | `ViewContent` | `VIEW_CONTENT` | `contents_viewed` |
-| `click_call` | `click_call` | Secondary | `Contact` | `Contact` | Custom | — |
-| `click_whatsapp` | `click_whatsapp` | Secondary | `Contact` | `Contact` | Custom | — |
+| `click_call` | `click_call` | Secondary | `Contact` | `Contact` | `CUSTOM_EVENT_1` | — |
+| `click_whatsapp` | `click_whatsapp` | Secondary | `Contact` | `Contact` | `CUSTOM_EVENT_2` | — |
 | `smile_pro_lead` | `generate_lead` | Primary | `Lead` | `SubmitForm` | `SIGN_UP` | `lead_created` |
 
 كل conversion tag تستعمل `event_id` نفسه:
@@ -179,8 +213,8 @@ phone_sha256_digits = SHA256("201012345678")
 
 نفّذ المطابقة داخل Tag التحويل فقط وبالترتيب التالي، باستخدام إعداد **Manual/Advanced Matching** الذي يوفره قالب المنصة المعتمد داخل GTM:
 
-- Google Ads: عيّن حقل الهاتف المشفّر إلى `user_data.phone_sha256_e164` ثم شغّل Conversion Tag.
-- Meta: حدّث Advanced Matching بالحقل `ph` من `user_data.phone_sha256_digits` قبل `Lead`، ثم مرر `eventID` نفسه.
+- Google Ads: مرر معامل الحدث `user_data` من متغير User-Provided Data باسم `UPD - Google Ads - Hashed phone E.164`. هذا المتغير يعمل بوضع Code ويقرأ كائنًا يحتوي `sha256_phone_number` من `user_data.phone_sha256_e164`. استخدم الحقل الأصلي `orderId={{DLV - lead_id}}` لمعرف المعاملة، وليس مفتاح import باسم `transactionId` لأن GTM يتجاهله.
+- Meta: في Custom HTML الخاص بحدث Lead فقط، أعد `init` بالحقل `ph` من `user_data.phone_sha256_digits` ثم نفّذ `trackSingle` لحدث `Lead` مع `eventID` نفسه. لا توجد مطابقة في Base أو أي حدث آخر.
 - TikTok: شغّل Manual Advanced Matching/Identify باستخدام `user_data.phone_sha256_e164` قبل `SubmitForm`، ثم مرر `event_id` نفسه.
 - Snapchat: عيّن hashed phone من `user_data.phone_sha256_digits` قبل `SIGN_UP`، واجعل `client_dedup_id` مساويًا لـ`event_id`.
 - ChatGPT Ads: قالب المشروع يعيد `init` للهاتف المشفّر ثم يرسل `lead_created` بنفس `event_id`.
@@ -189,32 +223,56 @@ phone_sha256_digits = SHA256("201012345678")
 
 لا ترسل قيمة مالية مع الـLead، ولا ترسل `service` أو نتيجة الحاسبة أو التشخيص أو القياس أو حالات العين أو التقنية المرشحة إلى Advertising Tags.
 
+### معاملات الأحداث الإعلانية
+
+| الحدث | المعاملات الإضافية المسموحة |
+|---|---|
+| `site_page_view` | `event_id` لكل منصة إعلانية |
+| `content_view` | `event_id` و`content_type=article` فقط |
+| `click_call`, `click_whatsapp` | `event_id` فقط للإعلانات؛ `cta_location` يذهب إلى GA4 فقط |
+| `smile_pro_lead` | Google Ads: `transaction_id=lead_id` وE.164 hash؛ Meta: `eventID` وdigits hash؛ TikTok: `event_id` وE.164 hash؛ Snapchat: `client_dedup_id` وdigits hash؛ OpenAI: `event_id`, `type=customer_action`, digits hash |
+
 ## 8. GA4 وClarity
 
-يسمح لهما بالأحداث العامة وأحداث تجربة الاستخدام، ومنها:
+كل حدث GA4 يرسل `event_id`, `page_kind`, `language`, `page_location`, `page_title`، ثم allowlist الإضافية التالية فقط:
 
-- `lead_form_view`, `lead_form_start`, `lead_form_error`, `lead_form_submit_attempt`, `lead_phone_valid`
-- `estimator_start`, `estimator_step`, `estimator_result`
-- `procedure_comparison_open`, `procedure_comparison_choice`
-- `fomo_banner_view`, `faq_open`, `video_start`, `cta_click`
+| Data Layer Event | GA4 Event | المعاملات الإضافية |
+|---|---|---|
+| `site_page_view` | `page_view` | `page_path` |
+| `content_view` | `content_view` | `content_type` |
+| `click_call`, `click_whatsapp` | نفس الاسم | `cta_location` |
+| `smile_pro_lead` | `generate_lead` | `form_name`, `form_position` |
+| `cta_click` | نفس الاسم | `cta_location`, `link_url` |
+| `lead_form_view`, `lead_form_start`, `lead_form_submit_attempt`, `lead_phone_valid` | نفس الاسم | `form_name`, `form_position` |
+| `lead_form_error` | نفس الاسم | `form_name`, `form_position`, `field_name`, `error_type` |
+| `estimator_start`, `estimator_result` | نفس الاسم | لا شيء |
+| `estimator_step` | نفس الاسم | `step` |
+| `procedure_comparison_open`, `procedure_comparison_choice` | نفس الاسم | `form_position` |
+| `fomo_banner_view` | نفس الاسم | `slots_shown` |
+| `faq_open` | نفس الاسم | `faq_index` |
+| `video_start` | نفس الاسم | `video_id` |
 
-استخدم allowlist لكل حدث. احذف `user_data` بالكامل من حقول GA4، ولا تسجل قيمة حقول النماذج في Clarity. لا تستخدم إعدادًا آليًا ينسخ Data Layer بأكملها.
+جميع أحداث الصفوف التحليلية فقط ممنوعة من تشغيل Advertising Tags. لا تمرر `service`, `procedure`, نتائج/إجابات الحاسبة، `lead_id`, `attempt_id`, `session_id` أو`user_data` إلى GA4. لا تنشئ Custom Dimensions لهذه المعرفات؛ أنشئ فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. لا تسجل قيمة حقول النماذج أو Custom Event للهاتف في Clarity، وتبقى الحقول masked.
+
+### إعداد GA4 وGoogle Ads
+
+- استخدم GA4 `G-K4989EX8EJ` فقط، وعطّل Enhanced Measurement المتداخل، وعرّف `generate_lead` كـKey Event.
+- اربط Property `554862114` بـGoogle Ads `683-517-3815`، لكن لا تستورد `generate_lead` كتحويل Ads ثانٍ.
+- استخدم Conversion Action الموجود ID `7777230464`. بعد نجاح Preview، أعد تسميته إلى `Smile Pro — Confirmed Website Lead` واجعله Primary، Count One، بلا قيمة، مع Manual Enhanced Conversions من `phone_sha256_e164`.
+- تحويل Click-to-call هو `7790979748`/`Vdu7CKTVg4MdEL2Dr_ZD`، وتحويل WhatsApp هو `7790816120`/`grnJCPjW-YIdEL2Dr_ZD`. كلاهما Secondary، Count One، وبلا قيمة مالية.
+- حوّل التحويلات القديمة المتداخلة إلى Secondary وأزلها من Account-level Campaign Goals دون حذفها.
+- استخدم Conversion Linker واحدة فقط. لا تمرر `_gcl_aw` أوأي Cookie يدويًا، وعطّل automatic user-data detection.
 
 ## 9. ChatGPT Ads
 
-استورد `tracking/openai-ads-pixel.tpl` من **Templates → Tag Templates → New → Import**. القالب يملك صلاحيتين فقط:
-
-- تحميل `https://bzrcdn.openai.com/sdk/oaiq.min.js`.
-- إنشاء وتنفيذ queue باسم `oaiq`.
-
-أنشئ أربع Tag instances:
+استخدم Custom HTML محدودًا يعرّف queue باسم `oaiq` ويحمل SDK الرسمي من `https://bzrcdn.openai.com/sdk/oaiq.min.js`. لا تستخدم قالب Community أو SDK URL آخر. أنشئ أربع Tags:
 
 1. Initialize only على Initialization – All Pages.
 2. Page viewed على `site_page_view`.
 3. Contents viewed على `content_view`.
 4. Lead created على `smile_pro_lead`، مع `phoneNumberSha256 = user_data.phone_sha256_digits` و`eventId = event_id`.
 
-عملية Lead تعيد `init` مع `user.phone_number_sha256` ثم ترسل `lead_created` بنوع `customer_action`. Pixel ID الحقيقي محفوظ في المواصفة، لكن إعداد هذه Tags وتفعيلها ينتظر طلب المستخدم الصريح واختبار Deploy Preview.
+عملية Lead تعيد `init` مع `user.phone_number_sha256` ثم ترسل `lead_created` بنوع `customer_action`. Pixel ID الحقيقي محفوظ في المواصفة، ولا تفعّل هذه Tags في النسخة المنشورة قبل نجاح GTM Preview واختبارات الخصوصية وعدم التكرار. ملف `tracking/openai-ads-pixel.tpl` محفوظ للمراجعة التاريخية فقط ولا يُستورد في الـWorkspace النشط.
 
 شغّل `debug` فقط في GTM Preview المتصل بـDeploy Preview. لا تشغله في Production. عطّل Automatic Advanced Matching من إعدادات OpenAI لأن المطابقة هنا Manual.
 
@@ -240,7 +298,7 @@ phone_sha256_digits = SHA256("201012345678")
 
 ## 11. فحص قبل النشر
 
-1. شغّل `npm run check`.
+1. شغّل `npm run check` و`npm run check:staging`، وبعد حفظ Export الرسمي شغّل `npm run check:gtm-export`.
 2. افتح Deploy Preview من خلال GTM Preview.
 3. تأكد أن Page View تصل مرة واحدة لكل منصة.
 4. أرسل نموذجًا ناجحًا وتأكد أن كل منصة تستقبل Conversion واحدة بنفس `event_id`.
@@ -249,6 +307,7 @@ phone_sha256_digits = SHA256("201012345678")
 7. افحص Network وData Layer وتأكد أن الرقم الخام لا يظهر إلا في POST الخاص بـNetlify Forms.
 8. تأكد أن GA4 DebugView وClarity لا يستقبلان hash الهاتف.
 9. اختبر حجب SDK لكل منصة؛ يجب أن يستمر إرسال النموذج والانتقال لصفحة الشكر.
-10. شغّل `npm run perf:smoke` وقارن تكلفة كل third-party script في Lighthouse وDevTools.
+10. افحص `gclid/_gcl_aw`, `fbclid/_fbc/_fbp`, `ttclid/_ttp`, `ScCid`, و`oppref/__obref`، مع بقاء Click IDs داخل first-touch وlast-non-direct وNetlify فقط.
+11. شغّل `npm run perf:smoke` وقارن تكلفة كل third-party script في Lighthouse وDevTools.
 
-لا تعتمد Workspace أو Production Deploy قبل نجاح هذه القائمة.
+لا تعتمد Workspace أو Production Deploy قبل نجاح هذه القائمة. بعد النشر، راقب Diagnostics والتحويلات 72 ساعة، وأوقف النسخة أو ارجعها عند وجود Lead مكرر أو تسريب بيانات.
