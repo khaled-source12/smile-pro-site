@@ -20,6 +20,8 @@ const expectedIds = {
   ga4_account_id: '397818498',
   ga4_property_id: '554862114',
   ga4_stream_id: '15804380417',
+  google_tag_id: 'GT-PB6FRJCR',
+  google_ads_tag_id: 'GT-WPQDMSF5',
   google_ads_customer_id: '683-517-3815',
   google_ads_conversion_id: 'AW-18233409981',
   google_ads_lead_label: 'AzguCIC9vPwcEL2Dr_ZD',
@@ -61,7 +63,16 @@ assert.equal(spec.ga4_google_ads_link.personalized_advertising, false);
 assert.equal(spec.ga4_google_ads_link.auto_tagging, true);
 assert.equal(spec.ga4_google_ads_link.analytics_feature_access_from_google_ads, false);
 assert.equal(spec.ga4_google_ads_link.import_generate_lead_as_google_ads_conversion, false);
-assert.equal(spec.ga4_google_ads_link.gtm_ads_destination_detection, 'pending-propagation');
+assert.equal(spec.ga4_google_ads_link.legacy_ga4_property_id, spec.legacy_ids.ga4_property_id);
+assert.equal(spec.ga4_google_ads_link.legacy_ga4_property_status, 'unlinked');
+assert.equal(spec.ga4_google_ads_link.gtm_ads_destination_detection, 'verified');
+assert.equal(spec.google_tag_configuration.status, 'combined-active');
+assert.equal(spec.google_tag_configuration.configuration_source, 'new-ga4');
+assert.deepEqual(spec.google_tag_configuration.tag_ids, [expectedIds.google_tag_id, expectedIds.google_ads_tag_id]);
+assert.deepEqual(spec.google_tag_configuration.destinations, [expectedIds.ga4_measurement_id, expectedIds.google_ads_conversion_id]);
+assert.equal(spec.google_tag_configuration.enhanced_measurement, false);
+assert.equal(spec.google_tag_configuration.gtm_send_page_view, false);
+assert.equal(spec.google_tag_configuration.gtm_warning, 'resolved-after-hard-refresh');
 assert.equal(spec.ga4_key_events.generate_lead.enabled, true);
 assert.equal(spec.ga4_key_events.generate_lead.import_to_google_ads, false);
 assert.equal(spec.google_ads_secondary_conversions.click_call.optimization, 'secondary');
@@ -174,6 +185,10 @@ assert(fs.existsSync(productionDraftPath), `${productionDraftPath} is missing; r
 const productionDraft = JSON.parse(fs.readFileSync(productionDraftPath, 'utf8')).containerVersion;
 assert.equal(productionDraft?.container?.publicId, expectedIds.container_id, 'Generated production draft belongs to another container');
 assert.equal(new Set((productionDraft.tag || []).map(tag => String(tag.tagId))).size, (productionDraft.tag || []).length, 'Generated production draft contains duplicate tag IDs');
+const googleTags = (productionDraft.tag || []).filter(tag => tag.type === 'googtag');
+assert.equal(googleTags.length, 1, 'Generated production draft must contain exactly one Google tag');
+assert.equal(tagParameter(googleTags[0], 'tagId')?.value, expectedIds.ga4_measurement_id, 'Google tag must use the new GA4 measurement ID');
+assert.equal(tableValue(tagParameter(googleTags[0], 'configSettingsTable'), 'send_page_view'), 'false', 'Google tag must disable automatic page views');
 validateGoogleAdsLead(productionDraft, 'Generated production draft', { requireActive: true });
 assert.equal(
   productionDraft.tag.find(tag => tag.type === 'awct' && JSON.stringify(tag).includes(expectedIds.google_ads_lead_label))?.name,
@@ -194,7 +209,7 @@ if (requireExport || fs.existsSync(exportPath)) {
   assert.equal(container?.container?.publicId, expectedIds.container_id, 'Official export belongs to another container');
   const serialized = JSON.stringify(exported);
   for (const [field, value] of Object.entries(expectedIds)) {
-    if (['gtm_account_id', 'gtm_container_numeric_id', 'ga4_account_id', 'ga4_property_id', 'ga4_stream_id', 'google_ads_customer_id', 'google_ads_lead_conversion_action_id', 'google_ads_call_conversion_action_id', 'google_ads_whatsapp_conversion_action_id'].includes(field)) continue;
+    if (['gtm_account_id', 'gtm_container_numeric_id', 'ga4_account_id', 'ga4_property_id', 'ga4_stream_id', 'google_tag_id', 'google_ads_tag_id', 'google_ads_customer_id', 'google_ads_lead_conversion_action_id', 'google_ads_call_conversion_action_id', 'google_ads_whatsapp_conversion_action_id'].includes(field)) continue;
     assert(serialized.includes(value), `Official GTM export is missing ${field}`);
   }
   for (const legacy of ['GTM-PZRLPZN2', 'G-QSJ0G255BE', 'zbwtCLjs48EcEL2Dr_ZD']) {

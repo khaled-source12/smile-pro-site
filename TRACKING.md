@@ -19,6 +19,8 @@
 | GA4 | Account ID | `397818498` |
 | GA4 | Property ID | `554862114` |
 | GA4 | Web Stream ID | `15804380417` |
+| Google tag | Unified configuration ID | `GT-PB6FRJCR` |
+| Google tag | Google Ads ID retained after combine | `GT-WPQDMSF5` |
 | Google Ads | Customer ID | `683-517-3815` |
 | Google Ads | Conversion ID | `AW-18233409981` (`18233409981`) |
 | Google Ads | Confirmed Lead Label | `AzguCIC9vPwcEL2Dr_ZD` |
@@ -33,7 +35,7 @@
 | OpenAI Ads | Pixel ID | `D75vs25S8kHCy2t9f3RK1c` |
 | Microsoft Clarity | Project ID | `x8s5tnix4i` |
 
-المعرفات القديمة التالية للمراجعة والـRollback فقط، وممنوع تحميلها أو إعادة استخدامها في التنفيذ الجديد: GTM `GTM-PZRLPZN2`، GA4 `G-QSJ0G255BE`، Property `541403336`، Stream `15061658163`، وGoogle Ads call label `zbwtCLjs48EcEL2Dr_ZD`. لا توضع API keys أو Access Tokens أو CAPI secrets في GTM أو المستودع.
+المعرفات القديمة التالية للمراجعة والـRollback فقط، وممنوع تحميلها أو إعادة استخدامها في التنفيذ الجديد: GTM `GTM-PZRLPZN2`، GA4 `G-QSJ0G255BE`، Google tag `GT-WBTHLHNH`، Property `541403336`، Stream `15061658163`، وGoogle Ads call label `zbwtCLjs48EcEL2Dr_ZD`. لا توضع API keys أو Access Tokens أو CAPI secrets في GTM أو المستودع.
 
 ### حالة التنفيذ الحالية
 
@@ -45,9 +47,9 @@
 - لم يظهر الاسم أو الهاتف الخام داخل Data Layer، ولم يتكرر `smile_pro_lead` بعد Refresh أو Back أو فتح صفحة الشكر مباشرة. لا تسجل بيانات الاختبار الخام أو قيم الـhash داخل المستودع.
 - Tag الـLead نشطة الآن في Draft Workspace فقط باسم `Google Ads - confirmed lead`. لم تُنشر الحاوية، ولا يزال النشر محتاجًا موافقة صريحة.
 - التحويلات المتداخلة `7645766110`, `7654283640`, `7654151276`, `7751362991` أصبحت Secondary وخارج Account-level Campaign Goals دون حذفها.
-- Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. ظهر `generate_lead` في أحداث GA4 وتم تعيينه Key Event بتاريخ 2026-09-25؛ لم يُنشأ Custom Event مكرر ولم يُستورد كتحويل Google Ads إضافي.
-- اكتمل ربط GA4 Property `554862114` بحساب Google Ads `683-517-3815` بتاريخ 2026-09-25. Auto-Tagging مفعّل، بينما Personalized Advertising وإتاحة تعديل Analytics من داخل Google Ads متوقفتان. لا تستورد `generate_lead` كتحويل Ads إضافي.
-- Google Tag الحالي في الـWorkspace مضبوط على `G-K4989EX8EJ`. ظل تحذير `No Google tag found in this container` ظاهرًا مباشرة بعد إنشاء الرابط وإعادة تحميل GTM؛ قد يستغرق ظهور وجهة Ads والبيانات حتى 24 ساعة. تحقق من زوال التحذير قبل النشر، ولا تضف Google Tag ثانية لأن المواصفة تعتمد Google Tag واحدة بوجهتي GA4 وAds.
+- Enhanced Measurement المتداخل واكتشاف بيانات المستخدم التلقائي معطلان. وتم التحقق من أن Google Tag في GTM يمرر `send_page_view=false`، ولذلك يبقى `site_page_view` المصدر الوحيد للـPage View. Custom Dimensions هي فقط `page_kind`, `language`, `form_name`, `form_position`, `cta_location`. ظهر `generate_lead` في أحداث GA4 وتم تعيينه Key Event بتاريخ 2026-09-25؛ لم يُنشأ Custom Event مكرر ولم يُستورد كتحويل Google Ads إضافي.
+- اكتمل ربط GA4 Property `554862114` بحساب Google Ads `683-517-3815` بتاريخ 2026-09-25. Auto-Tagging مفعّل، بينما Personalized Advertising وإتاحة تعديل Analytics من داخل Google Ads متوقفتان. فُك ربط Property القديمة `541403336` في التاريخ نفسه؛ تبقى للقراءة التاريخية فقط ولا تستقبل تكامل Google Ads الجديد. لا تستورد `generate_lead` كتحويل Ads إضافي.
+- دُمج Google Ads tag `GT-WPQDMSF5` في Google tag الجديد `GT-PB6FRJCR` باسم `Smile Pro Staging Web`، مع اعتماد إعدادات GA4 الجديدة. أصبح الـTag الواحد يحمل الوجهتين `G-K4989EX8EJ` و`AW-18233409981`. بعد Hard Refresh في GTM اختفى تحذير `No Google tag found in this container` من Tags تحويلات Google Ads، بما فيها `Google Ads - confirmed lead`. لا تضف Google Tag ثانية.
 
 ## 1. ما ينفذه الموقع
 

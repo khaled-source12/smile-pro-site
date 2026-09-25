@@ -19,6 +19,8 @@ export; it is an audit artifact, not a file to edit by hand.
 | GA4 account | `397818498` |
 | GA4 property | `554862114` |
 | GA4 web stream | `15804380417` |
+| Unified Google tag | `GT-PB6FRJCR` |
+| Google Ads tag ID retained after combine | `GT-WPQDMSF5` |
 | Google Ads customer | `683-517-3815` |
 | Google Ads conversion | `AW-18233409981` (`18233409981`) |
 | Google Ads confirmed-lead label | `AzguCIC9vPwcEL2Dr_ZD` |
@@ -34,9 +36,11 @@ export; it is an audit artifact, not a file to edit by hand.
 | Microsoft Clarity | `x8s5tnix4i` |
 
 The legacy container `GTM-PZRLPZN2`, legacy GA4 destination
-`G-QSJ0G255BE`, legacy GA4 property `541403336`, legacy GA4 stream
-`15061658163`, and legacy call label `zbwtCLjs48EcEL2Dr_ZD` are audit and
-rollback references only. Never load or reuse them for the confirmed-lead flow.
+`G-QSJ0G255BE`, legacy Google tag `GT-WBTHLHNH`, legacy GA4 property
+`541403336`, legacy GA4 stream `15061658163`, and legacy call label
+`zbwtCLjs48EcEL2Dr_ZD` are audit and rollback references only. The legacy GA4
+property is unlinked from Google Ads and must remain historical/read-only. Never
+load or reuse these identifiers for the confirmed-lead flow.
 Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
 
 ### Contract and conversion rules
@@ -56,6 +60,11 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
 - Use Exact-match Custom Event triggers and the approved-hostname guard. Base
   tags fire on Initialization once per page. Automatic platform page views stay
   disabled because `site_page_view` is the canonical page-view source.
+- Keep one Google tag only: the `Smile Pro Staging Web` tag combines
+  `GT-PB6FRJCR` and `GT-WPQDMSF5` with destinations `G-K4989EX8EJ` and
+  `AW-18233409981`. GA4 Enhanced Measurement stays off and the GTM Google tag
+  keeps `send_page_view=false`. Do not reconnect GA4 property `541403336` or add
+  another Google tag to silence a warning.
 
 ### Privacy and identifiers
 

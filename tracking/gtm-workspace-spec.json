@@ -14,6 +14,8 @@
     "ga4_account_id": "397818498",
     "ga4_property_id": "554862114",
     "ga4_stream_id": "15804380417",
+    "google_tag_id": "GT-PB6FRJCR",
+    "google_ads_tag_id": "GT-WPQDMSF5",
     "google_ads_customer_id": "683-517-3815",
     "google_ads_conversion_id": "AW-18233409981",
     "google_ads_lead_label": "AzguCIC9vPwcEL2Dr_ZD",
@@ -30,6 +32,7 @@
   },
   "legacy_ids": {
     "ga4_measurement_id": "G-QSJ0G255BE",
+    "ga4_google_tag_id": "GT-WBTHLHNH",
     "ga4_property_id": "541403336",
     "ga4_stream_id": "15061658163",
     "google_ads_call_label": "zbwtCLjs48EcEL2Dr_ZD",
@@ -44,7 +47,27 @@
     "auto_tagging": true,
     "analytics_feature_access_from_google_ads": false,
     "import_generate_lead_as_google_ads_conversion": false,
-    "gtm_ads_destination_detection": "pending-propagation"
+    "legacy_ga4_property_id": "541403336",
+    "legacy_ga4_property_status": "unlinked",
+    "legacy_ga4_unlinked_on": "2026-09-25",
+    "gtm_ads_destination_detection": "verified"
+  },
+  "google_tag_configuration": {
+    "status": "combined-active",
+    "combined_on": "2026-09-25",
+    "name": "Smile Pro Staging Web",
+    "configuration_source": "new-ga4",
+    "tag_ids": [
+      "GT-PB6FRJCR",
+      "GT-WPQDMSF5"
+    ],
+    "destinations": [
+      "G-K4989EX8EJ",
+      "AW-18233409981"
+    ],
+    "enhanced_measurement": false,
+    "gtm_send_page_view": false,
+    "gtm_warning": "resolved-after-hard-refresh"
   },
   "ga4_key_events": {
     "generate_lead": {
