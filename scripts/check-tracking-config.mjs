@@ -62,6 +62,8 @@ assert.equal(spec.ga4_google_ads_link.auto_tagging, true);
 assert.equal(spec.ga4_google_ads_link.analytics_feature_access_from_google_ads, false);
 assert.equal(spec.ga4_google_ads_link.import_generate_lead_as_google_ads_conversion, false);
 assert.equal(spec.ga4_google_ads_link.gtm_ads_destination_detection, 'pending-propagation');
+assert.equal(spec.ga4_key_events.generate_lead.enabled, true);
+assert.equal(spec.ga4_key_events.generate_lead.import_to_google_ads, false);
 assert.equal(spec.google_ads_secondary_conversions.click_call.optimization, 'secondary');
 assert.equal(spec.google_ads_secondary_conversions.click_call.value, null);
 assert.equal(spec.google_ads_secondary_conversions.click_whatsapp.optimization, 'secondary');

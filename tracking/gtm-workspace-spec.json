@@ -46,6 +46,13 @@
     "import_generate_lead_as_google_ads_conversion": false,
     "gtm_ads_destination_detection": "pending-propagation"
   },
+  "ga4_key_events": {
+    "generate_lead": {
+      "enabled": true,
+      "enabled_on": "2026-09-25",
+      "import_to_google_ads": false
+    }
+  },
   "google_ads_confirmed_lead": {
     "existing_name": "Smile Pro - Confirmed lead - New system TEST",
     "production_name": "Smile Pro — Confirmed Website Lead",
