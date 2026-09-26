@@ -40,10 +40,12 @@
 ### حالة التنفيذ الحالية
 
 - تم إنشاء Click-to-call `7790979748` وClick-to-WhatsApp `7790816120` كتحويلين Secondary مستقلين، ونجح تشغيل كل منهما مرة واحدة على حدثه exact-match داخل GTM Preview.
-- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead` وتحويله إلى Primary بتاريخ 2026-09-25. بقي Count One وبلا قيمة مالية، وEnhanced Conversions مفعّلة. لم يتغير Account-level Campaign Goal؛ هدف `Submit lead form (website)` ليس Account Default ولن يدخل المزايدة إلا للحملات التي تستخدم هذا الهدف.
+- تم تغيير اسم التحويل `7777230464` إلى `Smile Pro — Confirmed Website Lead` وتحويله إلى Primary بتاريخ 2026-09-25. بقي Count One وبلا قيمة مالية، وEnhanced Conversions مفعّلة.
+- بتاريخ 2026-09-26 أصبح `Submit lead form` هو هدف Account-default الوحيد المستخدم للمزايدة، ويغطي `7 من 7` حملات، وداخله Primary واحدة فقط هي `Smile Pro — Confirmed Website Lead`. أصبحت فئات `Sign-up` و`Phone call lead` و`Contact` و`Get directions` و`Engagement` و`Page view` و`Leads from messages` غير Account-default ومربوطة بـ`0 من 7` حملات. قد تبقى بعض إجراءات Google-hosted ظاهرة كـPrimary داخل فئاتها لأن Google لا يتيح تغيير تحسينها، لكنها غير مستخدمة في أي حملة ولا تدخل المزايدة.
 - Manual Enhanced Conversions معدة داخل Tag الـLead فقط: معامل `user_data` يقرأ `UPD - Google Ads - Hashed phone E.164`، والذي يقرأ `CJS - Google Ads user_data - SHA256 E.164` ويقدم `sha256_phone_number` من `user_data.phone_sha256_e164`.
 - حقل Transaction ID الأصلي في GTM اسمه الداخلي `orderId` ومربوط بـ`{{DLV - lead_id}}`. المفتاح `transactionId` في ملف import تتجاهله واجهة GTM، ولذلك تمنعه الاختبارات.
 - نجح اختبار Lead واحد في GTM Preview على الموقع الإنتاجي بتاريخ 2026-09-25: نجح Netlify، وظهر `smile_pro_lead` مرة واحدة، وعملت Tags الخاصة بـGA4 وGoogle Ads وMeta وTikTok وSnapchat وOpenAI مرة واحدة. طابق Google Ads `transaction_id` مع `lead_id` ووصل إليه SHA-256 الصحيح للهاتف بصيغة E.164 من دون قيمة مالية.
+- بتاريخ 2026-09-26 استُبدلت Event Tags الخاصة بـSnapchat بنداءات SDK الصريحة مع إبقاء Base الرسمي، ثم نجحت `PAGE_VIEW` و`VIEW_CONTENT` و`CUSTOM_EVENT_1` و`CUSTOM_EVENT_2` في GTM Preview ولم يعد أي وسم منها في حالة `Still running`.
 - لم يظهر الاسم أو الهاتف الخام داخل Data Layer، ولم يتكرر `smile_pro_lead` بعد Refresh أو Back أو فتح صفحة الشكر مباشرة. لا تسجل بيانات الاختبار الخام أو قيم الـhash داخل المستودع.
 - Tag الـLead نشطة الآن في Draft Workspace فقط باسم `Google Ads - confirmed lead`. لم تُنشر الحاوية، ولا يزال النشر محتاجًا موافقة صريحة.
 - التحويلات المتداخلة `7645766110`, `7654283640`, `7654151276`, `7751362991` أصبحت Secondary وخارج Account-level Campaign Goals دون حذفها.
@@ -143,7 +145,7 @@ phone_sha256_digits = SHA256("201012345678")
 
 حقول الاسم والهاتف تحمل `data-clarity-mask="true"` كتأكيد صريح فوق الإخفاء الافتراضي لحقول الإدخال في Clarity. لا تضف Smart Event أو Custom Tag ينسخ قيم الحقول.
 
-`dataLayer` ليست حاجزًا أمنيًا؛ أي Custom HTML Tag يستطيع قراءة الصفحة. الاستثناءات الوحيدة المسموحة هي كود Meta Pixel الرسمي (`fbevents.js` مع نداءات الأحداث الصريحة)، وTikTok Pixel Base Code الرسمي لأن قالب أحداث TikTok الرسمي يشترط وجوده، وOpenAI Measurement SDK الرسمي مع نداءات الأحداث الصريحة. لا تستخدم قالب Meta تابعًا لطرف ثالث، ولا تضف أي Custom HTML عام آخر، ويجب أن تُبنى كل Tag من allowlist صريحة.
+`dataLayer` ليست حاجزًا أمنيًا؛ أي Custom HTML Tag يستطيع قراءة الصفحة. الاستثناءات الوحيدة المسموحة هي كود Meta Pixel الرسمي (`fbevents.js` مع نداءات الأحداث الصريحة)، وTikTok Pixel Base Code الرسمي مع نداء `ttq.page()` الصريح، ونداءات أحداث Snap الرسمية `snaptr('track', ...)`، وOpenAI Measurement SDK الرسمي مع نداءات الأحداث الصريحة. لا تستخدم قالب Meta تابعًا لطرف ثالث، ولا تضف أي Custom HTML عام آخر، ويجب أن تُبنى كل Tag من allowlist صريحة.
 
 ### الإسناد ومعرفات الجلسة
 
@@ -153,7 +155,7 @@ phone_sha256_digits = SHA256("201012345678")
 | Meta | `fbclid` | `_fbc`, `_fbp` | Meta Pixel يديرهما تلقائيًا |
 | TikTok | `ttclid` | `_ttp` | TikTok Pixel يديره تلقائيًا |
 | Snapchat | `sccid` الملتقط من `ScCid` | Cookies الخاصة بـSnap Pixel | Pixel يديرها تلقائيًا |
-| OpenAI | `oppref` | `__obref` | OpenAI Pixel يديرها تلقائيًا |
+| OpenAI | `oppref` | `__oppref`, `__obref` | OpenAI Pixel يديرهما تلقائيًا |
 | Microsoft | `msclkid` | Cookies UET | حفظ للإسناد فقط؛ Microsoft Ads خارج النطاق |
 | الموقع | `session_id` | `sessionStorage` داخلي | ربط محاولات النماذج فقط، ولا يرسل إلى المنصات |
 
@@ -194,8 +196,8 @@ phone_sha256_digits = SHA256("201012345678")
 
 1. Google Tag واحد يضم وجهتي GA4 وGoogle Ads، مع تعطيل إرسال Page View التلقائي.
 2. Meta Base يستخدم الـCustom HTML الرسمي ويشغّل `fbq('set', 'autoConfig', false, pixelId)` ثم `init` فقط، دون `PageView` تلقائي ودون قالب طرف ثالث.
-3. TikTok Base يستخدم الـCustom HTML الرسمي وينفذ `load` فقط دون `ttq.page()` تلقائي؛ الأحداث تستخدم قالب TikTok الرسمي.
-4. Snapchat Base ينفذ `init` فقط دون `PAGE_VIEW` تلقائي.
+3. TikTok Base يستخدم الـCustom HTML الرسمي وينفذ `load` فقط دون `ttq.page()` تلقائي؛ Page View تستخدم نداء `ttq.page()` الصريح وباقي الأحداث تستخدم قالب TikTok الرسمي.
+4. Snapchat Base يستخدم قالب Snap الرسمي وينفذ `init` فقط دون `PAGE_VIEW` تلقائي. أحداث Snap الخمسة تستخدم نداءات SDK صريحة ومحدودة من نوع `snaptr('track', pixelId, eventName, data)` بعد Base؛ لأن الإصدار الحالي من القالب الرسمي يرسل الحدث لكنه لا يستدعي نجاح GTM إذا كان `snaptr` موجودًا، فيظل الوسم `Still running` داخل Preview وقد يؤخر `eventCallback` حتى انتهاء المهلة. لا تستخدم القالب الرسمي نفسه كـEvent Tag قبل إصلاح هذا السلوك upstream.
 5. ChatGPT Ads يستخدم Custom HTML محدودًا لتحميل OpenAI Measurement SDK الرسمي وتنفيذ `init` فقط؛ الملف [`tracking/openai-ads-pixel.tpl`](tracking/openai-ads-pixel.tpl) مرجع تاريخي وليس التنفيذ النشط.
 6. Clarity Base واحدة فقط.
 
@@ -210,6 +212,8 @@ phone_sha256_digits = SHA256("201012345678")
 | `click_call` | `click_call` | Secondary | `Contact` | `Contact` | `CUSTOM_EVENT_1` | — |
 | `click_whatsapp` | `click_whatsapp` | Secondary | `Contact` | `Contact` | `CUSTOM_EVENT_2` | — |
 | `smile_pro_lead` | `generate_lead` | Primary | `Lead` | `SubmitForm` | `SIGN_UP` | `lead_created` |
+
+يعرض Snap Pixel Helper النوعين `CUSTOM_EVENT_1` و`CUSTOM_EVENT_2` بصيغة “Custom Event 1” و“Custom Event 2”. هذا سلوك صحيح: Snapchat يوفر خمس خانات Custom Event ثابتة ولا يقبل هنا اسمًا حرًا مثل `CLICK_CALL`. الربط المعتمد هو `CUSTOM_EVENT_1 = click_call` و`CUSTOM_EVENT_2 = click_whatsapp`، ويجب تسمية الـCustom Conversions أو التقارير داخل Snap وفق هذا الربط عند الحاجة إلى أسماء بشرية أوضح.
 
 كل conversion tag تستعمل `event_id` نفسه:
 
@@ -305,7 +309,7 @@ phone_sha256_digits = SHA256("201012345678")
 
 ## 11. فحص قبل النشر
 
-1. شغّل `npm run check` و`npm run check:staging`، وبعد حفظ Export الرسمي شغّل `npm run check:gtm-export`.
+1. شغّل `npm run check` و`npm run check:staging`، وبعد حفظ Export الرسمي شغّل `npm run check:gtm-export`. لفحص Export لمساحة عمل غير منشورة دون اعتباره النسخة الرسمية، شغّل `node scripts/check-tracking-config.mjs --audit-export=/absolute/path/GTM-workspace.json`.
 2. افتح Deploy Preview من خلال GTM Preview.
 3. تأكد أن Page View تصل مرة واحدة لكل منصة.
 4. أرسل نموذجًا ناجحًا وتأكد أن كل منصة تستقبل Conversion واحدة بنفس `event_id`.
@@ -314,7 +318,7 @@ phone_sha256_digits = SHA256("201012345678")
 7. افحص Network وData Layer وتأكد أن الرقم الخام لا يظهر إلا في POST الخاص بـNetlify Forms.
 8. تأكد أن GA4 DebugView وClarity لا يستقبلان hash الهاتف.
 9. اختبر حجب SDK لكل منصة؛ يجب أن يستمر إرسال النموذج والانتقال لصفحة الشكر.
-10. افحص `gclid/_gcl_aw`, `fbclid/_fbc/_fbp`, `ttclid/_ttp`, `ScCid`, و`oppref/__obref`، مع بقاء Click IDs داخل first-touch وlast-non-direct وNetlify فقط.
+10. افحص `gclid/_gcl_aw`, `fbclid/_fbc/_fbp`, `ttclid/_ttp`, `ScCid`, و`oppref/__oppref/__obref`، مع بقاء Click IDs داخل first-touch وlast-non-direct وNetlify فقط.
 11. شغّل `npm run perf:smoke` وقارن تكلفة كل third-party script في Lighthouse وDevTools.
 
 لا تعتمد Workspace أو Production Deploy قبل نجاح هذه القائمة. بعد النشر، راقب Diagnostics والتحويلات 72 ساعة، وأوقف النسخة أو ارجعها عند وجود Lead مكرر أو تسريب بيانات.

@@ -101,8 +101,11 @@
     "value": null,
     "transaction_id": "lead_id",
     "enhanced_conversion_phone": "user_data.phone_sha256_e164",
-    "account_default_goal": false,
-    "campaign_goal_change_performed": false
+    "account_default_goal": true,
+    "campaign_goal_change_performed": true,
+    "campaign_goal_verified_on": "2026-09-26",
+    "campaigns_using_goal": 7,
+    "campaigns_total": 7
   },
   "google_ads_enhanced_conversions": {
     "mode": "manual_prehashed_phone",
@@ -135,6 +138,28 @@
     "publication_status": "not_published"
   },
   "google_ads_account_cleanup": {
+    "goal_assignment_audit": {
+      "verified_on": "2026-09-26",
+      "only_biddable_primary_goal": "Submit lead form / Smile Pro — Confirmed Website Lead",
+      "confirmed_lead_campaign_coverage": "7 of 7",
+      "unassigned_goal_categories": [
+        "Sign-up",
+        "Phone call lead",
+        "Contact",
+        "Get directions",
+        "Engagement",
+        "Page view",
+        "Leads from messages"
+      ],
+      "google_hosted_primary_actions_retained_but_unassigned": [
+        "Clicks to call",
+        "Local actions - Directions",
+        "Local actions - Other engagements",
+        "Local actions - Website visits",
+        "Conversation started"
+      ],
+      "note": "Google-hosted actions may still display Primary in the conversion-action UI, but they are not account-default and are assigned to 0 of 7 campaigns, so they are not used for bidding."
+    },
     "overlapping_actions": [
       {
         "name": "Smile-Pro (web) generate_lead",
@@ -202,6 +227,8 @@
     "custom_html_allowlist": [
       "meta_official_fbevents_sdk_and_explicit_events",
       "tiktok_official_pixel_base_code",
+      "tiktok_official_explicit_page_view_call",
+      "snapchat_official_sdk_explicit_event_calls",
       "openai_official_measurement_sdk_and_explicit_events"
     ],
     "third_party_meta_template": false,
@@ -214,7 +241,8 @@
     "meta_base_and_events": "custom_html_official_sdk",
     "tiktok_base": "custom_html_official_sdk",
     "tiktok_events": "cvt_MRQN8",
-    "snapchat": "cvt_K4VXG",
+    "snapchat_base": "cvt_K4VXG",
+    "snapchat_events": "custom_html_official_sdk_calls",
     "openai": "custom_html_official_sdk",
     "clarity": "cvt_MQDKZ"
   },
@@ -363,6 +391,7 @@
       "_fbp",
       "_ttp",
       "snapchat-pixel-cookies",
+      "__oppref",
       "__obref"
     ],
     "copy_platform_cookies_to_data_layer": false,

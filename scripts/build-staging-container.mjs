@@ -209,7 +209,7 @@ if (production) {
   tags.push(vendorTag({
     id: vendorId++,
     name: snapBaseName,
-    type: events.gtm_tag_implementations.snapchat,
+    type: events.gtm_tag_implementations.snapchat_base,
     parameters: [parameter('pixel_id', events.platform_ids.snapchat_pixel_id), parameter('enable_console_logging', false, 'BOOLEAN')],
     triggerId: '100',
     oncePerLoad: true
@@ -221,14 +221,15 @@ if (production) {
     ['click_whatsapp', 'CUSTOM_EVENT_2'],
     ['smile_pro_lead', 'SIGN_UP']
   ]) {
-    const parameters = [
-      parameter('pixel_id', events.platform_ids.snapchat_pixel_id),
-      parameter('event_type', snapEvent),
-      parameter('client_dedup_id', eventId),
-      parameter('enable_console_logging', false, 'BOOLEAN')
-    ];
-    if (siteEvent === 'smile_pro_lead') parameters.push(parameter('user_hashed_phone_number', phoneDigits));
-    tags.push(vendorTag({ id: vendorId++, name: `Snapchat - ${snapEvent} - ${siteEvent}`, type: events.gtm_tag_implementations.snapchat, parameters, triggerId: triggerByEvent.get(siteEvent), setupTag: snapBaseName }));
+    // Snap's official Gallery template sends the event but never calls
+    // gtmOnSuccess when snaptr already exists. Keep that template for the
+    // one-time loader/init only, then use the same documented SDK calls in a
+    // tightly scoped Custom HTML tag so every event completes in Tag Assistant.
+    const leadInit = siteEvent === 'smile_pro_lead'
+      ? `var ph='${phoneDigits}';if(/^[a-f0-9]{64}$/.test(ph)){snaptr('init','${events.platform_ids.snapchat_pixel_id}',{user_hashed_phone_number:ph});}`
+      : '';
+    const html = `<script>(function(){${leadInit}snaptr('track','${events.platform_ids.snapchat_pixel_id}','${snapEvent}',{client_dedup_id:'${eventId}'});})();</script>`;
+    tags.push(htmlTag({ id: vendorId++, name: `Snapchat - ${snapEvent} - ${siteEvent}`, html, triggerId: triggerByEvent.get(siteEvent), setupTag: snapBaseName }));
   }
 
   const openaiBaseName = 'OpenAI Ads - Base - official SDK initialize only';

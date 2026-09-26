@@ -11,6 +11,10 @@ const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const guide = fs.readFileSync(guidePath, 'utf8');
 const agents = fs.readFileSync(agentsPath, 'utf8');
 const requireExport = process.argv.includes('--require-export');
+const auditExportArg = process.argv.find(argument => argument.startsWith('--audit-export='));
+const auditExportPath = auditExportArg?.slice('--audit-export='.length) || null;
+const selectedExportPath = auditExportPath || exportPath;
+const shouldValidateExport = Boolean(auditExportPath) || requireExport || fs.existsSync(exportPath);
 
 const expectedIds = {
   container_id: 'GTM-NFTVFBKS',
@@ -51,8 +55,12 @@ for (const [field, expected] of Object.entries(expectedIds)) {
 assert.deepEqual(spec.approved_hostnames, ['smileproegypt.com', 'www.smileproegypt.com']);
 assert.equal(spec.google_ads_confirmed_lead.conversion_action_id, '7777230464');
 assert.equal(spec.google_ads_confirmed_lead.current_optimization, 'primary');
-assert.equal(spec.google_ads_confirmed_lead.account_default_goal, false);
-assert.equal(spec.google_ads_confirmed_lead.campaign_goal_change_performed, false);
+assert.equal(spec.google_ads_confirmed_lead.account_default_goal, true);
+assert.equal(spec.google_ads_confirmed_lead.campaign_goal_change_performed, true);
+assert.equal(spec.google_ads_confirmed_lead.campaigns_using_goal, 7);
+assert.equal(spec.google_ads_confirmed_lead.campaigns_total, 7);
+assert.equal(spec.google_ads_account_cleanup.goal_assignment_audit.confirmed_lead_campaign_coverage, '7 of 7');
+assert.equal(spec.google_ads_account_cleanup.goal_assignment_audit.unassigned_goal_categories.length, 7);
 assert.equal(spec.google_ads_confirmed_lead.count, 'one');
 assert.equal(spec.google_ads_confirmed_lead.value, null);
 assert.equal(spec.google_ads_confirmed_lead.transaction_id, 'lead_id');
@@ -91,6 +99,8 @@ assert.equal(spec.google_ads_secondary_conversions.click_whatsapp.optimization, 
 assert.equal(spec.google_ads_secondary_conversions.click_whatsapp.value, null);
 assert.equal(spec.data_layer_events.click_call.snapchat, 'CUSTOM_EVENT_1');
 assert.equal(spec.data_layer_events.click_whatsapp.snapchat, 'CUSTOM_EVENT_2');
+assert(agents.includes('Custom Event 1'), 'AGENTS.md must explain Snapchat Pixel Helper custom-event labels');
+assert(guide.includes('Custom Event 1'), 'TRACKING.md must explain Snapchat Pixel Helper custom-event labels');
 
 const requiredEvents = [
   'site_page_view', 'content_view', 'click_call', 'click_whatsapp', 'smile_pro_lead',
@@ -138,8 +148,12 @@ assert.equal(spec.platform_controls.automatic_event_detection, false);
 assert.deepEqual(spec.platform_controls.custom_html_allowlist, [
   'meta_official_fbevents_sdk_and_explicit_events',
   'tiktok_official_pixel_base_code',
+  'tiktok_official_explicit_page_view_call',
+  'snapchat_official_sdk_explicit_event_calls',
   'openai_official_measurement_sdk_and_explicit_events'
 ]);
+assert(spec.identifier_handling.platform_managed_browser_identifiers.includes('__oppref'));
+assert(spec.identifier_handling.platform_managed_browser_identifiers.includes('__obref'));
 assert.equal(spec.platform_controls.third_party_meta_template, false);
 assert.equal(spec.platform_controls.clarity_custom_events, false);
 assert.equal(spec.platform_controls.clarity_masking, 'strict');
@@ -191,6 +205,38 @@ const validateGoogleAdsLead = (container, source, { requirePaused = false, requi
   assert.equal(tagParameter(upd, 'dataSource')?.value, '{{CJS - Google Ads user_data - SHA256 E.164}}', `${source} User-Provided Data variable has the wrong data source`);
 };
 
+const validateSnapchatImplementation = (container, source) => {
+  const tags = container.tag || [];
+  const snapBase = tags.filter(tag => tag.name === 'Snapchat - Base - init only');
+  assert.equal(snapBase.length, 1, `${source} must contain exactly one Snapchat Base tag`);
+  assert.equal(snapBase[0].type, spec.gtm_tag_implementations.snapchat_base, `${source} must keep the official Snapchat template for SDK init only`);
+  assert.equal(snapBase[0].tagFiringOption, 'ONCE_PER_LOAD', `${source} Snapchat Base must fire once per page`);
+
+  const expectedEvents = new Map([
+    ['Snapchat - PAGE_VIEW - site_page_view', 'PAGE_VIEW'],
+    ['Snapchat - VIEW_CONTENT - content_view', 'VIEW_CONTENT'],
+    ['Snapchat - CUSTOM_EVENT_1 - click_call', 'CUSTOM_EVENT_1'],
+    ['Snapchat - CUSTOM_EVENT_2 - click_whatsapp', 'CUSTOM_EVENT_2'],
+    ['Snapchat - SIGN_UP - smile_pro_lead', 'SIGN_UP']
+  ]);
+  for (const [name, eventName] of expectedEvents) {
+    const matches = tags.filter(tag => tag.name === name);
+    assert.equal(matches.length, 1, `${source} must contain exactly one ${name} tag`);
+    const tag = matches[0];
+    const text = JSON.stringify(tag);
+    assert.equal(tag.type, 'html', `${source} ${name} must use the explicit official SDK call so GTM can complete the tag`);
+    assert(text.includes("snaptr('track'"), `${source} ${name} lacks the official Snap track call`);
+    assert(text.includes(expectedIds.snapchat_pixel_id), `${source} ${name} has the wrong Pixel ID`);
+    assert(text.includes(`'${eventName}'`), `${source} ${name} has the wrong event name`);
+    assert(text.includes('{{DLV - event_id}}'), `${source} ${name} lacks client_dedup_id=event_id`);
+    assert(text.includes('client_dedup_id'), `${source} ${name} lacks the Snap deduplication parameter`);
+    assert.equal(tag.setupTag?.[0]?.tagName, 'Snapchat - Base - init only', `${source} ${name} must sequence after Snapchat Base`);
+  }
+  const lead = tags.find(tag => tag.name === 'Snapchat - SIGN_UP - smile_pro_lead');
+  assert(JSON.stringify(lead).includes('{{DLV - user_data_phone_sha256_digits}}'), `${source} Snapchat lead tag lacks the digits-only hash`);
+  assert(!tags.some(tag => tag.name?.startsWith('Snapchat - ') && tag.name !== 'Snapchat - Base - init only' && tag.type === spec.gtm_tag_implementations.snapchat_base), `${source} must not use the non-completing Snapchat template for event tags`);
+};
+
 assert(fs.existsSync(productionDraftPath), `${productionDraftPath} is missing; run npm run build:gtm-production`);
 const productionDraft = JSON.parse(fs.readFileSync(productionDraftPath, 'utf8')).containerVersion;
 assert.equal(productionDraft?.container?.publicId, expectedIds.container_id, 'Generated production draft belongs to another container');
@@ -201,6 +247,7 @@ assert.equal(googleTags.length, 1, 'Generated production draft must contain exac
 assert.equal(tagParameter(googleTags[0], 'tagId')?.value, expectedIds.ga4_measurement_id, 'Google tag must use the new GA4 measurement ID');
 assert.equal(tableValue(tagParameter(googleTags[0], 'configSettingsTable'), 'send_page_view'), 'false', 'Google tag must disable automatic page views');
 validateGoogleAdsLead(productionDraft, 'Generated production draft', { requireActive: true });
+validateSnapchatImplementation(productionDraft, 'Generated production draft');
 assert.equal(
   productionDraft.tag.find(tag => tag.type === 'awct' && JSON.stringify(tag).includes(expectedIds.google_ads_lead_label))?.name,
   'Google Ads - confirmed lead',
@@ -212,17 +259,23 @@ for (const tag of productionDraft.tag || []) {
     assert(!JSON.stringify(tag).includes('user_data'), `GA4 tag ${tag.name} must not receive user_data`);
   }
 }
+const allowedCustomHtmlName = /^(?:Meta - |TikTok - (?:Base|PageView)|Snapchat - (?!Base)|OpenAI Ads - )/;
+for (const tag of (productionDraft.tag || []).filter(tag => tag.type === 'html')) {
+  assert(allowedCustomHtmlName.test(tag.name || ''), `Generated production draft contains non-allowlisted Custom HTML tag ${tag.name}`);
+}
 
-if (requireExport || fs.existsSync(exportPath)) {
-  assert(fs.existsSync(exportPath), `${exportPath} is required after GTM publication`);
-  const exported = JSON.parse(fs.readFileSync(exportPath, 'utf8'));
+if (shouldValidateExport) {
+  assert(fs.existsSync(selectedExportPath), `${selectedExportPath} is required for GTM export validation`);
+  const exportLabel = auditExportPath ? `Workspace GTM export ${selectedExportPath}` : 'Official GTM export';
+  const exported = JSON.parse(fs.readFileSync(selectedExportPath, 'utf8'));
   const container = exported.containerVersion;
-  assert.equal(container?.container?.publicId, expectedIds.container_id, 'Official export belongs to another container');
+  assert.equal(container?.container?.publicId, expectedIds.container_id, `${exportLabel} belongs to another container`);
   const serialized = JSON.stringify(exported);
   for (const [field, value] of Object.entries(expectedIds)) {
-    if (['gtm_account_id', 'gtm_container_numeric_id', 'ga4_account_id', 'ga4_property_id', 'ga4_stream_id', 'google_tag_id', 'google_ads_tag_id', 'google_ads_customer_id', 'google_ads_lead_conversion_action_id', 'google_ads_call_conversion_action_id', 'google_ads_whatsapp_conversion_action_id'].includes(field)) continue;
-    assert(serialized.includes(value), `Official GTM export is missing ${field}`);
+    if (['gtm_account_id', 'gtm_container_numeric_id', 'ga4_account_id', 'ga4_property_id', 'ga4_stream_id', 'google_tag_id', 'google_ads_tag_id', 'google_ads_customer_id', 'google_ads_conversion_id', 'google_ads_lead_conversion_action_id', 'google_ads_call_conversion_action_id', 'google_ads_whatsapp_conversion_action_id'].includes(field)) continue;
+    assert(serialized.includes(value), `${exportLabel} is missing ${field}`);
   }
+  assert(serialized.includes(expectedIds.google_ads_conversion_id.replace('AW-', '')), `${exportLabel} is missing google_ads_conversion_id`);
   for (const legacy of ['GTM-PZRLPZN2', 'G-QSJ0G255BE', 'zbwtCLjs48EcEL2Dr_ZD']) {
     assert(!serialized.includes(legacy), `Official GTM export contains legacy identifier ${legacy}`);
   }
@@ -238,7 +291,8 @@ if (requireExport || fs.existsSync(exportPath)) {
   const triggers = container.trigger || [];
   const variables = container.variable || [];
   assert.equal(new Set(tags.map(tag => String(tag.tagId))).size, tags.length, 'Official GTM export contains duplicate tag IDs');
-  validateGoogleAdsLead(container, 'Official GTM export');
+  validateGoogleAdsLead(container, exportLabel);
+  validateSnapchatImplementation(container, exportLabel);
   for (const variable of variables) {
     const variableText = JSON.stringify(variable);
     assert(!/(?:^|[.\"_])phone(?:[.\"_]|$)/i.test(variableText) || /phone_sha256_(?:e164|digits)/.test(variableText), `Raw phone variable is forbidden: ${variable.name}`);
@@ -322,4 +376,7 @@ if (requireExport || fs.existsSync(exportPath)) {
   }
 }
 
-console.log(`Tracking configuration checks passed${fs.existsSync(exportPath) ? ', including the official GTM export' : ''}.`);
+const exportCheckSummary = auditExportPath
+  ? `, including workspace export ${auditExportPath}`
+  : fs.existsSync(exportPath) ? ', including the official GTM export' : '';
+console.log(`Tracking configuration checks passed${exportCheckSummary}.`);

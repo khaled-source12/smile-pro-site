@@ -5,34 +5,12 @@
     "containerId": "264543391",
     "containerVersionId": "0",
     "container": {
-      "path": "accounts/6360521865/containers/264543391",
       "accountId": "6360521865",
       "containerId": "264543391",
       "name": "Smile Pro Production Web",
       "publicId": "GTM-NFTVFBKS",
       "usageContext": [
         "WEB"
-      ],
-      "fingerprint": "1789738745688",
-      "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6360521865/containers/264543391/workspaces?apiLink=container",
-      "features": {
-        "supportUserPermissions": true,
-        "supportEnvironments": true,
-        "supportWorkspaces": true,
-        "supportGtagConfigs": false,
-        "supportBuiltInVariables": true,
-        "supportClients": false,
-        "supportFolders": true,
-        "supportTags": true,
-        "supportTemplates": true,
-        "supportTriggers": true,
-        "supportVariables": true,
-        "supportVersions": true,
-        "supportZones": true,
-        "supportTransformations": false
-      },
-      "tagIds": [
-        "GTM-NFTVFBKS"
       ]
     },
     "tag": [
@@ -58,7 +36,7 @@
           }
         ],
         "firingTriggerId": [
-          "55"
+          "100"
         ],
         "tagFiringOption": "ONCE_PER_LOAD"
       },
@@ -84,7 +62,7 @@
           }
         ],
         "firingTriggerId": [
-          "74"
+          "101"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -116,7 +94,7 @@
           }
         ],
         "firingTriggerId": [
-          "79"
+          "102"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -148,7 +126,7 @@
           }
         ],
         "firingTriggerId": [
-          "84"
+          "103"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -180,7 +158,7 @@
           }
         ],
         "firingTriggerId": [
-          "71"
+          "104"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -212,7 +190,7 @@
           }
         ],
         "firingTriggerId": [
-          "52"
+          "105"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -244,7 +222,7 @@
           }
         ],
         "firingTriggerId": [
-          "55"
+          "100"
         ],
         "tagFiringOption": "ONCE_PER_LOAD"
       },
@@ -270,7 +248,7 @@
           }
         ],
         "firingTriggerId": [
-          "74"
+          "101"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -317,7 +295,7 @@
           }
         ],
         "firingTriggerId": [
-          "79"
+          "102"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -364,7 +342,7 @@
           }
         ],
         "firingTriggerId": [
-          "84"
+          "103"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -411,7 +389,7 @@
           }
         ],
         "firingTriggerId": [
-          "71"
+          "104"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -468,7 +446,7 @@
           }
         ],
         "firingTriggerId": [
-          "52"
+          "105"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -500,7 +478,7 @@
           }
         ],
         "firingTriggerId": [
-          "55"
+          "100"
         ],
         "tagFiringOption": "ONCE_PER_LOAD"
       },
@@ -512,31 +490,21 @@
         },
         "tagId": "313",
         "name": "Snapchat - PAGE_VIEW - site_page_view",
-        "type": "cvt_K4VXG",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "pixel_id",
-            "value": "d34f007b-056b-48fe-a1a9-9e4d2340907c"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "event_type",
-            "value": "PAGE_VIEW"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "client_dedup_id",
-            "value": "{{DLV - event_id}}"
+            "key": "html",
+            "value": "<script>(function(){snaptr('track','d34f007b-056b-48fe-a1a9-9e4d2340907c','PAGE_VIEW',{client_dedup_id:'{{DLV - event_id}}'});})();</script>"
           },
           {
             "type": "BOOLEAN",
-            "key": "enable_console_logging",
+            "key": "supportDocumentWrite",
             "value": "false"
           }
         ],
         "firingTriggerId": [
-          "74"
+          "101"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -554,31 +522,21 @@
         },
         "tagId": "314",
         "name": "Snapchat - VIEW_CONTENT - content_view",
-        "type": "cvt_K4VXG",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "pixel_id",
-            "value": "d34f007b-056b-48fe-a1a9-9e4d2340907c"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "event_type",
-            "value": "VIEW_CONTENT"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "client_dedup_id",
-            "value": "{{DLV - event_id}}"
+            "key": "html",
+            "value": "<script>(function(){snaptr('track','d34f007b-056b-48fe-a1a9-9e4d2340907c','VIEW_CONTENT',{client_dedup_id:'{{DLV - event_id}}'});})();</script>"
           },
           {
             "type": "BOOLEAN",
-            "key": "enable_console_logging",
+            "key": "supportDocumentWrite",
             "value": "false"
           }
         ],
         "firingTriggerId": [
-          "79"
+          "102"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -596,31 +554,21 @@
         },
         "tagId": "315",
         "name": "Snapchat - CUSTOM_EVENT_1 - click_call",
-        "type": "cvt_K4VXG",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "pixel_id",
-            "value": "d34f007b-056b-48fe-a1a9-9e4d2340907c"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "event_type",
-            "value": "CUSTOM_EVENT_1"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "client_dedup_id",
-            "value": "{{DLV - event_id}}"
+            "key": "html",
+            "value": "<script>(function(){snaptr('track','d34f007b-056b-48fe-a1a9-9e4d2340907c','CUSTOM_EVENT_1',{client_dedup_id:'{{DLV - event_id}}'});})();</script>"
           },
           {
             "type": "BOOLEAN",
-            "key": "enable_console_logging",
+            "key": "supportDocumentWrite",
             "value": "false"
           }
         ],
         "firingTriggerId": [
-          "84"
+          "103"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -638,31 +586,21 @@
         },
         "tagId": "316",
         "name": "Snapchat - CUSTOM_EVENT_2 - click_whatsapp",
-        "type": "cvt_K4VXG",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "pixel_id",
-            "value": "d34f007b-056b-48fe-a1a9-9e4d2340907c"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "event_type",
-            "value": "CUSTOM_EVENT_2"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "client_dedup_id",
-            "value": "{{DLV - event_id}}"
+            "key": "html",
+            "value": "<script>(function(){snaptr('track','d34f007b-056b-48fe-a1a9-9e4d2340907c','CUSTOM_EVENT_2',{client_dedup_id:'{{DLV - event_id}}'});})();</script>"
           },
           {
             "type": "BOOLEAN",
-            "key": "enable_console_logging",
+            "key": "supportDocumentWrite",
             "value": "false"
           }
         ],
         "firingTriggerId": [
-          "71"
+          "104"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -680,36 +618,21 @@
         },
         "tagId": "317",
         "name": "Snapchat - SIGN_UP - smile_pro_lead",
-        "type": "cvt_K4VXG",
+        "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
-            "key": "pixel_id",
-            "value": "d34f007b-056b-48fe-a1a9-9e4d2340907c"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "event_type",
-            "value": "SIGN_UP"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "client_dedup_id",
-            "value": "{{DLV - event_id}}"
+            "key": "html",
+            "value": "<script>(function(){var ph='{{DLV - user_data_phone_sha256_digits}}';if(/^[a-f0-9]{64}$/.test(ph)){snaptr('init','d34f007b-056b-48fe-a1a9-9e4d2340907c',{user_hashed_phone_number:ph});}snaptr('track','d34f007b-056b-48fe-a1a9-9e4d2340907c','SIGN_UP',{client_dedup_id:'{{DLV - event_id}}'});})();</script>"
           },
           {
             "type": "BOOLEAN",
-            "key": "enable_console_logging",
+            "key": "supportDocumentWrite",
             "value": "false"
-          },
-          {
-            "type": "TEMPLATE",
-            "key": "user_hashed_phone_number",
-            "value": "{{DLV - user_data_phone_sha256_digits}}"
           }
         ],
         "firingTriggerId": [
-          "52"
+          "105"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -741,7 +664,7 @@
           }
         ],
         "firingTriggerId": [
-          "55"
+          "100"
         ],
         "tagFiringOption": "ONCE_PER_LOAD"
       },
@@ -767,7 +690,7 @@
           }
         ],
         "firingTriggerId": [
-          "74"
+          "101"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -799,7 +722,7 @@
           }
         ],
         "firingTriggerId": [
-          "79"
+          "102"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -831,7 +754,7 @@
           }
         ],
         "firingTriggerId": [
-          "52"
+          "105"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "setupTag": [
@@ -858,7 +781,7 @@
           }
         ],
         "firingTriggerId": [
-          "55"
+          "100"
         ],
         "tagFiringOption": "ONCE_PER_LOAD"
       }

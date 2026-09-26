@@ -70,6 +70,14 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
   event detection, automatic user-data detection, manual CSS/JavaScript user-data
   selectors, and cross-domain conditions stay off/empty. The Internal Traffic
   filter stays Inactive unless a reviewed production exclusion is required.
+- Google Ads bidding uses one goal only: account-default `Submit lead form`,
+  covering all 7 campaigns, with `Smile Pro — Confirmed Website Lead`
+  (`7777230464`) as its sole Primary action. `Sign-up`, `Phone call lead`,
+  `Contact`, `Get directions`, `Engagement`, `Page view`, and `Leads from
+  messages` must remain outside account-default goals and assigned to zero
+  campaigns. Google-hosted actions may still display Primary in their own goal
+  category; this is acceptable only while that category remains unassigned to
+  every campaign and therefore cannot guide bidding.
 
 ### Privacy and identifiers
 
@@ -91,8 +99,9 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
   specification and never copies the complete data-layer object.
 - The site captures `gclid`, `wbraid`, `gbraid`, `fbclid`, `ttclid`, `ScCid`,
   `oppref`, and `msclkid`. Platform SDKs own browser cookies such as `_gcl_aw`,
-  `_fbc`, `_fbp`, `_ttp`, and `__obref`; do not copy those cookies into the data
-  layer. Explicit cookie forwarding belongs to a future reviewed CAPI project.
+  `_fbc`, `_fbp`, `_ttp`, `__oppref`, and `__obref`; do not copy those cookies
+  into the data layer. Explicit cookie forwarding belongs to a future reviewed
+  CAPI project.
 - Pixel IDs are public configuration values. API keys, access tokens, CAPI
   secrets, and OAuth secrets must never enter JavaScript, GTM, this repository,
   or an exported Web Container. Store future server secrets only in approved
@@ -104,10 +113,18 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
   no official GTM Gallery template, and TikTok's official event template
   requires its Base Code first; therefore tightly scoped Custom HTML is allowed
   only for Meta's official `fbevents.js` snippet/calls, TikTok's official Base
-  Code, and OpenAI's official Measurement SDK snippet/calls. The historical
-  `tracking/openai-ads-pixel.tpl` is not the active implementation. Do not use a
-  third-party Meta template, add other broad Custom HTML, call automatic page
-  views, or enable automatic advanced matching.
+  Code plus the explicit `ttq.page()` call, Snapchat's explicit official
+  `snaptr('track', ...)` event calls, and OpenAI's official Measurement SDK
+  snippet/calls. Keep Snapchat's official Gallery template for Base init only:
+  its current event path does not call GTM completion when `snaptr` already
+  exists. Snapchat supports five fixed custom-event slots rather than free-form
+  event names: `CUSTOM_EVENT_1` is `click_call` and `CUSTOM_EVENT_2` is
+  `click_whatsapp`. Pixel Helper intentionally renders them as “Custom Event 1”
+  and “Custom Event 2”; that display is expected and must not be “fixed” with
+  unsupported names. The historical `tracking/openai-ads-pixel.tpl` is not the
+  active implementation. Do not use a third-party Meta template, add other
+  broad Custom HTML, call automatic page views, or enable automatic advanced
+  matching.
 - Do not publish a GTM container, promote/demote a Google Ads conversion, or
   change campaign goals without explicit user approval for that live change.
 - Every GTM change requires Preview validation, privacy inspection, duplicate
@@ -116,3 +133,6 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
   `TRACKING.md`, the GTM specification, and this section together.
 - Before handoff, run `npm run check` and `npm run check:tracking`. Once an
   official export exists, also run `npm run check:gtm-export`.
+- A downloaded, unpublished workspace export can be audited without promoting
+  it to the official published artifact: run
+  `node scripts/check-tracking-config.mjs --audit-export=/absolute/path/export.json`.
