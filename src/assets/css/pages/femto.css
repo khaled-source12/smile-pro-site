@@ -2,7 +2,7 @@
 .split{display:grid;gap:24px;align-items:stretch}
 .card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:28px}
 .section{padding:80px 0}
-.lbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);display:block;margin-bottom:12px}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze2);display:block;margin-bottom:12px}
 .rule{width:40px;height:2px;background:var(--bronze);margin-bottom:22px}
 .js .fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
 .js .fade-up.vis{opacity:1;transform:translateY(0)}

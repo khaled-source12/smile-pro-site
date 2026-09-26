@@ -70,7 +70,7 @@
             background: var(--cream2); padding: 25px; border-radius: var(--r); margin: 40px 0 20px;
         }
         .doc-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bronze); }
-        .doc-info h4 { color: var(--burg); font-size: 18px; font-weight: 700; }
+        .doc-info h3 { color: var(--burg); font-size: 18px; font-weight: 700; margin-block: 1.33em; }
         .doc-info p { font-size: 13px; color: var(--muted); margin: 0; }
 
         .cta-banner {

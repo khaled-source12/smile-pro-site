@@ -875,6 +875,15 @@ for (const file of ["calculator-en.css", "calculator-ar.css"]) {
   if (/\.field-error\s*\{[^}]*display\s*:\s*none/i.test(styles)) fail(`Phone error remains permanently hidden in ${file}`);
   if (/\.price-range\s*\{[^}]*color\s*:\s*var\(--bronze2\)/i.test(styles)) fail(`Calculator price has insufficient dark-background contrast in ${file}`);
 }
+for (const file of ["home-en.css", "home-ar.css", "femto.css", "calculator-en.css", "calculator-ar.css"]) {
+  const styles = fs.readFileSync(path.join(sourceRoot, "assets/css/pages", file), "utf8");
+  if (!/\.lbl\s*\{[^}]*color\s*:\s*var\(--bronze2\)/i.test(styles)) {
+    fail(`Small section labels must use the accessible accent color in ${file}`);
+  }
+}
+if (!/\.site-footer__brand span\s*\{[^}]*color\s*:\s*var\(--bronze3\)/i.test(sharedStyles)) {
+  fail("Footer brand accent does not have sufficient contrast");
+}
 for (const file of walk(path.join(sourceRoot, "assets/css")).filter((entry) => entry.endsWith(".css"))) {
   if (/#25d366/i.test(fs.readFileSync(file, "utf8"))) fail(`Low-contrast WhatsApp green remains in ${path.relative(root, file)}`);
 }
@@ -921,6 +930,12 @@ for (const file of walk(path.join(sourceRoot, "assets/css/pages")).filter((entry
   const source = fs.readFileSync(file, "utf8");
   if (/(?:^|\})\s*(?:nav|footer)\s*\{/m.test(source)) {
     fail(`Page stylesheet leaks into a shared navigation or footer element: ${path.relative(root, file)}`);
+  }
+}
+for (const file of walk(path.join(sourceRoot, "articles")).filter((entry) => entry.endsWith(".md"))) {
+  const source = fs.readFileSync(file, "utf8");
+  if (/<div class="doc-info">[\s\S]*?<h4>/i.test(source)) {
+    fail(`Article doctor card skips a heading level in ${path.relative(root, file)}`);
   }
 }
 for (const page of [
@@ -1177,6 +1192,9 @@ for (const file of htmlFiles) {
   const criticalStyle = html.match(/<style\b[^>]*data-critical-css[^>]*>([\s\S]*?)<\/style>/i)?.[1] || "";
   if (!isDocumentFragment && !isAdminPage && !criticalStyle) fail(`Page has no inline critical CSS in ${relativeFile}`);
   else if (criticalStyle && gzipSync(criticalStyle).length > 15 * 1024) fail(`Critical CSS exceeds 15 KB gzip in ${relativeFile}`);
+  if (criticalStyle && (!criticalStyle.includes("font-display:optional") || criticalStyle.includes("font-display:swap"))) {
+    fail(`Critical fonts must avoid late swaps that cause layout shifts in ${relativeFile}`);
+  }
   let initialJavaScriptGzip = 0;
   for (const script of html.matchAll(/<script\b[^>]*type=["']module["'][^>]*src=["']([^"']+)["'][^>]*>/gi)) {
     const sourcePath = internalUrlPath(script[1]);

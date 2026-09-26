@@ -93,7 +93,7 @@ published: true
 <div class="doc-profile">
 
 <div class="doc-info">
-<h4>دكتور محمد النجار</h4>
+<h3>دكتور محمد النجار</h3>
 <p>استشاري جراحات العيون والقرنية وتصحيح العيوب الانكسارية بالليزر، خبرة واسعة في جراحات Smile Pro وFemto LASIK بأحدث التقنيات الألمانية.</p>
 {% include "partials/article-doctor-credentials.njk" %}
 </div>

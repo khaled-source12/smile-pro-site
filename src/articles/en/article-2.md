@@ -102,7 +102,7 @@ published: true
 
 <div class="doc-profile">
 <div class="doc-info">
-<h4>Dr. Mohamed El Naggar</h4>
+<h3>Dr. Mohamed El Naggar</h3>
 <p>Consultant Corneal & Refractive Surgeon with extensive experience in guiding post-operative recovery and delivering premier visual outcomes.</p>
 {% include "partials/article-doctor-credentials.njk" %}
 </div>

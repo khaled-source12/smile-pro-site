@@ -6,7 +6,8 @@
 .site-nav__inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .site-brand { display: inline-flex; align-items: center; gap: 9px; color: var(--brand); text-decoration: none; font: 700 1.15rem/1 "Space Grotesk", sans-serif; }
 .site-brand img { width: auto; height: 40px; object-fit: contain; }
-.site-brand b, .site-footer__brand span { color: var(--accent); }
+.site-brand b { color: var(--accent); }
+.site-footer__brand span { color: var(--bronze3); }
 .site-menu { display: flex; align-items: center; gap: 18px; }
 .site-menu > a { color: var(--brand); font-size: .88rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .site-menu > a:hover { color: var(--accent); }
