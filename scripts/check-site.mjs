@@ -1192,8 +1192,8 @@ for (const file of htmlFiles) {
   const criticalStyle = html.match(/<style\b[^>]*data-critical-css[^>]*>([\s\S]*?)<\/style>/i)?.[1] || "";
   if (!isDocumentFragment && !isAdminPage && !criticalStyle) fail(`Page has no inline critical CSS in ${relativeFile}`);
   else if (criticalStyle && gzipSync(criticalStyle).length > 15 * 1024) fail(`Critical CSS exceeds 15 KB gzip in ${relativeFile}`);
-  if (criticalStyle && (!criticalStyle.includes("font-display:optional") || criticalStyle.includes("font-display:swap"))) {
-    fail(`Critical fonts must avoid late swaps that cause layout shifts in ${relativeFile}`);
+  if (criticalStyle && (!criticalStyle.includes("font-display:swap") || criticalStyle.includes("font-display:optional"))) {
+    fail(`Critical fonts must load and replace their fallbacks in ${relativeFile}`);
   }
   let initialJavaScriptGzip = 0;
   for (const script of html.matchAll(/<script\b[^>]*type=["']module["'][^>]*src=["']([^"']+)["'][^>]*>/gi)) {
