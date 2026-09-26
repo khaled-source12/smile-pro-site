@@ -17,6 +17,7 @@ assert.deepEqual(spec.approved_hostnames, [STAGING_HOSTNAME, ...PRODUCTION_HOSTN
 const approvedHostnames = production ? events.approved_hostnames : spec.approved_hostnames;
 const prefix = production ? '' : 'TEST - ';
 const outputPath = production ? 'tracking/gtm-production-google-container.json' : 'tracking/gtm-staging-container.json';
+const containerName = production ? events.google_tag_configuration.name : 'Smile Pro Staging Web';
 const identity = { accountId: spec.gtm_account_id, containerId: spec.gtm_container_numeric_id };
 const parameter = (key, value, type = 'TEMPLATE') => ({ type, key, value: String(value) });
 const map = (key, value) => ({ type: 'MAP', map: [parameter('parameter', key), parameter('parameterValue', value)] });
@@ -257,7 +258,7 @@ const output = {
   exportFormatVersion: 2,
   containerVersion: {
     ...identity, containerVersionId: '0',
-    container: { ...identity, name: 'Smile Pro Staging Web', publicId: spec.container_id, usageContext: ['WEB'] },
+    container: { ...identity, name: containerName, publicId: spec.container_id, usageContext: ['WEB'] },
     tag: tags, trigger: triggers, variable: variables,
     ...(production ? { customTemplate: vendorTemplates } : {}),
     builtInVariable: [

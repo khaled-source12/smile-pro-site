@@ -7,7 +7,7 @@
     "container": {
       "accountId": "6360521865",
       "containerId": "264543391",
-      "name": "Smile Pro Staging Web",
+      "name": "Smile Pro Production Web",
       "publicId": "GTM-NFTVFBKS",
       "usageContext": [
         "WEB"

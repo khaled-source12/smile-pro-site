@@ -52,10 +52,17 @@
     "legacy_ga4_unlinked_on": "2026-09-25",
     "gtm_ads_destination_detection": "verified"
   },
+  "ga4_property_configuration": {
+    "name": "Smile Pro — Production",
+    "stream_name": "Smile Pro Production Web",
+    "stream_url": "https://smileproegypt.com",
+    "updated_on": "2026-09-26",
+    "internal_traffic_filter": "inactive"
+  },
   "google_tag_configuration": {
     "status": "combined-active",
     "combined_on": "2026-09-25",
-    "name": "Smile Pro Staging Web",
+    "name": "Smile Pro Production Web",
     "configuration_source": "new-ga4",
     "tag_ids": [
       "GT-PB6FRJCR",
@@ -66,6 +73,11 @@
       "AW-18233409981"
     ],
     "enhanced_measurement": false,
+    "automatic_event_detection": false,
+    "automatic_user_data_detection": false,
+    "manual_css_or_js_user_data_detection": false,
+    "user_provided_data_capability": true,
+    "cross_domain_measurement_conditions": [],
     "gtm_send_page_view": false,
     "gtm_warning": "resolved-after-hard-refresh"
   },
@@ -77,7 +89,7 @@
     }
   },
   "google_ads_confirmed_lead": {
-    "existing_name": "Smile Pro - Confirmed lead - New system TEST",
+    "historical_name": "Smile Pro - Confirmed lead - New system TEST",
     "production_name": "Smile Pro — Confirmed Website Lead",
     "conversion_action_id": "7777230464",
     "conversion_id": "AW-18233409981",

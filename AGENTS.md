@@ -60,11 +60,16 @@ Keep this table synchronized with `tracking/gtm-workspace-spec.json`.
 - Use Exact-match Custom Event triggers and the approved-hostname guard. Base
   tags fire on Initialization once per page. Automatic platform page views stay
   disabled because `site_page_view` is the canonical page-view source.
-- Keep one Google tag only: the `Smile Pro Staging Web` tag combines
+- Keep one Google tag only: the `Smile Pro Production Web` tag combines
   `GT-PB6FRJCR` and `GT-WPQDMSF5` with destinations `G-K4989EX8EJ` and
   `AW-18233409981`. GA4 Enhanced Measurement stays off and the GTM Google tag
   keeps `send_page_view=false`. Do not reconnect GA4 property `541403336` or add
   another Google tag to silence a warning.
+- GA4 property `554862114` is named `Smile Pro — Production`; its only web
+  stream is `Smile Pro Production Web` at `https://smileproegypt.com`. Automatic
+  event detection, automatic user-data detection, manual CSS/JavaScript user-data
+  selectors, and cross-domain conditions stay off/empty. The Internal Traffic
+  filter stays Inactive unless a reviewed production exclusion is required.
 
 ### Privacy and identifiers
 

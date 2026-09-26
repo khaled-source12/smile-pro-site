@@ -6,6 +6,7 @@ assert(workspaceExportPath, 'Usage: node scripts/build-gtm-vendor-import.mjs /pa
 
 const workspace = JSON.parse(fs.readFileSync(workspaceExportPath, 'utf8')).containerVersion;
 const draft = JSON.parse(fs.readFileSync('tracking/gtm-production-google-container.json', 'utf8')).containerVersion;
+const spec = JSON.parse(fs.readFileSync('tracking/gtm-workspace-spec.json', 'utf8'));
 const outputPath = 'tracking/gtm-production-vendor-import.json';
 
 const workspaceTriggersByName = new Map((workspace.trigger || []).map(trigger => [trigger.name, String(trigger.triggerId)]));
@@ -36,7 +37,7 @@ const output = {
     accountId: workspace.accountId,
     containerId: workspace.containerId,
     containerVersionId: '0',
-    container: workspace.container,
+    container: { ...workspace.container, name: spec.google_tag_configuration.name },
     tag: vendorTags,
     customTemplate: draft.customTemplate
   }
