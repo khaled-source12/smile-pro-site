@@ -2,7 +2,7 @@ backend:
   name: github
   repo: khaled-source12/smile-pro-site
   branch: main
-  base_url: https://smile-pro-eg.netlify.app
+  base_url: https://smileproegypt.com
   auth_endpoint: /.netlify/functions/auth
 
 media_folder: "src/images"

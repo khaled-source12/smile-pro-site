@@ -4,7 +4,7 @@
 
 ملف [`tracking/gtm-workspace-spec.json`](tracking/gtm-workspace-spec.json) هو مواصفة قابلة للمراجعة لما يجب أن تحتويه الحاوية، وليس Container Export قابلًا للاستيراد. وملف [`tracking/gtm-container-baseline-export.json`](tracking/gtm-container-baseline-export.json) هو التصدير الرسمي للحالة القديمة في Default Workspace قبل تنفيذ هذه الخطة: 6 Tags وTrigger واحد، من دون TikTok أو Snapchat أو Clarity أو ChatGPT Ads. لا تستورده باعتباره الإعداد المستهدف؛ احتفظ به للرجوع والمقارنة فقط.
 
-بعد ضبط Workspace الجديد واختباره، نزّل النسخة الرسمية من **Admin → Export Container** واحفظها باسم `tracking/gtm-container-export.json` مع النسخة المنشورة. هذا هو آخر Export رسمي منشور، ولا يعدّل يدويًا.
+ملف [`tracking/gtm-container-export.json`](tracking/gtm-container-export.json) هو آخر Export رسمي للحاوية الإنتاجية `GTM-NFTVFBKS`، المحفوظ بتاريخ 26 سبتمبر 2026: 47 Tags و20 Triggers و21 Variables. لا يعدّل يدويًا؛ عند نشر نسخة أحدث استبدله فقط بملف **Admin → Export Container** الجديد ثم شغّل فحوص التصدير.
 
 لا تنشر Workspace الخاص بـGTM مباشرة. اختبره أولًا مع Deploy Preview ثم انشره يدويًا بعد التأكد من عدم تكرار الأحداث.
 

@@ -497,6 +497,9 @@ if (!checkedAdminHtml.includes(`integrity="${decapScriptIntegrity}"`) || !checke
   fail("Decap CMS browser dependency must use the verified SRI digest and anonymous CORS");
 }
 const adminConfig = fs.readFileSync(path.join(sourceRoot, "admin/config.yml"), "utf8");
+if (!adminConfig.includes(`base_url: ${settings.url}`)) {
+  fail("Decap CMS OAuth base URL must use the production custom domain");
+}
 for (const setting of ["media_processing:", "default: webp", "quality: 70", "strip_metadata: true"]) {
   if (!adminConfig.includes(setting)) fail(`Decap CMS image processing is missing: ${setting}`);
 }

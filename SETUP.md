@@ -504,7 +504,7 @@ Node 24 محدد في `.nvmrc`، لذلك لا تحتاج عادة إلى إدخ
 لوحة الإدارة موجودة على:
 
 ```text
-https://YOUR-SITE.netlify.app/admin/
+https://smileproegypt.com/admin/
 ```
 
 لكن تسجيل الدخول يحتاج إلى GitHub OAuth App.
@@ -559,16 +559,16 @@ repository من تلقاء نفسه؛ هو يسمح لـDecap باستخدام �
 4. اختر **OAuth Apps**.
 5. اضغط **New OAuth App**.
 6. أدخل اسمًا واضحًا، مثل `Smile Pro CMS`.
-7. في **Homepage URL** ضع رابط موقع Netlify، مثل:
+7. في **Homepage URL** ضع الدومين الرئيسي للموقع:
 
 ```text
-https://smile-pro-eg.netlify.app
+https://smileproegypt.com
 ```
 
 8. في **Authorization callback URL** ضع:
 
 ```text
-https://smile-pro-eg.netlify.app/.netlify/functions/callback
+https://smileproegypt.com/.netlify/functions/callback
 ```
 
 9. أنشئ التطبيق.
@@ -610,10 +610,14 @@ CMS_ALLOWED_ORIGINS
 مثال، مع الفصل بفاصلة ومن دون شرطة مائلة في النهاية:
 
 ```text
-https://smileproegypt.com,https://smile-pro-eg.netlify.app
+https://smileproegypt.com,https://www.smileproegypt.com
 ```
 
 إذا لم تضفها، يستخدم المشروع الدومين الرئيسي ودومين Netlify الحاليين. أضف أي دومين جديد هنا قبل استخدام `/admin/` عليه، ولا تستخدم `*`.
+
+يمكن إضافة `https://smile-pro-eg.netlify.app` كـOrigin احتياطي فقط إذا أردت
+فتح لوحة الإدارة من رابط Netlify أو اختبار Deploy Preview. لا يُستخدم هذا
+الدومين كعنوان OAuth الأساسي بعد اعتماد الدومين المخصص.
 
 اكتب كل Origin بهذه الصورة فقط:
 
@@ -643,7 +647,7 @@ backend:
   name: github
   repo: khaled-source12/smile-pro-site
   branch: main
-  base_url: https://smile-pro-eg.netlify.app
+  base_url: https://smileproegypt.com
   auth_endpoint: /.netlify/functions/auth
 ```
 
@@ -654,8 +658,8 @@ backend:
 - `name: github`: Decap يتعامل مباشرة مع GitHub API بعد OAuth.
 - `repo`: repository الذي يقرأ منه المحتوى ويكتب إليه.
 - `branch: main`: كل عملية Publish تنشئ commit على `main` مباشرة.
-- `base_url`: الدومين الذي يستضيف Netlify OAuth Functions، وليس بالضرورة
-  الدومين الذي فتحت منه `/admin/`.
+- `base_url`: الدومين الذي يستضيف Netlify OAuth Functions. يستخدم المشروع
+  الدومين الإنتاجي المخصص نفسه لتبقى عملية الدخول على `smileproegypt.com`.
 - `auth_endpoint`: نقطة بدء تسجيل الدخول، وتُضاف إلى `base_url`.
 - `media_folder`: مكان حفظ الصور الجديدة داخل Git.
 - `public_folder`: الرابط الذي تستخدمه الصفحات لعرض تلك الصور.
@@ -664,7 +668,7 @@ backend:
 `base_url` ثم `/.netlify/functions/callback`. في الإعداد الحالي هي:
 
 ```text
-https://smile-pro-eg.netlify.app/.netlify/functions/callback
+https://smileproegypt.com/.netlify/functions/callback
 ```
 
 ### الخطوة الرابعة: اختبار لوحة الإدارة
@@ -709,7 +713,7 @@ https://smile-pro-eg.netlify.app/.netlify/functions/callback
 2. `src/admin/config.yml`:
 
 ```yaml
-base_url: https://new-site.netlify.app
+base_url: https://new-domain.example
 ```
 
 3. إعداد GitHub OAuth App:
@@ -788,7 +792,7 @@ Authorization callback URL
 
 ### مراجعة حاوية GTM قبل النشر
 
-كود الموقع يضع GTM مرة واحدة فقط في نهاية `<head>`، ولا يحمل أي SDK إعلاني مباشرة. محتوى الحاوية محفوظ داخل حساب Google؛ مواصفة الـWorkspace وقالب ChatGPT Ads موجودان في مجلد `tracking`. الملف `gtm-container-baseline-export.json` هو نسخة مرجعية للحالة القديمة فقط، وليس إعدادًا مستهدفًا أو ملفًا مطلوبًا استيراده. راجع الإعداد الجديد من **GTM → Preview** بهذه القائمة:
+كود الموقع يضع GTM مرة واحدة فقط في نهاية `<head>`، ولا يحمل أي SDK إعلاني مباشرة. محتوى الحاوية محفوظ داخل حساب Google؛ مواصفة الـWorkspace وقالب ChatGPT Ads موجودان في مجلد `tracking`. الملف `gtm-container-baseline-export.json` هو نسخة مرجعية للحالة القديمة فقط، وليس إعدادًا مستهدفًا أو ملفًا مطلوبًا استيراده. أما `gtm-container-export.json` فهو آخر Export رسمي للحاوية الإنتاجية، ويُستبدل فقط بملف جديد صادر من **Admin → Export Container** بعد كل نشر. راجع الإعداد الحالي من **GTM → Preview** بهذه القائمة:
 
 1. افتح صفحة من Deploy Preview، وليس localhost فقط؛ بعض العلامات قد تحتوي شرطًا على اسم الدومين.
 2. في حدث `Container Loaded` تأكد من وجود Base Tag واحدة لكل منصة، بما فيها TikTok وChatGPT Ads.
