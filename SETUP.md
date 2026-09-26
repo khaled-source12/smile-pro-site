@@ -509,6 +509,48 @@ https://YOUR-SITE.netlify.app/admin/
 
 لكن تسجيل الدخول يحتاج إلى GitHub OAuth App.
 
+### كيف يعمل الربط في هذا المشروع؟
+
+Decap CMS ليس قاعدة بيانات منفصلة ولا يحتفظ بنسخة أخرى من المحتوى. الربط الحالي
+يعمل بهذا التسلسل:
+
+```text
+/admin/
+  → يقرأ src/admin/config.yml
+  → يفتح /.netlify/functions/auth
+  → يحوّل المستخدم إلى GitHub OAuth
+  → يعيد GitHub المستخدم إلى /.netlify/functions/callback
+  → يحصل Decap على صلاحية المستخدم
+  → يقرأ ويعدّل ملفات repository على branch main
+  → ينشئ GitHub commit
+  → يشغّل Netlify Build وينشر الموقع
+```
+
+الملفات المسؤولة عن هذا الربط هي:
+
+| الملف | مسؤوليته |
+|---|---|
+| `src/admin/index.html` | صفحة `/admin/` وتحميل واجهة Decap CMS |
+| `src/admin/config.yml` | repository والفرع والمجموعات والحقول ومكان الصور |
+| `netlify/functions/auth.cjs` | بدء تسجيل GitHub وتوليد `state` آمن |
+| `netlify/functions/callback.cjs` | استبدال كود GitHub بتوكن وإعادته إلى نافذة Decap |
+| `netlify/lib/cms-origins.cjs` | السماح للدومينات المعتمدة فقط باستلام نتيجة تسجيل الدخول |
+| `netlify.toml` | تعريف مجلد `netlify/functions` ونشره مع الموقع |
+
+هذا المشروع يستخدم Decap مع `backend: github` وOAuth Functions خاصة به. لا
+تفعّل Netlify Identity أو Git Gateway لهذا الإعداد، ولا تغيّر `backend.name`
+إلى `git-gateway`؛ فهذا مسار مصادقة مختلف وغير مطلوب هنا.
+
+كل محرر يجب أن يسجل الدخول بحساب GitHub لديه صلاحية **Write** على
+`khaled-source12/smile-pro-site`. إنشاء OAuth App لا يمنح المستخدم صلاحية على
+repository من تلقاء نفسه؛ هو يسمح لـDecap باستخدام صلاحيات حساب GitHub الذي
+سجل الدخول. راجع توثيق
+[GitHub backend في Decap](https://decapcms.org/docs/github-backend/)
+و[إنشاء GitHub OAuth App](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app).
+
+> مهم: الحفظ من Decap يكتب إلى GitHub وليس إلى النسخة المحلية على جهازك. شغّل
+> `git pull` قبل بدء تعديل محلي جديد بعد استخدام CMS.
+
 ### الخطوة الأولى: إنشاء GitHub OAuth App
 
 1. افتح GitHub.
@@ -534,6 +576,8 @@ https://smile-pro-eg.netlify.app/.netlify/functions/callback
 11. أنشئ `Client Secret` وانسخه فورًا.
 
 لا ترسل `Client Secret` إلى أي شخص ولا تحفظه داخل GitHub أو ملفات المشروع.
+أنشئ OAuth App داخل حساب مالك المشروع أو المؤسسة المسؤولة عنه، وليس داخل حساب
+مؤقت لموظف قد يفقد الوصول لاحقًا.
 
 ### الخطوة الثانية: إضافة القيم السرية إلى Netlify
 
@@ -571,6 +615,16 @@ https://smileproegypt.com,https://smile-pro-eg.netlify.app
 
 إذا لم تضفها، يستخدم المشروع الدومين الرئيسي ودومين Netlify الحاليين. أضف أي دومين جديد هنا قبل استخدام `/admin/` عليه، ولا تستخدم `*`.
 
+اكتب كل Origin بهذه الصورة فقط:
+
+```text
+https://domain.example
+```
+
+لا تضف مسار `/admin/` ولا `/` في النهاية، ولا تستخدم `http`. المشروع يسمح
+تلقائيًا بروابط Deploy Preview التابعة لنفس موقع Netlify المعتمد، لكنه يعطّل
+واجهة CMS بالكامل على بيئة اختبار التتبع لحماية repository الإنتاجي.
+
 6. احفظ القيم.
 7. نفّذ Deploy جديدًا؛ تغيير environment variables لا يغير نسخة منشورة قديمة تلقائيًا في كل الحالات.
 
@@ -595,6 +649,24 @@ backend:
 
 إذا تغير repository أو موقع Netlify، حدّث `repo` أو `base_url` ثم ارفع التعديل.
 
+معنى الإعدادات الحالية:
+
+- `name: github`: Decap يتعامل مباشرة مع GitHub API بعد OAuth.
+- `repo`: repository الذي يقرأ منه المحتوى ويكتب إليه.
+- `branch: main`: كل عملية Publish تنشئ commit على `main` مباشرة.
+- `base_url`: الدومين الذي يستضيف Netlify OAuth Functions، وليس بالضرورة
+  الدومين الذي فتحت منه `/admin/`.
+- `auth_endpoint`: نقطة بدء تسجيل الدخول، وتُضاف إلى `base_url`.
+- `media_folder`: مكان حفظ الصور الجديدة داخل Git.
+- `public_folder`: الرابط الذي تستخدمه الصفحات لعرض تلك الصور.
+
+يجب أن يطابق **Authorization callback URL** داخل GitHub النتيجة الكاملة من
+`base_url` ثم `/.netlify/functions/callback`. في الإعداد الحالي هي:
+
+```text
+https://smile-pro-eg.netlify.app/.netlify/functions/callback
+```
+
 ### الخطوة الرابعة: اختبار لوحة الإدارة
 
 1. افتح `/admin/` على رابط Netlify.
@@ -605,6 +677,18 @@ backend:
 6. تأكد من ظهور commit جديد في GitHub.
 7. انتظر انتهاء Build في Netlify.
 8. راجع النسختين العربية والإنجليزية على الموقع.
+
+يكون الربط مكتملًا فقط إذا نجحت السلسلة كلها:
+
+1. تفتح `/admin/` من دون صفحة خطأ.
+2. تفتح نافذة GitHub المنبثقة وتعود برسالة نجاح.
+3. تظهر مجموعتا **Website Settings** و**Bilingual Articles**.
+4. يظهر commit جديد في `main` بعد الحفظ.
+5. يبدأ Netlify Deploy من ذلك الـcommit وينتهي بنجاح.
+6. يظهر التعديل على الموقع المنشور بعد اكتمال الـDeploy.
+
+إذا نجح تسجيل الدخول لكن لم يظهر المحتوى، فالمشكلة غالبًا في صلاحية حساب GitHub
+على repository أو في `repo` داخل `config.yml`، وليست في Client Secret.
 
 لا تضيف ميزة المقالات الثنائية أي قاعدة بيانات أو Function أو خدمة مدفوعة؛ إنها جزء مدمج من Decap CMS وتكتب ملفي Markdown في Git. لكن الإعداد الحالي يحفظ إلى فرع `main` مباشرة، لذلك كل عملية حفظ من CMS قد تشغّل Production Deploy عاديًا في Netlify. أكمل تبويبي اللغتين ثم احفظ مرة واحدة بدل الحفظ بعد كل حقل. قواعد تكلفة الـDeploy تعتمد على نوع خطة Netlify وليست تكلفة إضافية لميزة تعدد اللغات.
 
@@ -844,6 +928,18 @@ npm run dev -- --port=8081
 4. تنفيذ Deploy جديد بعد إضافة المتغيرات.
 5. أن حساب GitHub لديه صلاحية الكتابة على repository.
 6. أن المتصفح لم يمنع نافذة تسجيل الدخول المنبثقة.
+7. أن `CMS_ALLOWED_ORIGINS` يحتوي الدومين الذي فتحت منه `/admin/` بصيغة Origin
+   فقط ومن دون `/` في النهاية.
+8. أن `Authorization callback URL` يطابق `base_url` مع
+   `/.netlify/functions/callback` حرفيًا.
+9. افتح **Netlify → Functions** وتأكد أن `auth` و`callback` موجودتان في آخر
+   Deploy، ثم راجع Logs إذا ظهر خطأ 500.
+10. إذا ظهرت رسالة `state is missing or invalid`، اسمح بالكوكيز والنافذة
+    المنبثقة، أغلق تبويب `/admin/` والنافذة القديمة، ثم ابدأ تسجيل الدخول من
+    جديد.
+11. إذا اكتمل GitHub لكن ظلت لوحة الإدارة خارج الحساب، راجع الدومين المسموح
+    و`base_url`؛ نافذة callback لا ترسل التوكن إلا إلى Origin معتمد.
+12. لا تختبر من بيئة Tracking Staging؛ لوحة Decap معطلة فيها عمدًا.
 
 ### النموذج لا يظهر في Netlify Forms
 
